@@ -40,7 +40,7 @@ li{
 
 a{
   text-decoration: none;
-
+  color: black;
 
 }
 
@@ -99,7 +99,7 @@ hr{
 footer {
   background-color:#f0f0f0;
   width:100%;
-  margin: 0 200px;
+  margin: 0 180px;
 
   li{
 
@@ -107,4 +107,25 @@ footer {
     padding: 5px 15px;
     margin:10px 0;
   }
+}
+
+.signup-wrapper{
+  p{
+    margin-bottom: 15px;
+  }
+}
+
+.signup-input{
+  text-align: center;
+  padding: 5px;
+
+  input{
+    width:300px;
+    opacity: 0.6;
+  }
+}
+
+.mail-signup{
+  background-color:rgb(162, 131, 84);
+  @include sns-button;
 }
