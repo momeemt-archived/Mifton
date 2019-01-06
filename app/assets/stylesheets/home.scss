@@ -1,9 +1,18 @@
-$mifton-color : rgb(255, 146, 33);
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
+
+@mixin sns-button{
+  padding:5px;
+  border-radius: 5px;
+  color:white;
+  font-size: 15px;
+  margin: 0px 10px;
+  //SNSで登録ボタンの装飾
+}
 
 *{
   margin: 0;
   padding: 0;
-
+  font-family: 'M PLUS 1p', sans-serif;
 }
 
 .main{
@@ -24,20 +33,25 @@ li{
   list-style: none;
 }
 
-.main{
-
-}
-
 .logo-img{
   width: 300px;
 }
 
 .signup-img img{
-  height: 575px;
+  height: 560px;
   margin: 75px 20px;
   border-radius: 10px;
 }
 
+a{
+  text-decoration: none;
+
+
+}
+
+a:visited{
+  color:black;
+}
 
 .signup-img,.signup-box{
   float: left;
@@ -53,7 +67,7 @@ li{
   padding: 30px;
   margin: 30px;
   background-color:white ;
-  height: 600px;
+  height: 580px;
 }
 
 i{
@@ -61,13 +75,7 @@ i{
   margin-right:5px;
 }
 
-@mixin sns-button{
-  padding:5px;
-  border-radius: 5px;
-  color:white;
-  font-size: 15px;
-  margin: 0px 10px;
-}
+
 
 .twitter-btn{
   background-color: rgba(0, 172, 237, 1) ;
@@ -96,7 +104,7 @@ hr{
 .footer {
   li{
     float: left;
-    padding: 15px;
+    padding: 5px 15px;
   }
   margin: 0 250px;
 }
