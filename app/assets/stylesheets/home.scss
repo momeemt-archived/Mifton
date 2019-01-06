@@ -1,22 +1,94 @@
+$mifton-color : rgb(255, 146, 33);
+
 *{
   margin: 0;
   padding: 0;
+
 }
 
-ul{
+.main{
+  background-color:#f0f0f0 ;
+  height: 790px
+}
+
+p{
+  text-align: center;
+}
+
+header{
+  height: 80px;
+  background-color:$mifton-color;
+}
+
+li{
   list-style: none;
 }
 
-a{
-  text-decoration: none;
-  color:white;
+.main{
+
 }
 
-.top-wrapper{
-  text-align: center;
+.logo-img{
+  width: 300px;
+}
 
-  h1{
-    font-size: 50px;
-    letter-spacing: 5px;
-  }
+.signup-img img{
+  height: 575px;
+  margin: 75px 20px;
+  border-radius: 10px;
+}
+
+
+.signup-img,.signup-box{
+  float: left;
+}
+
+.signupBtn-wrapper{
+
+}
+
+.signup-box{
+  border: 1px #808080 solid;
+  border-radius: 5px;
+  padding: 30px;
+  margin: 30px;
+  background-color:white ;
+  height: 650px;
+}
+
+i{
+  margin-left: 2px;
+  margin-right:5px;
+}
+
+@mixin sns-button{
+  padding:5px;
+  border-radius: 5px;
+  color:white;
+  font-size: 15px;
+  margin: 0px 10px;
+}
+
+.twitter-btn{
+  background-color: rgba(0, 172, 237, 1) ;
+  @include sns-button;
+  margin-left: 40px;
+}
+
+.google-btn{
+  background-color: rgba(219, 74, 57, 1);
+  @include sns-button;
+}
+
+.lobi-btn{
+  background-color: rgb(255, 130, 40);
+  @include sns-button;
+}
+
+.btn-wrapper{
+  margin: 20px 5px 0 5px;
+}
+
+hr{
+  margin: 30px 0;
 }
