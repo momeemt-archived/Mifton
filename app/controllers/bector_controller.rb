@@ -1,6 +1,6 @@
 class BectorController < ApplicationController
   def top
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc)
   end
 
   def show
@@ -13,7 +13,7 @@ class BectorController < ApplicationController
   def create
     @post = Post.new(content: params[:content])
     @post.save
-    redirect_to("/bector/top")
+    redirect_to("/bector/")
   end
 
 end
