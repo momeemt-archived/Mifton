@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_06_223336) do
+ActiveRecord::Schema.define(version: 2019_01_18_052245) do
+
+  create_table "contests", force: :cascade do |t|
+    t.text "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.time "start_time"
+    t.string "category"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.text "content"
