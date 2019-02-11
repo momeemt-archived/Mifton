@@ -1,0 +1,60 @@
+.main
+  .signup-box
+    p.mifton-logo
+      img.logo-img[src="/miftonLogo.png"]
+    p
+      | Minecraftをもっと面白く、もっと便利に。
+    .signupBtn-wrapper
+      p
+        | これらのSNSから登録できます。
+      .btn-wrapper
+        a.btn.twitter-btn
+          i.fab.fa-twitter.fa-inverse
+          |  Twitter 
+        a.btn.google-btn
+          i.fab.fa-google-plus-g.fa-inverse
+          |  Google 
+        a.btn.lobi-btn
+          i.fas.fa-mobile-alt.fa-inverse
+          |  Lobi 
+    hr
+    .signup-wrapper
+      p
+        | メールアドレスで登録できます。
+      ul
+        li.signup-input
+          input[value="メールアドレス"]
+        li.signup-input
+          input[value="ニックネーム"]
+        li.signup-input
+          input[value="パスワード"]
+      .mail-signup
+        | 登録する
+    hr
+    div
+      div
+        | ログイン
+  .signup-img
+    img[src="/homeImg.jpg"]
+footer
+  ul
+    li
+      = link_to("Top","/")
+    li
+      = link_to("About Mifton","/about")
+    li
+      = link_to("Bector","/bector")
+    li
+      | Planeeds
+    li
+      = link_to("Tiprint","https://tiprint.net")
+    li
+      | Qrafters
+    li
+      | MineCoders
+    li
+      = link_to("プライバシーポリシー","/privacypolicy")
+    li
+      | 利用規約
+    li
+      | 開発マップ

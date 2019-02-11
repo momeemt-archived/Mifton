@@ -1,0 +1,35 @@
+<div class="main">
+  <h1>大会一覧</h1>
+  <h2>開催中の大会</h2>
+  <h2>次回以降の大会</h2>
+  <table>
+    <tr>
+      <th>開始時刻</th>
+      <th>大会名</th>
+      <th>カテゴリー</th>
+    </tr>
+    <% if @contests.empty? %>
+      <tr>
+        <td>---</td>
+        <td>開催予定の大会がありません</td>
+      </tr>
+    <% else %>
+      <% @contests.each do |contest| %>
+        <tr>
+          <td><%= contest.start_time %></td>
+          <td><%= link_to("#{contest.title}","#") %></td>
+          <td><%= contest.category %></td>
+        </tr>
+      <% end %>
+    <% end%>
+  </table>
+  <h2>終了した大会</h2>
+  <table>
+    <tr>
+      <th>開始時刻</th>
+      <th>大会名</th>
+      <th>カテゴリー</th>
+      <th>優勝者</th>
+    </tr>
+  </table>
+</div>
