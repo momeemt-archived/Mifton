@@ -9,23 +9,7 @@ $hfHeight : 55px;
 $tWrppColor : #a2d7dd;
 $tWrppHeight : 250px;
 
-a{
-  text-decoration: none;
-  color:#474444;
 
-  &hover{
-    text-decoration: none;
-  }
-}
-
-header{
-  height: $hfHeight;
-  background-color: $hfColor;
-  text-align: center;
-  img{
-    width:240px;
-  }
-}
 
 @mixin wrppMixin {
   clear: both;
@@ -47,82 +31,105 @@ header{
   }
 }
 
-main{
-  color:#474444;
-  .top-wrapper{
-    height:$tWrppHeight;
-    background-color: $tWrppColor;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
+
+
+.crafes{
+  a{
+    text-decoration: none;
+    color:#474444;
+  
+    &hover{
+      text-decoration: none;
+    }
+  }
+  .header{
+    height: $hfHeight;
+    background-color: $hfColor;
+    text-align: center;
+    img{
+      width:240px;
+    }
+  }
+  
+  
+  
+  .main{
+    color:#474444;
+    .top-wrapper{
+      height:$tWrppHeight;
+      background-color: $tWrppColor;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+  
+      #top-logo{
+        img{
+          width:800px;
+        }
+      }
+  
+      #top-title{
+        margin-top: 50px;
+        h1{
+          font-size: 60px;
+        }
+      }
+    }
+  
+    .description-wrapper{
+      @include wrppMixin();
+    }
+  
+    .descript{
+      @include deWrpp();
+      border-bottom: #008899 3px dashed;
+    }
+  
+    .descript1{
+      @include deWrpp();
+    }
+  
+  
+    .about-wrapper{
+      @include wrppMixin();
+    }
+  
+    .join-wrapper{
+      @include wrppMixin();
+    }
+  
+    .space{
+      height: 50px;
+    }
+  
+    a{
+      width: 100%;
+    }
+  }
+  
+  .footer{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-
-    #top-logo{
-      img{
-        width:800px;
-      }
-    }
-
-    #top-title{
-      margin-top: 50px;
-      h1{
-        font-size: 60px;
-      }
+    justify-content: center;
+    align-items: center;
+    height: $hfHeight;
+    background-color: $hfColor;
+    padding: 0px 5px;
+    a{
+      color:white;
     }
   }
-
-  .description-wrapper{
-    @include wrppMixin();
-  }
-
-  .descript{
-    @include deWrpp();
-    border-bottom: #008899 3px dashed;
-  }
-
-  .descript1{
-    @include deWrpp();
-  }
-
-
-  .about-wrapper{
-    @include wrppMixin();
-  }
-
-  .join-wrapper{
-    @include wrppMixin();
-  }
-
-  .space{
-    height: 50px;
-  }
-
-  a{
-    width: 100%;
-  }
-}
-
-footer{
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: $hfHeight;
-  background-color: $hfColor;
-  padding: 0px 5px;
-  a{
-    color:white;
-  }
-}
-
-.btn{
-  background-color: #a2d7dd;
-  border-radius: 4px;
-  padding: 6px 70px;
-  color:rgb(43, 43, 43);
-  &:hover{
-    background-color: #caecf0;
+  
+  .btn{
+    background-color: #a2d7dd;
+    border-radius: 4px;
+    padding: 6px 70px;
+    color:rgb(43, 43, 43);
+    &:hover{
+      background-color: #caecf0;
+    }
   }
 }
