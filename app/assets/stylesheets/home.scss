@@ -1,134 +1,134 @@
-@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
+// @import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
 
 
 
 
-@mixin sns-button{
-  padding:5px;
-  border-radius: 5px;
-  color:white;
-  font-size: 15px;
-  margin: 0px 10px;
-  //SNSで登録ボタンの装飾
-}
+// @mixin sns-button{
+//   padding:5px;
+//   border-radius: 5px;
+//   color:white;
+//   font-size: 15px;
+//   margin: 0px 10px;
+//   //SNSで登録ボタンの装飾
+// }
 
-*{
-  margin: 0;
-  padding: 0;
-  font-family: 'M PLUS 1p', sans-serif;
-}
+// *{
+//   margin: 0;
+//   padding: 0;
+//   font-family: 'M PLUS 1p', sans-serif;
+// }
 
-.main{
-  // background-color:#f0f0f0 ;
-  height: 770px
-}
+// .main{
+//   // background-color:#f0f0f0 ;
+//   height: 770px
+// }
 
-p{
-  text-align: center;
-}
+// p{
+//   text-align: center;
+// }
 
-li{
-  list-style: none;
-}
+// li{
+//   list-style: none;
+// }
 
-.logo-img{
-  width: 300px;
-}
+// .logo-img{
+//   width: 300px;
+// }
 
-.signup-img img{
-  height: 560px;
-  margin: 75px 20px;
-  border-radius: 10px;
-}
+// .signup-img img{
+//   height: 560px;
+//   margin: 75px 20px;
+//   border-radius: 10px;
+// }
 
-a{
-  text-decoration: none;
-  color: black;
+// a{
+//   text-decoration: none;
+//   color: black;
 
-}
+// }
 
-a:visited{
-  color:black;
-}
+// a:visited{
+//   color:black;
+// }
 
-.signup-img,.signup-box{
-  float: left;
-}
+// .signup-img,.signup-box{
+//   float: left;
+// }
 
-.signupBtn-wrapper{
+// .signupBtn-wrapper{
 
-}
+// }
 
-.signup-box{
-  border: 1px #808080 solid;
-  border-radius: 5px;
-  padding: 30px;
-  margin: 30px;
-  background-color:white ;
-  height: 580px;
-}
+// .signup-box{
+//   border: 1px #808080 solid;
+//   border-radius: 5px;
+//   padding: 30px;
+//   margin: 30px;
+//   background-color:white ;
+//   height: 580px;
+// }
 
-i{
-  margin-left: 2px;
-  margin-right:5px;
-}
+// i{
+//   margin-left: 2px;
+//   margin-right:5px;
+// }
 
 
 
-.twitter-btn{
-  background-color: rgba(0, 172, 237, 1) ;
-  @include sns-button;
-  margin-left: 40px;
-}
+// .twitter-btn{
+//   background-color: rgba(0, 172, 237, 1) ;
+//   @include sns-button;
+//   margin-left: 40px;
+// }
 
-.google-btn{
-  background-color: rgba(219, 74, 57, 1);
-  @include sns-button;
-}
+// .google-btn{
+//   background-color: rgba(219, 74, 57, 1);
+//   @include sns-button;
+// }
 
-.lobi-btn{
-  background-color: rgb(255, 130, 40);
-  @include sns-button;
-}
+// .lobi-btn{
+//   background-color: rgb(255, 130, 40);
+//   @include sns-button;
+// }
 
-.btn-wrapper{
-  margin: 20px 5px 0 5px;
-}
+// .btn-wrapper{
+//   margin: 20px 5px 0 5px;
+// }
 
-hr{
-  margin: 30px 0;
-}
+// hr{
+//   margin: 30px 0;
+// }
 
-footer {
-  background-color:#f0f0f0;
-  width:100%;
-  margin: 0 180px;
+// footer {
+//   background-color:#f0f0f0;
+//   width:100%;
+//   margin: 0 180px;
 
-  li{
+//   li{
 
-    float: left;
-    padding: 5px 15px;
-    margin:10px 0;
-  }
-}
+//     float: left;
+//     padding: 5px 15px;
+//     margin:10px 0;
+//   }
+// }
 
-.signup-wrapper{
-  p{
-    margin-bottom: 15px;
-  }
-}
+// .signup-wrapper{
+//   p{
+//     margin-bottom: 15px;
+//   }
+// }
 
-.signup-input{
-  text-align: center;
-  padding: 5px;
+// .signup-input{
+//   text-align: center;
+//   padding: 5px;
 
-  input{
-    width:300px;
-    opacity: 0.6;
-  }
-}
+//   input{
+//     width:300px;
+//     opacity: 0.6;
+//   }
+// }
 
-.mail-signup{
-  background-color:rgb(162, 131, 84);
-  @include sns-button;
-}
+// .mail-signup{
+//   background-color:rgb(162, 131, 84);
+//   @include sns-button;
+// }

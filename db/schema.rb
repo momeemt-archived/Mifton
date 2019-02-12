@@ -10,14 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_18_061355) do
+ActiveRecord::Schema.define(version: 2019_02_11_150459) do
 
   create_table "contests", force: :cascade do |t|
-    t.text "title"
+    t.string "name"
+    t.integer "times"
+    t.string "type"
+    t.string "q1title"
+    t.text "q1"
+    t.string "q2title"
+    t.text "q2"
+    t.string "q3title"
+    t.text "q3"
+    t.string "q4title"
+    t.text "q4"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.time "start_time"
-    t.string "category"
   end
 
   create_table "posts", force: :cascade do |t|

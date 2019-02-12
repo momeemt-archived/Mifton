@@ -1,0 +1,20 @@
+header
+  .header-logo
+    a[href="/crafes"]
+      img[src="/crafes-logo.png"] 
+      
+      
+    
+
+main
+  .container
+    nav top
+    h1 Function Beginner Contest #001
+    h2 Function Beginner Contest の説明
+    - if @contest.id == "FBC"
+     = "functionのみを利用して提示された条件に合うコマンドを組み立てるコンテストです。"
+    - end
+
+
+footer
+  =link_to("Miftonホームへ戻る","/")

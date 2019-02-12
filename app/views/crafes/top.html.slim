@@ -1,8 +1,46 @@
-.main
+header
+  .header-logo
+  img[src="/crafes-logo.png"]
+
+main
   .container
     .top-wrapper
-      h1#main-logo Crafes!
-      p Crafes! で自分の技術をアウトプットしよう！
-      p 大会に参加し、技術を向上させよう。
-      = link_to("大会一覧","/crafes/fes-index")
-      = link_to("大会を申請する","#")
+      #top-logo
+        img[src="/crafes-img.png"]
+      #top-title
+        p 自分の技術をアウトプットしよう
+        h1 Crafes!
+    .description-wrapper
+      .descript
+        h2 ざっくり "Crafes!" とは？
+        p Crafes! は、MinecraftBEの技術を競う大会開催サービスです。
+        p Miftonアカウントを持っていれば誰でも参加できます！結果に応じ、BEの技術力を示すレートを知ることができます。
+        p 技術分野は多数あり、あなたが自信のある技術で勝負することができます！
+    .about-wrapper
+      .descript
+        h2 もっと詳しく
+        p 参加方法、ルールなど、もっと詳しくCrafes!について説明します。
+        div.btn.about-btn
+          =link_to("Go!","/crafes/about")
+    .join-wrapper
+      .descript
+        h2 参加してみる
+        p Crafes! で、新たなMCBEの楽しみ方を増やしましょう！
+        div.btn.join-btn 
+          a Go!
+    .join-wrapper
+      .descript
+        h2 大会を開催してみる
+        p 一定以上の基準を満たすクラフターは、大会を開催することもできます。
+        div.btn.join-btn 
+          a Go!
+    .join-wrapper
+      .descript1
+        h2 過去問を解く
+        p 千里の道も一歩から。Crafes! の出題傾向に慣れましょう。
+        div.btn.join-btn 
+          a Go!     
+    .space
+
+footer
+  =link_to("Miftonホームへ戻る","/")

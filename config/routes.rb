@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
+
   get "/crafes" => "crafes#top"
-  get "/crafes/fes-index" => "crafes#index"
+  get "/crafes/about" => "crafes#about"
+  get "/crafes/index" => "crafes#index"
+  get "/crafes/create" => "crafes#create"
+
+
+
+
+
+
   get "/bector" => "bector#top"
   get "/bector/new" => "bector#new"
   post "/bector/create" => "bector#create"

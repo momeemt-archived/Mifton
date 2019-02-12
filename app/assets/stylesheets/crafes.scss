@@ -1,11 +1,128 @@
-.main{
-  background-color: white;
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
-.top-wrapper{
-  #main-logo{
-    text-align: center;
-    font-size: 10vh;
+$hfColor : #00a3af;
+$hfHeight : 55px;
+$tWrppColor : #a2d7dd;
+$tWrppHeight : 250px;
+
+a{
+  text-decoration: none;
+  color:#474444;
+
+  &hover{
+    text-decoration: none;
   }
-  
+}
+
+header{
+  height: $hfHeight;
+  background-color: $hfColor;
+  text-align: center;
+  img{
+    width:240px;
+  }
+}
+
+@mixin wrppMixin {
+  clear: both;
+  text-align: center;
+  margin:2px;
+}
+
+@mixin deWrpp {
+  padding: 20px 0;
+  display: inline-block;
+  h2{
+    font-size:20px;
+    margin: 15px 0px;
+    color:#008899;
+  }
+  p{
+    margin: 10px 0;
+    font-size:15px;
+  }
+}
+
+main{
+  color:#474444;
+  .top-wrapper{
+    height:$tWrppHeight;
+    background-color: $tWrppColor;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+
+    #top-logo{
+      img{
+        width:800px;
+      }
+    }
+
+    #top-title{
+      margin-top: 50px;
+      h1{
+        font-size: 60px;
+      }
+    }
+  }
+
+  .description-wrapper{
+    @include wrppMixin();
+  }
+
+  .descript{
+    @include deWrpp();
+    border-bottom: #008899 3px dashed;
+  }
+
+  .descript1{
+    @include deWrpp();
+  }
+
+
+  .about-wrapper{
+    @include wrppMixin();
+  }
+
+  .join-wrapper{
+    @include wrppMixin();
+  }
+
+  .space{
+    height: 50px;
+  }
+
+  a{
+    width: 100%;
+  }
+}
+
+footer{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $hfHeight;
+  background-color: $hfColor;
+  padding: 0px 5px;
+  a{
+    color:white;
+  }
+}
+
+.btn{
+  background-color: #a2d7dd;
+  border-radius: 4px;
+  padding: 6px 70px;
+  color:rgb(43, 43, 43);
+  &:hover{
+    background-color: #caecf0;
+  }
 }
