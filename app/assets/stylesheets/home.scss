@@ -1,138 +1,96 @@
-@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
+$height : 55px; // ヘッダーフッター用の height 
+$MiftonColor : #ec6d51; // Mifton用のメインカラー
+$BackColor : #ecad9f;
+$Color : white; // ヘッダーフッター文字カラー
+$TextColor: #474444;
 
 
-
-
-@mixin sns-button{
-  padding:5px;
-  border-radius: 5px;
-  color:white;
-  font-size: 15px;
-  margin: 0px 10px;
-  //SNSで登録ボタンの装飾
+img{
+  margin: 0;
+  padding:0;
 }
 
-*{
+hr {
+  height: 0;
   margin: 0;
   padding: 0;
-  font-family: 'M PLUS 1p', sans-serif;
+  border: 0;
+  width:55%;
+  margin: 0 auto;
 }
 
 .home{
-  .main{
-    // background-color:#f0f0f0 ;
-    height: 770px
+  @mixin basic {
+    height: $height;
+    background-color: $MiftonColor;
   }
-  
-  p{
+
+  header{
+    @include basic();
     text-align: center;
-  }
-  
-  li{
-    list-style: none;
-  }
-  
-  .logo-img{
-    width: 300px;
-  }
-  
-  .signup-img img{
-    height: 560px;
-    margin: 75px 20px;
-    border-radius: 10px;
-  }
-  
-  a{
-    text-decoration: none;
-    color: black;
-  
-  }
-  
-  a:visited{
-    color:black;
-  }
-  
-  .signup-img,.signup-box{
-    float: left;
-  }
-  
-  .signupBtn-wrapper{
-  
-  }
-  
-  .signup-box{
-    border: 1px #808080 solid;
-    border-radius: 5px;
-    padding: 30px;
-    margin: 30px;
-    background-color:white ;
-    height: 580px;
-  }
-  
-  i{
-    margin-left: 2px;
-    margin-right:5px;
-  }
-  
-  
-  
-  .twitter-btn{
-    background-color: rgba(0, 172, 237, 1) ;
-    @include sns-button;
-    margin-left: 40px;
-  }
-  
-  .google-btn{
-    background-color: rgba(219, 74, 57, 1);
-    @include sns-button;
-  }
-  
-  .lobi-btn{
-    background-color: rgb(255, 130, 40);
-    @include sns-button;
-  }
-  
-  .btn-wrapper{
-    margin: 20px 5px 0 5px;
-  }
-  
-  hr{
-    margin: 30px 0;
-  }
-  
-  footer {
-    background-color:#f0f0f0;
-    width:100%;
-    margin: 0 180px;
-  
-    li{
-  
-      float: left;
-      padding: 5px 15px;
-      margin:10px 0;
+    img{
+      width:240px;
     }
   }
-  
-  .signup-wrapper{
-    p{
-      margin-bottom: 15px;
+
+  footer{
+    @include basic();
+    position:relative;
+    .link-list{
+      display: flex;     
+      position:absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%,-50%);
+      -webkit-transform : translate(-50%,-50%);
+      transform : translate(-50%,-50%);
+
+      li{
+        padding: 0px 10px;
+        list-style: none;
+        
+      }
+      a{
+        text-decoration: none;
+        color: $Color;
+      }
     }
   }
-  
-  .signup-input{
+
+  main{
+    height: auto;
     text-align: center;
-    padding: 5px;
-  
-    input{
-      width:300px;
-      opacity: 0.6;
+
+    .top-wrapper{
+      img{
+        width: 100%;
+        vertical-align: bottom;
+      }
+    }
+
+    .main-wrapper{
+      background: $BackColor;
+      color:$Color;
+      height: 350px;
+      img{
+        margin-top: 20px;
+        width: 50%;
+      }
+      p{
+        font-size: 25px;
+      }
+    }
+
+    .signup-wrapper{
+      hr{
+        border-bottom: $MiftonColor 3px dashed;
+      }
+      p{
+        color: $TextColor;
+        font-size: 22px;
+        margin-top: 5px;
+      }
     }
   }
-  
-  .mail-signup{
-    background-color:rgb(162, 131, 84);
-    @include sns-button;
-  }
-  
 }
 
