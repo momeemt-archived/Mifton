@@ -15,21 +15,26 @@ html
   body
     .home
       header
-        img.header-logo[src="mifton-logo.png"]
-
-      = yield
-
-      footer
+        a href="/"
+          img.header-logo[src="mifton-logo.png"]
         ul.link-list
           li
             = link_to  "About", "/about"
           li
             = link_to  "Crafes!", "/crafes"
           li
-            = link_to  "Tiprint", "https://tiprint.net"
+            = link_to  "Tiprint", "https://tiprint.net",:target => "_blank"
           li
             = link_to  "プライバシーポリシー", "/privacypolicy"
           li
-            = link_to  "開発マップ", "#"
+            = link_to  "開発マップ", "https://trello.com/b/CzFf02M1",:target => "_blank"
+          li 
+            = link_to  "フィードバック","#",:target => "_blank"
           li
-            = link_to  "開発者", "https://twitter.com/momeemt"      
+            = link_to  "開発者", "https://twitter.com/momeemt" ,:target => "_blank"     
+
+      = yield
+      
+      footer
+
+      

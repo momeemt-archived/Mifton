@@ -1,35 +1,65 @@
-<div class="main">
-  <h1>大会一覧</h1>
-  <h2>開催中の大会</h2>
-  <h2>次回以降の大会</h2>
-  <table>
-    <tr>
-      <th>開始時刻</th>
-      <th>大会名</th>
-      <th>カテゴリー</th>
-    </tr>
-    <% if @contests.empty? %>
-      <tr>
-        <td>---</td>
-        <td>開催予定の大会がありません</td>
-      </tr>
-    <% else %>
-      <% @contests.each do |contest| %>
-        <tr>
-          <td><%= contest.start_time %></td>
-          <td><%= link_to("#{contest.title}","#") %></td>
-          <td><%= contest.category %></td>
-        </tr>
-      <% end %>
-    <% end%>
-  </table>
-  <h2>終了した大会</h2>
-  <table>
-    <tr>
-      <th>開始時刻</th>
-      <th>大会名</th>
-      <th>カテゴリー</th>
-      <th>優勝者</th>
-    </tr>
-  </table>
-</div>
+.main
+  h1 大会一覧
+  h2 開催中の大会
+  - once = 0
+  - if @contests.present?      
+    - @contests.each do |contest|
+      - if contest.holdingTime <= Time.now && contest.holdingTime + contest.length * 60 >= Time.now
+        - if once == 0
+          p 現在開催中の大会を表示します。
+          table
+            tr
+              th 開催時刻
+              th 大会名
+              th 大会時間
+              th 作問者
+              th レーティング変化
+            tr
+              td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
+              td=link_to("#{contest.name} ##{contest.times}","#")
+              td= contest.length
+              td= contest.writer
+              td="~#{contest.rating}"
+          - once += 1
+  - if once == 0
+    p 開催中の大会がありません
+  
+  h2 開催予定の大会
+  - if @contests.empty?
+      p 開催予定の大会がありません
+  - else
+    table
+      tr
+        th 開催時刻
+        th 大会名
+        th 大会時間
+        th 作問者
+        th レーティング変化
+      - @contests.each do |contest|
+        - if contest.holdingTime > Time.now
+          tr
+            td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
+            td=link_to("#{contest.name} ##{contest.times}","#")
+            td= contest.length
+            td= contest.writer
+            td="~#{contest.rating}"
+
+  h2 終了した大会
+  - if @contests.empty?
+      p 開催した大会がありません
+  - else
+    table
+      tr
+        th 開催時刻
+        th 大会名
+        th 大会時間
+        th 作問者
+        th レーティング変化
+      - @contests.each do |contest|
+        - if contest.holdingTime + contest.length * 60 < Time.now
+          tr
+            td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
+            td=link_to("#{contest.name} ##{contest.times}","#")
+            td= contest.length
+            td= contest.writer
+            td="~#{contest.rating}"

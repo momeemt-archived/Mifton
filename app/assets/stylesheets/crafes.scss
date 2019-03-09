@@ -13,6 +13,18 @@ hr {
   margin: 0 auto;
 }
 
+table {
+  border: solid 2px $tWrppColor;
+  border-collapse: collapse;
+  th,td{
+    border: 1px solid $tWrppColor;
+    padding:5px;
+  }
+  th{
+    font-size: 18px;
+  }
+}
+
 
 @mixin wrppMixin {
   clear: both;
@@ -37,6 +49,24 @@ hr {
 
 
 .crafes{
+  
+  #top-page{
+    padding:20px;
+    text-align: center;
+  }
+  
+  #controll-panel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .propaty{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
   a{
     text-decoration: none;
     color:#474444;
@@ -57,16 +87,28 @@ hr {
   }
   
   footer{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position:relative;
     height: $hfHeight;
     background-color: $hfColor;
-    padding: 0px 5px;
-    a{
-      color:white;
+    .back-link{
+      display: flex;
+      position:absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%,-50%);
+      -webkit-transform : translate(-50%,-50%);
+      transform : translate(-50%,-50%);
+      a{
+        color:white;
+        text-decoration: none;
+        display: block;
+        width:100%;
+      }
+      i{
+        color:white;
+        margin-right: 7px;
+        margin-top:3px;
+      }
     }
   }
   color:#474444;
@@ -137,4 +179,11 @@ hr {
       background-color: #caecf0;
     }
   }
+  
+
+  .about{
+    text-align: center;
+  }
+  
+  
 }

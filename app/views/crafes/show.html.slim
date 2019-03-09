@@ -1,20 +1,19 @@
-header
-  .header-logo
-    a[href="/crafes"]
-      img[src="/crafes-logo.png"] 
-      
-      
-    
-
 main
-  .container
-    nav top
-    h1 Function Beginner Contest #001
-    h2 Function Beginner Contest の説明
-    - if @contest.id == "FBC"
-     = "functionのみを利用して提示された条件に合うコマンドを組み立てるコンテストです。"
-    - end
-
-
-footer
-  =link_to("Miftonホームへ戻る","/")
+  - if @contest.present?
+    - if @contest.times.present?
+      h1= "#{@contest.name} ##{@contest.times}"
+    - else
+      h1= "#{@contest.name}"
+    p= "レーティング対象: ~#{@contest.rating}"
+    p= "作問者: #{@contest.writer}"
+    - finishTime = @contest.holdingTime + @contest.length * 60
+    p= "開催時刻: #{@contest.holdingTime.strftime("%Y-%m-%d %H:%M")} ~ #{finishTime.strftime("%Y-%m-%d %H:%M")}"
+    p= "回答時間: #{@contest.length}分"
+    h2= link_to("問題1: #{@contest.q1title}","/crafes/#{@contest.id}/1")
+    h2= link_to("問題2: #{@contest.q2title}","/crafes/#{@contest.id}/2")
+    h2= link_to("問題3: #{@contest.q3title}","/crafes/#{@contest.id}/3")
+    h2= link_to("問題4: #{@contest.q4title}","/crafes/#{@contest.id}/4")
+    / (ここでABCDなどのデータベース作る)
+    
+  - else
+    h1 無意味なページです。

@@ -1,4 +1,4 @@
-.container
+main
   .top-wrapper
     #top-logo
       img[src="/crafes-img.png"]
@@ -7,10 +7,14 @@
       h1 Crafes!
   .description-wrapper
     .descript
-      h2 ざっくり "Crafes!" とは？
-      p Crafes! は、MinecraftBEの技術を競う大会開催サービスです。
-      p Miftonアカウントを持っていれば誰でも参加できます！結果に応じ、BEの技術力を示すレートを知ることができます。
-      p 技術分野は多数あり、あなたが自信のある技術で勝負することができます！
+      h2 ざっくり "Crafes!" とは？  
+      p Crafes!は、MinecraftBEの知識や技術を競う大会に参加できるサービスです。
+      p これまで分からなかった自分の技術力が可視化されるようになり、技術向上にも役立ちます。
+      p 分野は幅広く、自分の気に入っている技術で勝負することができます。
+      p
+        | 一定以上の資格を満たすプレイヤーは、自ら大会を
+        span 開催
+        | することもできます。
     hr
   .about-wrapper
     .descript
@@ -31,13 +35,55 @@
       h2 大会を開催してみる
       p 一定以上の基準を満たすクラフターは、大会を開催することもできます。
       div.btn.join-btn 
-        = link_to  "Go!", "/crafes/holding"
+        = link_to  "Go!", "/crafes/contest_request"
     hr
   .join-wrapper
-    .descript1
-      h2 過去問を解く
-      p 千里の道も一歩から。Crafes! の出題傾向に慣れましょう。
-      div.btn.join-btn 
-        = link_to  "Go!", "/crafes/index" 
-  .space
+    .descript
+      h2 開催中の大会
+      - once = 0
+      - if @contests.present?      
+        - @contests.each do |contest|
+          - if contest.holdingTime <= Time.now && contest.holdingTime + contest.length * 60 >= Time.now
+            - if once == 0
+              p 現在開催中の大会を表示します。
+              table
+                tr
+                  th 開催時刻
+                  th 大会名
+                  th 大会時間(分)
+                  th 作問者
+                  th レーティング変化
+                tr
+                  td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
+                  td=link_to("#{contest.name} ##{contest.times}","#")
+                  td= contest.length
+                  td= contest.writer
+                  td="~#{contest.rating}"
+              - once += 1
+      - if once == 0
+        p 開催中の大会がありません
+    hr
+  .join-wrapper
+    .descript
+      h2 大会告知
+      - if @contests.empty?
+          p 開催予定の大会がありません
+      - else
+        p 直近に行われる大会を告知します。
+        table
+          tr
+            th 開催時刻
+            th 大会名
+            th 大会時間(分)
+            th 作問者
+            th レーティング変化
+          - @contests.each do |contest|
+            - if contest.holdingTime > Time.now
+              tr
+                td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
+                td=link_to("#{contest.name} ##{contest.times}","/crafes/#{contest.id}")
+                td= contest.length
+                td= contest.writer
+                td="~#{contest.rating}"
+    
 

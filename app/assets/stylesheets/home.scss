@@ -1,6 +1,7 @@
-$height : 55px; // ヘッダーフッター用の height 
+$height : 110px; // ヘッダーフッター用の height 
 $MiftonColor : #ec6d51; // Mifton用のメインカラー
-$BackColor : #ecad9f;
+// $BackColor : #ecad9f;
+$BackColor : #383c3c;
 $Color : white; // ヘッダーフッター文字カラー
 $TextColor: #474444;
 
@@ -29,17 +30,13 @@ hr {
     @include basic();
     text-align: center;
     img{
-      width:240px;
+      width:270px;
     }
-  }
-
-  footer{
-    @include basic();
     position:relative;
     .link-list{
       display: flex;     
       position:absolute;
-      top: 50%;
+      top: 75%;
       left: 50%;
       -ms-transform: translate(-50%,-50%);
       -webkit-transform : translate(-50%,-50%);
@@ -69,15 +66,19 @@ hr {
     }
 
     .main-wrapper{
+      position:relative;
       background: $BackColor;
       color:$Color;
-      height: 350px;
-      img{
-        margin-top: 20px;
-        width: 50%;
-      }
+      height: 60px;
       p{
-        font-size: 25px;
+        font-size: 16px;
+        display: flex;     
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform : translate(-50%,-50%);
+        transform : translate(-50%,-50%);
       }
     }
 
@@ -89,6 +90,36 @@ hr {
         color: $TextColor;
         font-size: 22px;
         margin-top: 5px;
+
+        
+      }
+      .twitter{
+        margin: 15px;
+        i{
+          margin-right: 8px;
+          color: #55acee;
+        }
+        span{
+          color:#55acee;
+        }
+      }
+      .mailAddress{
+        margin: 15px;
+        i{
+          margin-right: 8px;
+          color: #44a3aa;
+        }
+      }
+      .btn{
+        display: inline;
+        background-color: $BackColor;
+        border-radius: 4px;
+        padding: 6px 70px;
+        margin: 5px 0;
+        color:rgb(43, 43, 43);
+        &:hover{
+          background-color: #fac8bd;
+        }
       }
     }
   }

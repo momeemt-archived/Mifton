@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_150459) do
+ActiveRecord::Schema.define(version: 2019_03_09_034822) do
 
   create_table "contests", force: :cascade do |t|
     t.string "name"
     t.integer "times"
-    t.string "type"
     t.string "q1title"
     t.text "q1"
     t.string "q2title"
@@ -26,6 +25,10 @@ ActiveRecord::Schema.define(version: 2019_02_11_150459) do
     t.text "q4"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "holdingTime"
+    t.integer "length"
+    t.string "writer"
+    t.integer "rating"
   end
 
   create_table "posts", force: :cascade do |t|
