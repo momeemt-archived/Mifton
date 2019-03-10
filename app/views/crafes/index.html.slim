@@ -1,65 +1,87 @@
 .main
+  - if flash[:notice]
+    .flash
+      p= flash[:notice]
+     
   h1 大会一覧
   h2 開催中の大会
-  - once = 0
-  - if @contests.present?      
+  - hasContest = false
+  - if @contests.present?
     - @contests.each do |contest|
       - if contest.holdingTime <= Time.now && contest.holdingTime + contest.length * 60 >= Time.now
-        - if once == 0
-          p 現在開催中の大会を表示します。
-          table
-            tr
-              th 開催時刻
-              th 大会名
-              th 大会時間
-              th 作問者
-              th レーティング変化
-            tr
-              td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
-              td=link_to("#{contest.name} ##{contest.times}","#")
-              td= contest.length
-              td= contest.writer
-              td="~#{contest.rating}"
-          - once += 1
-  - if once == 0
-    p 開催中の大会がありません
+        - hasContest = true
   
-  h2 開催予定の大会
-  - if @contests.empty?
-      p 開催予定の大会がありません
-  - else
+  - if hasContest
+    p 開催中の大会を表示します。
     table
       tr
         th 開催時刻
         th 大会名
-        th 大会時間
+        th 大会時間(分)
+        th 作問者
+        th レーティング変化
+      - @contests.each do |contest|
+        - if contest.holdingTime <= Time.now && contest.holdingTime + contest.length * 60 >= Time.now
+          tr
+            td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
+            td=link_to("#{contest.name} ##{contest.times}","/crafes/#{contest.id}")
+            td= contest.length
+            td= contest.writer
+            td="~#{contest.rating}"
+  - else
+    p 開催中の大会がありません
+  
+  h2 開催予定の大会
+  - hasContest = false
+  - if @contests.present?
+    - @contests.each do |contest|
+      - if contest.holdingTime > Time.now
+        - hasContest = true
+  
+  - if hasContest
+    p 開催予定の大会を表示します。
+    table
+      tr
+        th 開催時刻
+        th 大会名
+        th 大会時間(分)
         th 作問者
         th レーティング変化
       - @contests.each do |contest|
         - if contest.holdingTime > Time.now
           tr
             td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
-            td=link_to("#{contest.name} ##{contest.times}","#")
+            td=link_to("#{contest.name} ##{contest.times}","/crafes/#{contest.id}")
             td= contest.length
             td= contest.writer
             td="~#{contest.rating}"
+  - else
+    p 開催予定の大会がありません
 
   h2 終了した大会
-  - if @contests.empty?
-      p 開催した大会がありません
-  - else
+  - hasContest = false
+  - if @contests.present?
+    - @contests.each do |contest|
+      - if contest.holdingTime + contest.length * 60 < Time.now
+        - hasContest = true
+  
+  - if hasContest
+    p 開催が終了した大会を表示します。
     table
       tr
         th 開催時刻
         th 大会名
-        th 大会時間
+        th 大会時間(分)
         th 作問者
         th レーティング変化
       - @contests.each do |contest|
         - if contest.holdingTime + contest.length * 60 < Time.now
           tr
             td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
-            td=link_to("#{contest.name} ##{contest.times}","#")
+            td=link_to("#{contest.name} ##{contest.times}","/crafes/#{contest.id}")
             td= contest.length
             td= contest.writer
             td="~#{contest.rating}"
+  - else
+    p 開催が終了した大会がありません
+  

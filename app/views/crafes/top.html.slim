@@ -40,36 +40,44 @@ main
   .join-wrapper
     .descript
       h2 開催中の大会
-      - once = 0
-      - if @contests.present?      
+      - hasContest = false
+      - if @contests.present?
         - @contests.each do |contest|
           - if contest.holdingTime <= Time.now && contest.holdingTime + contest.length * 60 >= Time.now
-            - if once == 0
-              p 現在開催中の大会を表示します。
-              table
-                tr
-                  th 開催時刻
-                  th 大会名
-                  th 大会時間(分)
-                  th 作問者
-                  th レーティング変化
-                tr
-                  td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
-                  td=link_to("#{contest.name} ##{contest.times}","#")
-                  td= contest.length
-                  td= contest.writer
-                  td="~#{contest.rating}"
-              - once += 1
-      - if once == 0
+            - hasContest = true
+      
+      - if hasContest
+        p 開催中の大会を表示します。
+        table
+          tr
+            th 開催時刻
+            th 大会名
+            th 大会時間(分)
+            th 作問者
+            th レーティング変化
+          - @contests.each do |contest|
+            - if contest.holdingTime <= Time.now && contest.holdingTime + contest.length * 60 >= Time.now
+              tr
+                td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
+                td=link_to("#{contest.name} ##{contest.times}","/crafes/#{contest.id}")
+                td= contest.length
+                td= contest.writer
+                td="~#{contest.rating}"
+      - else
         p 開催中の大会がありません
     hr
+    
   .join-wrapper
     .descript
       h2 大会告知
-      - if @contests.empty?
-          p 開催予定の大会がありません
-      - else
-        p 直近に行われる大会を告知します。
+      - hasContest = false
+      - if @contests.present?
+        - @contests.each do |contest|
+          - if contest.holdingTime > Time.now
+            - hasContest = true
+      
+      - if hasContest
+        p 開催予定の大会を表示します。
         table
           tr
             th 開催時刻
@@ -85,5 +93,8 @@ main
                 td= contest.length
                 td= contest.writer
                 td="~#{contest.rating}"
+      - else
+        p 開催予定の大会がありません
+      
     
 

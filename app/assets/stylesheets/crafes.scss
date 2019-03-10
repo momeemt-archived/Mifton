@@ -50,6 +50,15 @@ table {
 
 .crafes{
   
+  .flash{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkorange;
+    color:white;
+    padding:3px 0px;
+  }
+  
   #top-page{
     padding:20px;
     text-align: center;
@@ -69,7 +78,7 @@ table {
   
   a{
     text-decoration: none;
-    color:#474444;
+    color:$hfColor;
   
     &hover{
       text-decoration: none;

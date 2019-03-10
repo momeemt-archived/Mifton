@@ -1,4 +1,7 @@
 main
+  - if flash[:notice]
+    .flash
+      p= flash[:notice]
   #top-page
     = form_tag("/crafes/create", :method => "post") do
       h1 管理者用コンテスト登録ページ
@@ -23,6 +26,17 @@ main
         .input-box
           h2 レーティング変化(Max)
           input type="number" name="rating"/
+      .propaty
+        .input-box
+          h2 ペナルティー時間
+          input type="number" name="penalty"/
+        .input-box
+          h2 問題形式
+          select name="type"
+            option value="beginner" 初心者向け(ABCD4問構成)
+            option value="intermediate" 中級者向け(CDEF4問構成)
+            option value="senior" 上級者向け(EFGH4問構成)
+            option value="single" 単独一問
       hr
       .propaty
         .input-box
@@ -69,6 +83,8 @@ main
             th 大会時間
             th 作問者
             th レーティング変化
+            th 問題形式
+            th ペナルティー時間
             th 大会作成時
             th 大会最終更新時
             - @contests.each do |contest|
@@ -78,6 +94,16 @@ main
                 td= contest.length
                 td= contest.writer
                 td="~#{contest.rating}"
+                td
+                  - if contest.contest_type == "beginner"
+                    p ABCD
+                  - elsif contest.contest_type == "intermediate"
+                    p CDEF
+                  - elsif contest.contest_type == "senior"
+                    p EFGH
+                  - else
+                    p 単独一問
+                td= "#{contest.penalty}分"
                 td= contest.created_at.strftime("%Y-%m-%d %H:%M")
                 td= contest.updated_at.strftime("%Y-%m-%d %H:%M")
                 td= link_to("削除","/crafes/#{contest.id}/destroy", {method: "post"})

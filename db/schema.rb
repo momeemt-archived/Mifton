@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_09_034822) do
+ActiveRecord::Schema.define(version: 2019_03_10_020922) do
 
   create_table "contests", force: :cascade do |t|
     t.string "name"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 2019_03_09_034822) do
     t.integer "length"
     t.string "writer"
     t.integer "rating"
+    t.integer "penalty"
+    t.string "contest_type"
   end
 
   create_table "posts", force: :cascade do |t|

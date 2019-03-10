@@ -16,8 +16,13 @@ Rails.application.routes.draw do
   post "/crafes/:id/que_submit" => "crafes#question_submit" # コンテスト問題回答送信
   get "/crafes/:id/rank_table" => "crafes#rank_table" # コンテスト順位表
   post "/crafes/:id/destroy" => "crafes#destroy" #コンテスト削除
+  get "/crafes/:id/edit" => "crafes#edit" # コンテスト編集
+  post "/crafes/:id/update" => "crafes#update" #コンテスト情報更新
 
-
+  get "/users/index" => "users#index" # ユーザー一覧
+  get "/signup" => "users#new" # 新規登録
+  get "/users/:id" => "users#show" # ユーザー詳細ページ
+  
 
 
 
@@ -25,7 +30,7 @@ Rails.application.routes.draw do
   get "/bector/new" => "bector#new"
   post "/bector/create" => "bector#create"
   get "/bector/:id" => "bector#show"
-  get "/users/index" => "users#index"
+  
   get "/" => "home#index"
   get "/about" => "home#about"
   get "/privacypolicy" => "home#privacyPolicy"
