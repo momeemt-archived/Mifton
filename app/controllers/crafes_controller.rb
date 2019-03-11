@@ -17,9 +17,22 @@ class CrafesController < ApplicationController
   
   def create
     @contest = Contest.new(
-      name: params[:name],times: params[:times],
-      q1title: params[:q1title],q1: params[:q1],q2title: params[:q2title],q2: params[:q2],q3title: params[:q3title],q3: params[:q3],q4title: params[:q4title],q4: params[:q4],
-      holdingTime: params[:holdingTime],length: params[:length],writer: params[:writer],rating: params[:rating],type:params[:type],penalty:params[:penalty]
+      name: params[:name],
+      times: params[:times],
+      q1title: params[:q1title],
+      q1: params[:q1],
+      q2title: params[:q2title],
+      q2: params[:q2],
+      q3title: params[:q3title],
+      q3: params[:q3],
+      q4title: params[:q4title],
+      q4: params[:q4],
+      holdingTime: params[:holdingTime],
+      length: params[:length],
+      writer: params[:writer],
+      rating: params[:rating],
+      contest_type:params[:contest_type],
+      penalty:params[:penalty]
     )
     if @contest.save
       flash[:notice] = "大会を登録しました"

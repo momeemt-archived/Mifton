@@ -50,6 +50,48 @@ table {
 
 .crafes{
   
+  .long-hr{
+    width:90%;
+    padding: 10px 0;
+  }
+  
+  .detailed{
+    margin: 30px 0;
+    text-align: center;
+    
+    h2{
+      font-size: 40px;
+      
+      span{
+        color: $hfColor;
+        font-size: 45px;
+      }
+    }
+  }
+  
+  input{
+    border-radius: 3px;
+    border: 1px $hfColor solid;
+  }
+  
+  textarea{
+    border-radius: 10px;
+  }
+  
+  .top-wrap{
+    text-align: center;
+    color: black;
+    padding-top: 20px;
+    
+    h1{
+      font-size: 80px;
+    }
+    
+    p{
+      font-size: 20px;
+    }
+  }
+  
   .flash{
     display: flex;
     justify-content: center;
@@ -57,6 +99,45 @@ table {
     background-color: darkorange;
     color:white;
     padding:3px 0px;
+  }
+  
+  .header-section{
+    border: 2px $hfColor solid;
+    display: inline-block;
+    width: 200px;
+    padding: 15px;
+    
+    h2{
+      text-align: center;
+      border-bottom: 1px gray solid;
+      margin-bottom: 5px;
+    }
+    p{
+      padding: 2px;
+      line-height: 1.6em;
+    }
+    
+    position: relative;
+    transition: 0.5s;
+    top: 0;
+    
+    &:hover{
+      
+      
+      box-shadow: 0 10px 6px -6px #777;
+    }
+    
+  }
+  
+  .btn-wrapper{
+    text-align: center;
+  }
+  
+  .descript-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 100px;
   }
   
   #top-page{
