@@ -1,99 +1,165 @@
-$hfColor : #00a3af;
-$hfHeight : 55px;
-$tWrppColor : #a2d7dd;
-$tWrppHeight : 250px;
-
-
-hr {
-  height: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  width:55%;
-  margin: 0 auto;
-}
-
-table {
-  border: solid 2px $tWrppColor;
-  border-collapse: collapse;
-  th,td{
-    border: 1px solid $tWrppColor;
-    padding:5px;
-  }
-  th{
-    font-size: 18px;
-  }
-}
-
-
-@mixin wrppMixin {
-  clear: both;
+// Crafes! Controllerで制御されたページの装飾を行う
+.crafes {
+  
   text-align: center;
-  margin:2px;
-}
-
-@mixin deWrpp {
-  padding: 20px 0;
-  display: inline-block;
-  h2{
-    font-size:20px;
-    margin: 15px 0px;
-    color:#008899;
+  
+  // 変数宣言
+  $base-hf-height : 55px;
+  $base-hf-color : #00a3af;
+  $base-height-size : 250px;
+  $base-bg-color : #a2d7dd;
+  $base-cmpn-color : #008899;
+  
+  // display を flex にするmixin
+  @mixin flex-design {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
   }
+  
+  @mixin reset-css {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  
+  // ヘッダー、フッターのベース
+  @mixin base-hf {
+    height: $base-hf-height;
+    background-color: $base-hf-color;
+  }
+  
+  @mixin position-set-center {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform : translate(-50%,-50%);
+    transform : translate(-50%,-50%);
+  }
+  
+  // 水平線
+  hr {
+    @include reset-css();
+    margin: 0 auto;
+    border-bottom: $base-cmpn-color 3px dashed;
+  }
+  
+  table {
+    margin: 15px auto;
+    border: solid 2px $base-cmpn-color;
+    border-collapse: collapse;
+    th,td{
+      border: 1px solid $base-cmpn-color;
+      padding:5px;
+    }
+    th{
+      font-size: 18px;
+    }
+    
+    @media screen and (min-width:600px) and (max-width:959px) {
+      margin: 15px 10px;
+    }
+  }
+  
+  h2{
+    font-size: 20px;
+    margin: 15px 0px;
+    color: $base-cmpn-color;
+  }
+  
   p{
     margin: 10px 0;
-    font-size:15px;
-  }
-}
-
-
-
-.crafes{
-  
-  .long-hr{
-    width:90%;
-    padding: 10px 0;
+    font-size: 15px;
   }
   
-  .detailed{
-    margin: 30px 0;
-    text-align: center;
-    
-    h2{
-      font-size: 40px;
+  a{
+    text-decoration: none;
+    &:hover{
+      text-decoration: none;
+    }
+    &:visited{
+      color: blue;
+      text-decoration: none;
+    }
+  }
+  
+  header{
+    @include base-hf();
+    img{
+      width:240px;
+    }
+  }
+  
+  footer{
+    @include base-hf();
+    .back-link{
+      @include flex-design();
+      justify-content:center;
       
-      span{
-        color: $hfColor;
-        font-size: 45px;
+      .link-btn {
+        margin: 15px 0;
+        padding: 0 15px;
+        a {
+          color: white;
+        }
+        i {
+          color: white;
+          margin-right: 7px;
+          margin-top:2px;
+        }
       }
     }
   }
   
-  input{
-    border-radius: 3px;
-    border: 1px $hfColor solid;
-  }
-  
-  textarea{
-    border-radius: 10px;
-  }
-  
-  .top-wrap{
-    text-align: center;
-    color: black;
-    padding-top: 20px;
-    
-    h1{
-      font-size: 80px;
-    }
-    
-    p{
-      font-size: 20px;
+  .short-line {
+    width:70%;
+    @media screen and (min-width:960px){
+      width:55%;
     }
   }
   
+  .long-line{
+    width:90%;
+  }
+  
+  // 各ページmain内の上部
+  .top-wrapper {
+    width: 100%;
+    height: $base-height-size;
+    @include flex-design;
+    align-items: center;
+    #top-logo img {
+      width: 800px;
+    }
+
+    #top-title h1{
+      font-size: 60px;
+    }
+    
+    @media screen and (min-width:600px) and (max-width:959px) {
+      h1 {
+        color: red;
+      }
+    }
+    
+    
+  }
+  
+  .add-base-color {
+    background-color: $base-bg-color;
+  }
+  
+  .descript-section {
+    padding: 20px 0;
+  }
+
+  // Flash Css
   .flash{
-    display: flex;
+    @include flex-design();
     justify-content: center;
     align-items: center;
     background-color: darkorange;
@@ -101,179 +167,77 @@ table {
     padding:3px 0px;
   }
   
-  .header-section{
-    border: 2px $hfColor solid;
+  .detailed{
+    margin: 30px 0;
+    
+    h2{
+      font-size: 40px;
+      color: black;
+    }
+
+    span{
+      color: $base-cmpn-color;
+      font-size: 45px;
+    }
+  }
+  
+  .description-wrapper a{
+    color: black;
+  }
+  .box-section{
+    border: 2px $base-cmpn-color solid;
     display: inline-block;
     width: 200px;
     padding: 15px;
-    
+    margin: 50px 20px;
+    text-align: left;
+
     h2{
       text-align: center;
       border-bottom: 1px gray solid;
       margin-bottom: 5px;
     }
+    
     p{
       padding: 2px;
       line-height: 1.6em;
     }
-    
+
     position: relative;
     transition: 0.5s;
     top: 0;
-    
+
     &:hover{
-      
-      
       box-shadow: 0 10px 6px -6px #777;
     }
+
+  }
+  
+  .join-wrapper h2 {
+    color: black;
+    font-size: 45px;
+  }
+  
+  .btn {
+    border: 2px $base-hf-color solid;
+    width: 180px;
+    margin: 30px auto;
+    padding: 7.5px;
+    border-radius: 10px;
+    a {
+      display: block;
+      color: $base-cmpn-color;
+      font-size: 18px;
+    }
+  }
+  
+  @media screen and (max-width:480px) {
+    p{
+      font-size: 13px;
+    }
     
-  }
-  
-  .btn-wrapper{
-    text-align: center;
-  }
-  
-  .descript-wrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 50px 100px;
-  }
-  
-  #top-page{
-    padding:20px;
-    text-align: center;
-  }
-  
-  #controll-panel{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .propaty{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  a{
-    text-decoration: none;
-    color:$hfColor;
-  
-    &hover{
-      text-decoration: none;
+    th,td { 
+      font-size: 13px;
     }
   }
-  
-  
-  header{
-    height: $hfHeight;
-    background-color: $hfColor;
-    text-align: center;
-    img{
-      width:240px;
-    }
-  }
-  
-  footer{
-    position:relative;
-    height: $hfHeight;
-    background-color: $hfColor;
-    .back-link{
-      display: flex;
-      position:absolute;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translate(-50%,-50%);
-      -webkit-transform : translate(-50%,-50%);
-      transform : translate(-50%,-50%);
-      a{
-        color:white;
-        text-decoration: none;
-        display: block;
-        width:100%;
-      }
-      i{
-        color:white;
-        margin-right: 7px;
-        margin-top:3px;
-      }
-    }
-  }
-  color:#474444;
-  .top-wrapper{
-    height:$tWrppHeight;
-    background-color: $tWrppColor;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
-    display: flex;
-
-    #top-logo{
-      img{
-        width:800px;
-      }
-    }
-
-    #top-title{
-      margin-top: 50px;
-      h1{
-        font-size: 60px;
-      }
-    }
-  }
-
-  .description-wrapper{
-    @include wrppMixin();
-  }
-
-  .descript{
-    @include deWrpp();
-  }
-
-  .descript1{
-    @include deWrpp();
-  }
-
-
-  .about-wrapper{
-    @include wrppMixin();
-  }
-
-  .join-wrapper{
-    @include wrppMixin();
-  }
-
-  .space{
-    height: 50px;
-  }
-
-  a{
-    width: 100%;
-  }
-
-  hr{
-    border-bottom: #008899 3px dashed;
-  }
-  
-
-  
-  .btn{
-    background-color: #a2d7dd;
-    border-radius: 4px;
-    padding: 6px 70px;
-    color:rgb(43, 43, 43);
-    &:hover{
-      background-color: #caecf0;
-    }
-  }
-  
-
-  .about{
-    text-align: center;
-  }
-  
-  
 }

@@ -2,7 +2,7 @@ doctype html
 html
   head
     title
-      | Mifton
+      | Crafes!
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -24,5 +24,9 @@ html
 
       footer
         .back-link
-          i.fas.fa-backward
-          =link_to("Crafes!ホームへ戻る","/crafes")
+          .link-btn
+            i.fas.fa-home
+            =link_to "Miftonへ戻る", "/"
+          .link-btn
+            i.fas.fa-backward
+            =link_to("Crafes!ホームへ戻る","/crafes")

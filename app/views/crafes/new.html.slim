@@ -90,7 +90,7 @@ main
             - @contests.each do |contest|
               tr
                 td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
-                td=link_to("#{contest.name} ##{contest.times}","#")
+                td=link_to("#{contest.name} ##{contest.times}","/crafes/#{contest.id}")
                 td= contest.length
                 td= contest.writer
                 td="~#{contest.rating}"

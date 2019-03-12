@@ -1,35 +1,48 @@
 main
   .container
-    .top-wrap
-      h1 Crafes!
-      p 「Crafes!(クラフェス)」は、持ち前のMCBEの技術力で競う大会サービスです
+    .top-wrapper.add-base-color
+      #top-logo
+        img[src="/crafes-img.png"]
+      #top-title
+        h1 Crafes!
+        p 「Crafes!(クラフェス)」は、持ち前のMCBEの技術力で競う大会サービスです
       
-    .descript-wrapper
-      .header-section
+    .description-wrapper
+      a.box-section href="#"
         h2 幅広い分野
-        p 分野の違う3つのコンテストに参加できます。更に公式サポート大会は増える予定です。
+        p 分野の違う3つのコンテストに参加できます。
+        p 更に公式サポート大会を増やすために準備中です。
+        
       
-      .header-section
+      .box-section
         h2 誰でも気軽に
-        p 初心者から上級者まで、3つのレベルに大会を分けているので気軽に参加できます。
+        p 初心者から上級者まで、3つのレベルに大会が分かれますので、気軽に参加できます。
+        p さあ、参加しましょう！
       
-      .header-section
+      .box-section
         h2 大会の開催
-        p 大会に参加するだけでなく、自分で大会を開催をすることもできます。自由度MAX。
+        p 参加するだけでなく、大会を開催をすることもできます。
+        p また、問題を作問して運営に提供できます。
       
-      .header-section
+      .box-section
         h2 技術力の可視化
-        p レートシステムで技術力が可視化されます。ライバルを見つけて向上を目指しましょう！
+        p レートシステムで技術力が可視化されます。
+        p ライバルを見つけて向上を目指しましょう！
       
-      .header-section
+      .box-section
         h2 参加しやすい
-        p 基本的に毎週土曜日の19:00~20:00に開催。Miftonアカウントだけで参加できます。
-    .btn-wrapper
+        p 基本的に毎週土曜日の19:00~20:00に開催。
+        p Miftonアカウントだけで参加できます。
+        
+    .join-wrapper
       h2 さあ、あなたも今すぐCrafes!に参加しましょう！
-      a.raised href="/crafes" アカウント登録をする
-      a.raised href="/crafes/index" 大会に参加する 
+      .btn
+        a href="/crafes" アカウント登録
+      .btn
+        a href="/crafes/index" 大会に参加する 
     
-    hr.long-hr
+    hr.long-line
+    
     .detailed
       h2 
         span 幅
@@ -55,7 +68,7 @@ main
       p アップロードされた動画は運営によって後日Twitterにて一斉に投稿され、作成者が不明の状態でユーザーに評価していただきます。
       p Twitterで開催していたBETCよりも遥かに公平な大会システムを実現しています。
     
-    hr.long-hr
+    hr.long-line
     
     .detailed
       h2 
@@ -78,7 +91,7 @@ main
       p 全てのユーザーを想定していますが、非常に難しい問題構成となっております。
       p 人間を辞められている方にオススメの大会です。
       
-    hr.long-hr
+    hr.long-line
     
     .detailed
        h2
