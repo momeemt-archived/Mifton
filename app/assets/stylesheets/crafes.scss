@@ -229,6 +229,10 @@
       color: $base-cmpn-color;
       font-size: 18px;
     }
+    
+    &:hover {
+      background-color: $base-bg-color * 1.2;
+    }
   }
   
   @media screen and (max-width:480px) {

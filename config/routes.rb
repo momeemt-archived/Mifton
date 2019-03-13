@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   get "/users/index" => "users#index" # ユーザー一覧
   get "/signup" => "users#new" # 新規登録
+  post "/users/create" => "users#create"
   get "/users/:id" => "users#show" # ユーザー詳細ページ
   
 

@@ -13,4 +13,25 @@ html
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" />
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   body
-    = yield
+    .home
+      header
+        a href="/"
+          img.header-logo[src="mifton-logo.png"]
+        ul.link-list
+          li
+            = link_to  "About", "/about"
+          li
+            = link_to  "Crafes!", "/crafes"
+          li
+            = link_to  "開発マップ", "https://trello.com/b/CzFf02M1",:target => "_blank"
+          li 
+            = link_to  "フィードバック","#",:target => "_blank"
+             
+
+      = yield
+      
+      footer
+        li
+          = link_to  "プライバシーポリシー", "/policy"
+        li
+          = link_to  "開発者", "https://twitter.com/momeemt" ,:target => "_blank"  

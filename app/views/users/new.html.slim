@@ -1,3 +1,17 @@
 main
-  h1 新規登録
-  
+  - if flash[:notice]
+    .flash
+      p= flash[:notice]
+  #top-page
+    h1 メールアドレスで登録する
+    = form_tag("/users/create", :method => "post") do
+      = render 'shared/error_messages' 
+      h2 名前
+      input type="text" name="name"/
+      h2 メールアドレス
+      input type="email" name="email"/
+      h2 パスワード
+      input type="password"
+      h2 パスワード再確認
+      input type="password" name="password"/
+      input type="submit"/
