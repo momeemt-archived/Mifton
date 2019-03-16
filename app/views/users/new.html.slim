@@ -1,17 +1,19 @@
 main
-  - if flash[:notice]
+  - if flash[:success]
     .flash
-      p= flash[:notice]
+      p= flash[:success]
   #top-page
     h1 メールアドレスで登録する
-    = form_tag("/users/create", :method => "post") do
+
+    = form_for(@user) do |f|
       = render 'shared/error_messages' 
-      h2 名前
-      input type="text" name="name"/
-      h2 メールアドレス
-      input type="email" name="email"/
-      h2 パスワード
-      input type="password"
-      h2 パスワード再確認
-      input type="password" name="password"/
-      input type="submit"/
+      
+      = f.label :name
+      = f.text_field :name
+      = f.label :email
+      = f.email_field :email
+      = f.label :password
+      = f.password_field :password
+      = f.label :password_confirmation, "Confirmation"
+      = f.password_field :password_confirmation
+      = f.submit "Create my account"

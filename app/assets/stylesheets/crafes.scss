@@ -54,7 +54,7 @@
     border-collapse: collapse;
     th,td{
       border: 1px solid $base-cmpn-color;
-      padding:5px;
+      padding:5px 10px;
     }
     th{
       font-size: 18px;
@@ -232,6 +232,16 @@
     
     &:hover {
       background-color: $base-bg-color * 1.2;
+    }
+    
+    input {
+      border: 0px;
+      display: block;
+      color:  $base-cmpn-color;
+      background-color: rgba(255,0,0,0);
+      font-size: 18px;
+      margin: 0 auto;
+      width: 100%;
     }
   }
   

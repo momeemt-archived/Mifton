@@ -1,0 +1,9 @@
+h1 Log in
+= form_for(:session, url: login_path) do |f|
+  = f.label :email
+  = f.email_field :email, class: 'form-control'
+  = f.label :password
+  = f.password_field :password, class: 'form-control'
+  = f.submit "Log in", class: "btn btn-primary"
+p
+  | New user? #{link_to "Sign up now!", signup_path}

@@ -38,6 +38,7 @@ class CrafesController < ApplicationController
       flash[:notice] = "大会を登録しました"
       redirect_to("/crafes/index")
     else
+      flash[:notice] = "大会登録に失敗しました"
       render("crafes/new")
     end
   end

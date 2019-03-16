@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'sessions/new'
   get "/crafes" => "crafes#top" # Crafes! トップページ
   get "/crafes/about" => "crafes#about" # Crafes! 詳細ページ
   get "/crafes/index" => "crafes#index" #Crafes! コンテスト一覧ページ
@@ -19,12 +20,12 @@ Rails.application.routes.draw do
   get "/crafes/:id/edit" => "crafes#edit" # コンテスト編集
   post "/crafes/:id/update" => "crafes#update" #コンテスト情報更新
 
-  get "/users/index" => "users#index" # ユーザー一覧
   get "/signup" => "users#new" # 新規登録
-  post "/users/create" => "users#create"
-  get "/users/:id" => "users#show" # ユーザー詳細ページ
-  
+  resources :users
 
+  get "/login" => "sessions#new"
+  post "/login" => "sessions#create"
+  delete "/logout" => "sessions#destroy"
 
 
   get "/bector" => "bector#top"
