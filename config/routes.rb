@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post "/crafes/:id/update" => "crafes#update" #コンテスト情報更新
 
   get "/signup" => "users#new" # 新規登録
+  post "/users/:id/destroy" => "users#destroy"
   resources :users
 
   get "/login" => "sessions#new"
@@ -35,5 +36,5 @@ Rails.application.routes.draw do
   
   get "/" => "home#index"
   get "/about" => "home#about"
-  get "/privacypolicy" => "home#privacyPolicy"
+  get "/policy" => "home#policy"
 end

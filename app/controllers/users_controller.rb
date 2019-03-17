@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @users = User.all.order(id: :desc)
   end
   
   def show
@@ -10,12 +11,23 @@ class UsersController < ApplicationController
     @user = User.new
   end
   
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def destroy
+    @user = User.find_by(id: params[:id])
+    @user.destroy
+    flash[:notice] = "ユーザーを削除しました"
+    redirect_to("/users/")
+  end
+  
   def create
     @user = User.new(user_params)
     if @user.save
       log_in @user
       redirect_to @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Miftonへようこそ！"
     else
       render 'new'
     end

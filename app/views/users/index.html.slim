@@ -1,0 +1,15 @@
+main
+  - if flash[:notice]
+    .flash
+      p= flash[:notice]
+  h1 全てのユーザー
+  table
+    tr 
+      th 名前
+      th メールアドレス
+    - @users.each do |user|
+      tr
+        td= user.name
+        td= user.email
+        td 編集
+        td= link_to "削除", "/users/#{user.id}/destroy", {method: "post"}

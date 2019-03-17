@@ -1,19 +1,29 @@
 main
-  - if flash[:success]
-    .flash
-      p= flash[:success]
+  
   #top-page
-    h1 メールアドレスで登録する
+    h1 アカウントを作成
+    
+    .btn 
+      =link_to "Twitterでログイン", "/"
+    
+    hr
+    
+    h2 メールアドレスで登録する
 
     = form_for(@user) do |f|
       = render 'shared/error_messages' 
       
-      = f.label :name
-      = f.text_field :name
-      = f.label :email
-      = f.email_field :email
-      = f.label :password
-      = f.password_field :password
-      = f.label :password_confirmation, "Confirmation"
-      = f.password_field :password_confirmation
-      = f.submit "Create my account"
+      = f.text_field :name, placeholder: "名前 (3文字以上50文字以下)"
+      = f.email_field :email, placeholder: "メールアドレス"
+      = f.password_field :password, placeholder: "パスワード (6文字以上)"
+      = f.password_field :password_confirmation, placeholder: "パスワード再確認"
+      = f.submit "次へ進む"
+      
+    p 登録することで、Miftonの利用規約・プライバシーポリシー・Miftonで提供されるアプリケーションの利用規約に同意するものとします。
+    
+    hr
+    
+    h2 アカウントをお持ちですか？
+    
+    .btn
+      =link_to "ログインする", "/login"

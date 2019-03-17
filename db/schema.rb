@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_083015) do
+ActiveRecord::Schema.define(version: 2019_03_17_045506) do
 
   create_table "contests", force: :cascade do |t|
     t.string "name"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_083015) do
     t.integer "rating"
     t.integer "penalty"
     t.string "contest_type"
+    t.integer "user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_083015) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "remember_digest"
   end
 
 end
