@@ -7,9 +7,13 @@ main
     tr 
       th 名前
       th メールアドレス
+      th 管理者
     - @users.each do |user|
       tr
         td= user.name
         td= user.email
+        td= user.admin? ? "管理者" : "一般ユーザー"
         td 編集
-        td= link_to "削除", "/users/#{user.id}/destroy", {method: "post"}
+        / - if current_user.admin? && !current_user?(user)
+        /   td= link_to "削除", "/users/#{user.id}/destroy", {method: "post"}
+        p= current_user
