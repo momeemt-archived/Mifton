@@ -33,8 +33,8 @@ Rails.application.routes.draw do
   get "/bector/new" => "bector#new"
   post "/bector/create" => "bector#create"
   get "/bector/:id" => "bector#show"
-  
-  get "/" => "home#index"
+
+  root "home#index"
   get "/about" => "home#about"
   get "/policy" => "home#policy"
   get "/api" => "home#api"
