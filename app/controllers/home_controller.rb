@@ -6,6 +6,9 @@ class HomeController < ApplicationController
   def about
   end
 
-  def privacyPolicy
+  def policy
+  end
+  
+  def api
   end
 end

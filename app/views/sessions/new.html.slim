@@ -1,12 +1,12 @@
-h1 Log in
-= form_for(:session, url: login_path) do |f|
-  = f.label :email
-  = f.email_field :email, class: 'form-control'
-  = f.label :password
-  = f.password_field :password, class: 'form-control'
-  = f.label :remember_me, class: "checkbox inline" do
-  = f.check_box :remember_me
-  span Remember me on this computer
-  = f.submit "Log in", class: "btn btn-primary"
-p
-  | New user? #{link_to "Sign up now!", signup_path}
+main
+  h1 Log in
+  = form_for(:session, url: login_path) do |f|
+    = f.label :メールアドレス
+    = f.email_field :email, class: 'form-control'
+    = f.label :パスワード
+    = f.password_field :password, class: 'form-control'
+    = f.label :ログイン状態を保存する, class: "checkbox inline"
+    = f.check_box :remember_me
+    = f.submit "ログイン", class: "btn btn-primary"
+  p
+    | アカウントを持っていませんか？ #{link_to "作成しましょう！", signup_path}

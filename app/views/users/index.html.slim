@@ -15,5 +15,5 @@ main
         td= user.admin? ? "管理者" : "一般ユーザー"
         td 編集
         / - if current_user.admin? && !current_user?(user)
-        /   td= link_to "削除", "/users/#{user.id}/destroy", {method: "post"}
+        / td= link_to "削除", "/users/#{user.id}/destroy", {method: "post", data: { confirm: "Are you sure?" }}
         p= current_user

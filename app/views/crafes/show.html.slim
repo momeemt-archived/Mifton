@@ -9,9 +9,9 @@ main
     - else
       h1= "#{@contest.name}"
       
-    - unless isContest
-      .btn
-        a 参加登録
+    / - unless isContest
+    /   .btn
+    /     a 参加登録
       
     hr.short-line
     
@@ -35,15 +35,15 @@ main
       p コマンドの関数(function)を作成し、指定された問題について解くコンテストです。
       p Crafes!について慣れるためにも、ぜひ参加してみてください！
     
-    hr.short-line
-    
-    h2 参加方法
-    p まずは、Miftonアカウントを作成してください。
-    p ログインした後、参加登録ボタンを押して登録を行ってください。
-    p 
-      | 詳しくは
-      =link_to "詳細","/crafes/about"
-      | を参照してください。
+    / hr.short-line
+    / 
+    / h2 参加方法
+    / p まずは、Miftonアカウントを作成してください。
+    / p ログインした後、参加登録ボタンを押して登録を行ってください。
+    / p 
+    /   | 詳しくは
+    /   =link_to "詳細","/crafes/about"
+    /   | を参照してください。
     
     hr.short-line
     

@@ -3,7 +3,7 @@
 one:
   name: MyString
   times: 
-  type: 
+  contest_type: 
   q1title: MyString
   q1: MyText
   q2title: MyString
@@ -16,7 +16,7 @@ one:
 two:
   name: MyString
   times: 
-  type: 
+  contest_type: 
   q1title: MyString
   q1: MyText
   q2title: MyString

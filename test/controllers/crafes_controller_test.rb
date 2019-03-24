@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class CrafesControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should get about" do
+    get crafes_about_url
+    assert_response :success
+  end
+  
 end
