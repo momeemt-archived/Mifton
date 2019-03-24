@@ -1,25 +1,27 @@
-- hasContest = false
-- if @contests.present?
-  - @contests.each do |contest|
-    - if contest.holdingTime > Time.now
-      - hasContest = true
+/ - hasContest = false
+/ - if @contests.present?
+/   - @contests.each do |contest|
+/     - if contest.holdingTime > Time.now
+/       - hasContest = true
+/ 
+/ - if hasContest
+/   p 開催予定の大会を表示します。
+/   table
+/     tr
+/       th 開催時刻
+/       th 大会名
+/       th 大会時間(分)
+/       th 作問者
+/       th レーティング変化
+/     - @contests.each do |contest|
+/       - if contest.holdingTime > Time.now
+/         tr
+/           td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
+/           td=link_to("#{contest.name} ##{contest.times}","/crafes/#{contest.id}")
+/           td= contest.length
+/           td= contest.writer
+/           td="~#{contest.rating}"
+/ - else
+/   p 開催予定の大会がありません
 
-- if hasContest
-  p 開催予定の大会を表示します。
-  table
-    tr
-      th 開催時刻
-      th 大会名
-      th 大会時間(分)
-      th 作問者
-      th レーティング変化
-    - @contests.each do |contest|
-      - if contest.holdingTime > Time.now
-        tr
-          td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
-          td=link_to("#{contest.name} ##{contest.times}","/crafes/#{contest.id}")
-          td= contest.length
-          td= contest.writer
-          td="~#{contest.rating}"
-- else
-  p 開催予定の大会がありません
+p test!!
