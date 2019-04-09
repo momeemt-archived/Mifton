@@ -1,0 +1,10 @@
+- if @contest.holding_times == 0
+  h1= @contest.name
+- else
+  h1= "#{@contest.name} ##{@contest.holding_times}"
+
+p= "writer: #{@contest.writer}"
+p= "Rated対象: #{@contest.rating - 1}"
+p= "ペナルティ: #{@contest.penalty}"
+p= "開催時刻: #{@contest.start_time.strftime("%Y-%m-%d %H:%M")} ~ #{(@contest.start_time + @contest.length * 60).strftime("%Y-%m-%d %H:%M")}"
+p= "時間: #{@contest.length}分"
