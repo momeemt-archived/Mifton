@@ -10,7 +10,7 @@ ja:
     model:
       contest: コンテスト
     attributes:
-      contest:
+      contest: &contest
         id: ID
         name: コンテスト名
         holding_times: 開催回数
@@ -50,6 +50,10 @@ ja:
         executing_sample_4_remark: 実行例注釈(4)
         created_at: 登録日時
         updated_at: 更新日時
+
+      draft_contest:
+        <<: *contest
+      
       user:
         created_at: 登録日時
         updated_at: 更新日時

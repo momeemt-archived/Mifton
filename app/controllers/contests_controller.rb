@@ -1,10 +1,21 @@
 class ContestsController < ApplicationController
+  before_action :set_contest, only: [:show, :edit, :update, :destroy]
+  before_action :set_problem, only: [:problem_1, :problem_2, :problem_3, :problem_4]
+  before_action :set_all_contests, only: [:home, :index]
+
+  def home
+  end
+
   def index
-    @contests = Contest.all.order(start_time: :asc)
   end
 
   def show
-    @contest = Contest.find(params[:id])
+  end
+
+  def about
+  end
+
+  def admin
   end
 
   def new
@@ -21,14 +32,29 @@ class ContestsController < ApplicationController
     end
   end
 
+  def update
+    @contest.update!(contest_params)
+    redirect_to contests_url, notice: "コンテスト「#{@contest.name}」を更新しました。"
+  end
+
   def edit
-    @contest = Contest.find(params[:id])
   end
 
   def destroy
-    @contest = Contest.find(params[:id])
     @contest.destroy
     redirect_to contests_url
+  end
+
+  def problem_1
+  end
+
+  def problem_2
+  end
+
+  def problem_3
+  end
+
+  def problem_4
   end
 
   private
@@ -41,4 +67,23 @@ class ContestsController < ApplicationController
       :problem_4_name, :problem_4, :problem_4_answer, :submission_limit_4, :executing_sample_4, :execution_result_4, :executing_sample_4_remark,
       :writer, :rating, :penalty, :start_time, :contest_type, :length)
   end
+
+  def set_contest
+    @contest = Contest.find(params[:id])
+  end
+
+  def set_problem
+    @contest = Contest.find(params[:contest_id])
+    @problem_name = [@contest.problem_1_name, @contest.problem_2_name, @contest.problem_3_name, @contest.problem_4_name]
+    @problem = [@contest.problem_1, @contest.problem_2, @contest.problem_3, @contest.problem_4]
+    @submission_limit = [@contest.submission_limit_1, @contest.submission_limit_2, @contest.submission_limit_3, @contest.submission_limit_4]
+    @executing_sample = [@contest.executing_sample_1, @contest.executing_sample_2, @contest.executing_sample_3, @contest.executing_sample_4]
+    @execution_result = [@contest.execution_result_1, @contest.execution_result_2, @contest.execution_result_3, @contest.execution_result_4]
+    @executing_sample_remark = [@contest.executing_sample_1_remark, @contest.executing_sample_2_remark, @contest.executing_sample_3_remark, @contest.executing_sample_4_remark]
+  end
+
+  def set_all_contests
+    @contests = Contest.all.order(start_time: :asc)
+  end
+
 end
