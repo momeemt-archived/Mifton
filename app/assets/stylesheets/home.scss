@@ -1,4 +1,4 @@
-$height : 110px; // ヘッダーフッター用の height 
+$height : 110px; // ヘッダーフッター用の height
 $MiftonColor : #ec6d51; // Mifton用のメインカラー
 // $BackColor : #ecad9f;
 $BackColor : #383c3c;
@@ -21,7 +21,7 @@ hr {
 }
 
 .home{
-  
+
   // Flash Css
   .flash{
     display: -webkit-flex;
@@ -35,7 +35,7 @@ hr {
     color:white;
     padding:3px 0px;
   }
-  
+
   input, input[type="submit"] {
     display: block;
     width: 40%;
@@ -48,7 +48,7 @@ hr {
   input[type="submit"] {
     border-radius: 0px;
   }
-  
+
   table {
     margin: 15px auto;
     border: solid 2px $MiftonColor;
@@ -60,32 +60,32 @@ hr {
     th{
       font-size: 18px;
     }
-    
+
     @media screen and (min-width:600px) and (max-width:959px) {
       margin: 15px 10px;
     }
   }
-  
+
   hr {
     border-bottom: $MiftonColor 3px dashed;
     margin: 10px auto;
   }
-  
+
   h2 {
     font-size: 25px;
     margin-bottom: 10px;
   }
-  
+
   p{
     padding: 2px;
     line-height: 1.6em;
   }
-  
+
   h2 span {
     color: $MiftonColor;
     font-size: 35px;
   }
-  
+
   .btn {
     border: 2px $MiftonColor solid;
     width: 180px;
@@ -98,11 +98,11 @@ hr {
       font-size: 18px;
       text-decoration: none;
     }
-    
+
     &:hover {
       background-color: $MiftonColor * 2.3;
     }
-    
+
     input {
       border: 0px;
       display: block;
@@ -113,7 +113,7 @@ hr {
       width: 100%;
     }
   }
-  
+
   @mixin basic {
     height: $height;
     background-color: $MiftonColor;
@@ -127,7 +127,7 @@ hr {
     }
     position:relative;
     .link-list{
-      display: flex;     
+      display: flex;
       position:absolute;
       top: 75%;
       left: 50%;
@@ -138,7 +138,7 @@ hr {
       li{
         padding: 0px 10px;
         list-style: none;
-        
+
       }
       a{
         text-decoration: none;
@@ -146,18 +146,18 @@ hr {
       }
     }
   }
-  
-  
-  
+
+
+
   footer {
     margin-top: 50px;
-    
+
     a {
       color: white;
     }
     height: 55px;
     background-color: $MiftonColor;
-    
+
     ul {
       display: flex;
       justify-content:center;
@@ -191,7 +191,7 @@ hr {
       height: 60px;
       p{
         font-size: 16px;
-        display: flex;     
+        display: flex;
         position:absolute;
         top: 50%;
         left: 50%;
@@ -210,7 +210,7 @@ hr {
         font-size: 22px;
         margin-top: 5px;
 
-        
+
       }
       .twitter{
         margin: 15px;
@@ -243,4 +243,3 @@ hr {
     }
   }
 }
-

@@ -10,44 +10,101 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_17_215103) do
+ActiveRecord::Schema.define(version: 2019_04_12_133400) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "contests", force: :cascade do |t|
     t.string "name"
-    t.integer "times"
-    t.string "q1title"
-    t.text "q1"
-    t.string "q2title"
-    t.text "q2"
-    t.string "q3title"
-    t.text "q3"
-    t.string "q4title"
-    t.text "q4"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "holdingTime"
-    t.integer "length"
+    t.integer "holding_times"
+    t.string "problem_1_name"
+    t.text "problem_1"
+    t.text "problem_1_answer"
+    t.text "submission_limit_1"
+    t.text "executing_sample_1"
+    t.text "execution_result_1"
+    t.text "executing_sample_1_remark"
+    t.string "problem_2_name"
+    t.text "problem_2"
+    t.text "problem_2_answer"
+    t.text "submission_limit_2"
+    t.text "executing_sample_2"
+    t.text "execution_result_2"
+    t.text "executing_sample_2_remark"
+    t.string "problem_3_name"
+    t.text "problem_3"
+    t.text "problem_3_answer"
+    t.text "submission_limit_3"
+    t.text "executing_sample_3"
+    t.text "execution_result_3"
+    t.text "executing_sample_3_remark"
+    t.string "problem_4_name"
+    t.text "problem_4"
+    t.text "problem_4_answer"
+    t.text "submission_limit_4"
+    t.text "executing_sample_4"
+    t.text "execution_result_4"
+    t.text "executing_sample_4_remark"
     t.string "writer"
     t.integer "rating"
     t.integer "penalty"
+    t.datetime "start_time"
     t.string "contest_type"
-    t.integer "user_id"
+    t.integer "length"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.text "content"
+  create_table "draft_contests", force: :cascade do |t|
+    t.string "name"
+    t.integer "holding_times"
+    t.string "problem_1_name"
+    t.text "problem_1"
+    t.text "problem_1_answer"
+    t.text "submission_limit_1"
+    t.text "executing_sample_1"
+    t.text "execution_result_1"
+    t.text "executing_sample_1_remark"
+    t.string "problem_2_name"
+    t.text "problem_2"
+    t.text "problem_2_answer"
+    t.text "submission_limit_2"
+    t.text "executing_sample_2"
+    t.text "execution_result_2"
+    t.text "executing_sample_2_remark"
+    t.string "problem_3_name"
+    t.text "problem_3"
+    t.text "problem_3_answer"
+    t.text "submission_limit_3"
+    t.text "executing_sample_3"
+    t.text "execution_result_3"
+    t.text "executing_sample_3_remark"
+    t.string "problem_4_name"
+    t.text "problem_4"
+    t.text "problem_4_answer"
+    t.text "submission_limit_4"
+    t.text "executing_sample_4"
+    t.text "execution_result_4"
+    t.text "executing_sample_4_remark"
+    t.string "writer"
+    t.integer "rating"
+    t.integer "penalty"
+    t.datetime "start_time"
+    t.string "contest_type"
+    t.integer "length"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.string "authority", default: "general", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "password_digest"
-    t.string "remember_digest"
-    t.boolean "admin"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

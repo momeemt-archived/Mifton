@@ -1,19 +1,26 @@
-main
-  - if flash[:notice]
-    .flash
-      p= flash[:notice]
-  h1 全てのユーザー
+.main
+
+  h1 ユーザー一覧
+
+  p 開催中の大会を表示します。
   table
-    tr 
-      th 名前
-      th メールアドレス
-      th 管理者
+    tr
+      th= User.human_attribute_name(:id)
+      th= User.human_attribute_name(:name)
+      th= User.human_attribute_name(:email)
+      th= User.human_attribute_name(:authority)
+      th= User.human_attribute_name(:created_at)
+      th= User.human_attribute_name(:updated_at)
+      th
+    tbody
     - @users.each do |user|
       tr
-        td= user.name
+        td= user.id
+        td= link_to user.name, user
         td= user.email
-        td= user.admin? ? "管理者" : "一般ユーザー"
-        td 編集
-        / - if current_user.admin? && !current_user?(user)
-        / td= link_to "削除", "/users/#{user.id}/destroy", {method: "post", data: { confirm: "Are you sure?" }}
-        p= current_user
+        td= user.authority
+        td= user.created_at
+        td= user.updated_at
+        td
+          = link_to '編集', "#"
+          = link_to '削除', user, method: :delete, data: {confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"}

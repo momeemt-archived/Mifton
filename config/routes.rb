@@ -1,41 +1,30 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-  get "/crafes" => "crafes#top" # Crafes! トップページ
-  get "/crafes/about" => "crafes#about" # Crafes! 詳細ページ
-  get "/crafes/index" => "crafes#index" #Crafes! コンテスト一覧ページ
-  # get "/crafes/new" => "crafes#new" #Crafes! 管理者用コンテスト作成ページ
-  # post "/crafes/create" => "crafes#create" #Crafes! コンテスト送信ページ
-  get "/crafes/contest_request" => "crafes#contest_request" # Crafes! コンテストリクエストページ
-  # post "/crafes/submit" => "crafes#contest_submit" #Crafes! コンテストリクエスト送信ページ
-  get "/crafes/:id" => "crafes#show" # Crafes! コンテスト詳細ページ
-  # get "/crafes/:id/1" => "crafes#question1" # コンテスト問題1問目
-  # get "/crafes/:id/2" => "crafes#question2" # コンテスト問題2問目
-  # get "/crafes/:id/3" => "crafes#question3" # コンテスト問題3問目
-  # get "/crafes/:id/4" => "crafes#question4" # コンテスト問題4問目
-  get "/crafes/:id/submit" => "crafes#submit" # コンテスト問題提出ページ
-  post "/crafes/:id/que_submit" => "crafes#question_submit" # コンテスト問題回答送信
-  # get "/crafes/:id/rank_table" => "crafes#rank_table" # コンテスト順位表
-  # post "/crafes/:id/destroy" => "crafes#destroy" #コンテスト削除
-  # get "/crafes/:id/edit" => "crafes#edit" # コンテスト編集
-  # post "/crafes/:id/update" => "crafes#update" #コンテスト情報更新
+  # Home
+  root to: "home#top"
+  get "/about", to: "home#about"
 
-  get "/signup" => "users#new" # 新規登録
-  post "/users/:id/destroy" => "users#destroy"
+  # Users
   resources :users
 
-  get "/login" => "sessions#new"
-  post "/login" => "sessions#create"
-  delete "/logout" => "sessions#destroy"
+  # Sessions
+  get "/login", to: "sessions#new"
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
+  # Crafes! Draft Contest
+  resources :draft_contests do
+    post "/", to: "draft_contests#approval"
+  end
 
-  get "/bector" => "bector#top"
-  get "/bector/new" => "bector#new"
-  post "/bector/create" => "bector#create"
-  get "/bector/:id" => "bector#show"
-
-  root "home#index"
-  get "/about" => "home#about"
-  get "/policy" => "home#policy"
-  get "/api" => "home#api"
+  # Crafes!
+  get "/crafes", to: "contests#home"
+  get "/crafes/about", to: "contests#about"
+  get "/crafes/admin", to: "contests#admin"
+  resources :contests do
+    get "/problem_1", to: "contests#problem_1"
+    get "/problem_2", to: "contests#problem_2"
+    get "/problem_3", to: "contests#problem_3"
+    get "/problem_4", to: "contests#problem_4"
+  end
 end

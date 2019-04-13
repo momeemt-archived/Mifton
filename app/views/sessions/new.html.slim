@@ -1,12 +1,10 @@
-main
-  h1 Log in
-  = form_for(:session, url: login_path) do |f|
-    = f.label :メールアドレス
-    = f.email_field :email, class: 'form-control'
-    = f.label :パスワード
-    = f.password_field :password, class: 'form-control'
-    = f.label :ログイン状態を保存する, class: "checkbox inline"
-    = f.check_box :remember_me
-    = f.submit "ログイン", class: "btn btn-primary"
-  p
-    | アカウントを持っていませんか？ #{link_to "作成しましょう！", signup_path}
+h1 ログイン
+
+= form_with scope: :session, local: true do |f|
+  .form-group
+    = f.label :email, 'メールアドレス'
+    = f.text_field :email
+  .form-group
+    = f.label :password, 'パスワード'
+    = f.password_field :password
+  = f.submit 'ログインする'

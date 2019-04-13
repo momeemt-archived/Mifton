@@ -1,4 +1,24 @@
-# Mifton
-MinecraftBE ユーザーのためのサービス集合体。
-Ruby on Rails5を用いて、オープンソースで開発されています。
-自分が欲しいサービスを、開発に参加して開発し、Mifton内でリリースすることができます。
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
