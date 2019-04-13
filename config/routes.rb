@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   get "/about", to: "home#about"
 
   # Users
-  resources :users
+  resources :users do
+    get "/profile_edit", to: "users#profile_edit"
+  end
+
+  # Informations
+  resources :informations
 
   # Sessions
   get "/login", to: "sessions#new"

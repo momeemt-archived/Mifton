@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :profile_edit]
   before_action :permit_admin, only: [:index]
 
   def index
@@ -28,6 +28,12 @@ class UsersController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  def profile_edit
+  end
+
   private
 
   def user_params
@@ -37,7 +43,7 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
-  
+
   def permit_admin
     unless current_user
       redirect_to root_path

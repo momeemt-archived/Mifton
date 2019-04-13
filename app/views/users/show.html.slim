@@ -1,1 +1,10 @@
-h1= @user.name
+main
+  h1= @user.name
+  p= "@#{@user.id}"
+
+  p= @user.profile
+  p= @user.location
+
+  - if current_user.id == @user.id
+    .btn.signup
+      = link_to "プロフィールを編集", "#"

@@ -6,6 +6,8 @@ $Color : white; // ヘッダーフッター文字カラー
 $TextColor: #474444;
 
 
+
+
 img{
   margin: 0;
   padding:0;
@@ -67,8 +69,8 @@ hr {
   }
 
   hr {
-    border-bottom: $MiftonColor 3px dashed;
-    margin: 10px auto;
+    // border-bottom: $MiftonColor 3px dashed;
+    // margin: 10px auto;
   }
 
   h2 {
@@ -86,33 +88,6 @@ hr {
     font-size: 35px;
   }
 
-  .btn {
-    border: 2px $MiftonColor solid;
-    width: 180px;
-    margin: 30px auto;
-    padding: 7.5px;
-    border-radius: 10px;
-    a {
-      display: block;
-      color: $TextColor;
-      font-size: 18px;
-      text-decoration: none;
-    }
-
-    &:hover {
-      background-color: $MiftonColor * 2.3;
-    }
-
-    input {
-      border: 0px;
-      display: block;
-      color:  $TextColor;
-      background-color: rgba(255,0,0,0);
-      font-size: 18px;
-      margin: 0 auto;
-      width: 100%;
-    }
-  }
 
   @mixin basic {
     height: $height;
@@ -120,13 +95,15 @@ hr {
   }
 
   header{
-    @include basic();
+    height: $height;
+    background-color: $MiftonColor;
     text-align: center;
     img{
       width:270px;
     }
     position:relative;
-    .link-list{
+
+    .link-pc-list{
       display: flex;
       position:absolute;
       top: 75%;
@@ -184,6 +161,11 @@ hr {
       }
     }
 
+    #top_image {
+      width: 100%;
+      vertical-align: bottom;
+    }
+
     .main-wrapper{
       position:relative;
       background: $BackColor;
@@ -230,16 +212,169 @@ hr {
         }
       }
       .btn{
-        display: inline;
-        background-color: $BackColor;
-        border-radius: 4px;
-        padding: 6px 70px;
-        margin: 5px 0;
-        color:rgb(43, 43, 43);
-        &:hover{
-          background-color: #fac8bd;
-        }
+        // display: inline;
+        // background-color: $BackColor;
+        // border-radius: 4px;
+        // padding: 6px 70px;
+        // margin: 5px 0;
+        // color:rgb(43, 43, 43);
+        // &:hover{
+        //   background-color: #fac8bd;
+        // }
       }
     }
   }
+
+
+
+  @media screen and (min-width:960px) {
+    .link-mobile-list{
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    a:visited {
+      color: blue;
+    }
+
+
+
+    table {
+      width: 90%;
+
+      th,td {
+        padding: 0;
+        margin: 2px 0;
+      }
+
+      th{
+        font-size: 16px;
+      }
+
+      td{
+        font-size: 14px;
+      }
+    }
+
+
+
+    header {
+      height: $height / 2;
+
+      img{
+        width:200px;
+        margin: auto auto;
+      }
+    }
+
+    .link-pc-list li {
+      display: none;
+    }
+
+
+
+    .main-wrapper {
+      display: none;
+    }
+
+    h1, p{
+      line-height: normal;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: bold;
+      margin: 20px;
+    }
+
+    .btn {
+
+      width: 90%;
+      margin: 20px auto;
+      padding: 4px;
+      border-radius: 20px;
+      font-weight: bold;
+      a {
+        display: block;
+        color: $TextColor;
+        font-size: 16px;
+        text-decoration: none;
+      }
+
+      &:hover {
+        background-color: $MiftonColor * 2.3;
+      }
+
+      input {
+        border: 0px;
+        display: block;
+        color:  $TextColor;
+        background-color: rgba(255,0,0,0);
+        font-size: 18px;
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
+
+    .login {
+      border: 1px $MiftonColor solid;
+    }
+
+    .signup {
+      background-color: $MiftonColor;
+      a {
+        color:white;
+      }
+    }
+
+    .to-crafes {
+      background-color: #00a3af;
+      a {
+        color:white;
+      }
+    }
+
+    .to-info {
+      background-color: #38a1db;
+      a {
+        color:white;
+      }
+    }
+
+    .twitter-signup {
+      background-color: #55acee;
+      a {
+        display: inline;
+        color:white;
+      }
+      i {
+        display: inline;
+        color: white;
+        margin-right: 8px;
+      }
+    }
+
+    hr {
+      border-bottom: $MiftonColor 2px dashed;
+      margin: 10px auto;
+      width:90%;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .link-mobile-list {
+      margin: 5px 10px;
+      a {
+        color: darkgray;
+        font-size: 12px;
+        margin: 2px;
+        text-decoration: none;
+      }
+    }
+  }
+
 }

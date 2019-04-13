@@ -1,90 +1,179 @@
 main
-  .top-wrapper
-    img src="mifton-img.jpeg"
-  .main-wrapper
+  img#top_image src="mifton-img.jpeg"
 
-    p MineCraftをもっと面白く、もっと便利に。 Miftonを活用して、さらにクリエイティブな生活を。
+  h1 MineCraftをもっと面白く、もっと便利に。
+  p Miftonで世界を広げよう。
 
   - if current_user
-    h1 ログインしています
-    h2= current_user.name
-  .signup-wrapper
-    / .twitter
-    /   p
-    /     i.fab.fa-twitter
-    /     span.twitterColor
-    /       | Twitter
-    /     | からお手軽に登録できます。
-    /   .btn
-    /     = link_to "登録" , "/"
-    / hr
-    .mailAddress
-      p
-        i.far.fa-envelope
-        | メールアドレスで登録できます。
-  .btn
-    = link_to "登録" , "/users/new"
-  .login-wrapper
-      = link_to "or ログイン" , "/login"
-  hr
-  .description-wrapper
-    h2
-      span ざ
-      | っくり "Mifton" とは？
-    p MineCraftBEをもっと便利に、楽しくするサービスです。
-    p いくつかのアプリケーションを提供しています。
-    p 例えば、Crafes!では、毎週技術コンテストを開催しており、指標を確かめられます。
-    p Miftonは現在βver.で、アップデートやスマートフォンアプリの開発に取り組んでいます。
-    p 非公式であり、Mojang社が承認・開発したものではありません。
 
-  hr
+    hr
 
-  .crafes-wrapper
-    h2
-      span C
-      | rafes! 情報
-    - hasContest = false
-    - if @contests.present?
-      - @contests.each do |contest|
-        - if contest.start_time <= Time.now && contest.start_time + contest.length * 60 >= Time.now
-          - hasContest = true
+    h2 My Page
+    p Miftonでの活動・プロフィールなどを確認できます。
+    p さらに魅力的な活動をしよう！
 
-    - if hasContest
-      p 開催中の大会を表示します。
+    .btn.signup
+      = link_to "プロフィール", "/users/#{current_user.id}"
+
+    hr
+
+    h2 Crafes! info
+    p Crafes!は、MCBEの技術を競える大会サービスです。
+    p 大会に参加したり、開催したりしましょう！
+
+    h3 開催予定の大会
+
+    - if @is_contest
       table
         tr
-          th 開催時刻
-          th 大会名
-          th 大会時間(分)
-          th 作問者
-          th レーティング変化
+          th コンテスト名
+          th 日時
+        tbody
         - @contests.each do |contest|
-          - if contest.start_time <= Time.now && contest.start_time + contest.length * 60 >= Time.now
-            tr
-              td= contest.start_time.strftime("%Y-%m-%d %H:%M")
-              td=link_to("#{contest.name} ##{contest.holding_times}",contest)
-              td= contest.length
-              td= contest.writer
-              td="~#{contest.rating}"
+          - if contest.start_time > Time.now
+            td= link_to "#{contest.name} ##{contest.holding_times}", contest
+            td= contest.start_time.strftime("%Y-%m-%d %H:%M")
     - else
-      p 開催中の大会がありません
+      p 開催予定の大会はありません。
 
-    .btn
-      = link_to "Crafes! へ", "/crafes"
+    .btn.to-crafes
+      = link_to "Crafes!を見に行く", "/crafes"
+
+    hr
+
+    h2 運営からのお知らせ
+    p Mifton運営チームからアップデートのお知らせです。
+
+    .btn.to-info
+      = link_to "インフォメーション", "/informations"
+
+    hr
+
+    h2 ログアウト
+    p またのご利用をお待ちしております！
+
+    .btn.login
+      = link_to "ログアウト", "/logout", method: :delete
+
+
+  - else
+
+
+
+    .btn.signup
+      = link_to "アカウント作成", "/users/new"
+
+    .btn.login
+      = link_to "ログイン", "/login"
+
+    hr
+
+    h2 Twitterアカウントを持っていますか？
+    p メールアドレスを使わず、簡単にログイン出来ます。
+
+    .btn.twitter-signup
+      i.fab.fa-twitter
+      =link_to "Twitterでアカウント作成", "#"
+
+    hr
+
+    h2 Mifton
+    p MineCraftの新しいコミュニティサービスへようこそ。
+    p あなたの知らないMineCraftを探索してみましょう。
+
   hr
 
-  .bector-wrapper
-    h2
-      span B
-      | ector 最新情報
-    p 現在開発中！ver.0.2β にて公開予定です。
-    .btn
-      p Bectorとは？
+  .link-mobile-list
+    =link_to "Miftonについて", "/about"
+    =link_to "開発者", "https://twitter.com/momeemt" ,:target => "_blank"
+    =link_to "MineCraft", "https://www.minecraft.net/ja-jp/", :target => "_blank"
+    =link_to  "開発マップ", "https://trello.com/b/CzFf02M1",:target => "_blank"
+    =link_to  "利用規約", "#"
+    =link_to  "プライバシーポリシー", "/policy"
+    =link_to  "フィードバック","https://goo.gl/forms/8SbyOaNe5GYrUsh33",:target => "_blank"
+    =link_to  "API", "/api"
+    =link_to  "ソースコード", "https://github.com/aq17/Mifton"
 
-  hr
+  small 2019 - Mifton
 
-  .operation-wrapper
-    h2
-      span 運
-      | 営チームからのお知らせ
-    p 特にありません
+
+
+
+/ main
+/   .top-wrapper
+/     img src="mifton-img.jpeg"
+/   .main-wrapper
+/
+/     p MineCraftをもっと面白く、もっと便利に。 Miftonを活用して、さらにクリエイティブな生活を。
+/
+/   .signup-wrapper
+/     .mailAddress
+/       p
+/         i.far.fa-envelope
+/         | メールアドレスで登録できます。
+/   .btn
+/     = link_to "登録" , "/users/new"
+/   .login-wrapper
+/       = link_to "or ログイン" , "/login"
+/   hr
+/   .description-wrapper
+/     h2
+/       span ざ
+/       | っくり "Mifton" とは？
+/     p MineCraftBEをもっと便利に、楽しくするサービスです。
+/     p いくつかのアプリケーションを提供しています。
+/     p 例えば、Crafes!では、毎週技術コンテストを開催しており、指標を確かめられます。
+/     p Miftonは現在βver.で、アップデートやスマートフォンアプリの開発に取り組んでいます。
+/     p 非公式であり、Mojang社が承認・開発したものではありません。
+/
+/   hr
+/
+/   .crafes-wrapper
+/     h2
+/       span C
+/       | rafes! 情報
+/     - hasContest = false
+/     - if @contests.present?
+/       - @contests.each do |contest|
+/         - if contest.start_time <= Time.now && contest.start_time + contest.length * 60 >= Time.now
+/           - hasContest = true
+/
+/     - if hasContest
+/       p 開催中の大会を表示します。
+/       table
+/         tr
+/           th 開催時刻
+/           th 大会名
+/           th 大会時間(分)
+/           th 作問者
+/           th レーティング変化
+/         - @contests.each do |contest|
+/           - if contest.start_time <= Time.now && contest.start_time + contest.length * 60 >= Time.now
+/             tr
+/               td= contest.start_time.strftime("%Y-%m-%d %H:%M")
+/               td=link_to("#{contest.name} ##{contest.holding_times}",contest)
+/               td= contest.length
+/               td= contest.writer
+/               td="~#{contest.rating}"
+/     - else
+/       p 開催中の大会がありません
+/
+/     .btn
+/       = link_to "Crafes! へ", "/crafes"
+/   hr
+/
+/   .bector-wrapper
+/     h2
+/       span B
+/       | ector 最新情報
+/     p 現在開発中！ver.0.2β にて公開予定です。
+/     .btn
+/       p Bectorとは？
+/
+/   hr
+/
+/   .operation-wrapper
+/     h2
+/       span 運
+/       | 営チームからのお知らせ
+/     p 特にありません
