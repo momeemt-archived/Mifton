@@ -1,0 +1,113 @@
+- provide(:title, "新規大会")
+main
+  - if flash[:notice]
+    .flash
+      p= flash[:notice]
+  #top-page
+    = form_tag("/crafes/create", :method => "post") do
+      h1 管理者用コンテスト登録ページ
+      p 管理者がコンテストを企画する用のページです。
+      .propaty
+        .input-box
+          h2 大会名
+          input type="text" name="name"/
+        .input-box
+          h2 回数
+          input type="number" name="times"/
+        .input-box
+          h2 作問者
+          input type="text" name="writer"/
+      .propaty
+        .input-box
+          h2 開催時刻(開始時刻)
+          input type="datetime-local" name="holdingTime"/
+        .input-box
+          h2 大会時間(分)
+          input type="number" name="length"/
+        .input-box
+          h2 レーティング変化(Max)
+          input type="number" name="rating"/
+      .propaty
+        .input-box
+          h2 ペナルティー時間
+          input type="number" name="penalty"/
+        .input-box
+          h2 問題形式
+          select name="type"
+            option value="beginner" 初心者向け(ABCD4問構成)
+            option value="intermediate" 中級者向け(CDEF4問構成)
+            option value="senior" 上級者向け(EFGH4問構成)
+            option value="single" 単独一問
+      hr
+      .propaty
+        .input-box
+          h2 一問目 タイトル
+          input type="text" name="q1title"/
+        .input-box
+          h2 一問目
+          textarea# name="q1" cols="50" rows="8"
+      hr
+      .propaty
+        .input-box
+          h2 二問目　タイトル
+          input type="text" name="q2title"/
+        .input-box
+          h2 二問目
+          textarea# name="q2" cols="50" rows="8"
+      hr
+      .propaty
+        .input-box
+          h2 三問目　タイトル
+          input type="text" name="q3title"/
+        .input-box
+          h2 三問目
+          textarea# name="q3" cols="50" rows="8"
+      hr
+      .propaty
+        .input-box
+          h2 四問目　タイトル
+          input type="text" name="q4title"/
+        .input-box
+          h2 四問目
+          textarea# name="q4" cols="50" rows="8"
+      .btn
+        input type="submit"/
+      
+    h2 大会コントローラーパネル
+    - if @contests.empty?
+      p 開催予定の大会がありません
+    - else
+      #controll-panel
+        table
+          tr
+            th 開始時刻
+            th 大会名
+            th 大会時間
+            th 作問者
+            th レーティング変化
+            th 問題形式
+            th ペナルティー時間
+            th 大会作成時
+            th 大会最終更新時
+            - @contests.each do |contest|
+              tr
+                td= contest.holdingTime.strftime("%Y-%m-%d %H:%M")
+                td=link_to("#{contest.name} ##{contest.times}","/crafes/#{contest.id}")
+                td= contest.length
+                td= contest.writer
+                td="~#{contest.rating}"
+                td
+                  - if contest.contest_type == "beginner"
+                    p ABCD
+                  - elsif contest.contest_type == "intermediate"
+                    p CDEF
+                  - elsif contest.contest_type == "senior"
+                    p EFGH
+                  - else
+                    p 単独一問
+                td= "#{contest.penalty}分"
+                td= contest.created_at.strftime("%Y-%m-%d %H:%M")
+                td= contest.updated_at.strftime("%Y-%m-%d %H:%M")
+                td= link_to("削除","/crafes/#{contest.id}/destroy", {method: "post"})
+                td= link_to("編集","/crafes/#{contest.id}/edit")
+                

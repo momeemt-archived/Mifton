@@ -1,0 +1,44 @@
+- provide(:title, "編集")
+main
+  h1 edit
+  = form_tag("/crafes/#{@contest.id}/update") do
+    p 大会名
+    input type="text" name="name" value="#{@contest.name}"
+    p 回数
+    input type="number" name="times" value="#{@contest.times}"
+    p 作問者
+    input type="text" name="writer" value="#{@contest.writer}"
+    p 開催時刻(開始時刻)
+    - time =  @contest.holdingTime.strftime("%Y-%m-%d %H:%M").gsub(" ","T") + ":00"
+    input type="datetime-local" name="holdingTime" value="#{time}"
+    p 大会時間(分)
+    input type="number" name="length" value="#{@contest.length}"
+    p レーティング変化(Max)
+    input type="number" name="rating" value="#{@contest.rating}"
+    
+    p 問題形式
+    select name="type" selected="#{@contest.contest_type}"
+      option value="beginner" selected="#{puts "selected" if @contest.contest_type == "beginner"}" 初心者向け(ABCD4問構成)
+      option value="intermediate" selected="#{puts "selected" if @contest.contest_type == "intermediate"}" 中級者向け(CDEF4問構成)
+      option value="senior" selected="#{puts "selected" if @contest.contest_type == "senior"}" 上級者向け(EFGH4問構成)
+      option value="single" selected="#{puts "selected" if @contest.contest_type == "single"}" 単独一問
+    
+    p ペナルティー時間
+    input type="number" name="penalty" value="#{@contest.penalty}"/
+    p 一問目 タイトル
+    input type="text" name="q1title" value="#{@contest.q1title}"
+    p 一問目
+    textarea# name="q1" cols="50" rows="8"= @contest.q1
+    p 二問目 タイトル
+    input type="text" name="q2title" value="#{@contest.q2title}"
+    p 二問目
+    textarea# name="q2" cols="50" rows="8"= @contest.q2
+    p 三問目 タイトル
+    input type="text" name="q3title" value="#{@contest.q3title}"
+    p 三問目
+    textarea# name="q3" cols="50" rows="8"= @contest.q3
+    p 四問目 タイトル
+    input type="text" name="q4title" value="#{@contest.q4title}"
+    p 四問目
+    textarea# name="q4" cols="50" rows="8"= @contest.q4
+    input type="submit" value="保存"

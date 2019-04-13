@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  times: 
+  contest_type: 
+  q1title: MyString
+  q1: MyText
+  q2title: MyString
+  q2: MyText
+  q3title: MyString
+  q3: MyText
+  q4title: MyString
+  q4: MyText
+
+two:
+  name: MyString
+  times: 
+  contest_type: 
+  q1title: MyString
+  q1: MyText
+  q2title: MyString
+  q2: MyText
+  q3title: MyString
+  q3: MyText
+  q4title: MyString
+  q4: MyText

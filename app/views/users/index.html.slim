@@ -1,0 +1,19 @@
+main
+  - if flash[:notice]
+    .flash
+      p= flash[:notice]
+  h1 全てのユーザー
+  table
+    tr 
+      th 名前
+      th メールアドレス
+      th 管理者
+    - @users.each do |user|
+      tr
+        td= user.name
+        td= user.email
+        td= user.admin? ? "管理者" : "一般ユーザー"
+        td 編集
+        / - if current_user.admin? && !current_user?(user)
+        / td= link_to "削除", "/users/#{user.id}/destroy", {method: "post", data: { confirm: "Are you sure?" }}
+        p= current_user

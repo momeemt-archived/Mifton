@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title = crafes_title(yield(:title))
+    = render 'layouts/rails_default'
+    = render 'layouts/shim'  
+  body
+    .crafes
+      header
+        a href="/crafes"
+          img.header-logo[src="/crafes-logo.png"]    
+      = yield
+      footer
+        .back-link
+          .link-btn
+            i.fas.fa-home
+            =link_to "Miftonへ戻る", "/"
+          .link-btn
+            i.fas.fa-backward
+            =link_to("Crafes!ホームへ戻る","/crafes")

@@ -1,0 +1,68 @@
+- provide(:title, "Home")
+main
+  .top-wrapper
+    img src="mifton-img.jpeg"
+  .main-wrapper
+
+    p MineCraftをもっと面白く、もっと便利に。 Miftonを活用して、さらにクリエイティブな生活を。
+    
+  .signup-wrapper
+    / .twitter
+    /   p
+    /     i.fab.fa-twitter
+    /     span.twitterColor
+    /       | Twitter
+    /     | からお手軽に登録できます。
+    /   .btn 
+    /     = link_to "登録" , "/"
+    / hr
+    .mailAddress
+      p
+        i.far.fa-envelope
+        | メールアドレスで登録できます。
+  .btn 
+    = link_to "登録" , "/signup"
+  .login-wrapper
+      = link_to "or ログイン" , "/login"
+  hr
+  .description-wrapper
+    h2 
+      span ざ
+      | っくり "Mifton" とは？
+    p MineCraftBEをもっと便利に、楽しくするサービスです。
+    p いくつかのアプリケーションを提供しています。
+    p 例えば、Crafes!では、毎週技術コンテストを開催しており、指標を確かめられます。
+    p Miftonは現在βver.で、アップデートやスマートフォンアプリの開発に取り組んでいます。
+    p 非公式であり、Mojang社が承認・開発したものではありません。
+    
+  hr
+  
+  .crafes-wrapper
+    h2 
+      span C
+      | rafes! 情報
+    = render 'layouts/contest_list'
+    
+    .btn
+      = link_to "Crafes! へ", "/crafes"
+  hr
+  
+  .bector-wrapper
+    h2 
+      span B
+      | ector 最新情報
+    p 現在開発中！ver.0.2β にて公開予定です。
+    .btn
+      p Bectorとは？
+    
+  hr
+  
+  .operation-wrapper
+    h2 
+      span 運
+      | 営チームからのお知らせ
+    p 特にありません
+    
+    
+
+  
