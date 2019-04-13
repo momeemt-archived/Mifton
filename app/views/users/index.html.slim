@@ -1,2 +1,26 @@
-h1 Users#index
-p Find me in app/views/users/index.html.slim
+.main
+
+  h1 ユーザー一覧
+
+  p 開催中の大会を表示します。
+  table
+    tr
+      th= User.human_attribute_name(:id)
+      th= User.human_attribute_name(:name)
+      th= User.human_attribute_name(:email)
+      th= User.human_attribute_name(:authority)
+      th= User.human_attribute_name(:created_at)
+      th= User.human_attribute_name(:updated_at)
+      th
+    tbody
+    - @users.each do |user|
+      tr
+        td= user.id
+        td= link_to user.name, user
+        td= user.email
+        td= user.authority
+        td= user.created_at
+        td= user.updated_at
+        td
+          = link_to '編集', "#"
+          = link_to '削除', user, method: :delete, data: {confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"}

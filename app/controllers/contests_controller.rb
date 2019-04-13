@@ -2,6 +2,7 @@ class ContestsController < ApplicationController
   before_action :set_contest, only: [:show, :edit, :update, :destroy]
   before_action :set_problem, only: [:problem_1, :problem_2, :problem_3, :problem_4]
   before_action :set_all_contests, only: [:home, :index]
+  before_action :permit_admin, only: [:admin]
 
   def home
   end
@@ -84,6 +85,14 @@ class ContestsController < ApplicationController
 
   def set_all_contests
     @contests = Contest.all.order(start_time: :asc)
+  end
+
+  def permit_admin
+    unless current_user
+      redirect_to crafes_path
+      return
+    end
+    redirect_to crafes_path unless current_user.authority == "admin"
   end
 
 end

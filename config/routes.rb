@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
+
+  # Home
+  root to: "home#top"
+  get "/about", to: "home#about"
+
   # Users
   resources :users
+
+  # Sessions
+  get "/login", to: "sessions#new"
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
   # Crafes! Draft Contest
   resources :draft_contests do

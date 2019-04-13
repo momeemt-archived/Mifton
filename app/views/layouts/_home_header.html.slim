@@ -1,0 +1,16 @@
+header
+  a href="/"
+    img.header-logo[src="mifton-logo.png"]
+  ul.link-list
+    li = link_to  "Miftonについて", "/about"
+    li = link_to  "Crafes!", "/crafes"
+    li = link_to  "開発者", "https://twitter.com/momeemt" ,:target => "_blank"
+    li = link_to  "MineCraft", "https://www.minecraft.net/ja-jp/", :target => "_blank"
+    li = link_to  "開発マップ", "https://trello.com/b/CzFf02M1",:target => "_blank"
+
+    - if current_user
+      li = link_to current_user.name, "/users/#{current_user.id}"
+      li = link_to "ログアウト", logout_path, method: :delete
+
+    - else
+      li = link_to  "アカウント登録", "/users/new"

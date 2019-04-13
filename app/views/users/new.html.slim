@@ -1,2 +1,35 @@
-h1 Users#new
-p Find me in app/views/users/new.html.slim
+main
+
+  #top-page
+    h1 アカウントを作成
+
+    / .btn
+    /   =link_to "Twitterでログイン", "/"
+    /
+    / hr
+
+    h2 メールアドレスで登録する
+
+    = form_with model: @user, local: true do |f|
+      .form-group
+        = f.label :name, '名前'
+        = f.text_field :name, class: 'form-control'
+      .form-group
+        = f.label :email, 'メールアドレス'
+        = f.text_field :email, class: 'form-control'
+      .form-group
+        = f.label :password, 'パスワード'
+        = f.password_field :password, class: 'form-control'
+      .form-group
+        = f.label :password_confirmation, 'パスワード(確認)'
+        = f.password_field :password_confirmation, class: 'form-control'
+      = f.submit '登録する', class: 'btn btn-primary'
+
+    p 登録することで、Miftonの利用規約・プライバシーポリシー・Miftonで提供されるアプリケーションの利用規約に同意するものとします。
+
+    hr
+
+    h2 アカウントをお持ちですか？
+
+    .btn
+      =link_to "ログインする", "/login"

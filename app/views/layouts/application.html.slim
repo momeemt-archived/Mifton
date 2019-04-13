@@ -1,11 +1,12 @@
 doctype html
 html
   head
-    title
-      | Mifton
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    title = full_title(yield(:title))
+    = render 'layouts/rails_default'
+    = render 'layouts/shim'
+    = favicon_link_tag('favicon.ico')
   body
-    = yield
+    .home
+      = render 'layouts/home_header'
+      = yield
+      = render 'layouts/home_footer'

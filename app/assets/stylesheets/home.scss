@@ -1,0 +1,245 @@
+$height : 110px; // ヘッダーフッター用の height
+$MiftonColor : #ec6d51; // Mifton用のメインカラー
+// $BackColor : #ecad9f;
+$BackColor : #383c3c;
+$Color : white; // ヘッダーフッター文字カラー
+$TextColor: #474444;
+
+
+img{
+  margin: 0;
+  padding:0;
+}
+
+hr {
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width:55%;
+  margin: 0 auto;
+}
+
+.home{
+
+  // Flash Css
+  .flash{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #006e54;
+    color:white;
+    padding:3px 0px;
+  }
+
+  input, input[type="submit"] {
+    display: block;
+    width: 40%;
+    height: 50px;
+    margin: 10px auto;
+    padding: 5px;
+    font-size: 18px;
+  }
+
+  input[type="submit"] {
+    border-radius: 0px;
+  }
+
+  table {
+    margin: 15px auto;
+    border: solid 2px $MiftonColor;
+    border-collapse: collapse;
+    th,td{
+      border: 1px solid $MiftonColor;
+      padding:5px 10px;
+    }
+    th{
+      font-size: 18px;
+    }
+
+    @media screen and (min-width:600px) and (max-width:959px) {
+      margin: 15px 10px;
+    }
+  }
+
+  hr {
+    border-bottom: $MiftonColor 3px dashed;
+    margin: 10px auto;
+  }
+
+  h2 {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+
+  p{
+    padding: 2px;
+    line-height: 1.6em;
+  }
+
+  h2 span {
+    color: $MiftonColor;
+    font-size: 35px;
+  }
+
+  .btn {
+    border: 2px $MiftonColor solid;
+    width: 180px;
+    margin: 30px auto;
+    padding: 7.5px;
+    border-radius: 10px;
+    a {
+      display: block;
+      color: $TextColor;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+    &:hover {
+      background-color: $MiftonColor * 2.3;
+    }
+
+    input {
+      border: 0px;
+      display: block;
+      color:  $TextColor;
+      background-color: rgba(255,0,0,0);
+      font-size: 18px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+
+  @mixin basic {
+    height: $height;
+    background-color: $MiftonColor;
+  }
+
+  header{
+    @include basic();
+    text-align: center;
+    img{
+      width:270px;
+    }
+    position:relative;
+    .link-list{
+      display: flex;
+      position:absolute;
+      top: 75%;
+      left: 50%;
+      -ms-transform: translate(-50%,-50%);
+      -webkit-transform : translate(-50%,-50%);
+      transform : translate(-50%,-50%);
+
+      li{
+        padding: 0px 10px;
+        list-style: none;
+
+      }
+      a{
+        text-decoration: none;
+        color: $Color;
+      }
+    }
+  }
+
+
+
+  footer {
+    margin-top: 50px;
+
+    a {
+      color: white;
+    }
+    height: 55px;
+    background-color: $MiftonColor;
+
+    ul {
+      display: flex;
+      justify-content:center;
+      list-style: none;
+      line-height: 55px;
+      li {
+        padding: 0 10px;
+      }
+    }
+    a{
+      text-decoration: none;
+      color: $Color;
+    }
+  }
+
+  main{
+    height: auto;
+    text-align: center;
+
+    .top-wrapper{
+      img{
+        width: 100%;
+        vertical-align: bottom;
+      }
+    }
+
+    .main-wrapper{
+      position:relative;
+      background: $BackColor;
+      color:$Color;
+      height: 60px;
+      p{
+        font-size: 16px;
+        display: flex;
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform : translate(-50%,-50%);
+        transform : translate(-50%,-50%);
+      }
+    }
+
+    .signup-wrapper{
+      hr{
+        border-bottom: $MiftonColor 3px dashed;
+      }
+      p{
+        color: $TextColor;
+        font-size: 22px;
+        margin-top: 5px;
+
+
+      }
+      .twitter{
+        margin: 15px;
+        i{
+          margin-right: 8px;
+          color: #55acee;
+        }
+        span{
+          color:#55acee;
+        }
+      }
+      .mailAddress{
+        margin: 15px;
+        i{
+          margin-right: 8px;
+          color: #44a3aa;
+        }
+      }
+      .btn{
+        display: inline;
+        background-color: $BackColor;
+        border-radius: 4px;
+        padding: 6px 70px;
+        margin: 5px 0;
+        color:rgb(43, 43, 43);
+        &:hover{
+          background-color: #fac8bd;
+        }
+      }
+    }
+  }
+}
