@@ -1,10 +1,14 @@
 main
-  h1= @user.name
-  p= "@#{@user.id}"
+  - if @user.present?
+    h1= @user.name
+    p= "@#{@user.id}"
 
-  p= @user.profile
-  p= @user.location
+    p= @user.profile
+    p= @user.location
 
-  - if current_user.id == @user.id
-    .btn.signup
-      = link_to "プロフィールを編集", "#"
+    - if current_user
+      - if current_user.id == @user.id
+        .btn.signup
+          = link_to "プロフィールを編集", "#"
+  - else
+    h1 存在しないページです

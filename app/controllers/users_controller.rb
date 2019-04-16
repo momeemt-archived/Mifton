@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :profile_edit]
+  before_action :set_user, only: [:edit, :update, :destroy, :profile_edit]
   before_action :permit_admin, only: [:index]
 
   def index
@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find_by(id: params[:id])
   end
 
   def edit
