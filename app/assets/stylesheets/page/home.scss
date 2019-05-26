@@ -24,6 +24,10 @@ hr {
 
 .home{
 
+
+
+
+
   // Flash Css
   .flash{
     display: -webkit-flex;
@@ -226,14 +230,156 @@ hr {
   }
 
 
-
+  // PC向け
   @media screen and (min-width:960px) {
-    .link-mobile-list{
+    .btn {
+      width: 70%;
+      margin: 20px auto;
+      padding: 4px;
+      border-radius: 20px;
+      font-weight: bold;
+      a {
+        display: block;
+        color: $TextColor;
+        font-size: 16px;
+        text-decoration: none;
+      }
+
+      &:hover {
+        background-color: $MiftonColor * 2.3;
+      }
+
+      input {
+        border: 0px;
+        display: block;
+        color:  $TextColor;
+        background-color: rgba(255,0,0,0);
+        font-size: 18px;
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
+    #top_wrapper {
+      clear: both;
+      background-image: url("/mifton-img.jpeg");
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      .container {
+        display: flex;
+        justify-content: center;
+        #left_description {
+          padding-top: 22%;
+          padding-left: 20px;
+          width:50%;
+          color: white;
+          text-align: left;
+          h1 {
+            font-size: 70px;
+            line-height: 0.55;
+
+            #h1_2low {
+              font-size: 26px;
+            }
+            padding-bottom: 30px;
+          }
+
+          p {
+            font-size: 20px;
+          }
+
+        }
+
+        #sign_up_container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          width:50%;
+          #sign_up_form {
+            border-radius: 8px;
+            background-color: aliceblue;
+            width: 100%;
+            width:500px;
+            height: 400px;
+            font-size: 14px;
+            text-align: left;
+
+            padding: 20px 0px;
+
+            p,label {
+              padding-left: 20px;
+              padding-right: 10px;
+            }
+
+            input {
+              width: 90%;
+              height: 30px;
+              background-color: aliceblue;
+              border: 1px gray solid;
+              border-radius: 4px;
+            }
+
+            .btn.signup {
+              a {
+                color:white;
+                font-size: 20px;
+              }
+              text-align: center;
+              margin: 10px auto;
+              width: 70%;
+            }
+          }
+        }
+      }
+
+
+    }
+
+
+    .link-mobile-list, .tab{
+      display: none;
+    }
+
+    .login {
+      border: 1px $MiftonColor solid;
+    }
+
+    .signup {
+      background-color: $MiftonColor;
+      a {
+        color:white;
+      }
+    }
+
+    .scroll_btn {
+      background-color: $MiftonColor;
+      margin: auto;
+      width:100px;
+      height: 100px;
+      border-radius: 50%;
+      font-size: 50px;
+      color:white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  }
+
+  // タブレット向け
+  @media screen and (max-width:960px) {
+    .pc {
       display: none;
     }
   }
 
+  // モバイル向け
   @media screen and (max-width: 480px) {
+    .tab, .pc {
+      display: none;
+    }
+
     a:visited {
       color: blue;
     }

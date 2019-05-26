@@ -1,8 +1,62 @@
 main
-  img#top_image src="mifton-img.jpeg"
+  section#top_wrapper.pc
+    .container
+      #left_description
+        #desctex_block
+          h1
+            | Minecraft
+            span#h1_2low
+              br
+              | をもっと面白くもっと便利に
+          p クラフターのクラフターによるクラフターのためのサービス。
+          p あなたの何気ない気づきや技術が、コミュニティをより進歩させます。
 
-  h1 MineCraftをもっと面白く、もっと便利に。
-  p Miftonで世界を広げよう。
+      #sign_up_container
+        #sign_up_form
+          label ユーザー名
+          input placeholder="username"
+
+          label メールアドレス
+          input placeholder="me@example.com"
+
+          label パスワード
+          input placeholder="password" type="password"
+          p パスワードは、6文字以上、少なくとも英字と数字の両方が含まれている必要があります。
+
+          .btn.signup
+            =link_to "登録する", ""
+
+          p 「登録する」をクリックした時点で、あなたはMiftonの利用規約に同意したものとします。利用規約をお読みください。
+
+  /  section.top.pc
+      .top__heading
+        #desctex_block
+          h1
+            | Minecraft
+            span#h1_2low
+              br
+              | をもっと面白くもっと便利に
+          p クラフターのクラフターによるクラフターのためのサービス。
+          p あなたの何気ない気づきや技術が、コミュニティをより進歩させます。
+
+      .top__signup
+        .top__signup--form
+          label ユーザー名
+          input placeholder="username"
+
+          label メールアドレス
+          input placeholder="me@example.com"
+
+          label パスワード
+          input placeholder="password" type="password"
+          p パスワードは、6文字以上、少なくとも英字と数字の両方が含まれている必要があります。
+
+          .top__signup--form.btn.signup
+            =link_to "登録する", ""
+
+          p 「登録する」をクリックした時点で、あなたはMiftonの利用規約に同意したものとします。利用規約をお読みください。
+
+  img src=""
 
   - if current_user
 
@@ -58,30 +112,9 @@ main
 
   - else
 
-
-
-    .btn.signup
-      = link_to "アカウント作成", "/users/new"
-
-    .btn.login
-      = link_to "ログイン", "/login"
-
-    hr
-
-    h2 Twitterアカウントを持っていますか？
-    p メールアドレスを使わず、簡単にログイン出来ます。
-
-    .btn.twitter-signup
-      i.fab.fa-twitter
-      =link_to "Twitterでアカウント作成", "#"
-
-    hr
-
-    h2 Mifton
-    p MineCraftの新しいコミュニティサービスへようこそ。
-    p あなたの知らないMineCraftを探索してみましょう。
-
-  hr
+    h2 Miftonについてもっと詳しく
+    .scroll_btn
+      p ↓
 
   .link-mobile-list
     =link_to "Miftonについて", "/about"
@@ -94,86 +127,4 @@ main
     =link_to  "API", "/api"
     =link_to  "ソースコード", "https://github.com/aq17/Mifton"
 
-  small 2019 - Mifton
-
-
-
-
-/ main
-/   .top-wrapper
-/     img src="mifton-img.jpeg"
-/   .main-wrapper
-/
-/     p MineCraftをもっと面白く、もっと便利に。 Miftonを活用して、さらにクリエイティブな生活を。
-/
-/   .signup-wrapper
-/     .mailAddress
-/       p
-/         i.far.fa-envelope
-/         | メールアドレスで登録できます。
-/   .btn
-/     = link_to "登録" , "/users/new"
-/   .login-wrapper
-/       = link_to "or ログイン" , "/login"
-/   hr
-/   .description-wrapper
-/     h2
-/       span ざ
-/       | っくり "Mifton" とは？
-/     p MineCraftBEをもっと便利に、楽しくするサービスです。
-/     p いくつかのアプリケーションを提供しています。
-/     p 例えば、Crafes!では、毎週技術コンテストを開催しており、指標を確かめられます。
-/     p Miftonは現在βver.で、アップデートやスマートフォンアプリの開発に取り組んでいます。
-/     p 非公式であり、Mojang社が承認・開発したものではありません。
-/
-/   hr
-/
-/   .crafes-wrapper
-/     h2
-/       span C
-/       | rafes! 情報
-/     - hasContest = false
-/     - if @contests.present?
-/       - @contests.each do |contest|
-/         - if contest.start_time <= Time.now && contest.start_time + contest.length * 60 >= Time.now
-/           - hasContest = true
-/
-/     - if hasContest
-/       p 開催中の大会を表示します。
-/       table
-/         tr
-/           th 開催時刻
-/           th 大会名
-/           th 大会時間(分)
-/           th 作問者
-/           th レーティング変化
-/         - @contests.each do |contest|
-/           - if contest.start_time <= Time.now && contest.start_time + contest.length * 60 >= Time.now
-/             tr
-/               td= contest.start_time.strftime("%Y-%m-%d %H:%M")
-/               td=link_to("#{contest.name} ##{contest.holding_times}",contest)
-/               td= contest.length
-/               td= contest.writer
-/               td="~#{contest.rating}"
-/     - else
-/       p 開催中の大会がありません
-/
-/     .btn
-/       = link_to "Crafes! へ", "/crafes"
-/   hr
-/
-/   .bector-wrapper
-/     h2
-/       span B
-/       | ector 最新情報
-/     p 現在開発中！ver.0.2β にて公開予定です。
-/     .btn
-/       p Bectorとは？
-/
-/   hr
-/
-/   .operation-wrapper
-/     h2
-/       span 運
-/       | 営チームからのお知らせ
-/     p 特にありません
+    small 2019 - Mifton
