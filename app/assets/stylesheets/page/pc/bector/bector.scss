@@ -1,0 +1,75 @@
+@import "../../../config/_variables";
+@import "../../../mixin/_flex";
+@import "../../../mixin/_area";
+@import "../../../mixin/_main-button";
+
+.bector {
+  font-family: 'Noto Serif JP', serif !important;
+  header {
+    height: 75px;
+    background: linear-gradient(to right, #182848, #4b6cb7);
+    @include flex-all();
+    .header__wraps {
+      &--title {
+        color: $text-color;
+        font-size: 30px;
+      }
+    }
+  }
+  main {
+    height: 1000px;
+    color:white;
+
+    .bector__top-wrap {
+      background-image: url("/minecraft-2053882.jpg");
+      height: 1000px;
+      @include justify();
+      h1 {
+        font-size: 50px;
+        color: white;
+        background-color: #182848;
+        padding-left: 10px;
+        margin: 30px 0;
+      }
+      p {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 1.5;
+      }
+    }
+    .bector__un-signin {
+      @include justify();
+
+      &--signup, &--timeline {
+        width: 50%;
+        margin: 80px 20px 0 20px;
+      }
+
+      &--signup {
+        border: 4px #182848 solid;
+        background-color: rgba(24,40,72,0.5);
+        border-radius: 10px;
+        height: 500px;
+
+        &__form {
+          &--input {
+            @include area(90%,30px);
+            display: block;
+            background-color: aliceblue;
+            border: 1px gray solid;
+            border-radius: 4px;
+            margin: 10px auto;
+            padding: 5px;
+            font-size: 18px;
+          }
+        }
+
+
+
+        label, input {
+          display: block;
+        }
+      }
+    }
+  }
+}

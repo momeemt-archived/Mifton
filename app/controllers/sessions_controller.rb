@@ -1,5 +1,14 @@
 class SessionsController < ApplicationController
   def new
+    @field = "email";
+  end
+
+  def change_login
+    if @field = "email"
+      @field = "id"
+    else
+      @field = "email"
+    end
   end
 
   def create
@@ -15,9 +24,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    reset_session
+    session[:user_id] = nil
     redirect_to root_path, notice: 'ログアウトしました。'
   end
+
+  helper_method :change_login
 
   private
 

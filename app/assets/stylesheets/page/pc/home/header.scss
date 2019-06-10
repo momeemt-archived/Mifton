@@ -1,0 +1,58 @@
+@import "../../../config/_variables";
+@import "../../../mixin/_flex";
+
+.home {
+  header {
+    height: 75px;
+    background-color: $base-color;
+    @include align();
+    img {
+      width: 50px;
+      margin: 0 30px;
+    }
+
+    .header__wraps {
+      width: 100%;
+      &--not-mobile {
+
+        @include justify-sb();
+
+        &__left {
+          @include align();
+          justify-content: flex-start;
+
+          li {
+            padding: 0 10px;
+            list-style: none;
+          }
+
+          a {
+            text-decoration: none;
+            color: $text-color;
+          }
+        }
+
+        &__right {
+          margin-right: 100px;
+          @include align();
+          justify-content: flex-end;
+          &--btn {
+            border: 1px white solid;
+            border-radius: 5px;
+            margin: 0 10px;
+          }
+          li {
+            padding: 5px 12px;
+            list-style: none;
+          }
+
+          a {
+            text-decoration: none;
+            color: $text-color;
+          }
+        }
+      }
+    }
+
+  }
+}

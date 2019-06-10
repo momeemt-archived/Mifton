@@ -1,0 +1,96 @@
+@import "../../../config/_variables";
+@import "../../../mixin/_flex";
+@import "../../../mixin/_area";
+@import "../../../mixin/_main-button";
+
+.home {
+
+  &--not-mobile {
+
+    &__container {
+      background-image: url("/mifton-img.jpeg");
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @include justify();
+      height: 90%;
+
+      &--not-mobile__description {
+
+        padding: 22% 0 0 20px;
+        width: 50%;
+        color: $text-color;
+        margin-bottom: 30px;
+
+        &--title {
+          font-size: $biggest-text-size;
+          line-height: 0.65;
+          padding-bottom: 30px;
+
+          &--twoRow {
+            font-size: $large-text-size;
+          }
+        }
+
+        &--details {
+          font-size: 20px;
+        }
+      }
+
+      &--sign-up {
+        @include flex-all-center();
+        width: 50%;
+
+        &__form {
+          @include area(500px,400px);
+          font-size: 14px;
+          text-align: left;
+          border-radius: 8px;
+          padding: 20px 0;
+          background-color: white;
+
+          &--label {
+            padding: 0 10px 0 20px;
+          }
+
+          &--input {
+            @include area(90%,30px);
+            display: block;
+            background-color: aliceblue;
+            border: 1px gray solid;
+            border-radius: 4px;
+            margin: 10px auto;
+            padding: 5px;
+            font-size: 18px;
+          }
+
+          &--btn {
+            @include main-button(70%);
+          }
+        }
+      }
+    }
+
+    &__about {
+      font-size: 18px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  }
+
+  &--mobile {
+    &__link-wrap {
+      margin: 5px 10px;
+      a {
+        color: $no-eye-catching-color;
+        font-size: $no-eye-catching-size;
+        margin: 2px;
+        text-decoration: none;
+      }
+      small {
+        display: block;
+      }
+    }
+  }
+
+}

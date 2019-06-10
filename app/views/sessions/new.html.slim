@@ -1,10 +1,21 @@
-h1 ログイン
+.session
+  .session--page-container
+    .session--page-container--container
+      h1.session--page-container--container__top-title ログイン
+      hr.session--page-container--container__top-line
 
-= form_with scope: :session, local: true do |f|
-  .form-group
-    = f.label :email, 'メールアドレス'
-    = f.text_field :email
-  .form-group
-    = f.label :password, 'パスワード'
-    = f.password_field :password
-  = f.submit 'ログインする'
+      = form_with scope: :session, local: true, class:"session--page-container--container__login-form" do |f|
+        .session--page-container--container__login-form__group
+          - field = "email"
+          - if field == "email"
+            = f.text_field :email, :placeholder => "メールアドレス", class: "session--page-container--container__login-form__group--input"
+            =link_to "IDでログイン", "#"
+          - else
+            = f.text_field :id, :placeholder => "ユーザーID", class: "session--page-container--container__login-form__group--input"
+            =link_to "メールアドレスでログイン", "#"
+        .session--page-container--container__login-form__group
+          = f.password_field :password, :placeholder => "パスワード", class: "session--page-container--container__login-form__group--input"
+        = f.submit 'ログインする', class: "session--page-container--container__login-form--submit-button"
+        = f.check_box :test,class:"session--page-container--container__login-form--check-box"
+        span ログイン情報を保存する
+        p= link_to "パスワードを思い出せませんか？","#";

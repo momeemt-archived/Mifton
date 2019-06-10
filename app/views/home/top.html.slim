@@ -1,130 +1,53 @@
-main
-  section#top_wrapper.pc
-    .container
-      #left_description
-        #desctex_block
-          h1
-            | Minecraft
-            span#h1_2low
+- if !current_user.nil?
+  / タイムラインを作る
+  p= "こんにちは！#{current_user.name}さん"
+  =link_to "ログアウト", "/logout", method: :delete
+
+  p Bector タイムライン (グリッド使って表現できないかな)
+  p Crafes 自分の記録 (AtCoderみたいにグラフ状にして表現したい)
+  p
+- else
+  main
+    section.home--not-mobile
+      .home--not-mobile__container
+        .home--not-mobile__container--not-mobile__description
+          h1.home--not-mobile__container--not-mobile__description--title
+            | Minecraftを
+            span.home--not-mobile__container--not-mobile__description--title--twoRow
               br
-              | をもっと面白くもっと便利に
-          p クラフターのクラフターによるクラフターのためのサービス。
-          p あなたの何気ない気づきや技術が、コミュニティをより進歩させます。
+              | もっと面白くもっと便利に
+          p.home--not-mobile__container--not-mobile__description--details クラフターのクラフターによるクラフターのためのサービス。
+          p.home--not-mobile__container--not-mobile__description--details あなたの何気ない気づきや技術が、コミュニティをより進歩させます。
 
-      #sign_up_container
-        #sign_up_form
-          label ユーザー名
-          input placeholder="username"
+        .home--not-mobile__container--sign-up
+          .home--not-mobile__container--sign-up__form
+            label.home--not-mobile__container--sign-up__form--label ユーザー名
+            input.home--not-mobile__container--sign-up__form--input placeholder="username"
 
-          label メールアドレス
-          input placeholder="me@example.com"
+            label.home--not-mobile__container--sign-up__form--label メールアドレス
+            input.home--not-mobile__container--sign-up__form--input placeholder="me@example.com"
 
-          label パスワード
-          input placeholder="password" type="password"
-          p パスワードは、6文字以上、少なくとも英字と数字の両方が含まれている必要があります。
+            label.home--not-mobile__container--sign-up__form--label パスワード
+            input.home--not-mobile__container--sign-up__form--input placeholder="password" type="password"
+            p.home--not-mobile__container--sign-up__form--label パスワードは、6文字以上、少なくとも英字と数字の両方が含まれている必要があります。
 
-          .btn.signup
-            =link_to "登録する", ""
+            .home--not-mobile__container--sign-up__form--btn
+              =link_to "登録する", ""
 
-          p 「登録する」をクリックした時点で、あなたはMiftonの利用規約に同意したものとします。利用規約をお読みください。
+            p.home--not-mobile__container--sign-up__form--label「登録する」をクリックした時点で、あなたはMiftonの利用規約に同意したものとします。利用規約をお読みください。
 
-  /  section.top.pc
-      .top__heading
-        #desctex_block
-          h1
-            | Minecraft
-            span#h1_2low
-              br
-              | をもっと面白くもっと便利に
-          p クラフターのクラフターによるクラフターのためのサービス。
-          p あなたの何気ない気づきや技術が、コミュニティをより進歩させます。
+      section.home--not-mobile__about
+        h2 Miftonについてもっと詳しく
 
-      .top__signup
-        .top__signup--form
-          label ユーザー名
-          input placeholder="username"
-
-          label メールアドレス
-          input placeholder="me@example.com"
-
-          label パスワード
-          input placeholder="password" type="password"
-          p パスワードは、6文字以上、少なくとも英字と数字の両方が含まれている必要があります。
-
-          .top__signup--form.btn.signup
-            =link_to "登録する", ""
-
-          p 「登録する」をクリックした時点で、あなたはMiftonの利用規約に同意したものとします。利用規約をお読みください。
-
-  img src=""
-
-  - if current_user
-
-    hr
-
-    h2 My Page
-    p Miftonでの活動・プロフィールなどを確認できます。
-    p さらに魅力的な活動をしよう！
-
-    .btn.signup
-      = link_to "プロフィール", "/users/#{current_user.id}"
-
-    hr
-
-    h2 Crafes! info
-    p Crafes!は、MCBEの技術を競える大会サービスです。
-    p 大会に参加したり、開催したりしましょう！
-
-    h3 開催予定の大会
-
-    - if @is_contest
-      table
-        tr
-          th コンテスト名
-          th 日時
-        tbody
-        - @contests.each do |contest|
-          - if contest.start_time > Time.now
-            td= link_to "#{contest.name} ##{contest.holding_times}", contest
-            td= contest.start_time.strftime("%Y-%m-%d %H:%M")
-    - else
-      p 開催予定の大会はありません。
-
-    .btn.to-crafes
-      = link_to "Crafes!を見に行く", "/crafes"
-
-    hr
-
-    h2 運営からのお知らせ
-    p Mifton運営チームからアップデートのお知らせです。
-
-    .btn.to-info
-      = link_to "インフォメーション", "/informations"
-
-    hr
-
-    h2 ログアウト
-    p またのご利用をお待ちしております！
-
-    .btn.login
-      = link_to "ログアウト", "/logout", method: :delete
-
-
-  - else
-
-    h2 Miftonについてもっと詳しく
-    .scroll_btn
-      p ↓
-
-  .link-mobile-list
-    =link_to "Miftonについて", "/about"
-    =link_to "開発者", "https://twitter.com/momeemt" ,:target => "_blank"
-    =link_to "MineCraft", "https://www.minecraft.net/ja-jp/", :target => "_blank"
-    =link_to  "開発マップ", "https://trello.com/b/CzFf02M1",:target => "_blank"
-    =link_to  "利用規約", "#"
-    =link_to  "プライバシーポリシー", "/policy"
-    =link_to  "フィードバック","https://goo.gl/forms/8SbyOaNe5GYrUsh33",:target => "_blank"
-    =link_to  "API", "/api"
-    =link_to  "ソースコード", "https://github.com/aq17/Mifton"
-
-    small 2019 - Mifton
+    section.home--mobile
+      .home--mobile__link-wrap
+        =link_to "Miftonについて", "/about"
+        =link_to "開発者", "https://twitter.com/momeemt" ,:target => "_blank"
+        =link_to "MineCraft", "https://www.minecraft.net/ja-jp/", :target => "_blank"
+        =link_to "開発マップ", "https://trello.com/b/CzFf02M1",:target => "_blank"
+        =link_to "利用規約", "#"
+        =link_to "プライバシーポリシー", "/policy"
+        =link_to "フィードバック","https://goo.gl/forms/8SbyOaNe5GYrUsh33",:target => "_blank"
+        =link_to "API", "/api"
+        =link_to "ソースコード", "https://github.com/aq17/Mifton"
+        small 2019 - Mifton

@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-
   # Home
   root to: "home#top"
   get "/about", to: "home#about"
+
+  # Bector
+  get "/bector/top", to: "bector#top"
+  resources :bector
 
   # Users
   resources :users do
