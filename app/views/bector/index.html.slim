@@ -1,0 +1,67 @@
+main
+  .bector_index
+    .bector_index__left-wrapper
+      p= current_user.name
+      p= "@#{current_user.user_id}"
+      img src="/user_images/#{current_user.image_name}"
+      p リリース
+      p= current_user.microposts.count
+      p フォロー
+      p= current_user.following.count
+      p フォロワー
+      p= current_user.followers.count
+
+      p 通知
+      hr
+
+      - @informations.each do |info|
+        - if info.info_type == "bector"
+          p= info.content
+          p= info.created_at.strftime("%Y年%m月%d日 %H時%M分")
+          hr
+
+    .bector_index__center-wrapper
+      = form_with scope: :micropost, url: bector_index_url, local: true do |f|
+        = f.text_area :content
+        input name="image" type="file"
+        = f.file_field :image
+        = f.submit "リリース"
+      - @microposts.each do |post|
+        .bector_index__center-wrapper__post
+          .bector_index__center-wrapper__post--icon
+            img src="/user_images/#{@users.find_by(id:post.user_id).image_name}"
+          .bector_index__center-wrapper__post--contents
+            p.bector_index__center-wrapper__post--contents--user_name
+              = @users.find_by(id:post.user_id).name
+            p= post.content
+            - if !post.image_name.blank?
+              img src="/micropost_images/#{post.image_name}"
+            - if Reaction.find_by(user_id: current_user.id, reactioned_id: post.id)
+              = link_to "/reactions/#{post.id}/destroy", method: :delete do
+                i.fas.fa-heart style="color:red;"
+            - else
+              = link_to "/reactions/#{post.id}/create",{method: "post"} do
+                i.far.fa-heart style="color:red;"
+                = @reactions_count
+            span style="padding-left:5px;" = Reaction.where(reactioned_id: post.id).count
+
+    .bector_index__right-wrapper
+      p タイムラインのカスタムとか
+      = link_to "#" do
+        i.fas.fa-globe-americas
+      = link_to "#" do
+        i.fas.fa-street-view
+      = link_to "#" do
+        i.fas.fa-user-friends
+      p ダイレクトメッセージ
+      hr
+      = form_with scope: :direct_message, url: bector_index_url, local: true do |f|
+        = f.text_field :message
+        = f.select :target_user, @users_name_array
+        = f.submit "送信"
+
+      - @direct_messages.each do |message|
+        p= message.message
+        p= message.user_id
+        p= message.target_user
+        hr

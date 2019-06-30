@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # Home
   root to: "home#top"
   get "/about", to: "home#about"
@@ -11,6 +12,21 @@ Rails.application.routes.draw do
   resources :users do
     get "/profile_edit", to: "users#profile_edit"
   end
+
+  # Manages
+  get '/manages', to: "manages#index"
+  get '/manages/debug'
+
+  resources :manage_users
+  post "/manage_users/:id", to: "manage_users#update"
+
+  resources :manage_bector
+  post "/manage_bector/:id", to: "manage_bector#update"
+
+  resources :manage_informations
+
+  post "/reactions/:reactioned_id/create", to: "reactions#create"
+  delete "/reactions/:reactioned_id/destroy", to: "reactions#destroy"
 
   # Informations
   resources :informations
@@ -34,5 +50,11 @@ Rails.application.routes.draw do
     get "/problem_2", to: "contests#problem_2"
     get "/problem_3", to: "contests#problem_3"
     get "/problem_4", to: "contests#problem_4"
+  end
+
+  resources :users do
+    member do
+      get :following, :followers
+    end
   end
 end

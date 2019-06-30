@@ -24,3 +24,17 @@ img{
   margin: 0;
   padding:0;
 }
+
+a {
+  text-decoration: none;
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+// textarea {
+//   resize: none;
+//   width: 800px;
+//   height: 300px;
+//   border: 1px solid gray;
+// }

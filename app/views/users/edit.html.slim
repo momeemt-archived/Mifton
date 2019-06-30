@@ -1,0 +1,21 @@
+.main
+  h1 ユーザーを編集する
+
+  = form_with model: @user, local: true do |f|
+    = f.label :password
+    .form-group
+      = f.text_field :password
+    = f.label :authority
+    .form-group
+      = f.radio_button :authority, "general"
+      = f.label :authority, "一般ユーザー", value:"general"
+    .form-group
+      = f.radio_button :authority, "trust_user"
+      = f.label :authority, "信頼ユーザー", value:"trust_user"
+    .form-group
+      = f.radio_button :authority, "staff"
+      = f.label :authority, "スタッフ", value:"staff"
+    .form-group
+      = f.radio_button :authority, "admin"
+      = f.label :authority, "管理者", value:"admin"
+    = f.submit nil

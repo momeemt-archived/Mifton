@@ -1,0 +1,107 @@
+@import "../../../config/_variables";
+@import "../../../mixin/_main-button";
+
+.user_index {
+
+
+
+  display: flex;
+
+  &__content-wrapper {
+
+    h1 {
+      border-bottom: 3px $base-color dotted;
+      margin-bottom: 20px;
+      padding: 10px;
+    }
+
+    a {
+      color: blue;
+
+      &:visited {
+        color: blue;
+      }
+    }
+
+
+
+
+    table {
+      width:95%;
+      border-collapse:collapse;
+    }
+    tr {
+      border: 1px black solid;
+
+      &:nth-child(even) {
+        background-color: #f0f8ff;
+      }
+    }
+    td,th{
+      //border-left: 1px black solid;
+      //border-right: 1px black solid;
+
+      padding: 5px 6px;
+    }
+
+    &--container {
+      &--nav {
+        padding-bottom: 10px;
+        #text,nav {
+          padding: 10px 0;
+        }
+        .pagination {
+          display: inline-block;
+          border: 2px solid black;
+          border-radius: 5px;
+
+          li {
+            display: inline-block;
+            list-style: none;
+            padding: 5px 10px;
+            border-left: 1px solid black;
+
+            &:first-child {
+              border: 0;
+              border-radius: 3px 0 0 3px;
+            }
+
+            &:last-child {
+              border-radius: 0 3px 3px 0;
+            }
+          }
+
+          .active {
+            background-color: $base-color;
+            a {
+              color: white;
+            }
+          }
+        }
+      }
+
+      &--search-form {
+        padding-bottom: 20px;
+        tr {
+          border: 0;
+          &:nth-child(even) {
+            background-color: white;
+          }
+          input {
+            width: 85%;
+            height: 20px;
+          }
+        }
+        &--submit {
+          @include main-button(300px);
+          margin: 10px auto;
+          font-size: 15px;
+        }
+      }
+
+      padding: 10px 20px;
+    }
+    width:85%;
+  }
+
+}

@@ -1,15 +1,18 @@
 main
   - if @user.present?
-    h1= @user.name
-    p= "@#{@user.id}"
+    img src="/user_images/header/#{@user.header_image_name}"
+    img src="/user_images/#{@user.image_name}"
+    p= @user.name
+    p= "@#{@user.user_id}"
+    p= @user.following.count
+    p= @user.followers.count
+    - if @user.authority == "admin"
+      p 運営チーム
+    - elsif @user.authority == "staff"
+      p スタッフ
 
-    p= @user.profile
-    p= @user.location
-
-    - if current_user
-      - if current_user.id == @user.id
-        .btn.signup
-          = link_to "プロフィールを編集", "#"
+    - @user.microposts.each do |post|
+      p= post.content
   - else
     h1 存在しないページです。
     p= link_to "ホームへ", "/"

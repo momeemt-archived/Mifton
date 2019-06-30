@@ -4,15 +4,63 @@
 @import "../../../mixin/_main-button";
 
 .bector {
+
+  &_index {
+    color: black;
+    display: flex;
+
+    &__left-wrapper, &__right-wrapper {
+      width: 25%;
+    }
+    &__center-wrapper {
+      width: 50%;
+      padding:20px;
+    }
+
+    &__left-wrapper {
+      img {
+        width: 70px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .bector_index__center-wrapper__post {
+
+
+    width: 100%;
+    border: 0 gray solid;
+    border-width: 0 0.4px 0.4px 0.4px;
+    background-color: #ebf6f7;
+    display: flex;
+
+    img {
+      width: 50px;
+      margin: 5px 10px;
+      border-radius: 50%;
+    }
+
+    &--contents {
+      font-size: 14px;
+      &--user_name {
+        font-weight: bold;
+        font-size: 16px;
+      }
+    }
+
+    &:nth-child(2) {
+      border-top: 0.4px gray solid;
+    }
+  }
   font-family: 'Noto Serif JP', serif !important;
   header {
-    height: 75px;
+    height: 50px;
     background: linear-gradient(to right, #182848, #4b6cb7);
     @include flex-all();
     .header__wraps {
       &--title {
         color: $text-color;
-        font-size: 30px;
+        font-size: 20px;
       }
     }
   }
@@ -38,38 +86,38 @@
       }
     }
     .bector__un-signin {
-      @include justify();
-
-      &--signup, &--timeline {
-        width: 50%;
-        margin: 80px 20px 0 20px;
-      }
-
-      &--signup {
-        border: 4px #182848 solid;
-        background-color: rgba(24,40,72,0.5);
-        border-radius: 10px;
-        height: 500px;
-
-        &__form {
-          &--input {
-            @include area(90%,30px);
-            display: block;
-            background-color: aliceblue;
-            border: 1px gray solid;
-            border-radius: 4px;
-            margin: 10px auto;
-            padding: 5px;
-            font-size: 18px;
-          }
-        }
-
-
-
-        label, input {
-          display: block;
-        }
-      }
+      // @include justify();
+      //
+      // &--signup, &--timeline {
+      //   width: 50%;
+      //   margin: 80px 20px 0 20px;
+      // }
+      //
+      // &--signup {
+      //   border: 4px #182848 solid;
+      //   background-color: rgba(24,40,72,0.5);
+      //   border-radius: 10px;
+      //   height: 500px;
+      //
+      //   &__form {
+      //     &--input {
+      //       @include area(90%,30px);
+      //       display: block;
+      //       background-color: aliceblue;
+      //       border: 1px gray solid;
+      //       border-radius: 4px;
+      //       margin: 10px auto;
+      //       padding: 5px;
+      //       font-size: 18px;
+      //     }
+      //   }
+      //
+      //
+      //
+      //   label, input {
+      //     display: block;
+      //   }
+      // }
     }
   }
 }

@@ -7,11 +7,15 @@ header
           img[src="/mifton.001.png"]
         li= link_to  "Miftonについて", "/about"
         li= link_to  "Crafes!", "/crafes"
+        li= link_to  "Bector", "/bector"
           / i.fas.fa-chevron-down
           / .shadow
           /   p Crafes!
           /   hr
           /   =link_to "Crafes!とは？", "#"
+        - if !current_user.nil?
+          - if current_user.authority == "admin"
+            li= link_to "管理者", "/manages"
         li= link_to  "開発者", "https://twitter.com/momeemt" ,:target => "_blank"
         li= link_to  "MineCraft", "https://www.minecraft.net/ja-jp/", :target => "_blank"
         li= link_to  "開発マップ", "https://trello.com/b/CzFf02M1",:target => "_blank"

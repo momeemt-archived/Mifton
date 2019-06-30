@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_13_175338) do
+ActiveRecord::Schema.define(version: 2019_06_29_233538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(version: 2019_04_13_175338) do
     t.datetime "start_time"
     t.string "contest_type"
     t.integer "length"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "direct_messages", force: :cascade do |t|
+    t.string "message"
+    t.integer "user_id"
+    t.string "target_user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -98,9 +106,34 @@ ActiveRecord::Schema.define(version: 2019_04_13_175338) do
   end
 
   create_table "information", force: :cascade do |t|
-    t.string "name"
-    t.string "author"
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "info_type"
+    t.string "info_target"
+  end
+
+  create_table "microposts", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_name"
+    t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "reactioned_id"
+    t.string "reactioned_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -114,7 +147,15 @@ ActiveRecord::Schema.define(version: 2019_04_13_175338) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "reported_value", default: 0
+    t.integer "trusted_value", default: 0
+    t.boolean "is_test_user", default: false
+    t.string "user_id", null: false
+    t.string "image_name", default: "default_icon.png"
+    t.string "remember_digest"
+    t.string "header_image_name", default: "default_header.png"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "microposts", "users"
 end

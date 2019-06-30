@@ -1,0 +1,38 @@
+.main
+  .admins_new
+
+    = render 'layouts/admins-menu-wrapper'
+
+    .admins_new__content-wrapper
+      .admins_new__content-wrapper--container
+        h1 ユーザー新規作成
+        p テスト用ユーザーの生成などに使用します。
+        p 入力しない項目はfakerによって自動生成されます。
+
+        = form_with scope: :user, url: manage_users_url , local: true do |f|
+          table
+            tbody
+              - dummy_random_num = rand(100000)
+              tr
+                td= f.label :name, '名前'
+                td= f.text_field :name, class: 'form-control', value: Faker::Name.name
+              tr
+                td= f.label :user_id, 'ID'
+                td= f.text_field :user_id, value: "example_#{dummy_random_num}"
+              tr
+                td= f.label :email, 'メールアドレス'
+                td= f.text_field :email, class: 'form-control', value: "example-#{dummy_random_num}@mifton.xyz"
+              tr
+                td= f.label :password, 'パスワード'
+                td= f.password_field :password, class: 'form-control', value: "password"
+              tr
+                td= f.label :password_confirmation, 'パスワード(確認)'
+                td= f.password_field :password_confirmation, class: 'form-control', value: "password"
+              tr
+                td= f.label :authority, '権限'
+                td= f.select :authority, ["general","trust_user","staff","admin"]
+              tr
+                td= f.label :is_test_user, 'テストユーザー'
+                td= f.check_box :is_test_user, {:checked => true}
+
+          = f.submit '登録する', class: 'admins_new__content-wrapper--container--submit'

@@ -1,12 +1,6 @@
 class HomeController < ApplicationController
   def top
-    @contests = Contest.all.order(start_time: :asc)
-    @is_contest = false
-    @contests.each do |contest|
-      if contest.start_time > Time.now
-        @is_contest = true
-      end
-    end
+    @informations = current_user.informations.all if !current_user.nil?
   end
 
   def about

@@ -1,11 +1,18 @@
 - if !current_user.nil?
-  / タイムラインを作る
-  p= "こんにちは！#{current_user.name}さん"
-  =link_to "ログアウト", "/logout", method: :delete
+  .home
+    .home__logined-wrapper
+      .home__logined-wrapper__user-column
+        p= current_user.name
+        hr
+        p ステータス
+        p どうたらこうたら
 
-  p Bector タイムライン (グリッド使って表現できないかな)
-  p Crafes 自分の記録 (AtCoderみたいにグラフ状にして表現したい)
-  p
+      .home__logined-wrapper__timeline-column
+        p タイムライン
+        - @informations.each do |info|
+          p= info.content
+          p= info.created_at
+          hr
 - else
   main
     section.home--not-mobile

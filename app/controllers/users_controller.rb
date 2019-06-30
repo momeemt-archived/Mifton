@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :destroy, :profile_edit]
-  before_action :permit_admin, only: [:index]
+  before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all.order(id: :asc)
+    @q = User.all.order(id: :asc).ransack(params[:q])
+    @users = @q.result(distinct: true).page(params[:page]).per(50)
   end
 
   def new
@@ -32,7 +32,9 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def profile_edit
+  def update
+    @user.update!(user_params)
+    redirect_to users_url, notice: "ユーザー「#{@user.name}」を更新しました。"
   end
 
   private
