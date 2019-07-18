@@ -1,0 +1,17 @@
+@import "../../../config/_variables";
+@import "../../../mixin/_flex";
+
+@media screen and (max-width:480px) {
+  .home header {
+    height: 10vh;
+    background-color: $base-color;
+
+    li {
+      display: none;
+    }
+
+    img {
+      width: 14vw;
+    }
+  }
+}

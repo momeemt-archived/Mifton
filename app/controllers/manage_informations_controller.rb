@@ -1,4 +1,6 @@
 class ManageInformationsController < ApplicationController
+  before_action :permit_admin
+
   def index
     @informations = Information.all
     @users = User.all
@@ -47,5 +49,13 @@ class ManageInformationsController < ApplicationController
                                   :content,
                                   :user_id
                                 )
+  end
+
+  def permit_admin
+    unless current_user
+      redirect_to root_path
+      return
+    end
+    redirect_to root_path if current_user.authority.general
   end
 end

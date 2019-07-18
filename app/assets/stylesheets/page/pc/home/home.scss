@@ -1,14 +1,5 @@
-@import "../../../config/_variables";
-
-.home {
-  &__logined-wrapper {
-    display: flex;
-    &__user-column {
-      width: 30%;
-    }
-    &__timeline-column {
-      width: 70%;
-    }
+@media screen and (min-width:960px) {
+  .home {
+    background-color: white;
   }
-
 }

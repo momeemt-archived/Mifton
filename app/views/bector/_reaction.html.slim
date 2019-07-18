@@ -1,0 +1,7 @@
+- if reactioned?(post,type)
+  = link_to "/reactions/#{type}/#{post.id}/destroy", method: :delete, class: "app_reaction" do
+    i class="fas fa-#{faName} app_reaction-#{color}"
+    span = reaction_count(post,type)
+- else
+  = link_to "/reactions/#{type}/#{post.id}/create",  method: "post", class: "app_reaction"  do
+    i class="far fa-#{faName} app_reaction-gray"

@@ -5,7 +5,6 @@ html
     = render 'layouts/rails_default'
     = render 'layouts/shim'
     = favicon_link_tag('favicon.ico')
-  body
-    .home
-      = render 'layouts/home_header'
-      = yield
+  body.home.based
+    header= render 'layouts/header', type:"home"
+    main= yield

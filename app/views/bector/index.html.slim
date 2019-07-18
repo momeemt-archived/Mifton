@@ -1,67 +1,168 @@
-main
-  .bector_index
-    .bector_index__left-wrapper
-      p= current_user.name
-      p= "@#{current_user.user_id}"
-      img src="/user_images/#{current_user.image_name}"
-      p リリース
-      p= current_user.microposts.count
-      p フォロー
-      p= current_user.following.count
-      p フォロワー
-      p= current_user.followers.count
+- if login?
+  .be
+    .be_leftWrapper
+      section.be_leftWrapper_currentUserInfo
+        img.be_leftWrapper_currentUserInfo_userHeaderImg src="/user_images/header/#{current_user.header_image_name}"
+        img.be_leftWrapper_currentUserInfo_userIconImg src="/user_images/#{current_user.image_name}"
+        .be_leftWrapper_currentUserInfo_conditionCard
+          p.be_leftWrapper_currentUserInfo_conditionCard_userName= current_user.name
+          p.be_leftWrapper_currentUserInfo_conditionCard_userID= "@#{current_user.user_id}"
 
-      p 通知
-      hr
+          .be_leftWrapper_currentUserInfo_conditionCard_line
+            .be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup
+              p.be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-dataName フラグメント
+              p.be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data= current_user.microposts.count
+            .be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup
+              p.be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-dataName フォロー
+              p.be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data= current_user.following.count
+            .be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup
+              p.be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-dataName フォロワー
+              p.be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data= current_user.followers.count
 
-      - @informations.each do |info|
-        - if info.info_type == "bector"
-          p= info.content
-          p= info.created_at.strftime("%Y年%m月%d日 %H時%M分")
-          hr
+          .be_leftWrapper_currentUserInfo_conditionCard_line
+            .be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup
+              p.be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-dataName リアクション
+              = link_to "/bector/reaction/#{current_user.id}" do
+                p.be_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data= Reaction.where(user_id: current_user.id).count
 
-    .bector_index__center-wrapper
-      = form_with scope: :micropost, url: bector_index_url, local: true do |f|
-        = f.text_area :content
-        input name="image" type="file"
-        = f.file_field :image
-        = f.submit "リリース"
-      - @microposts.each do |post|
-        .bector_index__center-wrapper__post
-          .bector_index__center-wrapper__post--icon
-            img src="/user_images/#{@users.find_by(id:post.user_id).image_name}"
-          .bector_index__center-wrapper__post--contents
-            p.bector_index__center-wrapper__post--contents--user_name
-              = @users.find_by(id:post.user_id).name
-            p= post.content
-            - if !post.image_name.blank?
-              img src="/micropost_images/#{post.image_name}"
-            - if Reaction.find_by(user_id: current_user.id, reactioned_id: post.id)
-              = link_to "/reactions/#{post.id}/destroy", method: :delete do
-                i.fas.fa-heart style="color:red;"
-            - else
-              = link_to "/reactions/#{post.id}/create",{method: "post"} do
-                i.far.fa-heart style="color:red;"
-                = @reactions_count
-            span style="padding-left:5px;" = Reaction.where(reactioned_id: post.id).count
+      = render "/data_layout/search_form", type: "be", url: "/bector/search/", param: ":user_id"
 
-    .bector_index__right-wrapper
-      p タイムラインのカスタムとか
-      = link_to "#" do
-        i.fas.fa-globe-americas
-      = link_to "#" do
-        i.fas.fa-street-view
-      = link_to "#" do
-        i.fas.fa-user-friends
-      p ダイレクトメッセージ
-      hr
-      = form_with scope: :direct_message, url: bector_index_url, local: true do |f|
-        = f.text_field :message
-        = f.select :target_user, @users_name_array
-        = f.submit "送信"
+      section.be_leftWrapper_menuTab
+        = render "/data_layout/menuTab", u: bector_index_url, f:"home", d: "ホーム"
+        = render "/data_layout/menuTab", u: "/bector/custom/global", f:"globe-americas", d: "グローバルタイムライン"
+        = render "/data_layout/menuTab", u: "/bector/custom/friends" , f:"user-friends", d: "フレンドタイムライン"
+        = render "/data_layout/menuTab", u: bector_index_url, f:"images", d: "メディアタイムライン"
+        = render "/data_layout/menuTab", u: bector_index_url, f:"envelope", d: "ダイレクトメッセージ"
+        = render "/data_layout/menuTab", u: bector_index_url, f:"list", d: "ユーザーリスト"
+        = render "/data_layout/menuTab", u: bector_index_url, f:"bookmark", d: "ブックマーク"
+        = render "/data_layout/menuTab", u: bector_index_url, f:"volume-mute", d: "ミュートしたユーザー"
+        = render "/data_layout/menuTab", u: bector_index_url, f:"ban", d: "ブロックしたユーザー"
+        = render "/data_layout/menuTab", u: bector_index_url, f:"cog", d: "ユーザー設定"
+        = render "/data_layout/menuTab", u: bector_index_url, f:"question-circle", d: "ヘルプ"
+        = render "/data_layout/menuTab", u: "/" , f:"chevron-left", d: "Miftonに戻る"
 
-      - @direct_messages.each do |message|
-        p= message.message
-        p= message.user_id
-        p= message.target_user
+    .be_centerWrapper
+      section.be_centerWrapper_mobileHeader
+        img.be_centerWrapper_mobileHeader_userIcon src="/user_images/#{current_user.image_name}"
+        p ホーム
+
+      section.be_centerWrapper_postForm
+        .be_centerWrapper_postForm_container
+          img.be_centerWrapper_postForm_container_userIcon src="/user_images/#{current_user.image_name}"
+          = form_with scope: :micropost, url: bector_index_url, multipart: true, local: true do |f|
+            p= f.text_area :content, placeholder: "進捗や日常の体験を発信しよう"
+            p= f.text_field :tags, placeholder: "タグ(スペース区切りで5個まで)", value: ""
+            /p タグは5個までしか付けられません！6個目のタグからは削除されます。
+            input.far name="image" type="file"
+            = f.submit "リリース"
+
+
+
+      section.be_centerWrapper_timeLine
+        - @microposts.each do |post|
+          .be_centerWrapper_timeLine_post
+            .be_centerWrapper_timeLine_post_userIcon
+              =link_to "/users/#{@users.find_by(id: post.user_id).user_id}" do
+                img src="/user_images/#{@users.find_by(id:post.user_id).image_name}"
+            .be_centerWrapper_timeLine_post_textData
+              .be_centerWrapper_timeLine_post_textData_row
+                - @user = @users.find_by(id:post.user_id)
+                p.be_centerWrapper_timeLine_post_textData_row_userName
+                  - if @user.authority.chief_administrator
+                    i.fas.fa-star style="color:red;font-size:8px;"
+                  - if @user.authority.administrator
+                    i.fas.fa-star style="color:green;font-size:8px;"
+                  - if @user.authority.trust_user
+                    i.fas.fa-star style="color:deepskyblue;font-size:8px;"
+                  - if @user.authority.developer
+                    i.fas.fa-star style="color:darkorange;font-size:8px;"
+                  - if @user.authority.donor
+                    i.fas.fa-star style="color:gold;font-size:8px;"
+                  span style="margin-left:5px;" = @users.find_by(id:post.user_id).name
+                p.be_centerWrapper_timeLine_post_textData_row_userID= "@#{@users.find_by(id:post.user_id).user_id}"
+                p.be_centerWrapper_timeLine_post_textData_row_date= date_display(post.created_at)
+
+              .be_centerWrapper_timeLine_post_textData_content
+                p= simple_format(sanitize(markdown(post.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
+                - if post.tags.present?
+                  - post.tags.each do |tag|
+                    = link_to "##{tag.name} ", "/bector/tags/#{tag.name}"
+
+
+              - if !post.image_name.blank?
+                img.be_centerWrapper_timeLine_post_textData_postImg src="/micropost_images/#{post.image_name}"
+
+              = render partial: "reaction", locals: { type: "heart", faName: "heart", post: post, color: "pink" }
+              = render partial: "reaction", locals: { type: "good", faName: "thumbs-up", post: post, color: "blue" }
+              = render partial: "reaction", locals: { type: "cry", faName: "sad-tear", post: post, color: "deepskyblue" }
+              = render partial: "reaction", locals: { type: "surprise", faName: "surprise", post: post, color: "darkorange" }
+              = render partial: "reaction", locals: { type: "angry", faName: "angry", post: post, color: "red" }
+
+              - unless post.user_id == current_user.id
+                = link_to "通報", "/reports/bector/#{post.id}", class:"be_centerWrapper_timeLine_post_textData_report"
+
+    .be_rightWrapper
+      section.be_rightWrapper_notification
+        p.be_rightWrapper_notification_title
+          i.far.fa-bell
+          = "通知"
         hr
+
+        .be_rightWrapper_notification_infoCardList
+
+          - @informations.each do |info|
+            - if info.from_any_service == "bector"
+              .be_rightWrapper_notification_infoCardList-card
+                p= info.content
+                p= info.target_object
+                p= info.created_at.strftime("%Y年%m月%d日 %H時%M分")
+              hr
+- else
+  .be_logouted
+    .be_logouted_backgroundImg
+      .be_logouted_backgroundImg_leftCoverd
+        h1 Let's connect with Bector
+        p BectorはMinecraftユーザーのためのSNSです
+
+        p 登録フォーム
+
+        = form_with model: @user, local: true do |f|
+          .form-group
+            = f.label :name, '名前'
+            = f.text_field :name
+          .form-group
+            = f.label :email, 'メールアドレス'
+            = f.text_field :email
+          .form-group
+            = f.label :password, 'パスワード'
+            = f.password_field :password
+          .form-group
+            = f.label :password_confirmation, 'パスワード(確認)'
+            = f.password_field :password_confirmation
+          = f.submit '登録する'
+
+        p= "Bectorで#{@microposts.count}回つぶやかれています！"
+        .be_logouted_backgroundImg_leftCoverd_post
+          - @microposts.each do |post|
+            .be_centerWrapper_timeLine_post
+              .be_centerWrapper_timeLine_post_userIcon
+                img src="/user_images/#{@users.find_by(id:post.user_id).image_name}"
+              .be_centerWrapper_timeLine_post_textData
+                .be_centerWrapper_timeLine_post_textData_row
+                  p.be_centerWrapper_timeLine_post_textData_row_userName= @users.find_by(id:post.user_id).name
+                  p.be_centerWrapper_timeLine_post_textData_row_userID= "@#{@users.find_by(id:post.user_id).user_id}"
+                  p.be_centerWrapper_timeLine_post_textData_row_date= date_display(post.created_at)
+
+                .be_centerWrapper_timeLine_post_textData_content
+                  p= simple_format(sanitize(markdown(post.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
+
+                - if !post.image_name.blank?
+                  img.be_centerWrapper_timeLine_post_textData_postImg src="/micropost_images/#{post.image_name}"
+
+                i class="far fa-heart app_reaction-gray"
+                i class="far fa-thumbs-up app_reaction-gray"
+                i class="far fa-sad-tear app_reaction-gray"
+                i class="far fa-surprise app_reaction-gray"
+                i class="far fa-angry app_reaction-gray"
+
+      .be_logouted_backgroundImg_rightCoverd

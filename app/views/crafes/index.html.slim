@@ -1,0 +1,121 @@
+- if login?
+  .crafes_sideBar
+    section.crafes_sideBar_currentUserInfo
+      img.crafes_sideBar_currentUserInfo_userHeaderImg src="/user_images/header/#{current_user.header_image_name}"
+      img.crafes_sideBar_currentUserInfo_userIconImg src="/user_images/#{current_user.image_name}"
+      .crafes_sideBar_currentUserInfo_conditionCard
+        p.crafes_sideBar_currentUserInfo_conditionCard_userName= current_user.name
+        p.crafes_sideBar_currentUserInfo_conditionCard_userID= "@#{current_user.user_id}"
+
+        .crafes_sideBar_currentUserInfo_conditionCard_line
+          .crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup
+            p.crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup-dataName 参加数
+            p.crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup-data= current_user.microposts.count
+          .crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup
+            - rate_arr = current_user.rating
+            - sum = 0
+            - higehst = 0
+            - rate_arr.each do |rate|
+              - sum += rate.rate_value
+              - if higehst < rate.rate_value
+                - higehst = rate.rate_value
+            - ave = 1
+
+            p.crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup-dataName 平均レート
+            p.crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup-data= ave
+          .crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup
+            p.crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup-dataName 最高レート
+            p.crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup-data= higehst
+        .crafes_sideBar_currentUserInfo_conditionCard_line
+          .crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup
+            p.crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup-dataName フォロー
+            p.crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup-data= current_user.following.count
+          .crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup
+            p.crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup-dataName フォロワー
+            p.crafes_sideBar_currentUserInfo_conditionCard_line_dataGroup-data= current_user.followers.count
+
+
+    section.crafes_sideBar_searchForm
+      = form_with url: "/bector/search/", local: true do |f|
+        = f.text_field :user_id, placeholder: "コンテスト/問題検索"
+
+    section.crafes_sideBar_menuTab
+      = link_to "/crafes" do
+        p
+          i.fas.fa-home
+          = "ホーム"
+      = link_to "/crafes/custom/plan" do
+        p
+          i.fas.fa-flag
+          = "開催中・予定されたコンテスト"
+      = link_to "/crafes/custom/past" do
+        p
+          i.fas.fa-check
+          = "終了したコンテスト"
+      = link_to "/crafes/" do
+        p
+          i.fas.fa-list
+          = "問題リスト"
+      = link_to "/crafes/" do
+        p
+          i.far.fa-bookmark
+          = "ブックマーク"
+      = link_to "/crafes/ranking" do
+        p
+          i.fas.fa-crown
+          = "ランキング"
+      = link_to "/crafes/" do
+        p
+          i.fas.fa-paper-plane
+          = "問題を作る"
+      = link_to "/crafes/" do
+        p
+          i.fas.fa-cog
+          = "ユーザー設定"
+      = link_to "/crafes/" do
+        p
+          i.far.fa-question-circle
+          = "ヘルプ"
+      = link_to "/" do
+        p
+          i.fas.fa-chevron-left
+          = "Miftonに戻る"
+  .crafes_centerWrapper
+    p 開催中のコンテスト
+
+    - if @in_session_contests.present?
+      - @in_session_contests.each do |contest|
+        - if contest.times != 0
+          p= "#{contest.name} ##{contest.times}"
+        - else
+          p= contest.name
+    - else
+      p 開催中のコンテストはありません
+
+    p 予定されたコンテスト
+
+    - if @scheduled_contests.present?
+      - @scheduled_contests.each do |contest|
+        - if contest.times != 0
+          p= "#{contest.name} ##{contest.times}"
+        - else
+          p= contest.name
+    - else
+      p 開催予定のコンテストはありません
+
+  .crafes_rightWrapper
+    section.be_rightWrapper_notification
+      p.be_rightWrapper_notification_title
+        i.far.fa-bell
+        = "通知"
+      hr
+
+      .be_rightWrapper_notification_infoCardList
+
+        - @informations.each do |info|
+          - if info.from_any_service == "crafes"
+            .be_rightWrapper_notification_infoCardList-card
+              p= info.content
+              p= info.target_object
+              p= info.created_at.strftime("%Y年%m月%d日 %H時%M分")
+            hr

@@ -1,35 +1,178 @@
-main
+.users_new
+  .users_new_container
+    .users_new_container_catchCopy
+      h1 Miftonの世界に飛び込もう
+      p 全く新しいコミュニティ、ツール、有用な情報、それらを探し、自ら産み出そう
 
-  #top-page
-    h1 アカウントを作成
+    p.users_new_container_highlightText あなたのアカウントを作成しましょう
 
-    / .btn
-    /   =link_to "Twitterでログイン", "/"
-    /
-    / hr
+    = form_with model: @user, local: true, class: "users_new_container_accountForm" do |f|
+      .users_new_container_accountForm_group
+        p
+          | ユーザーID
+          span  *
+        = f.text_field :user_id, class: "users_new_container_accountForm_group_userId"
 
-    h2 メールアドレスで登録する
+        .users_new_container_accountForm_group_descriptGroup
+          p これがあなたのユーザーIDになります。3文字以上、15文字以下で、英数字・ハイフンを使って構成してください。
+          p ただし、一文字目はアルファベットでなければなりません。
+      .users_new_container_accountForm_group
+        p
+          | メールアドレス
+          span  *
+        = f.text_field :email
+        .users_new_container_accountForm_group_descriptGroup
+          p メールが受信できるメールアドレスを入力してください。(受信設定で @mifton.xyz からのメールを許可してください)
+          p プライバシーポリシーの通り、Miftonの運営チームがユーザーの許可なくメールアドレス情報を公開することはありません。
+      .users_new_container_accountForm_group
+        p
+          | ユーザー名
+          span  *
+        = f.text_field :name
+        .users_new_container_accountForm_group_descriptGroup
+          p これは他のユーザーがあなたを見たときに表示されるニックネームです。1文字以上、15文字以下で入力してください。
+      .users_new_container_accountForm_group
+        p
+          | パスワード
+          span  *
+        = f.password_field :password
+        .users_new_container_accountForm_group_descriptGroup
+          p 少なくとも5文字以上、20文字以内で、アルファベット・数字を含むパスワードを入力してください。
+      .users_new_container_accountForm_group
+        p
+          | パスワードの確認
+          span  *
+        = f.password_field :password_confirmation
 
-    = form_with model: @user, local: true do |f|
-      .form-group
-        = f.label :name, '名前'
-        = f.text_field :name, class: 'form-control'
-      .form-group
-        = f.label :email, 'メールアドレス'
-        = f.text_field :email, class: 'form-control'
-      .form-group
-        = f.label :password, 'パスワード'
-        = f.password_field :password, class: 'form-control'
-      .form-group
-        = f.label :password_confirmation, 'パスワード(確認)'
-        = f.password_field :password_confirmation, class: 'form-control'
-      = f.submit '登録する', class: 'btn btn-primary'
+      p.users_new_container_highlightText ユーザーデータ
 
-    p 登録することで、Miftonの利用規約・プライバシーポリシー・Miftonで提供されるアプリケーションの利用規約に同意するものとします。
+      .users_new_container_accountForm_dataDescript
+        p ユーザーデータは任意で回答できる項目です。ここで入力しなくても、あとで回答できます。
+        p プロフィールに公開されるデータがありますが、公開したくない場合は後から設定できます。
+        = link_to "登録画面まで飛ばす", "/signup/#users_new_submit"
 
-    hr
+      .users_new_container_accountForm_group
+        p プレイしているMineCraftエディション
+        .users_new_container_accountForm_group_descriptGroup
+          p プロフィールに表示されます
+        .users_new_container_accountForm_group_checkGroup
+          p
+            = f.check_box :data_edition, value: "BE"
+            = "MineCraft Bedrock Edition (統合版)"
+          p
+            = f.check_box :data_edition, value: "JE"
+            = "Minecraft Java Edition"
+          p
+            = f.check_box :data_edition, value: "PS4"
+            = "Minecraft PlayStation4 Edition"
+          p
+            = f.check_box :data_edition, value: "OTHER"
+            = "その他"
 
-    h2 アカウントをお持ちですか？
+      hr
 
-    .btn
-      =link_to "ログインする", "/login"
+      .users_new_container_accountForm_group
+        p プレイしている端末/PCのOS・ゲーム機
+        .users_new_container_accountForm_group_descriptGroup
+          p プロフィールに表示されます
+        .users_new_container_accountForm_group_checkGroup
+          p
+            = f.check_box :data_os, value: "IOS"
+            = "iOS"
+          p
+            = f.check_box :data_os, value: "ADR"
+            = "Android"
+          p
+            = f.check_box :data_os, value: "FR"
+            = "Fire OS"
+          p
+            = f.check_box :data_os, value: "WIN10MB"
+            = "Windows10 Mobile"
+          p
+            = f.check_box :data_os, value: "WIN"
+            = "Windows"
+          p
+            = f.check_box :data_os, value: "MAC"
+            = "MacOS(Mojave)"
+          p
+            = f.check_box :data_os, value: "LIN"
+            = "Linux"
+          p
+            = f.check_box :data_os, value: "PS4"
+            = "PlayStation4"
+          p
+            = f.check_box :data_os, value: "NSW"
+            = "Nintendo Switch"
+          p
+            = f.check_box :data_os, value: "XBO"
+            = "Xbox One"
+          p
+            = f.check_box :data_os, value: "GV"
+            = "Gear VR"
+          p
+            = f.check_box :data_os, value: "FT"
+            = "Fire TV"
+          p
+            = f.check_box :data_os, value: "OTHER"
+            = "その他"
+
+      hr
+
+      .users_new_container_accountForm_group
+        p メインで利用しているSNS
+        .users_new_container_accountForm_group_descriptGroup
+          p プロフィールに表示されます
+        .users_new_container_accountForm_group_checkGroup
+          p
+            = f.radio_button :data_sns, value: "Twitter"
+            = "Twitter"
+          p
+            = f.radio_button :data_sns, value: "Lobi"
+            = "Lobi"
+          p
+            = f.radio_button :data_sns, value: "Minepics"
+            = "Minepics"
+          p
+            = f.radio_button :data_sns, value: "Minepics"
+            = "Discord"
+          p
+            = f.radio_button :data_sns, value: "Facebook"
+            = "Facebook"
+          p
+            = f.radio_button :data_sns, value: "LINE"
+            = "LINE"
+          p
+            = f.radio_button :data_sns, value: "Nothing"
+            = "特にSNSはやっていない"
+
+      hr
+
+      .users_new_container_accountForm_group
+        p Miftonをどこで知りましたか？
+        .users_new_container_accountForm_group_descriptGroup
+          p プロフィールに表示されません
+        .users_new_container_accountForm_group_checkGroup
+          p
+            = f.radio_button :data_where_know, value: "DevAcc"
+            = "開発メンバーから直接、もしくはSNS"
+          p
+            = f.radio_button :data_where_know, value: "friend"
+            = "知り合いに教えてもらった"
+          p
+            = f.radio_button :data_where_know, value: "search"
+            = "ネットブラウジング中に発見した"
+          p
+            = f.radio_button :data_where_know, value: "other"
+            = "その他"
+
+      .users_new_container_accountForm_dataDescript
+        p ご協力ありがとうございました！
+        p ユーザーデータはもう少しあるので、お時間があるときにアカウント設定ページから入力してみてください！
+
+
+      .users_new_container_accountForm_submitGroup#users_new_submit
+        .app_recaptcha
+          = recaptcha_tags
+        p 下の[登録する]をクリックすると、利用規約とプライバシーポリシーに同意したことになります。
+        p クリックする前に必ずお読みください！
+        = f.submit "登録する"

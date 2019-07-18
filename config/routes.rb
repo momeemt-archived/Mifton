@@ -1,17 +1,29 @@
 Rails.application.routes.draw do
 
+  resources :anmitsu
   # Home
   root to: "home#top"
   get "/about", to: "home#about"
+  get "/authority", to: "home#authority"
 
   # Bector
   get "/bector/top", to: "bector#top"
+  get "/bector/reaction/:id", to: "bector#index"
+  get "/bector/custom/:level", to: "bector#index"
+  post "/bector/search", to:"bector#search"
+  get "/bector/users/:user_id", to:"bector#index"
+  get "/bector/tags/:tag", to:"bector#index"
   resources :bector
 
   # Users
-  resources :users do
-    get "/profile_edit", to: "users#profile_edit"
-  end
+  resources :users, only: [:edit, :update, :destroy]
+  get "/users/:user_id", to: "users#show"
+  get "/signup", to: "users#new"
+  post "/signup", to: "users#create"
+
+
+  get "/reports/:type/:id", to: "reports#show"
+  post "/reports/:type/:id/create", to:"reports#create"
 
   # Manages
   get '/manages', to: "manages#index"
@@ -24,9 +36,14 @@ Rails.application.routes.draw do
   post "/manage_bector/:id", to: "manage_bector#update"
 
   resources :manage_informations
+  resources :manage_reports
+  resources :manage_contests
+  post "/manage_contests/:id", to: "manage_contests#update"
 
-  post "/reactions/:reactioned_id/create", to: "reactions#create"
-  delete "/reactions/:reactioned_id/destroy", to: "reactions#destroy"
+  resources :manage_questions
+
+  post "/reactions/:reactioned_type/:reactioned_id/create", to: "reactions#create"
+  delete "/reactions/:reactioned_type/:reactioned_id/destroy", to: "reactions#destroy"
 
   # Informations
   resources :informations
@@ -34,7 +51,11 @@ Rails.application.routes.draw do
   # Sessions
   get "/login", to: "sessions#new"
   post '/login', to: 'sessions#create'
+  get '/auth/twitter/callback', to: 'sessions#create'
+  get "/login/:login_type", to: "sessions#new"
+  post '/login/:login_type', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  delete "/logout/:service", to: "sessions#destroy"
 
   # Crafes! Draft Contest
   resources :draft_contests do
@@ -42,9 +63,8 @@ Rails.application.routes.draw do
   end
 
   # Crafes!
-  get "/crafes", to: "contests#home"
-  get "/crafes/about", to: "contests#about"
-  get "/crafes/admin", to: "contests#admin"
+  get "/crafes/about", to: "crafes#about"
+  resources :crafes
   resources :contests do
     get "/problem_1", to: "contests#problem_1"
     get "/problem_2", to: "contests#problem_2"
@@ -57,4 +77,5 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+  resources :relationships,       only: [:create, :destroy]
 end

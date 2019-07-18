@@ -1,8 +1,28 @@
 class HomeController < ApplicationController
   def top
-    @informations = current_user.informations.all if !current_user.nil?
+    if !current_user.nil?
+      @informations = current_user.informations.all
+    else
+      @user = User.new(user_params)
+      @user.user_id = params[:name]
+      if @user.save
+        redirect_to users_path, notice: "ユーザー「#{@user.name}を登録しました。」"
+      else
+        render :top
+      end
+    end
   end
 
   def about
+  end
+
+  private
+
+  def user_params
+    params.permit(:name, :user_id, :email, :password, :password_confirmation)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end

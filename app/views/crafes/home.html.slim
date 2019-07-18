@@ -1,0 +1,117 @@
+main.crafes
+  .container
+    .top-wrapper.add-base-color
+      #top-logo
+        img[src="/crafes-img.png"]
+      #top-title
+        p 自分の技術をアウトプットしよう
+        h1 Crafes!
+
+    .description-wrapper
+      .descript-section
+        h2 ざっくり "Crafes!" とは？
+        p Crafes!は、MinecraftBEの知識や技術を競う大会に参加できるサービスです。
+        p これまで分からなかった自分の技術力が可視化されるようになり、技術向上にも役立ちます。
+        p 分野は幅広く、自分の気に入っている技術で勝負することができます。
+        p
+          | 一定以上の資格を満たすプレイヤーは、自ら大会を
+          span 開催
+          | することもできます。
+
+    hr.short-line
+
+    .about
+      .descript-section
+        h2 もっと詳しく
+        p 参加方法、ルールなど、もっと詳しくCrafes!について説明します。
+        div.btn.about-btn
+          = link_to  "詳しくみてみる", "/crafes/about"
+
+    hr.short-line
+
+    .join
+      .descript-section
+        h2 参加してみる
+        p Crafes! で、新たなMCBEの楽しみ方を増やしましょう！
+        div.btn.join-btn
+          = link_to  "参加してみる", contests_url
+
+    hr.short-line
+
+    .planning
+      .descript-section
+        h2 大会を開催してみる
+        p 一定以上の基準を満たすクラフターは、大会を開催することもできます。
+        div.btn.join-btn
+          = link_to  "開催してみる", "/draft_contests/new"
+
+    hr.short-line
+
+    .planning
+      .descript-section
+        h2 運営ユーザーの方へ
+        p 運営権限を持つユーザーは、管理者ページにアクセスできます。
+        .btn.join-btn
+          =link_to "管理者", "/crafes/admin"
+
+    hr.short-line
+
+    .contest-in-session
+      /.descript-section
+        h2 開催中の大会
+        - hasContest = false
+        - if @contests.present?
+          - @contests.each do |contest|
+            - if contest.start_time <= Time.now && contest.start_time + contest.length * 60 >= Time.now
+              - hasContest = true
+
+        - if hasContest
+          p 開催中の大会を表示します。
+          table
+            tr
+              th 開催時刻
+              th 大会名
+              th 大会時間(分)
+              th 作問者
+              th レーティング変化
+            - @contests.each do |contest|
+              - if contest.start_time <= Time.now && contest.start_time + contest.length * 60 >= Time.now
+                tr
+                  td= contest.start_time.strftime("%Y-%m-%d %H:%M")
+                  td=link_to("#{contest.name} ##{contest.holding_times}",contest)
+                  td= contest.length
+                  td= contest.writer
+                  td="~#{contest.rating}"
+        - else
+          p 開催中の大会がありません
+
+    hr.short-line
+
+    .contest-notice
+      /.descript-section
+        h2 大会告知
+        - hasContest = false
+        - if @contests.present?
+          - @contests.each do |contest|
+            - if contest.start_time > Time.now
+              - hasContest = true
+
+        - if hasContest
+          p 開催予定の大会を表示します。
+          table
+            tr
+              th 開催時刻
+              th 大会名
+              th 大会時間(分)
+              th 作問者
+              th レーティング変化
+            - @contests.each do |contest|
+              - if contest.start_time > Time.now
+                tr
+                  td= contest.start_time.strftime("%Y-%m-%d %H:%M")
+                  td=link_to("#{contest.name} ##{contest.holding_times}",contest)
+                  td= contest.length
+                  td= contest.writer
+                  td="~#{contest.rating}"
+        - else
+          p 開催予定の大会がありません

@@ -1,5 +1,6 @@
 class ManageUsersController < ApplicationController
   before_action :set_user_object, only: [:update, :destroy, :show]
+  before_action :permit_admin
 
   # 管理画面 -> ユーザー一覧
   def index
@@ -68,11 +69,20 @@ class ManageUsersController < ApplicationController
                                   :location,
                                   :reported_value,
                                   :trusted_value,
-                                  :image_name
+                                  :image_name,
+                                  :header_image_name
                                 )
   end
 
   def set_user_object
     @user = User.find_by(user_id: params[:id])
+  end
+
+  def permit_admin
+    unless current_user
+      redirect_to root_path
+      return
+    end
+    redirect_to root_path if current_user.authority.general
   end
 end

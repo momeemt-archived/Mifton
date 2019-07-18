@@ -5,7 +5,6 @@ header
       ul.header__wraps--not-mobile__left
         a href="/"
           img[src="/mifton.001.png"]
-        li= link_to  "Miftonについて", "/about"
         li= link_to  "Crafes!", "/crafes"
         li= link_to  "Bector", "/bector"
           / i.fas.fa-chevron-down
@@ -29,6 +28,6 @@ header
             = link_to "設定","#"
         - else
           li.header__wraps--not-mobile__right--btn
-            = link_to "ログイン", "/login"
+            = link_to "ログイン", "/login/id"
           li.header__wraps--not-mobile__right--btn
-            = link_to "登録", "/users/new"
+            = link_to "登録", "/signup"

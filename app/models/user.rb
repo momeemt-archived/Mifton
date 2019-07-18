@@ -1,6 +1,9 @@
 class User < ApplicationRecord
+  has_one :authority, dependent: :destroy
+  has_many :rating, dependent: :destroy
 
   has_many :microposts, dependent: :destroy
+  has_many :reports
   has_many :informations, dependent: :destroy
   has_many :direct_messages, dependent: :destroy
 
@@ -35,6 +38,39 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def self.find_or_create_from_auth_hash(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+
+
+    unless user
+      user = User.create(
+        uid:      auth.uid,
+        provider: auth.provider,
+        email:    User.dummy_email(auth),
+        password: ((0..9).to_a + ("a".."z").to_a).sample(15).join,
+        name: auth.info.name,
+        location: auth.info.location,
+        user_id: self.generate_user_id(auth)
+      )
+    end
+
+    return user
+  end
+
+  private
+
+  def self.dummy_email(auth)
+    "#{auth.uid}-#{auth.provider}@example.com"
+  end
+
+  def self.generate_user_id(auth)
+    if User.find_by(user_id: auth.uid)
+      auth.uid
+    else
+      ((0..9).to_a + ("a".."z").to_a).sample(10).join
+    end
   end
 
 end

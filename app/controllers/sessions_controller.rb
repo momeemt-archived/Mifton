@@ -1,22 +1,33 @@
 class SessionsController < ApplicationController
   def new
-    @field = "email";
-  end
-
-  def change_login
-    if @field = "email"
-      @field = "id"
-    else
-      @field = "email"
+    if params[:login_type] == "id"
+      @login_type = "id"
+    elsif params[:login_type] == "email"
+      @login_type = "email"
     end
   end
 
   def create
-    user = User.find_by(email: session_params[:email])
+
+    if params[:login_type] == "email"
+      user = User.find_by(email: session_params[:email])
+    elsif params[:login_type] == "id"
+      user = User.find_by(user_id: session_params[:user_id])
+    else
+      user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
+      session[:user_id] = user.id
+      redirect_to root_path, notice: 'ログインしました。'
+      return
+    end
 
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: 'ログインしました。'
+
+      if user.authority == "admin"
+        redirect_to manages_path
+      else
+        redirect_to root_path, notice: 'ログインしました。'
+      end
     else
       render :new
     end
@@ -25,7 +36,11 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, notice: 'ログアウトしました。'
+    if params[:service] == "bector"
+      redirect_to bector_index_url
+    else
+      redirect_to root_path, notice: 'ログアウトしました。'
+    end
   end
 
   helper_method :change_login
@@ -33,6 +48,6 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:session).permit(:email, :password)
+    params.require(:session).permit(:user_id, :email, :password)
   end
 end

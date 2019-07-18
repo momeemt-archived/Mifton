@@ -1,0 +1,128 @@
+@import "../../../config/_variables";
+@import "../../../mixin/_flex";
+@import "../../../mixin/_area";
+@import "../../../mixin/_main-button";
+
+@media screen and (max-width:480px) {
+
+  .app_reaction {
+    span {
+      padding-right: 0.2%;
+      color: black;
+
+      &:visited {
+        color: black;
+      }
+    }
+    &-gray {
+      color: #afafb0;
+    }
+
+    &-pink {
+      color: #f09199;
+    }
+
+    &-blue {
+      color: #0095d9;
+    }
+
+    &-deepskyblue {
+      color: #007bbb;
+    }
+
+    &-darkorange {
+      color: #eb6101;
+    }
+
+    &-red {
+      color: #e83929;
+    }
+  }
+
+  .be {
+    .fas, .far {
+      padding: 0 0.5%;
+    }
+
+    &_leftWrapper {
+      display: none;
+    }
+
+    &_centerWrapper {
+      width: 100%;
+      &_postForm {
+        &_container_userIcon {
+          display: none;
+        }
+        form,p {
+          width: 100%;
+        }
+        input[type="text"], textarea {
+          width:100%;
+          display: flex;
+          align-items: center;
+          resize: none;
+          border: 0.5px solid rgba(128,128,128,0.3);
+          border-radius: 3px;
+          outline: none;
+          margin: 1% 0;
+        }
+      }
+
+      &_mobileHeader {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 1% 0;
+        img {
+          width: 50px;
+          margin-right: 3%;
+        }
+        border-bottom: 2px rgba(128,128,128,0.3) solid;
+      }
+
+      &_timeLine {
+        &_post {
+          border-bottom: rgba(128,128,128,0.3) 1px solid;
+          padding: 3% 0;
+          display: flex;
+          &_textData {
+            width:85%;
+            font-size: 0.8em;
+            &_row {
+              display: flex;
+              align-items: center;
+
+              &_userName {
+                font-weight: bold;
+                margin-right: 3%;
+              }
+
+              &_userID, &_date {
+                margin-right: 2%;
+                color: gray;
+              }
+            }
+          }
+          &_userIcon {
+            width: 15%;
+            img {
+              border-radius: 50%;
+              width: 100%;
+              display: block;
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+
+    &_rightWrapper {
+      display: none;
+    }
+  }
+
+  .beHeader {
+    display: none;
+  }
+}

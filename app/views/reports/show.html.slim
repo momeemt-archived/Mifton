@@ -1,0 +1,26 @@
+h1 報告
+p この投稿の何が問題でしたか？最も適当なものを選んでください。
+
+= form_with scope: :report, url: "/reports/#{@type}/#{@id}/create", local: true do |f|
+  .group
+    = f.radio_button :report_reason, 1
+    = f.label :report_reason, "暴力的な発言"
+  .group
+    = f.radio_button :report_reason, 2
+    = f.label :report_reason, "ユーザーへの嫌がらせ"
+  .group
+    = f.radio_button :report_reason, 3
+    = f.label :report_reason, "デマの流布"
+  .group
+    = f.radio_button :report_reason, 4
+    = f.label :report_reason, "自殺・自傷行為の示唆"
+  .group
+    = f.radio_button :report_reason, 5
+    = f.label :report_reason, "スパム"
+  .group
+    = f.radio_button :report_reason, 6
+    = f.label :report_reason, "法律に接触する発言"
+  .group
+    = f.radio_button :report_reason, 7
+    = f.label :report_reason, "荒らし行為に纏わる発言"
+  = f.submit "送信"

@@ -43,6 +43,20 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap'
 gem 'jquery-rails'
 
+gem 'redcarpet', '~> 2.3.0'
+gem 'coderay'
+
+# 環境変数
+gem 'dotenv-rails'
+
+gem 'recaptcha', require: "recaptcha/rails"
+
+# Twitter Auth認証
+gem 'omniauth'
+gem 'omniauth-twitter'
+
+
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

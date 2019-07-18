@@ -10,48 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_29_233538) do
+ActiveRecord::Schema.define(version: 2019_07_16_094404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "authorities", force: :cascade do |t|
+    t.integer "user_id"
+    t.boolean "chief_administrator", default: false
+    t.boolean "administrator", default: false
+    t.boolean "trust_user", default: false
+    t.boolean "developer", default: false
+    t.boolean "donor", default: false
+    t.boolean "official_writer", default: false
+    t.boolean "general", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contest_join_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "contest_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "contests", force: :cascade do |t|
     t.string "name"
-    t.integer "holding_times"
-    t.string "problem_1_name"
-    t.text "problem_1"
-    t.text "problem_1_answer"
-    t.text "submission_limit_1"
-    t.text "executing_sample_1"
-    t.text "execution_result_1"
-    t.text "executing_sample_1_remark"
-    t.string "problem_2_name"
-    t.text "problem_2"
-    t.text "problem_2_answer"
-    t.text "submission_limit_2"
-    t.text "executing_sample_2"
-    t.text "execution_result_2"
-    t.text "executing_sample_2_remark"
-    t.string "problem_3_name"
-    t.text "problem_3"
-    t.text "problem_3_answer"
-    t.text "submission_limit_3"
-    t.text "executing_sample_3"
-    t.text "execution_result_3"
-    t.text "executing_sample_3_remark"
-    t.string "problem_4_name"
-    t.text "problem_4"
-    t.text "problem_4_answer"
-    t.text "submission_limit_4"
-    t.text "executing_sample_4"
-    t.text "execution_result_4"
-    t.text "executing_sample_4_remark"
-    t.string "writer"
-    t.integer "rating"
+    t.integer "times"
+    t.datetime "start_datetime"
+    t.integer "duration"
+    t.integer "rated_range"
     t.integer "penalty"
-    t.datetime "start_time"
     t.string "contest_type"
-    t.integer "length"
+    t.boolean "is_public"
+    t.integer "question1_id"
+    t.integer "question2_id"
+    t.integer "question3_id"
+    t.integer "question4_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,54 +60,14 @@ ActiveRecord::Schema.define(version: 2019_06_29_233538) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "draft_contests", force: :cascade do |t|
-    t.string "name"
-    t.integer "holding_times"
-    t.string "problem_1_name"
-    t.text "problem_1"
-    t.text "problem_1_answer"
-    t.text "submission_limit_1"
-    t.text "executing_sample_1"
-    t.text "execution_result_1"
-    t.text "executing_sample_1_remark"
-    t.string "problem_2_name"
-    t.text "problem_2"
-    t.text "problem_2_answer"
-    t.text "submission_limit_2"
-    t.text "executing_sample_2"
-    t.text "execution_result_2"
-    t.text "executing_sample_2_remark"
-    t.string "problem_3_name"
-    t.text "problem_3"
-    t.text "problem_3_answer"
-    t.text "submission_limit_3"
-    t.text "executing_sample_3"
-    t.text "execution_result_3"
-    t.text "executing_sample_3_remark"
-    t.string "problem_4_name"
-    t.text "problem_4"
-    t.text "problem_4_answer"
-    t.text "submission_limit_4"
-    t.text "executing_sample_4"
-    t.text "execution_result_4"
-    t.text "executing_sample_4_remark"
-    t.string "writer"
-    t.integer "rating"
-    t.integer "penalty"
-    t.datetime "start_time"
-    t.string "contest_type"
-    t.integer "length"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "information", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "info_type"
-    t.string "info_target"
+    t.integer "starting_point_user"
+    t.string "from_any_service"
+    t.string "target_object"
   end
 
   create_table "microposts", force: :cascade do |t|
@@ -121,6 +77,27 @@ ActiveRecord::Schema.define(version: 2019_06_29_233538) do
     t.datetime "updated_at", null: false
     t.string "image_name"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "title"
+    t.string "writer"
+    t.integer "score"
+    t.text "content"
+    t.text "constraints"
+    t.text "input_example"
+    t.text "output_example"
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "rate_value"
+    t.string "contest_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reactions", force: :cascade do |t|
@@ -138,11 +115,26 @@ ActiveRecord::Schema.define(version: 2019_06_29_233538) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "reported_object_id"
+    t.string "reported_object_type"
+    t.integer "report_reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer "micropost_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
-    t.string "authority", default: "general", null: false
     t.text "profile"
     t.string "location"
     t.datetime "created_at", null: false
@@ -154,6 +146,11 @@ ActiveRecord::Schema.define(version: 2019_06_29_233538) do
     t.string "image_name", default: "default_icon.png"
     t.string "remember_digest"
     t.string "header_image_name", default: "default_header.png"
+    t.string "data_os"
+    t.string "data_sns"
+    t.string "data_where_know"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

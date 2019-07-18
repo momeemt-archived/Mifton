@@ -47,18 +47,20 @@
         li
           span= link_to "投稿一覧", manage_bector_index_url
         li
-          span= link_to "通報一覧[未]"
+          span= link_to "通報一覧", manage_reports_url
 
     hr
 
     .admins-menu-wrapper--sticky--group
       i.fas.fa-chess
-      = link_to "Crafes![未]"
+      = link_to "Crafes!", manage_contests_url
       ul
         li
-          span= link_to "新規作成[未]"
+          span= link_to "コンテストの新規作成", new_manage_contest_url
         li
-          span= link_to "コンテスト一覧[未]"
+          span= link_to "問題の新規作成", new_manage_question_url
+        li
+          span= link_to "問題一覧", manage_questions_url
         li
           span= link_to "ドラフト一覧[未]"
         li

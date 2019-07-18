@@ -1,0 +1,157 @@
+@media screen and (min-width:960px) {
+
+  .crafes {
+    main {
+      background-color: #dff2e6;
+      display: flex;
+      position:relative;
+    }
+    &_sideBar {
+      width: 25%;
+      height: 100vh;
+      position: sticky;
+      top: 0px;
+
+      &_currentUserInfo {
+        position: relative;
+
+        &_conditionCard {
+          width: 80%;
+          margin: 0 auto;
+          background-color: white;
+
+          &_userName {
+            font-size: 20px;
+            font-weight: bold;
+            padding-left: 110px;
+            padding-top: 5px;
+          }
+
+          &_userID {
+            font-size: 13px;
+            padding-left: 110px;
+            font-weight: lighter;
+          }
+
+          &_line {
+            display: flex;
+            padding-top: 7px;
+            padding-bottom: 6px;
+
+            &_dataGroup {
+              padding: 0 14px;
+              &-dataName {
+                font-size: 13px;
+                font-weight: lighter;
+              }
+              &-data {
+                color: #007bbb;
+                font-weight: 900;
+                font-size: 16px;
+              }
+            }
+          }
+        }
+
+        &_userHeaderImg {
+          display: block;
+          width: 80%;
+          margin: 0 auto;
+          padding-top: 10px;
+        }
+
+        &_userIconImg {
+          position: absolute;
+          border: 3px solid white;
+          border-radius: 50%;
+          display: block;
+          width: 19%;
+          top: 28%;
+          left: 14%;
+        }
+      }
+
+      &_searchForm {
+        width: 80%;
+        margin: 10px auto;
+        background-color: white;
+
+        input {
+          width: 70%;
+          border: 0px;
+          display: block;
+          margin: 0 auto;
+          outline: none;
+          padding: 10px 30px 10px 0;
+          font-size: 16px;
+        }
+
+      }
+
+      &_menuTab {
+        width: 80%;
+        background-color: white;
+        margin: 10px auto;
+        text-align: left;
+
+
+        p {
+          font-size: 16px;
+          color: #007bbb;
+          padding: 3px 5px;
+        }
+
+        i {
+          font-size: 20px;
+          width: 10%;
+          padding: 5px 5px;
+        }
+
+      }
+    }
+
+    &_centerWrapper {
+      width: 50%;
+    }
+
+    &_rightWrapper {
+      width: 25%;
+      height: 100vh;
+      position: sticky;
+      top: 0px;
+
+      &_notification {
+        background-color: white;
+        width: 90%;
+        height: 95%;
+        margin: 15px auto;
+
+
+        hr {
+          border: 0px;
+          border: 0.5px dashed #007bbb;
+        }
+
+        &_infoCardList {
+          overflow: scroll;
+          height: 95%;
+          &-card {
+            padding: 8px;
+          }
+        }
+
+        &_title {
+          color: #007bbb;
+          font-weight: bold;
+          font-size: 20px;
+          padding: 5px 0;
+
+          i {
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+  }
+
+}

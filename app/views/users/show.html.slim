@@ -1,18 +1,52 @@
-main
-  - if @user.present?
-    img src="/user_images/header/#{@user.header_image_name}"
-    img src="/user_images/#{@user.image_name}"
-    p= @user.name
-    p= "@#{@user.user_id}"
-    p= @user.following.count
-    p= @user.followers.count
-    - if @user.authority == "admin"
-      p 運営チーム
-    - elsif @user.authority == "staff"
-      p スタッフ
+.user_show
+  .tc_leftWrapper
+    section.tc_leftWrapper_currentUserInfo
+      img.tc_leftWrapper_currentUserInfo_userHeaderImg src="/user_images/header/#{@user.header_image_name}"
+      img.tc_leftWrapper_currentUserInfo_userIconImg src="/user_images/#{@user.image_name}"
+      .tc_leftWrapper_currentUserInfo_conditionCard
+        p.tc_leftWrapper_currentUserInfo_conditionCard_userName
+          - if @user.authority.chief_administrator
+            i.fas.fa-star style="color:red;font-size:8px;"
+          - if @user.authority.administrator
+            i.fas.fa-star style="color:green;font-size:8px;"
+          - if @user.authority.trust_user
+            i.fas.fa-star style="color:deepskyblue;font-size:8px;"
+          - if @user.authority.developer
+            i.fas.fa-star style="color:darkorange;font-size:8px;"
+          - if @user.authority.donor
+            i.fas.fa-star style="color:gold;font-size:8px;"
+          span style="margin-left:5px;"= @user.name
+        p.tc_leftWrapper_currentUserInfo_conditionCard_userID= "@#{@user.user_id}"
 
-    - @user.microposts.each do |post|
-      p= post.content
-  - else
-    h1 存在しないページです。
-    p= link_to "ホームへ", "/"
+        .tc_leftWrapper_currentUserInfo_conditionCard_line
+          = render "/data_layout/current_user_data", dataname: "フォロー", data: @user.following.count
+          = render "/data_layout/current_user_data", dataname: "フォロワー", data: @user.followers.count
+
+        .tc_leftWrapper_currentUserInfo_conditionCard_line
+          = render "/data_layout/current_user_data", dataname: "プロフィール", data: @user.profile
+
+        .tc_leftWrapper_currentUserInfo_conditionCard_line
+          = render "/data_layout/current_user_data", dataname: "Pin Address", data: @user.location
+
+        .tc_leftWrapper_currentUserInfo_conditionCard_line
+          = render "/data_layout/current_user_data", dataname: "アカウント作成日", data: @user.created_at.strftime("%Y年%m月%d日")
+
+        .tc_leftWrapper_currentUserInfo_conditionCard_line
+          .tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup
+            p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-dataName ユーザー
+            - if @user.authority.chief_administrator
+              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data C-AD (管理責任者)
+            - if @user.authority.administrator
+              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data AD (管理者)
+            - if @user.authority.trust_user
+              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data Trust User (管理者候補)
+            - if @user.authority.developer
+              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data 開発者
+            - if @user.authority.donor
+              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data 寄付者
+            - if @user.authority.general
+              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data 一般ユーザー
+
+  .user_show_bector
+
+  .user_show_crafes

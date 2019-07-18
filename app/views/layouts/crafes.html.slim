@@ -1,0 +1,9 @@
+doctype html
+html
+  head
+    title = contests_title(yield(:title))
+    = render 'layouts/rails_default'
+    = render 'layouts/shim'
+  body.crafes
+    header= render "layouts/header", type:"crafes"
+    main= yield

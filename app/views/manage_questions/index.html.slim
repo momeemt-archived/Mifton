@@ -1,0 +1,22 @@
+.main
+  .user_index
+
+    = render 'layouts/admins-menu-wrapper'
+
+
+    .user_index__content-wrapper
+      .user_index__content-wrapper--container
+        h1 問題一覧
+
+        table
+          tr
+            th ID
+            th ユーザーID
+            th 内容
+            th
+          - @questions.each do |question|
+            tr
+              td= question.id
+              td= question.title
+              td
+              td
