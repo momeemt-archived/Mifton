@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def top
     if !current_user.nil?
+      render :top_logined
       @informations = current_user.informations.all
     else
       @user = User.new(user_params)
@@ -8,7 +9,7 @@ class HomeController < ApplicationController
       if @user.save
         redirect_to users_path, notice: "ユーザー「#{@user.name}を登録しました。」"
       else
-        render :top
+        render :top_not_logined
       end
     end
   end
