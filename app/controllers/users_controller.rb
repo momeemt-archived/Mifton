@@ -7,7 +7,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @error = []
 
     if @user.save && verify_recaptcha
       authority = @user.build_authority
@@ -15,21 +14,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to "/", notice: "ユーザー「#{@user.name}を登録しました。」"
     else
-
-      # if !verify_recaptcha
-      #   @error[0] = "認証に失敗しています"
-      # end
-      #
-      # if User.find_by(user_id: @user.user_id)
-      #   @error[1] = "既に#{@user.user_id}は存在しています"
-      # end
-      #
-      # if User.find_by(email: @user.email)
-      #   @error[2] = "既に#{@user.email}は使用されています"
-      # end
-
-      @user = User.new(user_params)
-      render :new
+      render action: :new
     end
   end
 
@@ -52,7 +37,7 @@ class UsersController < ApplicationController
 
   def update
     @user.update!(user_params)
-    redirect_to users_url, notice: "ユーザー「#{@user.name}」を更新しました。"
+    redirect_to "/", notice: "ユーザー「#{@user.name}」を更新しました。"
   end
 
   private

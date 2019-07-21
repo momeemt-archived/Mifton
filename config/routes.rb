@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :bector
 
   # Users
-  resources :users, only: [:edit, :update, :destroy]
+  resources :users, only: [:edit, :update, :destroy, :new]
   get "/users/:user_id", to: "users#show"
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"

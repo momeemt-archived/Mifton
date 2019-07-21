@@ -6,7 +6,12 @@
 
     p.users_new_container_highlightText あなたのアカウントを作成しましょう
 
-    = form_with model: @user, local: true, class: "users_new_container_accountForm" do |f|
+    - if @user.errors.any?
+      .users_new_container_errorMessage
+        - @user.errors.full_messages.each do |message|
+          p= message
+
+    = form_with model: @user, url:"/signup" , local: true, class: "users_new_container_accountForm" do |f|
       .users_new_container_accountForm_group
         p
           | ユーザーID
@@ -16,6 +21,7 @@
         .users_new_container_accountForm_group_descriptGroup
           p これがあなたのユーザーIDになります。3文字以上、15文字以下で、英数字・ハイフンを使って構成してください。
           p ただし、一文字目はアルファベットでなければなりません。
+
       .users_new_container_accountForm_group
         p
           | メールアドレス

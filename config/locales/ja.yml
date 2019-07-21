@@ -56,9 +56,11 @@ ja:
 
       user:
         id: ID
-        name: 名前
+        name: ユーザー名
         email: メールアドレス
-        authority: 権限
+        user_id: ユーザーID
+        password: パスワード
+        password_confirmation: パスワード(確認)
         created_at: 登録日時
         updated_at: 更新日時
   date:

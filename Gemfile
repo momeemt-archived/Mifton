@@ -55,6 +55,8 @@ gem 'recaptcha', require: "recaptcha/rails"
 gem 'omniauth'
 gem 'omniauth-twitter'
 
+gem 'hirb'         # モデルの出力結果を表形式で表示するGem
+gem 'hirb-unicode' # 日本語などマルチバイト文字の出力時の出力結果のずれに対応
 
 
 # Use ActiveStorage variant
@@ -78,8 +80,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'hirb'         # モデルの出力結果を表形式で表示するGem
-  gem 'hirb-unicode' # 日本語などマルチバイト文字の出力時の出力結果のずれに対応
 end
 
 group :test do
