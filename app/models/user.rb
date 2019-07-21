@@ -19,14 +19,25 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :followers, through: :passive_relationships, source: :follower
 
-  validates :name, presence: true, length: { maximum: 50 }
+  # モデルバリデーション BEGIN
 
-  before_save { self.email = email.downcase }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },
-            format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+    # User_ID 必須入力/3文字以上15文字以下/重複不可
+    VALID_USER_ID_REGEX = /\A[\w]/
+    validates :user_id, presence: true, length: { in: 3..15 }, uniqueness: true, format: { with: VALID_USER_ID_REGEX }
 
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+    # password
+    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+    # email
+    before_save { self.email = email.downcase }
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    validates :email, presence: true, length: { maximum: 255 },
+              format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+
+    # nick_name
+    validates :name, presence: true, length: { maximum: 50 }
+
+  # モデルバリデーション END
 
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
