@@ -18,7 +18,7 @@
         i.fab.fa-twitter
         = "開発者"
     - if login?
-      - if !current_user.authority.general
+      - if !(current_user.authority.manage_pos == "general")
         .application_header_naviList_group
           =link_to "/manages" do
             i.fas.fa-users-cog
@@ -29,7 +29,7 @@
           i.fas.fa-door-open
           = "ログアウト"
       .application_header_naviList_group
-        =link_to "/bector" do
+        =link_to "/users/edit" do
           .application_header_naviList_group-image
             img src="/user_images/#{current_user.image_name}"
     - else

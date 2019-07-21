@@ -4,7 +4,7 @@
       img.crafes_sideBar_currentUserInfo_userHeaderImg src="/user_images/header/#{current_user.header_image_name}"
       img.crafes_sideBar_currentUserInfo_userIconImg src="/user_images/#{current_user.image_name}"
       .crafes_sideBar_currentUserInfo_conditionCard
-        p.crafes_sideBar_currentUserInfo_conditionCard_userName= current_user.name
+        p.crafes_sideBar_currentUserInfo_conditionCard_userName= render "/data_layout/show_star_name", user: current_user
         p.crafes_sideBar_currentUserInfo_conditionCard_userID= "@#{current_user.user_id}"
 
         .crafes_sideBar_currentUserInfo_conditionCard_line

@@ -5,7 +5,8 @@
 
     .admins_new__content-wrapper
       .admins_new__content-wrapper--container
-        h1= @user.name
+        h1
+          = render "/data_layout/show_star_name", user: @user
 
         = form_with scope: :user, url: "/manage_users/#{@user.user_id}" ,multipart: true , local: true do |f|
           table
@@ -27,9 +28,6 @@
               tr
                 td= f.label :password_confirmation, 'パスワード(確認)'
                 td= f.password_field :password_confirmation, class: 'form-control'
-              tr
-                td= f.label :authority, '権限'
-                td= f.select :authority, ["general","trust_user","staff","admin"], value: @user.authority
               tr
                 td= f.label :is_test_user, 'テストユーザー'
                 td= f.check_box :is_test_user, value: @user.is_test_user
@@ -66,4 +64,21 @@
                 td= f.label :trusted_value, "信頼度"
                 td= f.number_field :trusted_value, value: @user.trusted_value
 
+          = f.submit '更新する', class: 'admins_new__content-wrapper--container--submit'
+        hr
+        = form_with scope: :authority, url: "/manage_users/#{@user.user_id}", local: true do |f|
+          table
+            tbody
+              tr
+                td= f.label :authority, '権限'
+                td
+              tr
+                td= f.label :manage_pos, "管理者権限"
+                td= f.select :manage_pos, ["general","trust_user","operator","admin"], :selected => @user.authority.manage_pos
+              tr
+                td= f.label :dev_pos, "開発者権限"
+                td= f.select :dev_pos, ["none","contributor","developer"], :selected => @user.authority.dev_pos
+              tr
+                td= f.label :donor_amount, "募金額"
+                td= f.number_field :donor_amount, value: @user.authority.donor_amount
           = f.submit '更新する', class: 'admins_new__content-wrapper--container--submit'

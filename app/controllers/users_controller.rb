@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:update, :destroy]
 
   def new
     @user = User.new
@@ -24,15 +24,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(user_id: params[:user_id])
+    @user = User.find_by(user_id: params[:id])
   end
 
   def edit
-    unless current_user == @user && current_user
+    if current_user.nil?
       redirect_to root_path
       return
     end
-
+    @user = current_user
   end
 
   def update
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(user_id: params[:id])
   end
 
 end

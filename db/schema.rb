@@ -10,22 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_16_094404) do
+ActiveRecord::Schema.define(version: 2019_07_21_232449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "authorities", force: :cascade do |t|
     t.integer "user_id"
-    t.boolean "chief_administrator", default: false
-    t.boolean "administrator", default: false
-    t.boolean "trust_user", default: false
-    t.boolean "developer", default: false
-    t.boolean "donor", default: false
-    t.boolean "official_writer", default: false
-    t.boolean "general", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "manage_pos", default: "general"
+    t.string "dev_pos", default: "none"
+    t.integer "donor_amount", default: 0
   end
 
   create_table "contest_join_users", force: :cascade do |t|

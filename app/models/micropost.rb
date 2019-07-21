@@ -4,6 +4,8 @@ class Micropost < ApplicationRecord
 
   has_many :tags, dependent: :destroy
 
-  #validates :content, presence: true, length: { maximum: 140 }
   default_scope -> { order(created_at: :desc) }
+
+  validates :content, presence: true, length: { in: 1..140 }
+  validates :user_id, presence: true
 end

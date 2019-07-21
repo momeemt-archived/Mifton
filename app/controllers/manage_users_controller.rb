@@ -1,4 +1,5 @@
 class ManageUsersController < ApplicationController
+  include Common
   before_action :set_user_object, only: [:update, :destroy, :show]
   before_action :permit_admin
 
@@ -43,9 +44,12 @@ class ManageUsersController < ApplicationController
       image = params[:header_image]
       File.binwrite("public/user_images/header/#{@user.image_name}", image.read)
     end
-
-    @user.update!(user_params)
-    redirect_to manage_users_url, notice: "コンテスト「#{@user.name}」を更新しました。"
+    if params[:user]
+      @user.update!(user_params)
+    elsif params[:authority]
+      @user.authority.update!(authority_params)
+    end
+    redirect_to manage_users_url
   end
 
   # 管理画面 -> ユーザー削除
@@ -74,15 +78,16 @@ class ManageUsersController < ApplicationController
                                 )
   end
 
+  def authority_params
+    params.require(:authority).permit(
+      :manage_pos,
+      :dev_pos,
+      :donor_amount
+    )
+  end
+
   def set_user_object
     @user = User.find_by(user_id: params[:id])
   end
 
-  def permit_admin
-    unless current_user
-      redirect_to root_path
-      return
-    end
-    redirect_to root_path if current_user.authority.general
-  end
 end

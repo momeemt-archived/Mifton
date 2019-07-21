@@ -5,7 +5,7 @@
         img.be_leftWrapper_currentUserInfo_userHeaderImg src="/user_images/header/#{current_user.header_image_name}"
         img.be_leftWrapper_currentUserInfo_userIconImg src="/user_images/#{current_user.image_name}"
         .be_leftWrapper_currentUserInfo_conditionCard
-          p.be_leftWrapper_currentUserInfo_conditionCard_userName= current_user.name
+          p.be_leftWrapper_currentUserInfo_conditionCard_userName= render "/data_layout/show_star_name", user: current_user
           p.be_leftWrapper_currentUserInfo_conditionCard_userID= "@#{current_user.user_id}"
 
           .be_leftWrapper_currentUserInfo_conditionCard_line
@@ -52,7 +52,6 @@
           = form_with scope: :micropost, url: bector_index_url, multipart: true, local: true do |f|
             p= f.text_area :content, placeholder: "進捗や日常の体験を発信しよう"
             p= f.text_field :tags, placeholder: "タグ(スペース区切りで5個まで)", value: ""
-            /p タグは5個までしか付けられません！6個目のタグからは削除されます。
             input.far name="image" type="file"
             = f.submit "リリース"
 
@@ -68,17 +67,7 @@
               .be_centerWrapper_timeLine_post_textData_row
                 - @user = @users.find_by(id:post.user_id)
                 p.be_centerWrapper_timeLine_post_textData_row_userName
-                  - if @user.authority.chief_administrator
-                    i.fas.fa-star style="color:red;font-size:8px;"
-                  - if @user.authority.administrator
-                    i.fas.fa-star style="color:green;font-size:8px;"
-                  - if @user.authority.trust_user
-                    i.fas.fa-star style="color:deepskyblue;font-size:8px;"
-                  - if @user.authority.developer
-                    i.fas.fa-star style="color:darkorange;font-size:8px;"
-                  - if @user.authority.donor
-                    i.fas.fa-star style="color:gold;font-size:8px;"
-                  span style="margin-left:5px;" = @users.find_by(id:post.user_id).name
+                  = render "/data_layout/show_star_name", user: @user
                 p.be_centerWrapper_timeLine_post_textData_row_userID= "@#{@users.find_by(id:post.user_id).user_id}"
                 p.be_centerWrapper_timeLine_post_textData_row_date= date_display(post.created_at)
 
@@ -99,7 +88,10 @@
               = render partial: "reaction", locals: { type: "angry", faName: "angry", post: post, color: "red" }
 
               - unless post.user_id == current_user.id
-                = link_to "通報", "/reports/bector/#{post.id}", class:"be_centerWrapper_timeLine_post_textData_report"
+                = form_with scope: :report, url: "/reports", local: true do |f|
+                  = f.hidden_field :type, :value => "bector"
+                  = f.hidden_field :post_id, :value => post.id
+                  = f.submit "通報", class:"be_centerWrapper_timeLine_post_textData_report"
 
     .be_rightWrapper
       section.be_rightWrapper_notification

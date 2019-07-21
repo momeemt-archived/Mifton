@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   root to: "home#top"
   get "/about", to: "home#about"
   get "/authority", to: "home#authority"
+  get "/help", to: "home#help"
+  get "/policy", to: "home#policy"
+  get "/terms", to: "home#terms" # 利用規約
 
   # Bector
   get "/bector/top", to: "bector#top"
@@ -16,14 +19,14 @@ Rails.application.routes.draw do
   resources :bector
 
   # Users
-  resources :users, only: [:edit, :update, :destroy, :new]
-  get "/users/:user_id", to: "users#show"
+  get "/users/edit", to: "users#edit"
+  resources :users, only:  [:update, :destroy]
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
 
 
-  get "/reports/:type/:id", to: "reports#show"
-  post "/reports/:type/:id/create", to:"reports#create"
+  post "/reports/", to: "reports#show"
+  post "/reports/create", to:"reports#create"
 
   # Manages
   get '/manages', to: "manages#index"
@@ -78,4 +81,7 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships,       only: [:create, :destroy]
+
+
+  get "/:id", to: "users#show"
 end

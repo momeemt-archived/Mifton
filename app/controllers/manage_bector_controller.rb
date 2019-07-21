@@ -1,4 +1,6 @@
 class ManageBectorController < ApplicationController
+  include Common
+
   before_action :permit_admin
 
   def index
@@ -29,11 +31,4 @@ class ManageBectorController < ApplicationController
    params.require(:micropost).permit(:content, :created_at)
   end
 
-  def permit_admin
-    unless current_user
-      redirect_to root_path
-      return
-    end
-    redirect_to root_path if current_user.authority.general
-  end
 end

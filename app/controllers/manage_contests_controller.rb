@@ -1,5 +1,5 @@
 class ManageContestsController < ApplicationController
-
+  include Common
   before_action :permit_admin
 
   def index
@@ -53,14 +53,6 @@ class ManageContestsController < ApplicationController
      :question3_id,
      :question4_id
    )
-  end
-
-  def permit_admin
-    unless current_user
-      redirect_to root_path
-      return
-    end
-    redirect_to root_path if current_user.authority.general
   end
 
 end

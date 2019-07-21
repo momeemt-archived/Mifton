@@ -1,7 +1,9 @@
 h1 報告
 p この投稿の何が問題でしたか？最も適当なものを選んでください。
 
-= form_with scope: :report, url: "/reports/#{@type}/#{@id}/create", local: true do |f|
+= form_with scope: :report, url: "/reports/create", local: true do |f|
+  = f.hidden_field :reported_object_id, :value => @id
+  = f.hidden_field :reported_object_type, :value => @type
   .group
     = f.radio_button :report_reason, 1
     = f.label :report_reason, "暴力的な発言"
