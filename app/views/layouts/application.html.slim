@@ -6,4 +6,5 @@ html
     = render 'layouts/shim'
     = favicon_link_tag('favicon.ico')
   body.home
+    header = render "layouts/header", type:"home"
     = yield
