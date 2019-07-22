@@ -31,6 +31,13 @@ class BectorController < ApplicationController
           @microposts = Micropost.all
         elsif params[:level] == "friends"
           @microposts = Micropost.where(user_id: current_user.id)
+          follow_users = current_user.following
+          follow_users.each do |user|
+            if user.following.include?(current_user)
+              @microposts += Micropost.where(user_id: user.id)
+            end
+          end
+          @microposts = @microposts.sort.reverse
 
         end
       elsif params[:tag]
@@ -40,12 +47,13 @@ class BectorController < ApplicationController
           @microposts << Micropost.find_by(id: tag.micropost_id)
         end
       else
-        # @microposts = []
-        # follow_users = current_user.following
-        # follow_users.each do |user|
-        #   @microposts << Micropost.where(user_id: user.id)
-        # end
+
         @microposts = Micropost.where(user_id: current_user.id)
+        follow_users = current_user.following
+        follow_users.each do |user|
+          @microposts += Micropost.where(user_id: user.id)
+        end
+        @microposts = @microposts.sort.reverse
       end
 
     else
@@ -88,7 +96,7 @@ class BectorController < ApplicationController
           File.rename("public/micropost_images/undecide.png", "public/micropost_images/#{@micropost.image_name}")
           @micropost.save
         end
-        redirect_to "/bector"
+        redirect_back(fallback_location: root_path)
       else
         render :index
       end
@@ -98,6 +106,12 @@ class BectorController < ApplicationController
   def search
     user_id = params[:user_id]
     redirect_to "/bector/users/#{user_id}"
+  end
+
+  def destroy
+    @post = current_user.microposts.find_by(id: params[:micropost][:post_id])
+    @post.destroy
+    redirect_to bector_index_url
   end
 
   private

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post "/bector/search", to:"bector#search"
   get "/bector/users/:user_id", to:"bector#index"
   get "/bector/tags/:tag", to:"bector#index"
+  post "/bector/destroy", to:"bector#destroy"
   resources :bector
 
   # Users

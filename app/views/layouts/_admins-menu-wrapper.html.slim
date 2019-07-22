@@ -12,12 +12,14 @@
       i.fas.fa-users-cog
       = link_to "サイト管理[未]"
       ul
-        li
-          span= link_to "緊急通知[未]"
-        li
-          span= link_to "デバッグ", manages_debug_url
-        li
-          span= link_to "統計情報[未]"
+        - if than_operator
+          li
+            span= link_to "緊急通知[未]"
+          li
+            span= link_to "デバッグ", manages_debug_url
+        - if than_admin
+          li
+            span= link_to "統計情報[未]"
         li
           span= link_to "サイトマップ[未]"
 
@@ -55,12 +57,13 @@
       i.fas.fa-chess
       = link_to "Crafes!", manage_contests_url
       ul
-        li
-          span= link_to "コンテストの新規作成", new_manage_contest_url
-        li
-          span= link_to "問題の新規作成", new_manage_question_url
-        li
-          span= link_to "問題一覧", manage_questions_url
+        - if than_operator
+          li
+            span= link_to "コンテストの新規作成", new_manage_contest_url
+          li
+            span= link_to "問題の新規作成", new_manage_question_url
+          li
+            span= link_to "問題一覧", manage_questions_url
         li
           span= link_to "ドラフト一覧[未]"
         li
@@ -87,9 +90,10 @@
       ul
         li
           span= link_to "メディア[未]"
-        li
-          span= link_to "インポート[未]"
-        li
-          span= link_to "エクスポート[未]"
+        - if than_admin
+          li
+            span= link_to "インポート[未]"
+          li
+            span= link_to "エクスポート[未]"
 
     hr
