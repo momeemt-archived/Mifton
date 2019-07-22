@@ -61,7 +61,7 @@
         - @microposts.each do |post|
           .be_centerWrapper_timeLine_post
             .be_centerWrapper_timeLine_post_userIcon
-              =link_to "/users/#{@users.find_by(id: post.user_id).user_id}" do
+              =link_to "/#{@users.find_by(id: post.user_id).user_id}" do
                 img src="/user_images/#{@users.find_by(id:post.user_id).image_name}"
             .be_centerWrapper_timeLine_post_textData
               .be_centerWrapper_timeLine_post_textData_row
@@ -92,6 +92,11 @@
                   = f.hidden_field :type, :value => "bector"
                   = f.hidden_field :post_id, :value => post.id
                   = f.submit "通報", class:"be_centerWrapper_timeLine_post_textData_report"
+
+              - if post.user_id == current_user.id
+                = form_with scope: :micropost, url: "/bector/destroy", local: true do |f|
+                  = f.hidden_field :post_id, :value => post.id
+                  = f.submit "削除", class:"be_centerWrapper_timeLine_post_textData_report", data: { confirm: "Are you sure?"}
 
     .be_rightWrapper
       section.be_rightWrapper_notification

@@ -21,9 +21,10 @@
                   tr
                     td= f.label :name_cont, 'ユーザー名'
                     td= f.search_field :name_cont
-                  tr
-                    td= f.label :email_cont, "メールアドレス"
-                    td= f.search_field :email_cont
+                  - if than_admin
+                    tr
+                      td= f.label :email_cont, "メールアドレス"
+                      td= f.search_field :email_cont
               = f.submit class:"user_index__content-wrapper--container--search-form--submit"
 
 
@@ -35,28 +36,35 @@
             th
             th= User.human_attribute_name(:id)
             th= User.human_attribute_name(:name)
-            th 固有ID
-            th= User.human_attribute_name(:email)
-            th= User.human_attribute_name(:authority)
+            th ユーザーID
+            - if than_admin
+              th= User.human_attribute_name(:email)
+            th 運営権限
+            th 開発権限
             th テスト
             th 被通報値
             th 被信頼値
-            th
-            th
+            -if than_admin
+              th
+              th
           tbody
           - @users.each do |user|
             tr
               td
                 input type="checkbox"
               td= user.id
-              td= link_to user.name, "/manage_users/#{user.user_id}"
+              - if than_admin
+                td= link_to user.name, "/manage_users/#{user.user_id}"
+              - else
+                td= user.name
               td= "@#{user.user_id}"
-              td= user.email
-              td= user.authority
-              / td= user.created_at.strftime("%Y年%m月%d日 %H時%M分")
-              / td= user.updated_at.strftime("%Y年%m月%d日 %H時%M分")
+              - if than_admin
+                td= user.email
+              td= user.authority.manage_pos
+              td= user.authority.dev_pos
               td= user.is_test_user
               td= user.reported_value
               td= user.trusted_value
-              td= link_to '編集', "/manage_users/#{user.user_id}"
-              td= link_to '削除', "/manage_users/#{user.user_id}", method: :delete, data: {confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"}
+              - if than_admin
+                td= link_to '編集', "/manage_users/#{user.user_id}"
+                td= link_to '削除', "/manage_users/#{user.user_id}", method: :delete, data: {confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"}
