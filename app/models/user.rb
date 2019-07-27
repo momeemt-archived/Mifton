@@ -69,6 +69,9 @@ class User < ApplicationRecord
 
       authority = user.build_authority
       authority.save
+
+      user_traffic = user.build_user_traffic
+      user_traffic.save
     end
 
     return user

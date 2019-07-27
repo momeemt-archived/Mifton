@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   # Manages
   get '/manages', to: "manages#index"
   get '/manages/debug'
+  post "/manages/fix"
 
   resources :manage_users
   post "/manage_users/:id", to: "manage_users#update"

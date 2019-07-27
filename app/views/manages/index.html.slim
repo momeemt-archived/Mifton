@@ -3,7 +3,16 @@
 
     = render 'layouts/admins-menu-wrapper'
 
+
+
     .user_index__content-wrapper
+      .admins_new__content-wrapper
+        .admins_new__content-wrapper--container
+
+          = form_with scope: :bug, url: "/manages/fix" , local: true do |f|
+
+            = f.submit '修正する', class: 'admins_new__content-wrapper--container--submit'
+            
       .user_index__content-wrapper--container
         h1 ダッシュボード
 
