@@ -17,6 +17,10 @@ class HomeController < ApplicationController
   def about
   end
 
+  def authority
+    @users = User.all
+  end
+
   private
 
   def user_params

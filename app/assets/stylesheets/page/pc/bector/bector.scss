@@ -48,281 +48,342 @@
   }
 
   .be {
+
     background-color: #eaf4fc;
-    display: flex;
-    position:relative;
 
-    &_leftWrapper {
-      width: 25%;
-      height: 100vh;
-      position: sticky;
-      top: 0px;
+    &_currentUserInfo {
+      position: relative;
 
-      &_currentUserInfo {
-        position: relative;
+      &_conditionCard {
+        width: 80%;
+        margin: 0 auto;
+        background-color: white;
 
-        &_conditionCard {
-          width: 80%;
-          margin: 0 auto;
-          background-color: white;
+        @mixin make_follow_button {
+          position: absolute;
+          right: 50px;
+          top: 120px;
 
+          // RESET CSS BEGIN
+
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          outline: none;
+          padding: 0;
+          appearance: none;
+
+          // RESET CSS END
+
+          font-size: 14px;
+          padding: 5px 10px;
+        }
+
+        &_followButton input[type="submit"] {
+          @include make_follow_button
+          border-radius: 30px;
+          border: #2E4577 2px solid;
+          color: #2E4577;
+          font-weight: bold;
+        }
+
+        &_unfollowButton input[type="submit"] {
+          @include make_follow_button
+          background-color: #2E4577;
+          border-radius: 30px;
+          padding: 5px 10px;
+          color: white;
+        }
+
+        &_basicInfo {
+          padding-top: 45px;
+          padding-left: 8px;
           &_userName {
             font-size: 20px;
             font-weight: bold;
-            padding-left: 110px;
-            padding-top: 5px;
           }
 
           &_userID {
             font-size: 13px;
-            padding-left: 110px;
-            font-weight: lighter;
           }
 
-          &_line {
-            display: flex;
-            padding-top: 7px;
-            padding-bottom: 6px;
-
-            &_dataGroup {
-              padding: 0 14px;
-              &-dataName {
-                font-size: 13px;
-                font-weight: lighter;
-              }
-              &-data {
-                color: #007bbb;
-                font-weight: 900;
-                font-size: 16px;
-              }
-            }
-          }
-        }
-
-        &_userHeaderImg {
-          display: block;
-          width: 80%;
-          margin: 0 auto;
-          padding-top: 10px;
-        }
-
-        &_userIconImg {
-          position: absolute;
-          border: 3px solid white;
-          border-radius: 50%;
-          display: block;
-          width: 19%;
-          top: 28%;
-          left: 14%;
-        }
-      }
-
-      &_searchForm {
-        width: 80%;
-        margin: 10px auto;
-        background-color: white;
-
-        input {
-          width: 70%;
-          border: 0px;
-          display: block;
-          margin: 0 auto;
-          outline: none;
-          padding: 10px 30px 10px 0;
-          font-size: 16px;
-        }
-
-      }
-
-      &_menuTab {
-        width: 80%;
-        background-color: white;
-        margin: 10px auto;
-
-
-        p {
-          font-size: 16px;
-          color: #007bbb;
-          padding: 3px 5px;
-        }
-
-        i {
-          font-size: 20px;
-          width: 10%;
-          padding: 5px 5px;
-        }
-
-      }
-    }
-
-    &_centerWrapper {
-      width: 50%;
-
-      &_mobileHeader {
-        display: none;
-      }
-
-      &_postForm {
-        background-color: #c9deff;
-        margin-top: 10px;
-        padding: 10px 4px 0;
-
-        &_container {
-          display: flex;
-          align-items: flex-start;
-
-          &_userIcon {
-            border-radius: 50%;
-            width: 5%;
-            margin-left: 5%;
-            margin-right: 2%;
-          }
-          form,p {
-            display: block;
-            width: 100%;
-          }
-          textarea {
-            width: 80%;
-            height: 60px;
-            resize: none;
-            border: 2px solid #007bbb;
-            border-radius: 10px;
-            padding: 10px;
-            outline: none;
-            font-size: 16px;
-            margin: 0 auto;
-          }
-
-          input[type="text"] {
-            width: 80%;
-            height: 10px;
-            resize: none;
-            border: 2px solid #007bbb;
-            border-radius: 10px;
-            padding: 10px;
-            outline: none;
+          &_isMyAccount {
+            display: inline-block;
             font-size: 13px;
-            margin: 0 auto 10px;
+            background: linear-gradient(transparent 50%, yellow 50%);
           }
         }
 
-
-      }
-
-      &_timeLine {
-        margin-bottom: 20px;
-
-        .fas, .far {
-          padding: 0 3px;
-        }
-
-        &_post {
-          border-top: 0.5px dashed #007bbb;
+        &_authorityBadge {
           display: flex;
-          flex: flex-start;
-          background-color: white;
+          justify-content: center;
+          align-items: center;
+          color:white;
 
-
-
-          &_textData {
-            width: 90%;
-
-            &_row {
-              display: flex;
-              align-items: center;
-              padding-top: 10px;
-
-              &_userName {
-                font-weight: bold;
-                margin-right: 30px;
-
-                .fa-star {
-                  padding: 0;
-                }
-              }
-
-              &_userID, &_date {
-                margin-right: 10px;
-                color: gray;
-              }
-
-            }
-
-            &_content {
-              padding: 10px 0;
-            }
-            &_postImg {
-              width: 30%;
-              display: block;
-              padding: 10px 0px;
-            }
-
-            &_report {
-              color: #afafb0;
-              font-size: 13px;
-              padding: 0 10px;
-
-              &:visited {
-                color: #afafb0;
-              }
-            }
-
-
-          }
-
-          &_userIcon {
-            width: 10%;
-            img {
-              border-radius: 50%;
-              width: 60%;
-              display: block;
-              margin: 15px auto 0;
-            }
-          }
-
-
-        }
-
-      }
-    }
-
-    &_rightWrapper {
-      width: 25%;
-      height: 100vh;
-      position: sticky;
-      top: 0px;
-
-      &_notification {
-        background-color: white;
-        width: 90%;
-        height: 95%;
-        margin: 15px auto;
-
-
-        hr {
-          border: 0px;
-          border: 0.5px dashed #007bbb;
-        }
-
-        &_infoCardList {
-          overflow: scroll;
-          height: 95%;
-          &-card {
-            padding: 8px;
-          }
-        }
-
-        &_title {
-          color: #007bbb;
-          font-weight: bold;
-          font-size: 20px;
-          padding: 5px 0;
+          width: 70%;
+          margin: 5px auto 0;
+          padding: 3px 0;
+          border-radius: 30px;
 
           i {
-            padding: 0 10px;
+            font-size: 8px;
+            padding-right: 5px;
+          }
+        }
+
+        &_authorityAdmins {
+          background-color: red;
+        }
+
+        &_authorityOperator {
+          background-color: green;
+        }
+
+        &_authorityTrustUser {
+          background-color: deepskyblue;
+        }
+
+        &_authorityDeveloper {
+          background-color: darkorange;
+        }
+
+        &_authorityContributor {
+          background-color: gold;
+        }
+
+        &_simpleLine,&_simpleLineFirst {
+          display: flex;
+          align-items: center;
+          margin-top: 5px;
+          margin-left: 8px;
+
+          a {
+            font-size: 15px;
+            color: blue;
+
+            &:visited {
+              color: blue;
+            }
+          }
+
+          i {
+            font-size: 14px;
+            color: gray;
+            padding-right: 5px;
+          }
+
+          p {
+            font-size: 15px;
+          }
+        }
+
+        &_simpleLineFirst {
+          margin-top: 15px;
+        }
+
+        &_line {
+          display: flex;
+          padding-top: 7px;
+          padding-bottom: 6px;
+
+          &_profile {
+            font-size: 13px;
+            font-weight: lighter;
+            margin: 0 8px;
+            margin-top: 10px;
+          }
+
+          &_dataGroup {
+            padding: 0 14px;
+            &-dataName {
+              font-size: 13px;
+              font-weight: lighter;
+            }
+            &-data {
+              color: #007bbb;
+              font-weight: 900;
+              font-size: 16px;
+            }
           }
         }
       }
+
+      &_userHeaderImg {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 10px;
+      }
+
+      &_userIconImg {
+        position: absolute;
+        border: 3px solid black;
+        border-radius: 50%;
+        display: block;
+        width: 19%;
+        top: 67px;
+        left: 14%;
+      }
+    }
+
+    &_searchForm {
+      width: 80%;
+      margin: 10px auto;
+      background-color: white;
+
+      input {
+        width: 70%;
+        border: 0px;
+        display: block;
+        margin: 0 auto;
+        outline: none;
+        padding: 10px 30px 10px 0;
+        font-size: 16px;
+      }
+
+    }
+
+    &_menuTab {
+      width: 80%;
+      background-color: white;
+      margin: 10px auto;
+
+
+      p {
+        font-size: 16px;
+        color: #007bbb;
+        padding: 3px 5px;
+      }
+
+      i {
+        font-size: 20px;
+        width: 10%;
+        padding: 5px 5px;
+      }
+
+    }
+
+    &_postForm {
+      background-color: #c9deff;
+      margin-top: 10px;
+      padding: 10px 4px 0;
+
+      &_container {
+        display: flex;
+        align-items: flex-start;
+
+        &_userIcon {
+          border-radius: 50%;
+          width: 5%;
+          margin-left: 5%;
+          margin-right: 2%;
+        }
+        form,p {
+          display: block;
+          width: 100%;
+        }
+        textarea {
+          width: 80%;
+          height: 60px;
+          resize: none;
+          border: 2px solid #007bbb;
+          border-radius: 10px;
+          padding: 10px;
+          outline: none;
+          font-size: 16px;
+          margin: 0 auto;
+        }
+
+        input[type="text"] {
+          width: 80%;
+          height: 10px;
+          resize: none;
+          border: 2px solid #007bbb;
+          border-radius: 10px;
+          padding: 10px;
+          outline: none;
+          font-size: 13px;
+          margin: 0 auto 10px;
+        }
+      }
+
+
+    }
+
+    &_timeLine {
+      margin-bottom: 20px;
+
+      .fas, .far {
+        padding: 0 3px;
+      }
+
+      &_post {
+        border-top: 0.5px dashed #007bbb;
+        display: flex;
+        flex: flex-start;
+        background-color: white;
+
+
+
+        &_textData {
+          width: 90%;
+
+          &_row {
+            display: flex;
+            align-items: center;
+            padding-top: 10px;
+
+            &_userName {
+              font-weight: bold;
+              margin-right: 30px;
+
+              .fa-star {
+                padding: 0;
+              }
+            }
+
+            &_userID, &_date {
+              margin-right: 10px;
+              color: gray;
+            }
+
+          }
+
+          &_content {
+            padding: 10px 0;
+          }
+          &_postImg {
+            width: 30%;
+            display: block;
+            padding: 10px 0px;
+          }
+
+          &_report {
+            color: #afafb0;
+            font-size: 13px;
+            padding: 0 10px;
+
+            &:visited {
+              color: #afafb0;
+            }
+          }
+
+
+        }
+
+        &_userIcon {
+          width: 10%;
+          img {
+            border-radius: 50%;
+            width: 60%;
+            display: block;
+            margin: 15px auto 0;
+          }
+        }
+
+
+      }
+
     }
 
   }

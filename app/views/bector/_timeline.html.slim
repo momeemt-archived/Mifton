@@ -1,0 +1,51 @@
+section.be_postForm
+  .be_postForm_container
+    img.be_postForm_container_userIcon src="/user_images/#{current_user.image_name}"
+    = form_with scope: :micropost, url: bector_index_url, multipart: true, local: true do |f|
+      p= f.text_area :content, placeholder: "進捗や日常の体験を発信しよう"
+      p= f.text_field :tags, placeholder: "タグ(スペース区切りで5個まで)", value: ""
+      = f.label :image
+        i.far.fa-images
+      = f.file_field :image
+      = f.submit "リリース"
+
+section.be_timeLine
+  - @microposts.each do |post|
+    .be_timeLine_post
+      .be_timeLine_post_userIcon
+        =link_to "/bector/users/#{@users.find_by(id: post.user_id).user_id}" do
+          img src="/user_images/#{@users.find_by(id:post.user_id).image_name}"
+      .be_timeLine_post_textData
+        .be_timeLine_post_textData_row
+          - @user = @users.find_by(id:post.user_id)
+          p.be_timeLine_post_textData_row_userName
+            = render "/data_layout/show_star_name", user: @user
+          p.be_timeLine_post_textData_row_userID= "@#{@users.find_by(id:post.user_id).user_id}"
+          p.be_timeLine_post_textData_row_date= date_display(post.created_at)
+
+        .be_timeLine_post_textData_content
+          p= simple_format(sanitize(markdown(post.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
+          - if post.tags.present?
+            - post.tags.each do |tag|
+              = link_to "##{tag.name} ", "/bector/tags/#{tag.name}"
+
+
+        - if !post.image_name.blank?
+          img.be_timeLine_post_textData_postImg src="/micropost_images/#{post.image_name}"
+
+        = render partial: "reaction", locals: { type: "heart", faName: "heart", post: post, color: "pink" }
+        = render partial: "reaction", locals: { type: "good", faName: "thumbs-up", post: post, color: "blue" }
+        = render partial: "reaction", locals: { type: "cry", faName: "sad-tear", post: post, color: "deepskyblue" }
+        = render partial: "reaction", locals: { type: "surprise", faName: "surprise", post: post, color: "darkorange" }
+        = render partial: "reaction", locals: { type: "angry", faName: "angry", post: post, color: "red" }
+
+        - unless post.user_id == current_user.id
+          = form_with scope: :report, url: "/reports", local: true do |f|
+            = f.hidden_field :type, :value => "bector"
+            = f.hidden_field :post_id, :value => post.id
+            = f.submit "通報", class:"be_timeLine_post_textData_report"
+
+        - if post.user_id == current_user.id
+          = form_with scope: :micropost, url: "/bector/destroy", local: true do |f|
+            = f.hidden_field :post_id, :value => post.id
+            = f.submit "削除", class:"be_timeLine_post_textData_report", data: { confirm: "Are you sure?"}

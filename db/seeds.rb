@@ -28,9 +28,20 @@
 #   User.find_by(id: 1).microposts.create!(content: content)
 # end
 
-User.create!(name: "Admin",
-             email: "admin@mifton.xyz",
-             password: "MiftonisthecoolestApp!",
-             password_confirmation: "MiftonisthecoolestApp!",
-             authority: "admin",
-             user_id: "admin")
+user = User.create(
+  name: "Mifton Official",
+  email: "mifton@mifton.xyz",
+  password: "password",
+  password_confirmation: "password",
+  user_id: "mifton"
+)
+
+authority = user.build_authority(
+  manage_pos: "admin"
+)
+
+authority.save
+
+user_data = user.build_user_traffic
+
+user_data.save

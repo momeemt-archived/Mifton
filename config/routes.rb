@@ -11,11 +11,15 @@ Rails.application.routes.draw do
 
   # Bector
   get "/bector/top", to: "bector#top"
-  get "/bector/reaction/:id", to: "bector#index"
-  get "/bector/custom/:level", to: "bector#index"
+  get "/bector/custom/:level", to: "bector#custom"
+
+  get "/bector/global", to: "bector#global"
+  get "/bector/friends", to: "bector#friends"
+  get "/bector/reactions/:id", to: "bector#reactions"
+
   post "/bector/search", to:"bector#search"
   get "/bector/users/:user_id", to:"bector#index"
-  get "/bector/tags/:tag", to:"bector#index"
+  get "/bector/tags/:tag", to:"bector#tags"
   post "/bector/destroy", to:"bector#destroy"
   resources :bector
 

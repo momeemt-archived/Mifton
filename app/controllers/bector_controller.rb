@@ -1,12 +1,8 @@
 class BectorController < ApplicationController
+  before_action :add_users_and_infos, only: [:global, :friends, :tags, :index, :reactions]
   def index
 
     if !current_user.nil?
-
-      @users = User.all
-      @micropost = current_user.microposts.build
-      @informations = current_user.informations
-      @direct_messages = current_user.direct_messages
 
       @users_name_array = []
       @users.each do |user|
@@ -14,38 +10,13 @@ class BectorController < ApplicationController
         @users_name_array << "@" + user.user_id
       end
 
-      if params[:id]
-        reactions = Reaction.where(user_id: params[:id])
-        @microposts = []
-        reactions.each do |reaction|
-          @microposts << Micropost.find_by(id: reaction.reactioned_id)
-        end
-      elsif params[:user_id]
+      if params[:user_id]
         if User.find_by(user_id: params[:user_id]).present?
           @microposts = Micropost.where(user_id: User.find_by(user_id: params[:user_id]).id)
         else
           redirect_to "/bector"
         end
-      elsif params[:level]
-        if params[:level] == "global"
-          @microposts = Micropost.all
-        elsif params[:level] == "friends"
-          @microposts = Micropost.where(user_id: current_user.id)
-          follow_users = current_user.following
-          follow_users.each do |user|
-            if user.following.include?(current_user)
-              @microposts += Micropost.where(user_id: user.id)
-            end
-          end
-          @microposts = @microposts.sort.reverse
 
-        end
-      elsif params[:tag]
-        @microposts = []
-        target_tags = Tag.where(name: params[:tag])
-        target_tags.each do |tag|
-          @microposts << Micropost.find_by(id: tag.micropost_id)
-        end
       else
 
         @microposts = Micropost.where(user_id: current_user.id)
@@ -60,6 +31,44 @@ class BectorController < ApplicationController
       @microposts = Micropost.all
       @users = User.all
     end
+  end
+
+  def reactions
+    # reactions_obj = Reaction.where(user_id: params[:id])
+    @microposts = []
+    # reactions_obj.each do |reaction|
+    #   @microposts << Micropost.find_by(id: reaction.reactioned_id)
+    # end
+  end
+
+
+  def global
+    @users = User.all
+    @microposts = Micropost.all
+    @informations = current_user.informations
+    render :index
+  end
+
+  def friends
+    @microposts = Micropost.where(user_id: current_user.id)
+    follow_users = current_user.following
+    follow_users.each do |user|
+      if user.following.include?(current_user)
+        @microposts += Micropost.where(user_id: user.id)
+      end
+    end
+    @microposts = @microposts.sort.reverse
+    render :index
+  end
+
+  def tags
+    @microposts = []
+    target_tags = Tag.where(name: params[:tag])
+    target_tags.each do |tag|
+      @microposts << Micropost.find_by(id: tag.micropost_id)
+    end
+
+    render :index
   end
 
   def create
@@ -127,4 +136,17 @@ class BectorController < ApplicationController
       :target_user
     )
   end
+
+  def add_users_and_infos
+    @users = User.all
+    @informations = current_user.informations
+
+    user_raw_data = User.find_by(user_id: params[:user_id])
+    if user_raw_data.present?
+      @user = user_raw_data
+    else
+      @user = current_user
+    end
+  end
+
 end

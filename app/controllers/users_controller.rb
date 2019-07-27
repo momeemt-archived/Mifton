@@ -11,6 +11,8 @@ class UsersController < ApplicationController
     if @user.save && verify_recaptcha
       authority = @user.build_authority
       authority.save
+      user_traffic = @user.build_user_traffic
+      user_traffic.save
       session[:user_id] = @user.id
       redirect_to "/", notice: "ユーザー「#{@user.name}を登録しました。」"
     else

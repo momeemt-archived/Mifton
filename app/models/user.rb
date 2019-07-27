@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one :user_traffic, dependent: :destroy
   has_one :authority, dependent: :destroy
   has_many :rating, dependent: :destroy
 
@@ -65,6 +66,9 @@ class User < ApplicationRecord
         location: auth.info.location,
         user_id: self.generate_user_id(auth)
       )
+
+      authority = user.build_authority
+      authority.save
     end
 
     return user
