@@ -1,13 +1,4 @@
-section.be_postForm
-  .be_postForm_container
-    img.be_postForm_container_userIcon src="/user_images/#{current_user.image_name}"
-    = form_with scope: :micropost, url: bector_index_url, multipart: true, local: true do |f|
-      p= f.text_area :content, placeholder: "進捗や日常の体験を発信しよう"
-      p= f.text_field :tags, placeholder: "タグ(スペース区切りで5個まで)", value: ""
-      = f.label :image
-        i.far.fa-images
-      = f.file_field :image
-      = f.submit "リリース"
+
 
 section.be_timeLine
   - @microposts.each do |post|
@@ -30,7 +21,7 @@ section.be_timeLine
               = link_to "##{tag.name} ", "/bector/tags/#{tag.name}"
 
 
-        - if !post.image_name.blank?
+        - if post.image_name.present?
           img.be_timeLine_post_textData_postImg src="/micropost_images/#{post.image_name}"
 
         = render partial: "reaction", locals: { type: "heart", faName: "heart", post: post, color: "pink" }

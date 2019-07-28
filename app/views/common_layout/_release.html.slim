@@ -1,0 +1,11 @@
+section.common_release
+  .common_release_container
+    img.common_release_container_icon src="/user_images/#{current_user.image_name}"
+    = form_with scope: :micropost, url: bector_index_url, multipart: true, local: true do |f|
+      p= f.text_area :content, placeholder: "進捗や日常の体験を発信しよう"
+      p= f.text_field :tags, placeholder: "タグ(スペース区切りで5個まで)", value: ""
+      .preview
+      = f.label :image
+        i.far.fa-images
+      = f.file_field :image
+      = f.submit "リリース"

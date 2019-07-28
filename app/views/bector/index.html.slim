@@ -10,10 +10,11 @@
   - if login?
     / ユーザー情報
     .lay_1p4.lay_sticky.lay_100vh
-      = render "user_information"
+      = render "/common_layout/userInfo"
     / タイムライン
     .lay_1p2
-      = render "timeline"
+      = render "/common_layout/release"
+      = render "/common_layout/timeLine", datas: @microposts, type: "bector"
     / メニュー
     .lay_1p4.lay_sticky.lay_100vh
       = render "function_menu"

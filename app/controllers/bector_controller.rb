@@ -82,11 +82,12 @@ class BectorController < ApplicationController
       end
 
     elsif params[:micropost]
+      puts params
       @micropost = current_user.microposts.build(micropost_params)
       image_flg = false
-      if params[:image]
+      if params[:micropost][:image]
         image_flg = true
-        image = params[:image]
+        image = params[:micropost][:image]
         File.binwrite("public/micropost_images/undecide.png", image.read)
       end
 

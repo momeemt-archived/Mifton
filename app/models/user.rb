@@ -57,7 +57,7 @@ class User < ApplicationRecord
 
 
     unless user
-      user = User.create(
+      user = User.new(
         uid:      auth.uid,
         provider: auth.provider,
         email:    User.dummy_email(auth),
@@ -66,6 +66,8 @@ class User < ApplicationRecord
         location: auth.info.location,
         user_id: self.generate_user_id(auth)
       )
+
+      user.save
 
       authority = user.build_authority
       authority.save

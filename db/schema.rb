@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_225507) do
+ActiveRecord::Schema.define(version: 2019_07_28_063126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_225507) do
     t.integer "user_id"
     t.integer "starting_point_user"
     t.string "from_any_service"
-    t.string "target_object"
+    t.integer "target_object"
   end
 
   create_table "microposts", force: :cascade do |t|

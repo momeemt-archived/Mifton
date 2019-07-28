@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
   def top
     if !current_user.nil?
+      @informations = Information.where(starting_point_user: current_user.id)
       render :top_logined
-      @informations = current_user.informations.all
     else
       @user = User.new(user_params)
       @user.user_id = params[:name]

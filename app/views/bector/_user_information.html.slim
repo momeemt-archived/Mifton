@@ -56,7 +56,7 @@ section.be_currentUserInfo
     - if @user.user_traffic.user_link.present?
       .be_currentUserInfo_conditionCard_simpleLine
         i.fas.fa-link
-        = link_to @user.user_traffic.user_link, @user.user_traffic.user_link, :target => "_blank"
+        = link_to @user.user_traffic.user_link, "https://#{@user.user_traffic.user_link}", :target => "_blank"
 
     - if @user.user_traffic.birthday.present?
       .be_currentUserInfo_conditionCard_simpleLine

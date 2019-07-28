@@ -1,21 +1,17 @@
+.lay
+  - @user = current_user
 
-  .tc_leftWrapper
-    section.tc_leftWrapper_currentUserInfo
-      = render "/data_layout/current_user_img"
-      .tc_leftWrapper_currentUserInfo_conditionCard
-        = render "/data_layout/current_user_name"
+  .lay_1p4.lay_sticky.lay_100vh
+    = render "/common_layout/userInfo"
 
-        .tc_leftWrapper_currentUserInfo_conditionCard_line
-          = render "/data_layout/current_user_data", dataname: "フォロー", data: current_user.following.count
-          = render "/data_layout/current_user_data", dataname: "フォロワー", data: current_user.followers.count
-          = render "/data_layout/current_user_data", dataname: "利用スコア", data: current_user.followers.count
+  .lay_1p2
+    = render "homeIndex"
+    = render "/common_layout/timeLine", datas: @informations, type: "home"
 
-        .tc_leftWrapper_currentUserInfo_conditionCard_line
-          = render "/data_layout/current_user_link_data", dataname: "リアクション", data: Reaction.where(user_id: current_user.id).count, link: "/bector/reaction/#{current_user.id}"
-
+  .lay_1p4.lay_sticky.lay_100vh
     = render "/data_layout/search_form", type: "be", url: "/bector/search/", param: ":user_id"
 
-    section.tc_leftWrapper_menuTab
+    section.be_menuTab
       = render "/data_layout/menuTab", u: "/", f:"home", d: "ホーム"
       = render "/data_layout/menuTab", u: bector_index_url, f:"cog", d: "ユーザー設定"
       = render "/data_layout/menuTab", u: bector_index_url, f:"question-circle", d: "ヘルプ"

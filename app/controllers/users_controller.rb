@@ -14,6 +14,8 @@ class UsersController < ApplicationController
       user_traffic = @user.build_user_traffic
       user_traffic.save
       session[:user_id] = @user.id
+      admin = User.find_by(user_id: "mifton")
+      @user.follow(admin)
       redirect_to "/", notice: "ユーザー「#{@user.name}を登録しました。」"
     else
       render action: :new

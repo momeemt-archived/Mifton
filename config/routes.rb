@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :anmitsu
   # Home
   root to: "home#top"

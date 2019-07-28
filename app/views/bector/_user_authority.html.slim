@@ -4,18 +4,22 @@
       i.fas.fa-star
       p 管理者
 - if user.authority.manage_pos == "operator"
-  .be_currentUserInfo_conditionCard_authorityBadge.be_currentUserInfo_conditionCard_authorityOperator
-    i.fas.fa-star
-    p オペレーター
+  = link_to "/authority" do
+    .be_currentUserInfo_conditionCard_authorityBadge.be_currentUserInfo_conditionCard_authorityOperator
+      i.fas.fa-star
+      p オペレーター
 - if user.authority.manage_pos == "trust_user"
-  .be_currentUserInfo_conditionCard_authorityBadge.be_currentUserInfo_conditionCard_authorityTrustUser
-    i.fas.fa-star
-    p トラストユーザー
+  = link_to "/authority" do
+    .be_currentUserInfo_conditionCard_authorityBadge.be_currentUserInfo_conditionCard_authorityTrustUser
+      i.fas.fa-star
+      p トラストユーザー
 - if user.authority.dev_pos == "developer"
-  .be_currentUserInfo_conditionCard_authorityBadge.be_currentUserInfo_conditionCard_authorityDeveloper
-    i.fas.fa-star
-    p 開発者
+  = link_to "/authority" do
+    .be_currentUserInfo_conditionCard_authorityBadge.be_currentUserInfo_conditionCard_authorityDeveloper
+      i.fas.fa-star
+      p 開発者
 - if user.authority.dev_pos == "contributor"
-  .be_currentUserInfo_conditionCard_authorityBadge.be_currentUserInfo_conditionCard_authorityContributor
-    i.fas.fa-star
-    p 開発貢献者
+  = link_to "/authority" do
+    .be_currentUserInfo_conditionCard_authorityBadge.be_currentUserInfo_conditionCard_authorityContributor
+      i.fas.fa-star
+      p 開発貢献者

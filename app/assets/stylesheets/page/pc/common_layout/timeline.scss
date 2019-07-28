@@ -1,0 +1,84 @@
+.common {
+
+  &_timeLine {
+    margin-bottom: 20px;
+
+    .fas, .far {
+      padding: 0 3px;
+    }
+
+    &_data {
+      border-top: 0.5px dashed #007bbb;
+      display: flex;
+      flex: flex-start;
+      background-color: white;
+
+
+
+      &_container {
+        width: 90%;
+
+        &_top {
+          display: flex;
+          align-items: center;
+          padding-top: 10px;
+
+          &_name {
+            font-weight: bold;
+            margin-right: 30px;
+
+            .fa-star {
+              padding: 0;
+            }
+          }
+
+          &_id, &_date {
+            margin-right: 10px;
+            color: gray;
+          }
+
+        }
+
+        &_content {
+          padding: 10px 0;
+        }
+        &_img {
+          width: 30%;
+          display: block;
+          padding: 10px 0px;
+        }
+
+        form {
+          display: inline;
+        }
+
+        &_report {
+          color: #afafb0;
+          font-size: 13px;
+          padding: 0 10px;
+          border: none;
+          outline: none;
+
+          &:visited {
+            color: #afafb0;
+          }
+        }
+
+
+      }
+
+      &_icon {
+        width: 10%;
+        img {
+          border-radius: 50%;
+          width: 60%;
+          display: block;
+          margin: 15px auto 0;
+        }
+      }
+
+
+    }
+
+  }
+}
