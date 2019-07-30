@@ -24,11 +24,16 @@ section.be_timeLine
         - if post.image_name.present?
           img.be_timeLine_post_textData_postImg src="/micropost_images/#{post.image_name}"
 
-        = render partial: "reaction", locals: { type: "heart", faName: "heart", post: post, color: "pink" }
-        = render partial: "reaction", locals: { type: "good", faName: "thumbs-up", post: post, color: "blue" }
-        = render partial: "reaction", locals: { type: "cry", faName: "sad-tear", post: post, color: "deepskyblue" }
-        = render partial: "reaction", locals: { type: "surprise", faName: "surprise", post: post, color: "darkorange" }
-        = render partial: "reaction", locals: { type: "angry", faName: "angry", post: post, color: "red" }
+        div#heart_reaction
+          = render partial: "reaction", locals: { type: "heart", faName: "heart", post: post, color: "pink" }
+        div#good_reaction
+          = render partial: "reaction", locals: { type: "good", faName: "thumbs-up", post: post, color: "blue" }
+        div#cry_reaction
+          = render partial: "reaction", locals: { type: "cry", faName: "sad-tear", post: post, color: "deepskyblue" }
+        div#surprise_reaction
+          = render partial: "reaction", locals: { type: "surprise", faName: "surprise", post: post, color: "darkorange" }
+        div#angry_reaction
+          = render partial: "reaction", locals: { type: "angry", faName: "angry", post: post, color: "red" }
 
         - unless post.user_id == current_user.id
           = form_with scope: :report, url: "/reports", local: true do |f|

@@ -24,7 +24,14 @@ class ReactionsController < ApplicationController
       @information.save
     end
 
-    redirect_back(fallback_location: root_path)
+    @post_id = params[:post_id]
+    @user = params[:user]
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+    end
+
   end
 
   def destroy
@@ -52,7 +59,15 @@ class ReactionsController < ApplicationController
       end
     end
 
-    redirect_back(fallback_location: root_path)
+    @post_id = params[:post_id]
+    @user = params[:user_data]
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+    end
+
+    #redirect_back(fallback_location: root_path)
   end
 
   private

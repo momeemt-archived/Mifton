@@ -28,20 +28,25 @@ section.common_timeLine
         - if type == "bector"
           - if data.image_name.present?
             img.common_timeLine_data_container_img src="/micropost_images/#{data.image_name}"
+          .app_reactionContainer
+            div id="heart_reaction_#{data.id}"
+              = render "/common_layout/reaction",  type: "heart", faName: "heart", post: data, color: "pink", user: user
+            div id="good_reaction_#{data.id}"
+              = render "/common_layout/reaction",  type: "good", faName: "thumbs-up", post: data, color: "blue", user: user
+            div id="cry_reaction_#{data.id}"
+              = render "/common_layout/reaction",  type: "cry", faName: "sad-tear", post: data, color: "deepskyblue", user: user
+            div id="surprise_reaction_#{data.id}"
+              = render "/common_layout/reaction",  type: "surprise", faName: "surprise", post: data, color: "darkorange", user: user
+            div id="angry_reaction_#{data.id}"
+              = render "/common_layout/reaction",  type: "angry", faName: "angry", post: data, color: "red", user: user
 
-          = render "/common_layout/reaction",  type: "heart", faName: "heart", post: data, color: "pink"
-          = render "/common_layout/reaction",  type: "good", faName: "thumbs-up", post: data, color: "blue"
-          = render "/common_layout/reaction",  type: "cry", faName: "sad-tear", post: data, color: "deepskyblue"
-          = render "/common_layout/reaction",  type: "surprise", faName: "surprise", post: data, color: "darkorange"
-          = render "/common_layout/reaction",  type: "angry", faName: "angry", post: data, color: "red"
+            = render "/common_layout/reportButton", data: data, type: type
 
-          = render "/common_layout/reportButton", data: data, type: type
-
-          - if data.user_id == current_user.id
-            = form_with scope: :micropost, url: "/bector/destroy", local: true do |f|
-              = f.hidden_field :post_id, :value => data.id
-              = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "フラグメントを削除しますか？\n削除したフラグメントは運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
-                i.far.fa-trash-alt
+            - if data.user_id == current_user.id
+              = form_with scope: :micropost, url: "/bector/destroy", local: true do |f|
+                = f.hidden_field :post_id, :value => data.id
+                = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "フラグメントを削除しますか？\n削除したフラグメントは運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
+                  i.far.fa-trash-alt
 
         - elsif type == "home"
           - if data.from_any_service == "bector"
