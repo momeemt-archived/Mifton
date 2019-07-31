@@ -15,6 +15,10 @@
 
   .app_reactionContainer {
     display: flex;
+
+    &:hover {
+      background-color: #f3f3f2;
+    }
   }
 
   .app_reaction {

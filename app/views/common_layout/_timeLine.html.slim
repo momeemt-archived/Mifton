@@ -6,7 +6,9 @@ section.common_timeLine
     p おすすめユーザーやあなたの友人をもっとフォローしたり、友達をMiftonに誘ってみましょう！
   - datas.each do |data|
     - user = User.find_by(id: data.user_id)
+
     .common_timeLine_data
+      = link_to "","/bector/microposts/#{data.id}", class: "common_timeLine_data_link"
       .common_timeLine_data_icon
         =link_to "/bector/users/#{user.user_id}" do
           img src="/user_images/#{user.image_name}"
@@ -28,7 +30,17 @@ section.common_timeLine
         - if type == "bector"
           - if data.image_name.present?
             img.common_timeLine_data_container_img src="/micropost_images/#{data.image_name}"
+
           .app_reactionContainer
+
+            / div id="comment_#{data.id}"
+            /   = form_with url: "/bector/microposts/#{data.id}", remote: true, class: "app_reaction" do |f|
+            /     = f.button type: "submit" do
+            /       i.far.fa-comment.app_reaction-gray
+            /       - if reaction_count(data,type) != 0
+            /         span = reaction_count(data,type)
+            /         / モーダルを作る
+
             div id="heart_reaction_#{data.id}"
               = render "/common_layout/reaction",  type: "heart", faName: "heart", post: data, color: "pink", user: user
             div id="good_reaction_#{data.id}"

@@ -1,0 +1,99 @@
+section.common_timeLine
+  - user = User.find_by(id: @micropost.user_id)
+  .common_timeLine_data
+    .common_timeLine_data_icon
+      =link_to "/bector/users/#{user.user_id}" do
+        img src="/user_images/#{user.image_name}"
+    .common_timeLine_data_container
+      .common_timeLine_data_container_top
+        p.common_timeLine_data_container_top_name
+          = render "/data_layout/show_star_name", user: user
+        p.common_timeLine_data_container_top_id = "@#{user.user_id}"
+        p.common_timeLine_data_container_top_date = date_display(@micropost.created_at)
+
+      .common_timeLine_data_container_content
+        p= simple_format(sanitize(markdown(@micropost.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
+
+        - if type == "bector"
+          - if @micropost.tags.present?
+            - @micropost.tags.each do |tag|
+              = link_to "##{tag.name} ", "/bector/tags/#{tag.name}"
+
+      - if type == "bector"
+        - if @micropost.image_name.present?
+          img.common_timeLine_data_container_img src="/micropost_images/#{@micropost.image_name}"
+
+        .app_reactionContainer
+
+          div id="heart_reaction_#{@micropost.id}"
+            = render "/common_layout/reaction",  type: "heart", faName: "heart", post: @micropost, color: "pink", user: user
+          div id="good_reaction_#{@micropost.id}"
+            = render "/common_layout/reaction",  type: "good", faName: "thumbs-up", post: @micropost, color: "blue", user: user
+          div id="cry_reaction_#{@micropost.id}"
+            = render "/common_layout/reaction",  type: "cry", faName: "sad-tear", post: @micropost, color: "deepskyblue", user: user
+          div id="surprise_reaction_#{@micropost.id}"
+            = render "/common_layout/reaction",  type: "surprise", faName: "surprise", post: @micropost, color: "darkorange", user: user
+          div id="angry_reaction_#{@micropost.id}"
+            = render "/common_layout/reaction",  type: "angry", faName: "angry", post: @micropost, color: "red", user: user
+
+          = render "/common_layout/reportButton", data: @micropost, type: type
+
+          - if @micropost.user_id == current_user.id
+            = form_with scope: :micropost, url: "/bector/destroy", local: true do |f|
+              = f.hidden_field :post_id, :value => @micropost.id
+              = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "フラグメントを削除しますか？\n削除したフラグメントは運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
+                i.far.fa-trash-alt
+
+  - @comments.each do |comment|
+    - user = User.find_by(id: comment.user_id)
+
+    .common_timeLine_data
+
+      .common_timeLine_data_icon
+        =link_to "/bector/users/#{user.user_id}" do
+          img src="/user_images/#{user.image_name}"
+      .common_timeLine_data_container
+        .common_timeLine_data_container_top
+          i.fas.fa-reply-all
+          p.common_timeLine_data_container_top_name
+            = render "/data_layout/show_star_name", user: user
+          p.common_timeLine_data_container_top_id = "@#{user.user_id}"
+          p.common_timeLine_data_container_top_date = date_display(comment.created_at)
+
+        .common_timeLine_data_container_content
+          p= simple_format(sanitize(markdown(comment.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
+
+
+
+        / - if type == "bector"
+        /   - if data.image_name.present?
+        /     img.common_timeLine_data_container_img src="/micropost_images/#{data.image_name}"
+        /
+        /   .app_reactionContainer
+        /
+        /     / div id="comment_#{data.id}"
+        /     /   = form_with url: "/bector/microposts/#{data.id}", remote: true, class: "app_reaction" do |f|
+        /     /     = f.button type: "submit" do
+        /     /       i.far.fa-comment.app_reaction-gray
+        /     /       - if reaction_count(data,type) != 0
+        /     /         span = reaction_count(data,type)
+        /     /         / モーダルを作る
+        /
+        /     div id="heart_reaction_#{data.id}"
+        /       = render "/common_layout/reaction",  type: "heart", faName: "heart", post: data, color: "pink", user: user
+        /     div id="good_reaction_#{data.id}"
+        /       = render "/common_layout/reaction",  type: "good", faName: "thumbs-up", post: data, color: "blue", user: user
+        /     div id="cry_reaction_#{data.id}"
+        /       = render "/common_layout/reaction",  type: "cry", faName: "sad-tear", post: data, color: "deepskyblue", user: user
+        /     div id="surprise_reaction_#{data.id}"
+        /       = render "/common_layout/reaction",  type: "surprise", faName: "surprise", post: data, color: "darkorange", user: user
+        /     div id="angry_reaction_#{data.id}"
+        /       = render "/common_layout/reaction",  type: "angry", faName: "angry", post: data, color: "red", user: user
+        /
+        /     = render "/common_layout/reportButton", data: data, type: type
+        /
+        /     - if data.user_id == current_user.id
+        /       = form_with scope: :micropost, url: "/bector/destroy", local: true do |f|
+        /         = f.hidden_field :post_id, :value => data.id
+        /         = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "フラグメントを削除しますか？\n削除したフラグメントは運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
+        /           i.far.fa-trash-alt

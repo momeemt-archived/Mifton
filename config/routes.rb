@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   get "/bector/users/:user_id", to:"bector#index"
   get "/bector/tags/:tag", to:"bector#tags"
   post "/bector/destroy", to:"bector#destroy"
-  resources :bector
+  resources :bector, only: [:create, :destroy, :index]
+  get "/bector/microposts/:id", to: "bector#show"
+  post "/bector/microposts/:id", to: "bector#comment"
 
   # Users
   get "/users/edit", to: "users#edit"

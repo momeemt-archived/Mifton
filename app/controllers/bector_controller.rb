@@ -1,5 +1,5 @@
 class BectorController < ApplicationController
-  before_action :add_users_and_infos, only: [:global, :friends, :tags, :index, :reactions]
+  before_action :add_users_and_infos, only: [:global, :friends, :tags, :index, :reactions, :show]
   def index
 
     if !current_user.nil?
@@ -31,6 +31,12 @@ class BectorController < ApplicationController
       @microposts = Micropost.all
       @users = User.all
     end
+  end
+
+  def comment
+    @comment = current_user.comments.build(comment_params)
+    @comment.save
+    redirect_back(fallback_location: root_path)
   end
 
   def reactions
@@ -124,6 +130,11 @@ class BectorController < ApplicationController
     redirect_to bector_index_url
   end
 
+  def show
+    @micropost  = Micropost.find_by(id: params[:id])
+    @comments = Comment.where(parent_model: "bector", parent_id: params[:id])
+  end
+
   private
   def micropost_params
    params.require(:micropost).permit(
@@ -135,6 +146,15 @@ class BectorController < ApplicationController
     params.require(:direct_message).permit(
       :message,
       :target_user
+    )
+  end
+
+  def comment_params
+    params.require(:comment).permit(
+      :content,
+      :image_name,
+      :parent_model,
+      :parent_id
     )
   end
 

@@ -8,12 +8,27 @@
     }
 
     &_data {
+
+
       border-top: 0.5px dashed #007bbb;
       display: flex;
       flex: flex-start;
       background-color: white;
 
+      &:hover {
+        background-color: #f3f3f2;
+      }
 
+      position: relative;
+
+      &_link {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height:100%;
+        width: 100%;
+      }
 
       &_container {
         width: 90%;
@@ -81,4 +96,6 @@
     }
 
   }
+
+  
 }
