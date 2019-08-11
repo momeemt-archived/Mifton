@@ -1,0 +1,31 @@
+@media screen and (min-width:1024px) and (max-width:1439px) {
+  .common {
+    &_release {
+      &_container {
+        textarea {
+          width: 80%;
+          font-size: 16px;
+        }
+
+        input[type="text"] {
+          width: 80%;
+          font-size: 13px;
+        }
+
+        input[type="submit"] {
+          margin-right: 15%;
+          font-size: 15px;
+          padding: 2px 8px;
+        }
+
+        input[type="file"] {
+          display: none;
+        }
+
+        i {
+          font-size: 26px;
+        }
+      }
+    }
+  }
+}

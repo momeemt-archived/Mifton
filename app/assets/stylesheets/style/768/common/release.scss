@@ -1,0 +1,33 @@
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .common {
+    &_release {
+      &_container {
+        &_icon {
+          display: none;
+        }
+        form,p {
+          margin: 0 5px;
+        }
+        textarea {
+          width: 90%;
+          font-size: 13px;
+        }
+
+        input[type="text"] {
+          width: 90%;
+          font-size: 11px;
+        }
+
+        input[type="submit"] {
+          margin-right: 3%;
+          font-size: 15px;
+          padding: 2px 8px;
+        }
+
+        i {
+          font-size: 22px;
+        }
+      }
+    }
+  }
+}
