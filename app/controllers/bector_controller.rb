@@ -4,12 +4,6 @@ class BectorController < ApplicationController
 
     if !current_user.nil?
 
-      @users_name_array = []
-      @users.each do |user|
-        next if user == current_user
-        @users_name_array << "@" + user.user_id
-      end
-
       if params[:user_id]
         if User.find_by(user_id: params[:user_id]).present?
           @microposts = Micropost.where(user_id: User.find_by(user_id: params[:user_id]).id)
@@ -36,6 +30,17 @@ class BectorController < ApplicationController
   def comment
     @comment = current_user.comments.build(comment_params)
     @comment.save
+
+    unless Micropost.find(@comment.parent_id).user_id == current_user.id
+      @information = Information.new(
+        user_id: current_user.id,
+        from_any_service: "comment",
+        starting_point_user: Micropost.find(@comment.parent_id).user_id,
+        content: "あなたの投稿にコメントをしました。",
+        target_object: @comment.id
+      )
+      @information.save
+    end
     redirect_back(fallback_location: root_path)
   end
 
@@ -46,7 +51,6 @@ class BectorController < ApplicationController
     #   @microposts << Micropost.find_by(id: reaction.reactioned_id)
     # end
   end
-
 
   def global
     @users = User.all
@@ -64,6 +68,13 @@ class BectorController < ApplicationController
       end
     end
     @microposts = @microposts.sort.reverse
+    render :index
+  end
+
+  def media
+    @users = User.all
+    @microposts = Micropost.all
+    @informations = current_user.informations
     render :index
   end
 
@@ -159,14 +170,16 @@ class BectorController < ApplicationController
   end
 
   def add_users_and_infos
-    @users = User.all
-    @informations = current_user.informations
+    if !current_user.nil?
+      @users = User.all
+      @informations = current_user.informations
 
-    user_raw_data = User.find_by(user_id: params[:user_id])
-    if user_raw_data.present?
-      @user = user_raw_data
-    else
-      @user = current_user
+      user_raw_data = User.find_by(user_id: params[:user_id])
+      if user_raw_data.present?
+        @user = user_raw_data
+      else
+        @user = current_user
+      end
     end
   end
 

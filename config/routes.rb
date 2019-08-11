@@ -73,14 +73,15 @@ Rails.application.routes.draw do
   end
 
   # Crafes!
-  get "/crafes/about", to: "crafes#about"
-  resources :crafes
-  resources :contests do
-    get "/problem_1", to: "contests#problem_1"
-    get "/problem_2", to: "contests#problem_2"
-    get "/problem_3", to: "contests#problem_3"
-    get "/problem_4", to: "contests#problem_4"
-  end
+  get "/crafes", to: "crafes#index"
+  get "/crafes/about"
+  get "/crafes/schedule"
+  get "/crafes/finished"
+  get "/crafes/contest/:id", to: "crafes#show_contest"
+  get "/crafes/questions"
+  get "/crafes/question/:id", to: "crafes#show_question"
+
+
 
   resources :users do
     member do
@@ -89,6 +90,7 @@ Rails.application.routes.draw do
   end
   resources :relationships,       only: [:create, :destroy]
 
-
+  resources :account_activations, only: [:edit]
+  
   get "/:id", to: "users#show"
 end

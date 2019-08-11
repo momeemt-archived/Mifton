@@ -37,7 +37,7 @@ class ManageContestsController < ApplicationController
   private
 
   def contest_params
-   params.require(:contest).permit(
+   params.require(:contests).permit(
      :name,
      :times,
      :start_datetime,

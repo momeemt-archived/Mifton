@@ -63,3 +63,5 @@ section.common_timeLine
         - elsif type == "home"
           - if data.from_any_service == "bector"
             p= simple_format(sanitize(markdown(Micropost.find(data.target_object).content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
+          - elsif data.from_any_service == "comment"
+            p= simple_format(sanitize(markdown(Comment.find(data.target_object).content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)

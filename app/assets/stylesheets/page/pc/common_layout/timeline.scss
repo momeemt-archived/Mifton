@@ -24,9 +24,9 @@
       &_link {
         display: block;
         position: absolute;
-        top: 0;
+        top: 20;
         left: 0;
-        height:100%;
+        height:calc(100% - 25px);
         width: 100%;
       }
 
@@ -68,14 +68,15 @@
         }
 
         &_report {
-          color: #afafb0;
-          font-size: 13px;
+          color: gray;
+          font-size: 16px;
           padding: 0 10px;
           border: none;
           outline: none;
+          background-color: rgba(0,0,0,0);
 
           &:visited {
-            color: #afafb0;
+            color: gray;
           }
         }
 
@@ -97,5 +98,5 @@
 
   }
 
-  
+
 }

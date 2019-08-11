@@ -9,6 +9,7 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     model:
       contest: コンテスト
+      micropost: 投稿
     attributes:
       contest: &contest
         id: ID

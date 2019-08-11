@@ -1,14 +1,6 @@
-## 共通スタイルシート
-B = app のクラス命名
+全てのページ
 
-Controller {
-  Block {
-    Element {
-      Modi. {
+.layout
+  .layout_1p4
 
-      }
-    }
-  }
-}
-
-Block ごとに scss を切り分ける
+  .layout_1p2.layout_strict

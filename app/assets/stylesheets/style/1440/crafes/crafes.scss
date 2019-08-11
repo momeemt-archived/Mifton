@@ -1,0 +1,26 @@
+.crafes {
+  &_noticeLine {
+    margin-top: 10px;
+    article {
+      margin-top: 10px;
+      padding: 3px 10px;
+      border-radius: 5px;
+      background-color: white;
+
+      hr {
+        margin-top: 5px;
+        border: 0.5px solid gray;
+      }
+    }
+
+    &_title {
+      display: block;
+      font-size: 1.2em;
+      padding: 5px;
+    }
+
+    &_detail {
+      margin-top: 10px;
+    }
+  }
+}

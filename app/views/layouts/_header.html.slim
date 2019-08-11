@@ -10,10 +10,6 @@
         i.fas.fa-users
         = "Bector"
     .application_header_naviList_group
-      =link_to "/crafes" do
-        i.fas.fa-chess
-        = "Crafes!"
-    .application_header_naviList_group
       =link_to "https://twitter.com/momeemt" do
         i.fab.fa-twitter
         = "開発者"
@@ -23,6 +19,11 @@
           =link_to "/manages" do
             i.fas.fa-users-cog
             = "管理者"
+
+        .application_header_naviList_group
+          =link_to "/crafes" do
+            i.fas.fa-chess
+            = "Crafes! (開発中)"
 
       .application_header_naviList_group
         =link_to "/logout/#{type}", :method => "delete" do

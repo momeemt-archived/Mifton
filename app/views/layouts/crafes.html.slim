@@ -4,6 +4,7 @@ html
     title = contests_title(yield(:title))
     = render 'layouts/rails_default'
     = render 'layouts/shim'
+    = favicon_link_tag('favicon.ico')
   body.crafes
     header= render "layouts/header", type:"crafes"
     main= yield

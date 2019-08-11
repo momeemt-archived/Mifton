@@ -9,7 +9,7 @@ section.common_timeLine
         p.common_timeLine_data_container_top_name
           = render "/data_layout/show_star_name", user: user
         p.common_timeLine_data_container_top_id = "@#{user.user_id}"
-        p.common_timeLine_data_container_top_date = date_display(@micropost.created_at)
+        p.common_timeLine_data_container_top_date = @micropost.created_at.strftime("%Y年%m月%d日%H時%M分")
 
       .common_timeLine_data_container_content
         p= simple_format(sanitize(markdown(@micropost.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
@@ -41,7 +41,7 @@ section.common_timeLine
           - if @micropost.user_id == current_user.id
             = form_with scope: :micropost, url: "/bector/destroy", local: true do |f|
               = f.hidden_field :post_id, :value => @micropost.id
-              = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "フラグメントを削除しますか？\n削除したフラグメントは運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
+              = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "投稿を削除しますか？\n削除した投稿は運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
                 i.far.fa-trash-alt
 
   - @comments.each do |comment|

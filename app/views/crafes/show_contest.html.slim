@@ -1,0 +1,71 @@
+.lay
+  - @user = current_user
+  / ユーザー情報
+  .lay_1p4.lay_sticky.lay_100vh
+    = render "/common_layout/userInfo"
+  / タイムライン
+  .lay_1p2
+
+    section.crafes_showContest
+    h1= @contest.name
+    p= "開催時刻: #{@contest.start_datetime.strftime("%Y年%m月%d日%H時%M分より")}"
+    p= "コンテスト時間: #{@contest.duration}分"
+    p= "レーティング変化: ~#{@contest.rated_range}"
+
+    p 参加登録
+    p contest_join モデルに登録させて、登録者のみコンテスト時間後に問題をチェック可能
+
+    h2 問題
+    table
+      tr
+        td= link_to "#{@questions.find(@contest.question1_id).title}", "/crafes/question/#{@contest.question1_id}"
+        td= "#{@questions.find(@contest.question1_id).score}点"
+        td= "#{@questions.find(@contest.question1_id).writer}"
+
+  / メニュー
+  .lay_1p4.lay_sticky.lay_100vh
+    section.crafes_sideBar_searchForm
+      = form_with url: "/bector/search/", local: true do |f|
+        = f.text_field :user_id, placeholder: "コンテスト/問題検索"
+
+    section.crafes_sideBar_menuTab
+      = link_to "/crafes" do
+        p
+          i.fas.fa-home
+          = "ホーム"
+      = link_to "/crafes/custom/plan" do
+        p
+          i.fas.fa-flag
+          = "開催中・予定されたコンテスト"
+      = link_to "/crafes/custom/past" do
+        p
+          i.fas.fa-check
+          = "終了したコンテスト"
+      = link_to "/crafes/questions" do
+        p
+          i.fas.fa-list
+          = "問題リスト"
+      = link_to "/crafes/" do
+        p
+          i.far.fa-bookmark
+          = "ブックマーク"
+      = link_to "/crafes/ranking" do
+        p
+          i.fas.fa-crown
+          = "ランキング"
+      = link_to "/crafes/new" do
+        p
+          i.fas.fa-paper-plane
+          = "問題を作る"
+      = link_to "/crafes/" do
+        p
+          i.fas.fa-cog
+          = "ユーザー設定"
+      = link_to "/crafes/" do
+        p
+          i.far.fa-question-circle
+          = "ヘルプ"
+      = link_to "/" do
+        p
+          i.fas.fa-chevron-left
+          = "Miftonに戻る"
