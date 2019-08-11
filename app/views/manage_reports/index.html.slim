@@ -1,22 +1,21 @@
-.main
-  .user_index
+.lay
+  .lay_1p4.lay_sticky.lay_100vh
+    section.be_menuTab
+      = render "/layouts/components/manage_menu"
 
-    = render 'layouts/admins-menu-wrapper'
+  .lay_3p4
 
+    h1 報告一覧
 
-    .user_index__content-wrapper
-      .user_index__content-wrapper--container
-        h1 報告一覧
-
-        table
-          tr
-            th 報告したユーザー
-            th 報告されたユーザー
-            th 報告されたオブジェクト
-            th 報告された理由
-          - @reports.each do |report|
-            tr
-              td= "@#{User.find_by(id: report.user_id).user_id}"
-              td= "@#{User.find_by(id: Micropost.find_by(id: report.reported_object_id).user_id).user_id}"
-              td= Micropost.find_by(id: report.reported_object_id).content
-              td= report.report_reason
+    table
+      tr
+        th 報告したユーザー
+        th 報告されたユーザー
+        th 報告されたオブジェクト
+        th 報告された理由
+      - @reports.each do |report|
+        tr
+          td= "@#{User.find_by(id: report.user_id).user_id}"
+          td= "@#{User.find_by(id: Micropost.find_by(id: report.reported_object_id).user_id).user_id}"
+          td= Micropost.find_by(id: report.reported_object_id).content
+          td= report.report_reason

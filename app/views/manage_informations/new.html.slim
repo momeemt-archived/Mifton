@@ -1,19 +1,13 @@
-.main
-  .admins_new
+h1 通知作成
+hr
+= form_with scope: :information, url: manage_informations_url , local: true do |f|
+  table
+    tbody
+      tr
+        td 受信ユーザー
+        td= f.select :user_id, @users_name_array
+      tr
+        td= f.label :content, "内容"
+        td= f.text_area :content
 
-    = render 'layouts/admins-menu-wrapper'
-
-    .admins_new__content-wrapper
-      .admins_new__content-wrapper--container
-        h1 通知作成
-        = form_with scope: :information, url: manage_informations_url , local: true do |f|
-          table
-            tbody
-              tr
-                td 受信ユーザー
-                td= f.select :user_id, @users_name_array
-              tr
-                td= f.label :content, "内容"
-                td= f.text_field :content
-
-          = f.submit '登録する', class: 'admins_new__content-wrapper--container--submit'
+  = f.submit '登録する', class: 'admins_new__content-wrapper--container--submit'

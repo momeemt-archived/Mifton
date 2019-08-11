@@ -1,70 +1,46 @@
-.main
-  .user_index
+h1 ユーザーリスト
+hr
 
-    = render 'layouts/admins-menu-wrapper'
-
-
-    .user_index__content-wrapper
-      .user_index__content-wrapper--container
-        h1 ユーザー一覧
-
-        .user_index__content-wrapper--container--nav
-          = paginate @users
-          = page_entries_info @users
-
-        .user_index__content-wrapper--container--search-form
-          details
-            summary 詳細な検索
-            = search_form_for(@q, url: manage_users_path) do |f|
-              table
-                tbody
-                  tr
-                    td= f.label :name_cont, 'ユーザー名'
-                    td= f.search_field :name_cont
-                  - if than_admin
-                    tr
-                      td= f.label :email_cont, "メールアドレス"
-                      td= f.search_field :email_cont
-              = f.submit class:"user_index__content-wrapper--container--search-form--submit"
+/ .user_index__content-wrapper--container--nav
+/   = paginate @users
+/   = page_entries_info @users
+/
+/ .user_index__content-wrapper--container--search-form
+/   details
+/     summary 詳細な検索
+/     = search_form_for(@q, url: manage_users_path) do |f|
+/       table
+/         tbody
+/           tr
+/             td= f.label :name_cont, 'ユーザー名'
+/             td= f.search_field :name_cont
+/           - if than_admin
+/             tr
+/               td= f.label :email_cont, "メールアドレス"
+/               td= f.search_field :email_cont
+/       = f.submit class:"user_index__content-wrapper--container--search-form--submit"
 
 
 
 
 
-        table
-          tr
-            th
-            th= User.human_attribute_name(:id)
-            th= User.human_attribute_name(:name)
-            th ユーザーID
-            - if than_admin
-              th= User.human_attribute_name(:email)
-            th 運営権限
-            th 開発権限
-            th テスト
-            th 被通報値
-            th 被信頼値
-            -if than_admin
-              th
-              th
-          tbody
-          - @users.each do |user|
-            tr
-              td
-                input type="checkbox"
-              td= user.id
-              - if than_admin
-                td= link_to user.name, "/manage_users/#{user.user_id}"
-              - else
-                td= user.name
-              td= "@#{user.user_id}"
-              - if than_admin
-                td= user.email
-              td= user.authority.manage_pos
-              td= user.authority.dev_pos
-              td= user.is_test_user
-              td= user.reported_value
-              td= user.trusted_value
-              - if than_admin
-                td= link_to '編集', "/manage_users/#{user.user_id}"
-                td= link_to '削除', "/manage_users/#{user.user_id}", method: :delete, data: {confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"}
+table
+  tr
+    th= User.human_attribute_name(:id)
+    th= User.human_attribute_name(:name)
+    th ユーザーID
+    th 登録日
+
+  tbody
+  - @users.each do |user|
+    tr
+      td= user.id
+      - if user.name.length > 15
+        td= "#{user.name.slice(0,15)}..."
+      - else
+        td= user.name
+      - if than_admin
+        td= link_to "@#{user.user_id}", "/manage_users/#{user.user_id}"
+      - else
+        td= "@#{user.user_id}"
+      td= user.created_at.strftime("%Y/%m/%d")

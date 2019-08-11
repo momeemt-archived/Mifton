@@ -1,24 +1,16 @@
-.main
-  .user_index
+h1 コンテスト一覧
 
-    = render 'layouts/admins-menu-wrapper'
-
-
-    .user_index__content-wrapper
-      .user_index__content-wrapper--container
-        h1 コンテスト一覧
-
-        table
-          tr
-            th ID
-            th コンテスト名
-            th 開催時刻
-            th コンテストタイプ
-            th 公開中？
-          - @contests.each do |contest|
-            tr
-              td= contest.id
-              td= link_to "#{contest.name} ##{contest.times}", "/manage_contests/#{contest.id}"
-              td= contest.start_datetime
-              td= contest.contest_type
-              td= contest.is_public
+table
+  tr
+    th ID
+    th コンテスト名
+    th 開催時刻
+    th コンテストタイプ
+    th 公開中？
+  - @contests.each do |contest|
+    tr
+      td= contest.id
+      td= link_to "#{contest.name} ##{contest.times}", "/manage_contests/#{contest.id}"
+      td= contest.start_datetime
+      td= contest.contest_type
+      td= contest.is_public

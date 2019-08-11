@@ -1,25 +1,17 @@
-.main
-  .user_index
+h1 通知一覧
+p Mifton内で作成された通知が全て表示されます。
 
-    = render 'layouts/admins-menu-wrapper'
-
-
-    .user_index__content-wrapper
-      .user_index__content-wrapper--container
-        h1 通知一覧
-        p Mifton内で作成された通知が全て表示されます。
-
-        table
-          tbody
-            tr
-              th 通知を受け取ったユーザー
-              th 内容
-              th 作成日時
-              th
-            - @informations.each do |info|
-              tr
-                - info_get_user = @users.find_by(id: info.user_id).user_id
-                td= link_to "@" + info_get_user, "/manage_users/#{info_get_user}"
-                td= info.content
-                td= info.created_at.strftime("%Y %m/%d %H:%M")
-                td= link_to "削除", "/manage_informations/#{info.id}", method: :delete, data: {confirm: "投稿「#{info.content}」を削除します。よろしいですか？"}
+table
+  tbody
+    tr
+      th 通知を受け取ったユーザー
+      th 内容
+      th 作成日時
+      th
+    - @informations.each do |info|
+      tr
+        - info_get_user = @users.find_by(id: info.user_id).user_id
+        td= link_to "@" + info_get_user, "/manage_users/#{info_get_user}"
+        td= info.content
+        td= info.created_at.strftime("%Y %m/%d %H:%M")
+        td= link_to "削除", "/manage_informations/#{info.id}", method: :delete, data: {confirm: "投稿「#{info.content}」を削除します。よろしいですか？"}
