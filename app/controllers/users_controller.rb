@@ -40,14 +40,28 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update!(user_params)
-    redirect_to "/", notice: "ユーザー「#{@user.name}」を更新しました。"
+    current_user.update!(user_params)
+    current_user.user_traffic.update(user_traffic_params)
+    redirect_to "/users/edit"
   end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :user_id, :password, :password_confirmation)
+  end
+
+  def user_traffic_params
+    params.require(:user).permit(
+      :profile,
+      :location,
+      :user_link,
+      :birthday,
+      :twitter_id,
+      :lobi_id,
+      :github_id,
+      :discord_id
+    )
   end
 
   def set_user

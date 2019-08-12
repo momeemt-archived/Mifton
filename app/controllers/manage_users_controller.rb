@@ -19,6 +19,10 @@ class ManageUsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      a = @user.build_authority(authority_params)
+      a.save
+      t = @user.build_user_traffic
+      t.save
       redirect_to manage_users_url, notice: "ユーザー「#{@user.name}を登録しました。」"
     else
       render :new
@@ -79,7 +83,7 @@ class ManageUsersController < ApplicationController
   end
 
   def authority_params
-    params.require(:authority).permit(
+    params.require(:user).permit(
       :manage_pos,
       :dev_pos,
       :donor_amount

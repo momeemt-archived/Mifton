@@ -1,36 +1,47 @@
-.lay
+.lay.manages
   - if login?
     / ユーザー情報
     .lay_1p4.lay_sticky.lay_100vh
       = render "/common_layout/userInfo"
 
-    .lay_1p2
+    .lay_3p4
       h1 プロフィールを編集
+      hr
 
-      = form_with scope:"edit", url:"/users/edit", local: true do |f|
-        .form-group
-          = f.label :name, "名前"
-          = f.text_field :name
+      = form_with scope:"user", url:"/users/update", local: true do |f|
+        table
+          tr
+            td= f.label :name, "名前"
+            td= f.text_field :name
+          tr
+            td= f.label :user_id, "ユーザーID"
+            td= f.text_field :user_id
+          tr
+            td= f.label :password
+            td= f.text_field :password
+          tr
+            td= f.label :profile, "自己紹介"
+            td= f.text_area :profile, value: current_user.user_traffic.profile
+          tr
+            td= f.label :location, "場所"
+            td= f.text_field :location, value: current_user.user_traffic.location
+          tr
+            td= f.label :user_link, "ウェブサイト"
+            td= f.text_field :user_link, value: current_user.user_traffic.user_link
+          tr
+            td= f.label :birthday, "誕生日"
+            td= f.date_select :birthday, value: current_user.user_traffic.birthday
+          tr
+            td= f.label :twitter, "TwitterID"
+            td= f.text_field :twitter, value: current_user.user_traffic.twitter_id
+          tr
+            td= f.label :lobi, "Lobi ID"
+            td= f.text_field :lobi, value: current_user.user_traffic.lobi_id
+          tr
+            td= f.label :github, "Github ID"
+            td= f.text_field :github, value: current_user.user_traffic.github_id
+          tr
+            td= f.label :discord, "Discord ID"
+            td= f.text_field :discord, value: current_user.user_traffic.discord_id
 
-        .form-group
-          = f.label :user_id, "ユーザーID"
-          = f.text_field :user_id
-
-
-        .form-group
-          = f.label :password
-          = f.text_field :password
-        = f.label :authority
-        .form-group
-          = f.radio_button :authority, "general"
-          = f.label :authority, "一般ユーザー", value:"general"
-        .form-group
-          = f.radio_button :authority, "trust_user"
-          = f.label :authority, "信頼ユーザー", value:"trust_user"
-        .form-group
-          = f.radio_button :authority, "staff"
-          = f.label :authority, "スタッフ", value:"staff"
-        .form-group
-          = f.radio_button :authority, "admin"
-          = f.label :authority, "管理者", value:"admin"
-        = f.submit nil
+        = f.submit

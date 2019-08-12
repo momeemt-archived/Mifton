@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   # Users
   get "/users/edit", to: "users#edit"
+  post "/users/update", to: "users#update"
   resources :users, only:  [:update, :destroy]
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
@@ -91,6 +92,6 @@ Rails.application.routes.draw do
   resources :relationships,       only: [:create, :destroy]
 
   resources :account_activations, only: [:edit]
-  
+
   get "/:id", to: "users#show"
 end

@@ -22,7 +22,7 @@ hr
         td= f.password_field :password_confirmation, class: 'form-control', value: "password"
       tr
         td= f.label :authority, '権限'
-        td= f.select :authority, ["general","trust_user","staff","admin"]
+        td= f.select :manage_pos, ["general","trust_user","staff","admin"]
       tr
         td= f.label :is_test_user, 'テストユーザー'
         td= f.check_box :is_test_user, {:checked => true}
