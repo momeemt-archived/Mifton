@@ -21,9 +21,13 @@ class BectorController < ApplicationController
         @microposts = @microposts.sort.reverse
       end
 
+      render :index
+
     else
       @microposts = Micropost.all
       @users = User.all
+
+      render :top
     end
   end
 

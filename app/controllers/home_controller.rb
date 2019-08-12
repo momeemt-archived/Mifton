@@ -5,8 +5,15 @@ class HomeController < ApplicationController
       render :top_logined
     else
       @user = User.new(user_params)
-      @user.user_id = params[:name]
-      if @user.save
+      @user.name = params[:user_id]
+      if @user.save && verify_recaptcha
+        authority = @user.build_authority
+        authority.save
+        user_traffic = @user.build_user_traffic
+        user_traffic.save
+        session[:user_id] = @user.id
+        admin = User.find_by(user_id: "mifton")
+        @user.follow(admin)
         redirect_to users_path, notice: "ユーザー「#{@user.name}を登録しました。」"
       else
         render :top_not_logined
@@ -17,6 +24,9 @@ class HomeController < ApplicationController
   def about
   end
 
+  def terms
+  end
+
   def authority
     @users = User.all
   end
@@ -24,7 +34,7 @@ class HomeController < ApplicationController
   private
 
   def user_params
-    params.permit(:name, :user_id, :email, :password, :password_confirmation)
+    params.permit(:user_id, :email, :password, :password_confirmation)
   end
 
   def set_user
