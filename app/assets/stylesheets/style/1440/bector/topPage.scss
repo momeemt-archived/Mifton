@@ -1,0 +1,22 @@
+@media screen and (min-width:1440px) {
+
+
+  .bector_topPage {
+    background-image: url("/bector-top.jpg");
+
+    background-size: cover;
+    height: calc(100vh - 50px);
+
+    &_descript {
+      h1 {
+        font-size: 50px;
+        color: white;
+      }
+
+      p {
+        font-size: 18px;
+        color: white;
+      }
+    }
+  }
+}
