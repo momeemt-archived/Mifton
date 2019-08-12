@@ -89,24 +89,24 @@ class BectorController < ApplicationController
   end
 
   def create
-    if params[:direct_message]
-      @direct_message = current_user.direct_messages.build(direct_message_params)
-
-      if @direct_message.save
-        redirect_to bector_index_url
-      else
-        render :index
-      end
-
-    elsif params[:micropost]
-      puts params
+    # if params[:direct_message]
+    #   @direct_message = current_user.direct_messages.build(direct_message_params)
+    #
+    #   if @direct_message.save
+    #     redirect_to bector_index_url
+    #   else
+    #     render :index
+    #   end
+    #
+    # els
+    if params[:micropost]
       @micropost = current_user.microposts.build(micropost_params)
-      image_flg = false
-      if params[:micropost][:image]
-        image_flg = true
-        image = params[:micropost][:image]
-        File.binwrite("public/micropost_images/undecide.png", image.read)
-      end
+      # image_flg = false
+      # if params[:micropost][:image]
+      #   image_flg = true
+      #   image = params[:micropost][:image]
+      #   File.binwrite("public/micropost_images/undecide.png", image.read)
+      # end
 
 
 
@@ -118,11 +118,11 @@ class BectorController < ApplicationController
           @tag.name = tag
           @tag.save
         end
-        if image_flg
-          @micropost.image_name = "#{@micropost.id}.png"
-          File.rename("public/micropost_images/undecide.png", "public/micropost_images/#{@micropost.image_name}")
-          @micropost.save
-        end
+        # if image_flg
+        #   @micropost.image_name = "#{@micropost.id}.png"
+        #   File.rename("public/micropost_images/undecide.png", "public/micropost_images/#{@micropost.image_name}")
+        #   @micropost.save
+        # end
         redirect_back(fallback_location: root_path)
       else
         render :index
@@ -149,7 +149,8 @@ class BectorController < ApplicationController
   private
   def micropost_params
    params.require(:micropost).permit(
-     :content
+     :content,
+     images: []
     )
   end
 

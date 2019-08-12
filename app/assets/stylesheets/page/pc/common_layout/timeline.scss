@@ -24,10 +24,11 @@
       &_link {
         display: block;
         position: absolute;
-        top: 20;
+        top: 0;
         left: 0;
-        height:calc(100% - 25px);
+        height:calc(100% - 27px);
         width: 100%;
+        z-index: 0;
       }
 
       &_container {

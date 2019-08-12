@@ -5,9 +5,9 @@ section.common_release
       p= f.text_area :content, placeholder: "進捗や日常の体験を発信しよう"
       p= f.text_field :tags, placeholder: "タグ(スペース区切りで5個まで)", value: ""
       .preview
-      = f.label :image
+      = f.label :images
         i.far.fa-images
-      = f.file_field :image
+      = f.file_field :images, multiple: true
 
       = f.label :topic
         i.far.fa-sticky-note

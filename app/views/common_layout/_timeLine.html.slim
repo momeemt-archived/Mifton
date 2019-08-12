@@ -28,8 +28,9 @@ section.common_timeLine
                 = link_to "##{tag.name} ", "/bector/tags/#{tag.name}"
 
         - if type == "bector"
-          - if data.image_name.present?
-            img.common_timeLine_data_container_img src="/micropost_images/#{data.image_name}"
+          - if data.images.attached?
+            - data.images.each do |image|
+              = image_tag image, class:"common_timeLine_data_container_img"
 
           .app_reactionContainer
 
