@@ -5,20 +5,23 @@ class BectorController < ApplicationController
     if !current_user.nil?
 
       if params[:user_id]
-        if User.find_by(user_id: params[:user_id]).present?
-          @microposts = Micropost.where(user_id: User.find_by(user_id: params[:user_id]).id)
+        target_user = User.find_by(user_id: params[:user_id])
+        if target_user.present?
+          @microposts = Micropost.where(user_id: target_user.id)
         else
           redirect_to "/bector"
         end
 
       else
 
+        ## OPEN
         @microposts = Micropost.where(user_id: current_user.id)
         follow_users = current_user.following
         follow_users.each do |user|
           @microposts += Micropost.where(user_id: user.id)
         end
         @microposts = @microposts.sort.reverse
+        ##
       end
 
       render :index

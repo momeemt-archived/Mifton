@@ -5,21 +5,21 @@
       img.tc_leftWrapper_currentUserInfo_userIconImg src="/user_images/#{@user.image_name}"
       .tc_leftWrapper_currentUserInfo_conditionCard
         p.tc_leftWrapper_currentUserInfo_conditionCard_userName
-          = render "/data_layout/show_star_name", user: @user
+          = render "components/show_star_name", user: @user
         p.tc_leftWrapper_currentUserInfo_conditionCard_userID= "@#{@user.user_id}"
 
         .tc_leftWrapper_currentUserInfo_conditionCard_line
-          = render "/data_layout/current_user_data", dataname: "フォロー", data: @user.following.count
-          = render "/data_layout/current_user_data", dataname: "フォロワー", data: @user.followers.count
+          = render "components/current_user_data", dataname: "フォロー", data: @user.following.count
+          = render "components/current_user_data", dataname: "フォロワー", data: @user.followers.count
 
         .tc_leftWrapper_currentUserInfo_conditionCard_line
-          = render "/data_layout/current_user_data", dataname: "プロフィール", data: @user.profile
+          = render "components/current_user_data", dataname: "プロフィール", data: @user.profile
 
         .tc_leftWrapper_currentUserInfo_conditionCard_line
-          = render "/data_layout/current_user_data", dataname: "Pin Address", data: @user.location
+          = render "components/current_user_data", dataname: "Pin Address", data: @user.location
 
         .tc_leftWrapper_currentUserInfo_conditionCard_line
-          = render "/data_layout/current_user_data", dataname: "アカウント作成日", data: @user.created_at.strftime("%Y年%m月%d日")
+          = render "components/current_user_data", dataname: "アカウント作成日", data: @user.created_at.strftime("%Y年%m月%d日")
 
         .tc_leftWrapper_currentUserInfo_conditionCard_line
           .tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup

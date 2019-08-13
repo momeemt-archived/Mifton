@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  resources :anmitsu
+
   # Home
   root to: "home#top"
+  post "/", to: "home#top"
   get "/about", to: "home#about"
   get "/authority", to: "home#authority"
   get "/help", to: "home#help"
   get "/policy", to: "home#policy"
   get "/terms", to: "home#terms" # 利用規約
+
 
   # Bector
   get "/bector/top", to: "bector#top"
@@ -30,6 +32,7 @@ Rails.application.routes.draw do
   resources :users, only:  [:update, :destroy]
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
+  get "/exit", to: "users#exit"
 
 
   post "/reports/", to: "reports#show"

@@ -1,5 +1,5 @@
 h1
-  = render "/data_layout/show_star_name", user: @user
+  = render "components/show_star_name", user: @user
 
 = form_with scope: :user, url: "/manage_users/#{@user.user_id}" ,multipart: true , local: true do |f|
   table

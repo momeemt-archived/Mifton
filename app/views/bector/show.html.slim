@@ -2,7 +2,7 @@
   - if login?
     / ユーザー情報
     .lay_1p4.lay_sticky.lay_100vh
-      = render "/common_layout/userInfo"
+      = render "components/userInfo"
     / タイムライン
     .lay_1p2
       = render "showTop"
@@ -10,8 +10,4 @@
       = render "comment"
     / メニュー
     .lay_1p4.lay_sticky.lay_100vh
-      = render "function_menu"
-
-  - else
-    .lay_1p1
-      = render "logout_bector"
+      = render "bector/components/sidemenu"

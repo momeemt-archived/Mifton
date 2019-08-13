@@ -32,7 +32,10 @@
       .application_header_naviList_group
         =link_to "/users/edit" do
           .application_header_naviList_group-image
-            img src="/user_images/#{current_user.image_name}"
+            - if current_user.icon.attached?
+              = image_tag current_user.icon
+            - else
+              = image_tag "/user_images/default_icon.png"
     - else
       .application_header_naviList_group
         =link_to "/login/id" do

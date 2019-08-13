@@ -45,10 +45,13 @@ class UsersController < ApplicationController
     redirect_to "/users/edit"
   end
 
+  def exit
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :user_id, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :user_id, :password, :password_confirmation,:icon)
   end
 
   def user_traffic_params

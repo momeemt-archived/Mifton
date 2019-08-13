@@ -1,21 +1,12 @@
 .lay
   - @user = current_user
 
-  .lay_1p4.lay_sticky.lay_100vh
-    = render "/common_layout/userInfo"
+  .lay_1p4.lay_sticky
+    = render "components/userInfo"
 
   .lay_1p2
-    = render "/common_layout/timeLine", datas: @informations, type: "home"
+    = render "home/components/feed", datas: @informations, type: "home"
 
-  .lay_1p4.lay_sticky.lay_100vh
-    = render "/data_layout/search_form", type: "be", url: "/bector/search/", param: ":user_id"
+  .lay_1p4.lay_sticky
 
-    section.be_menuTab
-      = render "/data_layout/menuTab", u: "/", f:"home", d: "ホーム"
-      = render "/data_layout/menuTab", u: bector_index_url, f:"cog", d: "ユーザー設定"
-      = render "/data_layout/menuTab", u: bector_index_url, f:"question-circle", d: "ヘルプ"
-      = render "/data_layout/menuTab", u: bector_index_url, f:"users", d: "Bector"
-      = render "/data_layout/menuTab", u: "/crafes", f:"chess", d: "Crafes!"
-      = render "/data_layout/menuTab", u: "https://twitter.com/momeemt", f:"hashtag", d: "開発者"
-      - if current_user.authority == "admin"
-        = render "/data_layout/menuTab", u: "/manages", f:"users-cog", d: "管理者"
+    = render "home/components/sidemenu"

@@ -2,7 +2,7 @@
   - if login?
     / ユーザー情報
     .lay_1p4.lay_sticky.lay_100vh
-      = render "/common_layout/userInfo"
+      = render "components/userInfo"
 
     .lay_3p4
       h1 プロフィールを編集
@@ -10,6 +10,9 @@
 
       = form_with scope:"user", url:"/users/update", local: true do |f|
         table
+          tr
+            td= f.label :icon, "アイコン"
+            td= f.file_field :icon
           tr
             td= f.label :name, "名前"
             td= f.text_field :name

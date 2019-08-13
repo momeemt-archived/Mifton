@@ -50,135 +50,139 @@
           span  *
         = f.password_field :password_confirmation
 
-      p.users_new_container_highlightText ユーザーデータ
-
-      .users_new_container_accountForm_dataDescript
-        p ユーザーデータは任意で回答できる項目です。ここで入力しなくても、あとで回答できます。
-        p プロフィールに公開されるデータがありますが、公開したくない場合は後から設定できます。
-        = link_to "登録画面まで飛ばす", "/signup/#users_new_submit"
-
-      .users_new_container_accountForm_group
-        p プレイしているMineCraftエディション
-        .users_new_container_accountForm_group_descriptGroup
-          p プロフィールに表示されます
-        .users_new_container_accountForm_group_checkGroup
-          p
-            = f.check_box :data_edition, value: "BE"
-            = "MineCraft Bedrock Edition (統合版)"
-          p
-            = f.check_box :data_edition, value: "JE"
-            = "Minecraft Java Edition"
-          p
-            = f.check_box :data_edition, value: "PS4"
-            = "Minecraft PlayStation4 Edition"
-          p
-            = f.check_box :data_edition, value: "OTHER"
-            = "その他"
-
-      hr
-
-      .users_new_container_accountForm_group
-        p プレイしている端末/PCのOS・ゲーム機
-        .users_new_container_accountForm_group_descriptGroup
-          p プロフィールに表示されます
-        .users_new_container_accountForm_group_checkGroup
-          p
-            = f.check_box :data_os, value: "IOS"
-            = "iOS"
-          p
-            = f.check_box :data_os, value: "ADR"
-            = "Android"
-          p
-            = f.check_box :data_os, value: "FR"
-            = "Fire OS"
-          p
-            = f.check_box :data_os, value: "WIN10MB"
-            = "Windows10 Mobile"
-          p
-            = f.check_box :data_os, value: "WIN"
-            = "Windows"
-          p
-            = f.check_box :data_os, value: "MAC"
-            = "MacOS(Mojave)"
-          p
-            = f.check_box :data_os, value: "LIN"
-            = "Linux"
-          p
-            = f.check_box :data_os, value: "PS4"
-            = "PlayStation4"
-          p
-            = f.check_box :data_os, value: "NSW"
-            = "Nintendo Switch"
-          p
-            = f.check_box :data_os, value: "XBO"
-            = "Xbox One"
-          p
-            = f.check_box :data_os, value: "GV"
-            = "Gear VR"
-          p
-            = f.check_box :data_os, value: "FT"
-            = "Fire TV"
-          p
-            = f.check_box :data_os, value: "OTHER"
-            = "その他"
-
-      hr
-
-      .users_new_container_accountForm_group
-        p メインで利用しているSNS
-        .users_new_container_accountForm_group_descriptGroup
-          p プロフィールに表示されます
-        .users_new_container_accountForm_group_checkGroup
-          p
-            = f.radio_button :data_sns, value: "Twitter"
-            = "Twitter"
-          p
-            = f.radio_button :data_sns, value: "Lobi"
-            = "Lobi"
-          p
-            = f.radio_button :data_sns, value: "Minepics"
-            = "Minepics"
-          p
-            = f.radio_button :data_sns, value: "Minepics"
-            = "Discord"
-          p
-            = f.radio_button :data_sns, value: "Facebook"
-            = "Facebook"
-          p
-            = f.radio_button :data_sns, value: "LINE"
-            = "LINE"
-          p
-            = f.radio_button :data_sns, value: "Nothing"
-            = "特にSNSはやっていない"
-
-      hr
-
-      .users_new_container_accountForm_group
-        p Miftonをどこで知りましたか？
-        .users_new_container_accountForm_group_descriptGroup
-          p プロフィールに表示されません
-        .users_new_container_accountForm_group_checkGroup
-          p
-            = f.radio_button :data_where_know, value: "DevAcc"
-            = "開発メンバーから直接、もしくはSNS"
-          p
-            = f.radio_button :data_where_know, value: "friend"
-            = "知り合いに教えてもらった"
-          p
-            = f.radio_button :data_where_know, value: "search"
-            = "ネットブラウジング中に発見した"
-          p
-            = f.radio_button :data_where_know, value: "other"
-            = "その他"
-
-      .users_new_container_accountForm_dataDescript
-        p ご協力ありがとうございました！
-        p ユーザーデータはもう少しあるので、お時間があるときにアカウント設定ページから入力してみてください！
+      / p.users_new_container_highlightText ユーザーデータ
+      /
+      / .users_new_container_accountForm_dataDescript
+      /   p ユーザーデータは任意で回答できる項目です。ここで入力しなくても、あとで回答できます。
+      /   p プロフィールに公開されるデータがありますが、公開したくない場合は後から設定できます。
+      /   = link_to "登録画面まで飛ばす", "/signup/#users_new_submit"
+      /
+      / .users_new_container_accountForm_group
+      /   p プレイしているMineCraftエディション
+      /   .users_new_container_accountForm_group_descriptGroup
+      /     p プロフィールに表示されます
+      /   .users_new_container_accountForm_group_checkGroup
+      /     p
+      /       = f.check_box :data_edition, value: "BE"
+      /       = "MineCraft Bedrock Edition (統合版)"
+      /     p
+      /       = f.check_box :data_edition, value: "JE"
+      /       = "Minecraft Java Edition"
+      /     p
+      /       = f.check_box :data_edition, value: "PS4"
+      /       = "Minecraft PlayStation4 Edition"
+      /     p
+      /       = f.check_box :data_edition, value: "OTHER"
+      /       = "その他"
+      /
+      / hr
+      /
+      / .users_new_container_accountForm_group
+      /   p プレイしている端末/PCのOS・ゲーム機
+      /   .users_new_container_accountForm_group_descriptGroup
+      /     p プロフィールに表示されます
+      /   .users_new_container_accountForm_group_checkGroup
+      /     p
+      /       = f.check_box :data_os, value: "IOS"
+      /       = "iOS"
+      /     p
+      /       = f.check_box :data_os, value: "ADR"
+      /       = "Android"
+      /     p
+      /       = f.check_box :data_os, value: "FR"
+      /       = "Fire OS"
+      /     p
+      /       = f.check_box :data_os, value: "WIN10MB"
+      /       = "Windows10 Mobile"
+      /     p
+      /       = f.check_box :data_os, value: "WIN"
+      /       = "Windows"
+      /     p
+      /       = f.check_box :data_os, value: "MAC"
+      /       = "MacOS(Mojave)"
+      /     p
+      /       = f.check_box :data_os, value: "LIN"
+      /       = "Linux"
+      /     p
+      /       = f.check_box :data_os, value: "PS4"
+      /       = "PlayStation4"
+      /     p
+      /       = f.check_box :data_os, value: "NSW"
+      /       = "Nintendo Switch"
+      /     p
+      /       = f.check_box :data_os, value: "XBO"
+      /       = "Xbox One"
+      /     p
+      /       = f.check_box :data_os, value: "GV"
+      /       = "Gear VR"
+      /     p
+      /       = f.check_box :data_os, value: "FT"
+      /       = "Fire TV"
+      /     p
+      /       = f.check_box :data_os, value: "OTHER"
+      /       = "その他"
+      /
+      / hr
+      /
+      / .users_new_container_accountForm_group
+      /   p メインで利用しているSNS
+      /   .users_new_container_accountForm_group_descriptGroup
+      /     p プロフィールに表示されます
+      /   .users_new_container_accountForm_group_checkGroup
+      /     p
+      /       = f.radio_button :data_sns, value: "Twitter"
+      /       = "Twitter"
+      /     p
+      /       = f.radio_button :data_sns, value: "Lobi"
+      /       = "Lobi"
+      /     p
+      /       = f.radio_button :data_sns, value: "Minepics"
+      /       = "Minepics"
+      /     p
+      /       = f.radio_button :data_sns, value: "Minepics"
+      /       = "Discord"
+      /     p
+      /       = f.radio_button :data_sns, value: "Facebook"
+      /       = "Facebook"
+      /     p
+      /       = f.radio_button :data_sns, value: "LINE"
+      /       = "LINE"
+      /     p
+      /       = f.radio_button :data_sns, value: "Nothing"
+      /       = "特にSNSはやっていない"
+      /
+      / hr
+      /
+      / .users_new_container_accountForm_group
+      /   p Miftonをどこで知りましたか？
+      /   .users_new_container_accountForm_group_descriptGroup
+      /     p プロフィールに表示されません
+      /   .users_new_container_accountForm_group_checkGroup
+      /     p
+      /       = f.radio_button :data_where_know, value: "DevAcc"
+      /       = "開発メンバーから直接、もしくはSNS"
+      /     p
+      /       = f.radio_button :data_where_know, value: "friend"
+      /       = "知り合いに教えてもらった"
+      /     p
+      /       = f.radio_button :data_where_know, value: "search"
+      /       = "ネットブラウジング中に発見した"
+      /     p
+      /       = f.radio_button :data_where_know, value: "other"
+      /       = "その他"
+      /
+      / .users_new_container_accountForm_dataDescript
+      /   p ご協力ありがとうございました！
+      /   p ユーザーデータはもう少しあるので、お時間があるときにアカウント設定ページから入力してみてください！
 
 
       .users_new_container_accountForm_submitGroup#users_new_submit
         .app_recaptcha
           = recaptcha_tags
-        p 下の[登録する]をクリックすると、利用規約とプライバシーポリシーに同意したことになります。
+        p 下の[登録する]をクリックすると、
+        = link_to "利用規約", terms_url, :target => :_blank
+        = "と"
+        = link_to "プライバシーポリシー", policy_url, :target => :_blank
+        = "に同意したことになります。"
         p クリックする前に必ずお読みください！
         = f.submit "登録する"

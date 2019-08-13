@@ -6,68 +6,15 @@
 / 3レイアウトは強制させるべきか
 
 
-.be.lay
+.lay
   - if login?
     / ユーザー情報
     .lay_1p4.lay_sticky.lay_100vh
-      = render "/common_layout/userInfo"
+      = render "components/userInfo"
     / タイムライン
     .lay_1p2
-      = render "/common_layout/release"
-      = render "/common_layout/timeLine", datas: @microposts, type: "bector"
+      = render "components/release"
+      = render "components/timeLine", datas: @microposts, type: "bector"
     / メニュー
     .lay_1p4.lay_sticky.lay_100vh
-      = render "function_menu"
-
-  - else
-
-
-
-    .be_logouted
-      .be_logouted_backgroundImg
-        .be_logouted_backgroundImg_leftCoverd
-          h1 Let's connect with Bector
-          p BectorはMinecraftユーザーのためのSNSです
-
-          p 登録フォーム
-
-          = form_with model: @user, local: true do |f|
-            .form-group
-              = f.label :name, '名前'
-              = f.text_field :name
-            .form-group
-              = f.label :email, 'メールアドレス'
-              = f.text_field :email
-            .form-group
-              = f.label :password, 'パスワード'
-              = f.password_field :password
-            .form-group
-              = f.label :password_confirmation, 'パスワード(確認)'
-              = f.password_field :password_confirmation
-            = f.submit '登録する'
-
-          p= "Bectorで#{@microposts.count}回つぶやかれています！"
-          .be_logouted_backgroundImg_leftCoverd_post
-            - @microposts.each do |post|
-              .be_centerWrapper_timeLine_post
-                .be_centerWrapper_timeLine_post_userIcon
-                  img src="/user_images/#{@users.find_by(id:post.user_id).image_name}"
-                .be_centerWrapper_timeLine_post_textData
-                  .be_centerWrapper_timeLine_post_textData_row
-                    p.be_centerWrapper_timeLine_post_textData_row_userName= @users.find_by(id:post.user_id).name
-                    p.be_centerWrapper_timeLine_post_textData_row_userID= "@#{@users.find_by(id:post.user_id).user_id}"
-                    p.be_centerWrapper_timeLine_post_textData_row_date= date_display(post.created_at)
-
-                  .be_centerWrapper_timeLine_post_textData_content
-                    p= simple_format(sanitize(markdown(post.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
-
-                  - if !post.image_name.blank?
-                    img.be_centerWrapper_timeLine_post_textData_postImg src="/micropost_images/#{post.image_name}"
-
-                  i class="far fa-heart app_reaction-gray"
-                  i class="far fa-thumbs-up app_reaction-gray"
-                  i class="far fa-sad-tear app_reaction-gray"
-                  i class="far fa-surprise app_reaction-gray"
-                  i class="far fa-angry app_reaction-gray"
-
-        .be_logouted_backgroundImg_rightCoverd
+      = render "bector/components/sidemenu"

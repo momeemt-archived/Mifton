@@ -4,7 +4,7 @@
     - @user = current_user
     / ユーザー情報
     .lay_1p4.lay_sticky.lay_100vh
-      = render "/common_layout/userInfo"
+      = render "components/userInfo"
     / タイムライン
     .lay_1p2
 
@@ -22,48 +22,5 @@
 
     / メニュー
     .lay_1p4.lay_sticky.lay_100vh
-      section.crafes_sideBar_searchForm
-        = form_with url: "/bector/search/", local: true do |f|
-          = f.text_field :user_id, placeholder: "コンテスト/問題検索"
 
-      section.crafes_sideBar_menuTab
-        = link_to "/crafes" do
-          p
-            i.fas.fa-home
-            = "ホーム"
-        = link_to "/crafes/custom/plan" do
-          p
-            i.fas.fa-flag
-            = "開催中・予定されたコンテスト"
-        = link_to "/crafes/custom/past" do
-          p
-            i.fas.fa-check
-            = "終了したコンテスト"
-        = link_to "/crafes/questions" do
-          p
-            i.fas.fa-list
-            = "問題リスト"
-        = link_to "/crafes/" do
-          p
-            i.far.fa-bookmark
-            = "ブックマーク"
-        = link_to "/crafes/ranking" do
-          p
-            i.fas.fa-crown
-            = "ランキング"
-        = link_to "/crafes/new" do
-          p
-            i.fas.fa-paper-plane
-            = "問題を作る"
-        = link_to "/crafes/" do
-          p
-            i.fas.fa-cog
-            = "ユーザー設定"
-        = link_to "/crafes/" do
-          p
-            i.far.fa-question-circle
-            = "ヘルプ"
-        = link_to "/" do
-          p
-            i.fas.fa-chevron-left
-            = "Miftonに戻る"
+      = render "crafes/components/sidemenu"
