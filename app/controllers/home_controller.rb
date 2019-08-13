@@ -36,7 +36,7 @@ class HomeController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :user_id, :email, :password, :password_confirmation)
+    params.permit(:name, :user_id, :email, :password, :password_confirmation)
   end
 
   def set_user

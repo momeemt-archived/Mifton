@@ -31,4 +31,29 @@
     height: 100vh;
   }
 
+
+
+}
+
+@media screen and (max-width:1023px) and (min-width:768px) {
+
+  .lay {
+    flex-wrap: wrap;
+    &_a {
+      order: 1;
+      width: 50%;
+      position: static;
+    }
+
+    &_b {
+      order: 3;
+      width: 100vw;
+    }
+
+    &_c {
+      order: 2;
+      width: 50%;
+      position: static;
+    }
+  }
 }

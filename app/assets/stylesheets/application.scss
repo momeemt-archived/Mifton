@@ -31,25 +31,3 @@ a {
     text-decoration: none;
   }
 }
-
-.mobile,.tablet {
-  display: none;
-}
-
-@media screen and (max-width:960px) {
-  .pc, .mobile{
-    display: none;
-  }
-  .tablet {
-    display: block;
-  }
-}
-
-@media screen and (max-width:480px) {
-  .pc, .tablet, .pc-or-tablet {
-    display: none;
-  }
-  .mobile {
-    display: block;
-  }
-}
