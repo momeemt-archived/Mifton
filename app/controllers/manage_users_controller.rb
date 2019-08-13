@@ -69,7 +69,6 @@ class ManageUsersController < ApplicationController
                                   :name,
                                   :user_id,
                                   :email,
-                                  :authority,
                                   :password,
                                   :password_confirmation,
                                   :is_test_user,
@@ -83,7 +82,7 @@ class ManageUsersController < ApplicationController
   end
 
   def authority_params
-    params.require(:user).permit(
+    params.require(:authority).permit(
       :manage_pos,
       :dev_pos,
       :donor_amount
