@@ -1,0 +1,29 @@
+.common_userRegister
+  = form_with scope: :user, url: users_url, class: "common_userRegister_form", local: true do |f|
+    .common_userRegister_form_container
+      p.signUpForm-title Miftonの世界に飛び込もう！
+      .signUpForm_inputGroup
+        .signUpForm_inputGroup_container
+          p= f.label :name, "ユーザーID"
+          = f.text_field :name,  placeholder: "username"
+        .signUpForm_inputGroup_container
+          p= f.label :email, "メールアドレス"
+          = f.text_field :email, placeholder: "me@example.com"
+      .signUpForm_inputGroup
+        .signUpForm_inputGroup_container
+          p= f.label :password, 'パスワード'
+          = f.password_field :password,　placeholder: "password"
+        .signUpForm_inputGroup_container
+          p= f.label :password_confirmation, 'パスワード(確認)'
+          = f.password_field :password_confirmation,　placeholder: "password"
+      .app_recaptcha
+        = recaptcha_tags
+      .signUpForm_descript
+        p　パスワードは、6文字以上、少なくとも英字と数字の両方が含まれている必要があります。
+        p 下の[登録する]をクリックすると、利用規約とプライバシーポリシーに同意したことになります。
+        p クリックする前に必ずお読みください！
+      p.signUpForm-register= f.submit "登録する", class: "signUpForm_submit"
+      hr
+      p.signUpForm-register= link_to "/auth/twitter", class: "signUpForm_submit signUpForm_submit_twitter" do
+        i.fab.fa-twitter
+        = "Twitterで登録/ログイン"
