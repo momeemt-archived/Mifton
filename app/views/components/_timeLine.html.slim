@@ -37,14 +37,6 @@ section.common_timeLine
 
           .app_reactionContainer
 
-            / div id="comment_#{data.id}"
-            /   = form_with url: "/bector/microposts/#{data.id}", remote: true, class: "app_reaction" do |f|
-            /     = f.button type: "submit" do
-            /       i.far.fa-comment.app_reaction-gray
-            /       - if reaction_count(data,type) != 0
-            /         span = reaction_count(data,type)
-            /         / モーダルを作る
-
             div id="heart_reaction_#{data.id}"
               = render "components/reaction",  type: "heart", faName: "heart", post: data, color: "pink", user: user
             div id="good_reaction_#{data.id}"
@@ -61,7 +53,7 @@ section.common_timeLine
             - if data.user_id == current_user.id
               = form_with scope: :micropost, url: "/bector/destroy", local: true do |f|
                 = f.hidden_field :post_id, :value => data.id
-                = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "フラグメントを削除しますか？\n削除したフラグメントは運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
+                = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "投稿を削除しますか？\n削除した投稿は運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
                   i.far.fa-trash-alt
 
         - elsif type == "home"

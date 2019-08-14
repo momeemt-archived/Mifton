@@ -1,56 +1,11 @@
-.user_show
-  .tc_leftWrapper
-    section.tc_leftWrapper_currentUserInfo
-      img.tc_leftWrapper_currentUserInfo_userHeaderImg src="/user_images/header/#{@user.header_image_name}"
-      img.tc_leftWrapper_currentUserInfo_userIconImg src="/user_images/#{@user.image_name}"
-      .tc_leftWrapper_currentUserInfo_conditionCard
-        p.tc_leftWrapper_currentUserInfo_conditionCard_userName
-          = render "components/show_star_name", user: @user
-        p.tc_leftWrapper_currentUserInfo_conditionCard_userID= "@#{@user.user_id}"
+.lay
 
-        .tc_leftWrapper_currentUserInfo_conditionCard_line
-          = render "components/current_user_data", dataname: "フォロー", data: @user.following.count
-          = render "components/current_user_data", dataname: "フォロワー", data: @user.followers.count
+  .lay_1p4.lay_sticky.lay_a
+    = render "components/userInfo"
 
-        .tc_leftWrapper_currentUserInfo_conditionCard_line
-          = render "components/current_user_data", dataname: "プロフィール", data: @user.profile
+  .lay_1p2.lay_b
+    h1 フィード
 
-        .tc_leftWrapper_currentUserInfo_conditionCard_line
-          = render "components/current_user_data", dataname: "Pin Address", data: @user.location
+  .lay_1p4.lay_sticky.lay_c
 
-        .tc_leftWrapper_currentUserInfo_conditionCard_line
-          = render "components/current_user_data", dataname: "アカウント作成日", data: @user.created_at.strftime("%Y年%m月%d日")
-
-        .tc_leftWrapper_currentUserInfo_conditionCard_line
-          .tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup
-            p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-dataName ユーザー
-
-            - if @user.authority.manage_pos == "admin"
-              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data Admin (管理者)
-            - elsif @user.authority.manage_pos == "operator"
-              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data OP (運営者)
-            - elsif @user.authority.manage_pos == "trust_user"
-              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data Trust-User (運営者候補)
-            - else
-              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data 一般ユーザー
-
-            - if @user.authority.dev_pos == "developer"
-              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data Developer (開発者)
-            - elsif @user.authority.dev_pos == "contributor"
-              p.tc_leftWrapper_currentUserInfo_conditionCard_line_dataGroup-data Contributor (開発貢献者)
-
-        .tc_leftWrapper_currentUserInfo_conditionCard_line
-          - if login? && !(current_user == @user)
-            - if current_user.following?(@user)
-              = form_for(current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }) do |f|
-                = f.submit "Unfollow"
-            - else
-              = form_for(current_user.active_relationships.build) do |f|
-                = hidden_field_tag :followed_id, @user.id
-                = f.submit "Follow"
-
-
-
-  .user_show_bector
-
-  .user_show_crafes
+    = render "home/components/sidemenu"
