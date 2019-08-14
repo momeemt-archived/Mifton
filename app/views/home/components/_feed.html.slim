@@ -66,8 +66,9 @@ section.common_timeLine
 
             p.common_timeLine_container_descript-date =date_display(information.created_at)
 
+          - f_service = information.from_any_service
 
-          - if information.from_any_service == "bector"
+          - if f_service == "bector"
 
             .common_timeLine_container_bectorPost
               - target_user = User.find_by(id: information.starting_point_user)
@@ -84,16 +85,22 @@ section.common_timeLine
               .common_timeLine_container_bectorPost_content
                 p= simple_format(sanitize(markdown(post.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
 
+          - elsif f_service == "comment"
 
-          .app_reactionContainer
+            - comment = Comment.find_by(id: information.target_object)
+            .common_timeLine_container_bectorPost_content
+              p= simple_format(sanitize(markdown(comment.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
 
-            div id="heart_reaction_#{information.id}"
-              = render "components/reaction",  type: "heart", faName: "heart", post: information, color: "pink", user: user
-            div id="good_reaction_#{information.id}"
-              = render "components/reaction",  type: "good", faName: "thumbs-up", post: information, color: "blue", user: user
-            div id="cry_reaction_#{information.id}"
-              = render "components/reaction",  type: "cry", faName: "sad-tear", post: information, color: "deepskyblue", user: user
-            div id="surprise_reaction_#{information.id}"
-              = render "components/reaction",  type: "surprise", faName: "surprise", post: information, color: "darkorange", user: user
-            div id="angry_reaction_#{information.id}"
-              = render "components/reaction",  type: "angry", faName: "angry", post: information, color: "red", user: user
+
+          / .app_reactionContainer
+          /
+          /   div id="heart_reaction_#{information.id}"
+          /     = render "components/reaction",  type: "heart", faName: "heart", post: information, color: "pink", user: user
+          /   div id="good_reaction_#{information.id}"
+          /     = render "components/reaction",  type: "good", faName: "thumbs-up", post: information, color: "blue", user: user
+          /   div id="cry_reaction_#{information.id}"
+          /     = render "components/reaction",  type: "cry", faName: "sad-tear", post: information, color: "deepskyblue", user: user
+          /   div id="surprise_reaction_#{information.id}"
+          /     = render "components/reaction",  type: "surprise", faName: "surprise", post: information, color: "darkorange", user: user
+          /   div id="angry_reaction_#{information.id}"
+          /     = render "components/reaction",  type: "angry", faName: "angry", post: information, color: "red", user: user

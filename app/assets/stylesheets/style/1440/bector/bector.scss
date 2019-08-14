@@ -1,13 +1,7 @@
 @import "../../../mixin/_pc_header";
 
 @media screen and (min-width:1440px) {
-  .bector {
-    background-color: #eaf4fc;
-
-    .application_header {
-      @include application_header(linear-gradient(to right, #182848, #4b6cb7));
-    }
-  }
+  // wideで大枠を読み込み
 }
 
 .app_reactionContainer {

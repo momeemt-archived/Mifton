@@ -119,7 +119,6 @@
         }
 
         &_dataSection {
-          display: flex;
           padding-top: 7px;
           padding-bottom: 6px;
 
@@ -131,15 +130,18 @@
           }
 
           &_group {
-            padding: 0 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 30px 0 20px;
             &_name {
-              font-size: 10px;
+              font-size: 15px;
               font-weight: lighter;
             }
             &_data {
               color: #007bbb;
               font-weight: 900;
-              font-size: 16px;
+              font-size: 15px;
             }
           }
         }
