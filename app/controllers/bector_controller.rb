@@ -52,11 +52,16 @@ class BectorController < ApplicationController
   end
 
   def reactions
-    # reactions_obj = Reaction.where(user_id: params[:id])
+    reactions_obj = Reaction.where(user_id: params[:id])
     @microposts = []
-    # reactions_obj.each do |reaction|
-    #   @microposts << Micropost.find_by(id: reaction.reactioned_id)
-    # end
+    reactions_obj.each do |reaction|
+      target_object = Micropost.find_by(id: reaction.reactioned_id)
+      unless @microposts.include?(target_object)
+        @microposts << target_object
+      end
+    end
+
+    render :index
   end
 
   def global
