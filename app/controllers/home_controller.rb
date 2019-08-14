@@ -4,19 +4,23 @@ class HomeController < ApplicationController
       @informations = Information.where(starting_point_user: current_user.id)
       render :top_logined
     else
-      @user = User.new(user_params)
-      if @user.save && verify_recaptcha
-        authority = @user.build_authority
-        authority.save
-        user_traffic = @user.build_user_traffic
-        user_traffic.save
-        session[:user_id] = @user.id
-        admin = User.find_by(user_id: "mifton")
-        @user.follow(admin)
-        redirect_to root_path, notice: "ユーザー「#{@user.name}を登録しました。」"
-      else
-        render :top_not_logined
-      end
+      render :top_not_logined
+    end
+  end
+
+  def register
+    @user = User.new(user_params)
+    if @user.save && verify_recaptcha
+      authority = @user.build_authority
+      authority.save
+      user_traffic = @user.build_user_traffic
+      user_traffic.save
+      session[:user_id] = @user.id
+      admin = User.find_by(user_id: "mifton")
+      @user.follow(admin)
+      redirect_to root_path, notice: "ユーザー「#{@user.name}を登録しました。」"
+    else
+      render :top_not_logined
     end
   end
 
@@ -36,7 +40,7 @@ class HomeController < ApplicationController
   private
 
   def user_params
-    params.permit(:name, :user_id, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :user_id, :email, :password, :password_confirmation)
   end
 
   def set_user

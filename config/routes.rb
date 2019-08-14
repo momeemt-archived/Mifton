@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   # Home
   root to: "home#top"
-  post "/", to: "home#top"
+  post "/register", to: "home#register"
   get "/about", to: "home#about"
   get "/authority", to: "home#authority"
   get "/help", to: "home#help"
