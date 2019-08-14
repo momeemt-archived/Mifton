@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 
   def update
     current_user.update!(user_params)
-    current_user.user_traffic.update(user_traffic_params)
+    current_user.user_traffic.update!(user_traffic_params)
     redirect_to "/users/edit"
   end
 
