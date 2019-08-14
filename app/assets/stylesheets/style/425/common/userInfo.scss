@@ -1,10 +1,10 @@
-@media screen and (max-width:1023px) and (min-width:768px) {
+@media screen and (max-width:1023px) and (min-width:425px) {
   .common {
 
     @mixin make_follow_button {
       position: absolute;
-      right: 30px;
-      top: 80px;
+      right: 4.5vw;
+      top: 17vw;
 
       // RESET CSS BEGIN
 
@@ -17,40 +17,40 @@
 
       // RESET CSS END
 
-      font-size: 9px;
-      padding: 3px 5px;
+      font-size: 1.4vw;
     }
 
     &_userInfo {
+      width: 90%;
+      height: 70vw;
+      margin: 10px auto;
       position: relative;
+      background-color: white;
 
       &_header {
         display: block;
-        width: 80%;
-        margin: 0 auto;
-        padding-top: 10px;
+        width: 100%;
       }
 
       &_icon {
         position: absolute;
-        border: 2px solid black;
+        border: 2px solid white;
         border-radius: 50%;
         display: block;
-        width: 19%;
-        top: 10%;
-        left: 14%;
+        width: 8vw;
+        top: 10.5vw;
+        left: 5vw;
       }
 
       &_wrapper {
-        width: 80%;
-        margin: 0 auto;
-        background-color: white;
 
+        padding-left: 2vw;
         &_followButton input[type="submit"] {
           @include make_follow_button
           border-radius: 30px;
           border: #2E4577 1px solid;
           color: #2E4577;
+          padding: 0.5vw 2vw;
           font-weight: bold;
         }
 
@@ -58,25 +58,24 @@
           @include make_follow_button
           background-color: #2E4577;
           border-radius: 30px;
-          padding: 5px 10px;
+          padding: 0.5vw 2vw;
           color: white;
         }
 
         &_basicSection {
-          padding-top: 55px;
-          padding-left: 8px;
+          padding-top: 8vw;
           &_userName {
-            font-size: 15px;
+            font-size: 3vw;
             font-weight: bold;
           }
 
           &_userID {
-            font-size: 11px;
+            font-size: 1.6vh;
           }
 
           &_isMyAccount {
             display: inline-block;
-            font-size: 11px;
+            font-size: 1.5vh;
             background: linear-gradient(transparent 50%, yellow 50%);
           }
         }
@@ -88,14 +87,14 @@
           color:white;
 
           width: 75%;
-          margin: 5px auto 0;
-          padding: 2px 0;
+          margin: 1vw auto 0;
+          padding: 0.4vw 0;
           border-radius: 30px;
-          font-size: 11px;
+          font-size: 1.5vw;
 
           i {
-            font-size: 7px;
-            padding-right: 5px;
+            font-size: 1vw;
+            padding-right: 1vw;
           }
         }
 
@@ -120,43 +119,44 @@
         }
 
         &_dataSection {
-          padding-top: 7px;
-          padding-bottom: 6px;
+          padding-top: 0.5vw;
+          padding-bottom: 1vw;
+          display: flex;
 
           &_profile {
-            font-size: 11px;
+            font-size: 1.6vw;
             font-weight: lighter;
-            margin: 0 8px;
-            margin-top: 10px;
+            margin: 0 1vw;
+            margin-top: 1vw;
           }
 
           &_group {
-            padding: 0 14px;
+            padding: 0 2vw;
             display: flex;
             &_name {
-              font-size: 7px;
+              font-size: 1.5vw;
               font-weight: lighter;
-              margin-right: 15px;
+              margin-right: 2vw;
             }
             &_data {
               color: #007bbb;
               font-weight: 900;
-              font-size: 11px;
+              font-size: 1.5vw;
             }
           }
         }
 
         &_trafficSection {
-          margin-top: 15px;
-          padding-bottom: 15px;
+          margin-top: 2vw;
+          padding-bottom: 2vw;
           &_bar {
             display: flex;
             align-items: center;
-            margin-top: 5px;
-            margin-left: 8px;
+            margin-top: 1vw;
+            margin-left: 1.6vw;
 
             a {
-              font-size: 11px;
+              font-size: 1.8vw;
               color: blue;
 
               &:visited {
@@ -165,13 +165,13 @@
             }
 
             i {
-              font-size: 11px;
+              font-size: 1.8vw;
               color: gray;
-              padding-right: 5px;
+              padding-right: 1vw;
             }
 
             p {
-              font-size: 11px;
+              font-size: 1.8vw;
             }
           }
         }

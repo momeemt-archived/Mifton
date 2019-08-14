@@ -42,9 +42,6 @@ section.common_userInfo#common_userInfo
 
     .common_userInfo_wrapper_dataSection
       .common_userInfo_wrapper_dataSection_group
-        p.common_userInfo_wrapper_dataSection_group_name 投稿数
-        p.common_userInfo_wrapper_dataSection_group_data= @user.microposts.count + @user.comments.count
-      .common_userInfo_wrapper_dataSection_group
         p.common_userInfo_wrapper_dataSection_group_name フォロー
         p.common_userInfo_wrapper_dataSection_group_data= @user.following.count
       .common_userInfo_wrapper_dataSection_group
@@ -52,6 +49,9 @@ section.common_userInfo#common_userInfo
         p.common_userInfo_wrapper_dataSection_group_data= @user.followers.count
 
     .common_userInfo_wrapper_dataSection
+      .common_userInfo_wrapper_dataSection_group
+        p.common_userInfo_wrapper_dataSection_group_name 投稿数
+        p.common_userInfo_wrapper_dataSection_group_data= @user.microposts.count + @user.comments.count
       .common_userInfo_wrapper_dataSection_group
         p.common_userInfo_wrapper_dataSection_group_name リアクション
         = link_to "/bector/reactions/#{@user.id}" do

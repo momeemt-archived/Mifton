@@ -1,24 +1,24 @@
 h1 ユーザーリスト
 hr
 
-/ .user_index__content-wrapper--container--nav
-/   = paginate @users
-/   = page_entries_info @users
-/
-/ .user_index__content-wrapper--container--search-form
-/   details
-/     summary 詳細な検索
-/     = search_form_for(@q, url: manage_users_path) do |f|
-/       table
-/         tbody
-/           tr
-/             td= f.label :name_cont, 'ユーザー名'
-/             td= f.search_field :name_cont
-/           - if than_admin
-/             tr
-/               td= f.label :email_cont, "メールアドレス"
-/               td= f.search_field :email_cont
-/       = f.submit class:"user_index__content-wrapper--container--search-form--submit"
+.user_index__content-wrapper--container--nav
+  = paginate @users
+  = page_entries_info @users
+
+.user_index__content-wrapper--container--search-form
+  details
+    summary 詳細な検索
+    = search_form_for(@q, url: manage_users_path) do |f|
+      table
+        tbody
+          tr
+            td= f.label :name_cont, 'ユーザー名'
+            td= f.search_field :name_cont
+          - if than_admin
+            tr
+              td= f.label :email_cont, "メールアドレス"
+              td= f.search_field :email_cont
+      = f.submit class:"user_index__content-wrapper--container--search-form--submit"
 
 
 
