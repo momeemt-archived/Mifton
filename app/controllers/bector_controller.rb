@@ -52,6 +52,7 @@ class BectorController < ApplicationController
   end
 
   def reactions
+    @user = User.find(params[:id])
     reactions_obj = Reaction.where(user_id: params[:id])
     @microposts = []
     reactions_obj.each do |reaction|
