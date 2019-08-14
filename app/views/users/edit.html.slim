@@ -12,7 +12,10 @@
         table
           tr
             td= f.label :icon, "アイコン"
-            td= f.file_field :icon
+            td= f.file_field :icon, accept: 'image/jpg,image/jpeg,image/png,image/gif'
+          / tr
+          /   td= f.label :header, "ヘッダー"
+          /   td= f.file_field :header, accept: 'image/jpg,image/jpeg,image/png,image/gif'
           tr
             td= f.label :name, "名前"
             td= f.text_field :name
@@ -33,7 +36,7 @@
             td= f.text_field :user_link, value: current_user.user_traffic.user_link
           tr
             td= f.label :birthday, "誕生日"
-            td= f.date_select :birthday, value: current_user.user_traffic.birthday
+            td= f.date_select :birthday, default: current_user.user_traffic.birthday, start_year: Time.now.year - 60 , end_year: Time.now.year - 8
           tr
             td= f.label :twitter, "TwitterID"
             td= f.text_field :twitter, value: current_user.user_traffic.twitter_id
