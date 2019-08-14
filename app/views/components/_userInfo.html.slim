@@ -1,8 +1,10 @@
 section.common_userInfo#common_userInfo
 
-
-  img.common_userInfo_header src="/user_images/header/#{@user.header_image_name}"
-
+  - if @user.header.attached?
+    = image_tag @user.header, class: "common_userInfo_header"
+  - else
+    = image_tag "/user_images/header/default_header.png", class: "common_userInfo_header"
+    
   - if @user.icon.attached?
     = image_tag @user.icon, class:"common_userInfo_icon"
   - else
