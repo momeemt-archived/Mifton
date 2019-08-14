@@ -1,6 +1,7 @@
 class ReactionsController < ApplicationController
 
   def create
+
     #render params
     @reaction = Reaction.new(
       user_id: current_user.id,
