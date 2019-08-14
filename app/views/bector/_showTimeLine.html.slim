@@ -23,8 +23,11 @@ section.common_timeLine
               = link_to "##{tag.name} ", "/bector/tags/#{tag.name}"
 
       - if type == "bector"
-        - if @micropost.image_name.present?
-          img.common_timeLine_data_container_img src="/micropost_images/#{@micropost.image_name}"
+
+        - post_images = @micropost.images
+        - if post_images.attached?
+          - post_images.each do |image|
+            = image_tag image, class: "common_timeLine_data_container_img"
 
         .app_reactionContainer
 
@@ -54,7 +57,11 @@ section.common_timeLine
 
       .common_timeLine_data_icon
         =link_to "/bector/users/#{user.user_id}" do
-          img src="/user_images/#{user.image_name}"
+          - if user.icon.attached?
+            = image_tag user.icon
+          - else
+            = image_tag "/user_images/default_icon.png"
+
       .common_timeLine_data_container
         .common_timeLine_data_container_top
           i.fas.fa-reply-all
