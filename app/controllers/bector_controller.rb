@@ -52,12 +52,12 @@ class BectorController < ApplicationController
   end
 
   def reactions
+    @microposts = []
     @user = User.find(params[:id])
     reactions_obj = Reaction.where(user_id: params[:id])
-    @microposts = []
     reactions_obj.each do |reaction|
       target_object = Micropost.find_by(id: reaction.reactioned_id)
-      unless @microposts.include?(target_object)
+      if !@microposts.include?(target_object) && target_object.user_id.present?
         @microposts << target_object
       end
     end
