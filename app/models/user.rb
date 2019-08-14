@@ -27,7 +27,8 @@ class User < ApplicationRecord
   # モデルバリデーション BEGIN
 
     # User_ID 必須入力/3文字以上15文字以下/重複不可
-    VALID_USER_ID_REGEX = /\A[\w]/
+    before_save { self.user_id = user_id.downcase }
+    VALID_USER_ID_REGEX = /[a-z]+[a-z_0-9]+[a-z_]/
     validates :user_id, presence: true, length: { in: 3..15 }, uniqueness: true, format: { with: VALID_USER_ID_REGEX }
 
     # password
