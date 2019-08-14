@@ -10,13 +10,16 @@ class UsersController < ApplicationController
 
     if @user.save && verify_recaptcha
       authority = @user.build_authority
-      authority.save
       user_traffic = @user.build_user_traffic
-      user_traffic.save
-      session[:user_id] = @user.id
-      admin = User.find_by(user_id: "mifton")
-      @user.follow(admin)
-      redirect_to "/", notice: "ユーザー「#{@user.name}を登録しました。」"
+
+      if authority.save && user_traffic.save
+        session[:user_id] = @user.id
+        admin = User.find_by(user_id: "mifton")
+        @user.follow(admin)
+        redirect_to "/", notice: "ユーザー「#{@user.name}を登録しました。」"
+      else
+        render action: :new
+      end
     else
       render action: :new
     end

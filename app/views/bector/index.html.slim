@@ -9,12 +9,12 @@
 .lay
   - if login?
     / ユーザー情報
-    .lay_1p4.lay_sticky.lay_a
+    .lay_1p4.lay_sticky.lay_a.lay_100vh
       = render "components/userInfo"
     / タイムライン
     .lay_1p2.lay_b
       = render "components/release"
       = render "components/timeLine", datas: @microposts, type: "bector"
     / メニュー
-    .lay_1p4.lay_sticky.lay_c
+    .lay_1p4.lay_sticky.lay_c.lay_100vh
       = render "bector/components/sidemenu"
