@@ -101,3 +101,37 @@
             =link_to "/signup" do
               i.fas.fa-user-plus
               = "登録"
+        hr
+        - if request.path.include?("bector")
+          .application_header_naviList_group
+            =link_to "/bector/global" do
+              i.fas.fa-globe-americas
+              = "グローバルタイムライン"
+          .application_header_naviList_group
+            =link_to "/bector/friends" do
+              i.fas.fa-user-friends
+              = "フレンドタイムライン"
+          .application_header_naviList_group
+            =link_to bector_index_url do
+              i.fas.fa-images
+              = "メディアタイムライン"
+          .application_header_naviList_group
+            =link_to bector_index_url do
+              i.fas.fa-envelope
+              = "ダイレクトメッセージ"
+          .application_header_naviList_group
+            =link_to bector_index_url do
+              i.fas.fa-list
+              = "ユーザーリスト"
+          .application_header_naviList_group
+            =link_to bector_index_url do
+              i.fas.fa-bookmark
+              = "ブックマーク"
+          .application_header_naviList_group
+            =link_to bector_index_url do
+              i.fas.fa-volume-mute
+              = "ミュートしたユーザー"
+          .application_header_naviList_group
+            =link_to bector_index_url do
+              i.fas.fa-ban
+              = "ブロックしたユーザー"
