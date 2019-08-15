@@ -48,8 +48,13 @@
             = "登録"
   .application_header_mobile
     .application_header_logo
-      =link_to "/bector" do
-        i.fas.fa-users
-        = "Bector"
+      - if request.path.include?("bector")
+        =link_to "/bector" do
+          i.fas.fa-users
+          = "Bector"
+      - else
+        =link_to "/" do
+          i.fas.fa-home
+          = "Mifton"
     .application_header_hamburger
       i.fas.fa-list
