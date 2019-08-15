@@ -16,7 +16,7 @@
     }
 
     hr {
-      border: 0.5px $base-color solid;
+      border: 0.5px #ec6d51 solid;
       width: 70%;
       margin-top: 15px;
     }
@@ -78,7 +78,7 @@
         margin-top: 50px;
 
         input[type="submit"] {
-          background-color: $base-color;
+          background-color: #ec6d51;
           border-radius: 20px;
           padding: 5px 40px;
           border: 0px;
@@ -86,7 +86,7 @@
           font-size: 16px;
           margin-top: 20px;
           &:hover {
-            background-color: $base-color * 1.5;
+            background-color: #ec6d51 * 1.5;
             transition: .6s;
           }
         }

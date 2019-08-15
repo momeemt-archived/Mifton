@@ -19,7 +19,7 @@
     transition: .6s;
 
     a {
-      color: $base-color;
+      color: #ec6d51;
       text-decoration: none;
     }
 
@@ -74,7 +74,7 @@
           font-size: 17.5px;
           text-align: center;
           width: 30%;
-          background-color: $base-color;
+          background-color: #ec6d51;
           margin: 20px auto;
           padding: 4px;
           border-radius: 20px;
@@ -83,7 +83,7 @@
           border: 0px white solid;
 
           &:hover {
-            background-color: $base-color * 1.5;
+            background-color: #ec6d51 * 1.5;
             transition: .6s;
           }
         }

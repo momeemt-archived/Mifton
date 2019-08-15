@@ -77,7 +77,7 @@
         }
 
         &_submit {
-          background-color: $base-color;
+          background-color: #ec6d51;
           border-radius: 20px;
           padding: 5px 40px;
           border: 0px;
@@ -85,7 +85,7 @@
           font-size: 16px;
           transition: .6s;
           &:hover {
-            background-color: $base-color * 1.5;
+            background-color: #ec6d51 * 1.5;
             transition: .6s;
           }
 
