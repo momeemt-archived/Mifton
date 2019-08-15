@@ -1,10 +1,15 @@
 @media screen and (min-width:426px) {
 
   .home,.manages {
+
     .application_header {
       background: #ec6d51;
       height: 50px;
       color: white;
+
+      &_mobile {
+        display: none;
+      }
 
 
       &_naviList {

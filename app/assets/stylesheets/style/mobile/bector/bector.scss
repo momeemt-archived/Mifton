@@ -7,6 +7,7 @@
       background: linear-gradient(to right, #182848, #4b6cb7);
       height: 50px;
       color: white;
+      
 
       &_wide {
         display: none;
@@ -17,6 +18,7 @@
         justify-content: flex-end;
         align-items: center;
         height: 100%;
+        position: relative;
       }
 
       &_logo {
@@ -35,7 +37,33 @@
 
       &_hamburger {
         padding-right: 5%;
+
+        &_content {
+          position: fixed;
+          top: 0;
+          left: 0;
+          background-color: #eaf4fc;
+          height: 100%;
+          width: 80%;
+          z-index: 999;
+          transition: .3s ease-in-out;
+          -webkit-transform: translateX(-105%);
+          transform: translateX(-105%);
+
+        }
       }
+
+      #application_header_hamburger_checkbox {
+        display: none;
+
+        &:checked ~ .application_header_hamburger_content {
+          display: block;
+          -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+        }
+      }
+
+
     }
   }
 }

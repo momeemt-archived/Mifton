@@ -2,7 +2,7 @@
   .application_header_wide
     .application_header_naviList
 
-      .application_header_naviList_group.
+      .application_header_naviList_group
         =link_to "/" do
           i.fas.fa-home
           = "Mifton"
@@ -57,4 +57,47 @@
           i.fas.fa-home
           = "Mifton"
     .application_header_hamburger
-      i.fas.fa-list
+      input#application_header_hamburger_checkbox type="checkbox"
+      label.application_header_hamburger_openLabel for="application_header_hamburger_checkbox"
+        i.fas.fa-list
+      .application_header_hamburger_content
+        .application_header_naviList_group
+          =link_to "/" do
+            i.fas.fa-home
+            = "Mifton"
+        .application_header_naviList_group
+          =link_to "/bector" do
+            i.fas.fa-users
+            = "Bector"
+        .application_header_naviList_group
+          =link_to "https://twitter.com/momeemt" do
+            i.fab.fa-twitter
+            = "開発者"
+        - if login?
+          - if !(current_user.authority.manage_pos == "general")
+            .application_header_naviList_group
+              =link_to "/manages" do
+                i.fas.fa-users-cog
+                = "管理者"
+
+            .application_header_naviList_group
+              =link_to "/crafes" do
+                i.fas.fa-chess
+                = "Crafes!"
+
+          .application_header_naviList_group
+            =link_to "/logout/#{type}", :method => "delete" do
+              i.fas.fa-door-open
+              = "ログオフ"
+          .application_header_naviList_group
+            =link_to "/users/edit" do
+              = "プロフィールを編集する"
+        - else
+          .application_header_naviList_group
+            =link_to "/login/id" do
+              i.fas.fa-sign-in-alt
+              = "ログイン"
+          .application_header_naviList_group
+            =link_to "/signup" do
+              i.fas.fa-user-plus
+              = "登録"
