@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "/help", to: "home#help"
   get "/policy", to: "home#policy"
   get "/terms", to: "home#terms" # 利用規約
+  get "/condition", to: "home#condition"
 
 
   # Bector
@@ -16,10 +17,13 @@ Rails.application.routes.draw do
 
   get "/bector/global", to: "bector#global"
   get "/bector/friends", to: "bector#friends"
+  get "/bector/media", to: "bector#media"
   get "/bector/reactions/:id", to: "bector#reactions"
 
   post "/bector/search", to:"bector#search"
-  get "/bector/users/:user_id", to:"bector#index"
+
+  get "/bector/users/:user_id", to:"bector#user"
+
   get "/bector/tags/:tag", to:"bector#tags"
   post "/bector/destroy", to:"bector#destroy"
   resources :bector, only: [:create, :destroy, :index]
@@ -59,8 +63,6 @@ Rails.application.routes.draw do
   post "/reactions/:reactioned_type/:reactioned_id/create", to: "reactions#create"
   delete "/reactions/:reactioned_type/:reactioned_id/destroy", to: "reactions#destroy"
 
-  # Informations
-  resources :informations
 
   # Sessions
   get "/login", to: "sessions#new"
@@ -71,11 +73,6 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   delete "/logout/:service", to: "sessions#destroy"
 
-  # Crafes! Draft Contest
-  resources :draft_contests do
-    post "/", to: "draft_contests#approval"
-  end
-
   # Crafes!
   get "/crafes", to: "crafes#index"
   get "/crafes/about"
@@ -84,8 +81,6 @@ Rails.application.routes.draw do
   get "/crafes/contest/:id", to: "crafes#show_contest"
   get "/crafes/questions"
   get "/crafes/question/:id", to: "crafes#show_question"
-
-
 
   resources :users do
     member do

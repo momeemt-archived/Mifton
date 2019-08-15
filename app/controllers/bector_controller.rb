@@ -1,28 +1,14 @@
 class BectorController < ApplicationController
-  before_action :add_users_and_infos, only: [:global, :friends, :tags, :index, :reactions, :show]
+  before_action :add_users_and_infos, only: [:global, :friends, :tags, :index, :show]
+
   def index
-
-    if !current_user.nil?
-
-      if params[:user_id]
-        target_user = User.find_by(user_id: params[:user_id])
-        if target_user.present?
-          @microposts = Micropost.where(user_id: target_user.id)
-        else
-          redirect_to "/bector"
-        end
-
-      else
-
-        ## OPEN
-        @microposts = Micropost.where(user_id: current_user.id)
-        follow_users = current_user.following
-        follow_users.each do |user|
-          @microposts += Micropost.where(user_id: user.id)
-        end
-        @microposts = @microposts.sort.reverse
-        ##
+    if login?
+      @microposts = Micropost.where(user_id: current_user.id)
+      follow_users = current_user.following
+      follow_users.each do |user|
+        @microposts += Micropost.where(user_id: user.id)
       end
+      @microposts = @microposts.sort.reverse
 
       render :index
 
@@ -33,6 +19,19 @@ class BectorController < ApplicationController
       render :top
     end
   end
+
+  def user
+    if login?
+      @user = User.find_by(user_id: params[:user_id])
+      if @user.present?
+        @microposts = Micropost.where(user_id: @user.id)
+        render :index
+      else
+        redirect_to "/bector"
+      end
+    end
+  end
+
 
   def comment
     @comment = current_user.comments.build(comment_params)
@@ -86,7 +85,7 @@ class BectorController < ApplicationController
 
   def media
     @users = User.all
-    @microposts = Micropost.all
+    @microposts = Micropost.where.not(images: nil)
     @informations = current_user.informations
     render :index
   end
@@ -97,45 +96,19 @@ class BectorController < ApplicationController
     target_tags.each do |tag|
       @microposts << Micropost.find_by(id: tag.micropost_id)
     end
-
     render :index
   end
 
   def create
-    # if params[:direct_message]
-    #   @direct_message = current_user.direct_messages.build(direct_message_params)
-    #
-    #   if @direct_message.save
-    #     redirect_to bector_index_url
-    #   else
-    #     render :index
-    #   end
-    #
-    # els
     if params[:micropost]
       @micropost = current_user.microposts.build(micropost_params)
-      # image_flg = false
-      # if params[:micropost][:image]
-      #   image_flg = true
-      #   image = params[:micropost][:image]
-      #   File.binwrite("public/micropost_images/undecide.png", image.read)
-      # end
-
-
-
       if @micropost.save
-        flash[:success] = "Micropost created!"
         tag_array = params[:micropost][:tags].split(/[[:blank:]]+/);
         tag_array.each do |tag|
           @tag = @micropost.tags.build
           @tag.name = tag
           @tag.save
         end
-        # if image_flg
-        #   @micropost.image_name = "#{@micropost.id}.png"
-        #   File.rename("public/micropost_images/undecide.png", "public/micropost_images/#{@micropost.image_name}")
-        #   @micropost.save
-        # end
         redirect_back(fallback_location: root_path)
       else
         render :index

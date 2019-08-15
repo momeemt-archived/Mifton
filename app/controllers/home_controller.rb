@@ -8,6 +8,9 @@ class HomeController < ApplicationController
     end
   end
 
+  def condition
+  end
+
   def register
     @user = User.new(user_params)
     if @user.save && verify_recaptcha

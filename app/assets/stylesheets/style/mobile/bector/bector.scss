@@ -1,0 +1,41 @@
+@media screen and (max-width:425px) {
+  .bector {
+    background-color: #eaf4fc;
+
+    .application_header {
+
+      background: linear-gradient(to right, #182848, #4b6cb7);
+      height: 50px;
+      color: white;
+
+      &_wide {
+        display: none;
+      }
+
+      &_mobile {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 100%;
+      }
+
+      &_logo {
+        padding-right: 30%;
+
+        a {
+          color: white;
+          font-size: 1.2em;
+
+          i {
+            padding-right: 0.5em;
+          }
+        }
+
+      }
+
+      &_hamburger {
+        padding-right: 5%;
+      }
+    }
+  }
+}
