@@ -1,6 +1,7 @@
 @media screen and (min-width:1440px) {
   .common {
     &_sidemenu {
+      display: block;
       width: 80%;
       background-color: white;
       margin: 10px auto;

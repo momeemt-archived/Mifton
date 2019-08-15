@@ -1,3 +1,8 @@
+.home, .manages {
+  background-color: #F6F8FA;
+}
+
+
 @media screen and (min-width:1024px) {
   .lay {
 
@@ -40,6 +45,7 @@
 @media screen and (max-width:1023px) and (min-width:426px) {
 
   .lay {
+    display: flex;
     flex-wrap: wrap;
     &_a {
       order: 1;
