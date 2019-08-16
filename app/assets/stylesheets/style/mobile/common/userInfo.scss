@@ -22,7 +22,7 @@
 
     &_userInfo {
       width: 90%;
-      height: 110vw;
+      //height: 110vw;
       margin: 10px auto;
       position: relative;
       background-color: white;
@@ -37,8 +37,8 @@
         border: 2px solid white;
         border-radius: 50%;
         display: block;
-        width: 8vw;
-        top: 10.5vw;
+        width: 16vw;
+        top: 20vw;
         left: 5vw;
       }
 
@@ -65,17 +65,17 @@
         &_basicSection {
           padding-top: 8vw;
           &_userName {
-            font-size: 3vw;
+            font-size: 6vw;
             font-weight: bold;
           }
 
           &_userID {
-            font-size: 1.6vh;
+            font-size: 3vw;
           }
 
           &_isMyAccount {
             display: inline-block;
-            font-size: 1.5vh;
+            font-size: 3vw;
             background: linear-gradient(transparent 50%, yellow 50%);
           }
         }
@@ -86,11 +86,11 @@
           align-items: center;
           color:white;
 
-          width: 75%;
-          margin: 1vw auto 0;
-          padding: 0.4vw 0;
+          width: 50%;
+          margin: 3vw auto 0;
+          padding: 0.6vw 0;
           border-radius: 30px;
-          font-size: 1.5vw;
+          font-size: 3vw;
 
           i {
             font-size: 1vw;
@@ -119,12 +119,12 @@
         }
 
         &_dataSection {
-          padding-top: 0.5vw;
+          padding-top: 2vw;
           padding-bottom: 1vw;
           display: flex;
 
           &_profile {
-            font-size: 1.6vw;
+            font-size: 3vw;
             font-weight: lighter;
             margin: 0 1vw;
             margin-top: 1vw;
@@ -134,14 +134,14 @@
             padding: 0 2vw;
             display: flex;
             &_name {
-              font-size: 1.5vw;
+              font-size: 3vw;
               font-weight: lighter;
               margin-right: 2vw;
             }
             &_data {
               color: #007bbb;
               font-weight: 900;
-              font-size: 1.5vw;
+              font-size: 3vw;
             }
           }
         }
@@ -156,7 +156,7 @@
             margin-left: 1.6vw;
 
             a {
-              font-size: 1.8vw;
+              font-size: 3vw;
               color: blue;
 
               &:visited {
@@ -165,13 +165,13 @@
             }
 
             i {
-              font-size: 1.8vw;
+              font-size: 3vw;
               color: gray;
               padding-right: 1vw;
             }
 
             p {
-              font-size: 1.8vw;
+              font-size: 3vw;
             }
           }
         }
