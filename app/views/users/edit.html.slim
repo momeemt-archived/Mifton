@@ -38,16 +38,16 @@
             td= f.label :birthday, "誕生日"
             td= f.date_select :birthday, default: current_user.user_traffic.birthday, start_year: Time.now.year - 60 , end_year: Time.now.year - 8
           tr
-            td= f.label :twitter, "TwitterID"
-            td= f.text_field :twitter, value: current_user.user_traffic.twitter_id
+            td= f.label :twitter_id, "TwitterID"
+            td= f.text_field :twitter_id, value: current_user.user_traffic.twitter_id
           tr
-            td= f.label :lobi, "Lobi ID"
-            td= f.text_field :lobi, value: current_user.user_traffic.lobi_id
+            td= f.label :lobi_id, "Lobi ID"
+            td= f.text_field :lobi_id, value: current_user.user_traffic.lobi_id
           tr
-            td= f.label :github, "Github ID"
-            td= f.text_field :github, value: current_user.user_traffic.github_id
+            td= f.label :github_id, "Github ID"
+            td= f.text_field :github_id, value: current_user.user_traffic.github_id
           tr
-            td= f.label :discord, "Discord ID"
-            td= f.text_field :discord, value: current_user.user_traffic.discord_id
+            td= f.label :discord_id, "Discord ID"
+            td= f.text_field :discord_id, value: current_user.user_traffic.discord_id
 
         = f.submit
