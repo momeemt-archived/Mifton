@@ -1,10 +1,13 @@
-@media screen and (min-width:426px) {
-  .bector {
-    background-color: #eaf4fc;
+
+
+@media screen and (min-width:1024px) {
+
+  // wide/home/header.scss に則る
+
+  .home,.manages {
 
     .application_header {
-
-      background: linear-gradient(to right, #182848, #4b6cb7);
+      background: #ec6d51;
       height: 50px;
       color: white;
 
@@ -12,11 +15,12 @@
         display: none;
       }
 
+
       &_naviList {
         display: flex;
 
         i {
-          padding-right: 1vw;
+          padding-right: 5px;
         }
 
         height: 100%;
@@ -38,7 +42,6 @@
           color: white;
           height: 50px;
           display: block;
-          font-size: 1.4vw;
         }
         img {
           display: block;
@@ -50,4 +53,5 @@
       }
     }
   }
+
 }
