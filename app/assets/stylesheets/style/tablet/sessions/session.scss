@@ -1,4 +1,4 @@
-@media screen and (min-width:1024px) {
+@media screen and (max-width:1023px) and (min-width:426px) {
   .session {
     input {
       outline: none;
@@ -9,29 +9,21 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-
       margin-top: 30px;
-      padding: 20px 10px;
-
+      padding: 20px 0;
 
       a {
         color: #ec6d51;
         text-decoration: none;
       }
 
-
+      &:hover {
+        transition: .6s;
+        box-shadow: 2px 2px 4px gray;
+      }
 
       &--container {
-        border: 1px black solid;
-        border-radius: 8px;
         width: 70%;
-        padding: 20px 50px;
-        transition: .6s;
-
-        &:hover {
-          transition: .6s;
-          box-shadow: 2px 2px 4px gray;
-        }
 
         text-align: left;
 
@@ -72,13 +64,14 @@
               color: white;
               font-size: 2vw;
             }
+            display: block;
             color: white;
-            font-size: 1.2vw;
+            font-size: 15px;
             text-align: center;
-            width: 30%;
+            width: 80%;
             background-color: #ec6d51;
             margin: 20px auto;
-            padding: 4px;
+            padding: 1vw 2vw;
             border-radius: 20px;
             font-weight: bold;
             transition: .6s;

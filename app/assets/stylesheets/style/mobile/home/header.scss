@@ -1,6 +1,5 @@
 @media screen and (max-width:425px) {
-  .home, .manage {
-    background-color: #eaf4fc;
+  .home, .manages, .session {
 
     .application_header {
 
@@ -62,5 +61,9 @@
         }
       }
     }
+  }
+
+  .home, .manages {
+    background-color: #eaf4fc;
   }
 }
