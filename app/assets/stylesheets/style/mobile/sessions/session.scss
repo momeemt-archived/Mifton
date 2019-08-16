@@ -4,6 +4,20 @@
       outline: none;
     }
 
+    input[type="submit"],input[type="button"] {
+      -webkit-box-sizing: content-box;
+      -webkit-appearance: button;
+      appearance: button;
+      border: none;
+      box-sizing: border-box;
+      &::-webkit-search-decoration {
+        display: none;
+      }
+      &:focus {
+        outline-offset: -2px;
+      }
+    }
+
 
     &--page-container {
       display: flex;
@@ -18,10 +32,6 @@
         text-decoration: none;
       }
 
-      &:hover {
-        transition: .6s;
-        box-shadow: 2px 2px 4px gray;
-      }
 
       &--container {
         width: 70%;
@@ -77,6 +87,7 @@
             font-weight: bold;
             transition: .6s;
             border: 0px white solid;
+            border-radius: 30px;
 
             &:hover {
               background-color: #ec6d51 * 1.5;
