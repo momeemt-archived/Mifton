@@ -62,7 +62,7 @@
         i.fas.fa-list
       label.application_header_hamburger_closeLabel for="application_header_hamburger_checkbox"
       .application_header_hamburger_content
-        
+
         label.application_header_hamburger_content_close for="application_header_hamburger_checkbox"
           i.fas.fa-times
         .application_header_naviList_group
@@ -187,6 +187,37 @@
                 =link_to new_manage_question_url do
                   i.fas.fa-seedling
                   = "問題作成"
+
+          - else
+            hr
+            .application_header_naviList_group
+              =link_to terms_url do
+                i.fas.fa-align-left
+                = "利用規約"
+            .application_header_naviList_group
+              =link_to terms_url do
+                i.fas.fa-user-secret
+                = "プライバシーポリシー"
+            .application_header_naviList_group
+              =link_to authority_url do
+                i.fas.fa-star
+                = "権限ユーザー"
+            .application_header_naviList_group
+              =link_to condition_url do
+                i.fas.fa-file-code
+                = "開発状況"
+            .application_header_naviList_group
+              =link_to "https://docs.google.com/forms/d/e/1FAIpQLSfKIT-A8AQRDSyQ4uiFzGDDu5-XAHv-CjB6calFzZs29mtabg/viewform" do
+                i.fas.fa-comment-dots
+                = "フィードバック"
+            .application_header_naviList_group
+              =link_to "https://twitter.com/momeemt" do
+                i.fas.fa-hashtag
+                = "開発者"
+            .application_header_naviList_group
+              =link_to help_url do
+                i.fas.fa-question-circle
+                = "ヘルプセンター"
 
         - else
           .application_header_naviList_group
