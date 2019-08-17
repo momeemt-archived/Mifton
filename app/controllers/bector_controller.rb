@@ -9,7 +9,7 @@ class BectorController < ApplicationController
         @microposts += Micropost.where(user_id: user.id)
       end
       @microposts = @microposts.sort.reverse
-
+      @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
       render :index
 
     else
@@ -67,6 +67,7 @@ class BectorController < ApplicationController
   def global
     @users = User.all
     @microposts = Micropost.all
+    @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
     @informations = current_user.informations
     render :index
   end
@@ -80,12 +81,14 @@ class BectorController < ApplicationController
       end
     end
     @microposts = @microposts.sort.reverse
+    @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
     render :index
   end
 
   def media
     @users = User.all
     @microposts = Micropost.where.not(images: nil)
+    @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
     @informations = current_user.informations
     render :index
   end
@@ -96,6 +99,7 @@ class BectorController < ApplicationController
     target_tags.each do |tag|
       @microposts << Micropost.find_by(id: tag.micropost_id)
     end
+    @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
     render :index
   end
 
