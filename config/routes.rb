@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
   resources :manage_users
   post "/manage_users/:id", to: "manage_users#update"
+  post "/manage_users/fix_model/:id", to: "manage_users#fix_model"
 
   resources :manage_bector
   post "/manage_bector/:id", to: "manage_bector#update"

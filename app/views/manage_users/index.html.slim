@@ -46,4 +46,5 @@ table
         td= "@#{user.user_id}"
       td= user.created_at.strftime("%Y/%m/%d")
       - unless user.authority.present? && user.user_traffic.present?
-        td エラー
+        = form_with url: "/manage_users/fix_model/#{user.id}" do |f|
+          = f.submit "モデルエラー"

@@ -62,6 +62,15 @@ class ManageUsersController < ApplicationController
     redirect_to manage_users_url
   end
 
+  def fix_model
+    user = User.find(params[:id])
+    authority_model = user.build_authority
+    authority_model.save
+    user_traffic_model = user.build_user_traffic
+    user_traffic_model.save
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def user_params
