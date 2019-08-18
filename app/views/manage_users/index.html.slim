@@ -45,5 +45,5 @@ table
       - else
         td= "@#{user.user_id}"
       td= user.created_at.strftime("%Y/%m/%d")
-      - if user.authority.present? && user.user_traffic.present?
+      - unless user.authority.present? && user.user_traffic.present?
         td エラー
