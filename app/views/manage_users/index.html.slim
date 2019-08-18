@@ -30,6 +30,7 @@ table
     th= User.human_attribute_name(:name)
     th ユーザーID
     th 登録日
+    th
 
   tbody
   - @users.each do |user|
@@ -44,3 +45,5 @@ table
       - else
         td= "@#{user.user_id}"
       td= user.created_at.strftime("%Y/%m/%d")
+      - if user.authority.present? && user.user_traffic.present?
+        p エラー
