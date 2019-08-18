@@ -25,7 +25,7 @@ class BectorController < ApplicationController
       @user = User.find_by(user_id: params[:user_id])
       if @user.present?
         @microposts = Micropost.where(user_id: @user.id)
-        render :index
+        render :user_index
       else
         redirect_to "/bector"
       end
