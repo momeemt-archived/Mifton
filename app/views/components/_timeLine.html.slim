@@ -4,8 +4,9 @@ section.common_timeLine
   - if datas.empty? && type == "home"
     p あなたへの通知やユーザーの近況はないようです。
     p おすすめユーザーやあなたの友人をもっとフォローしたり、友達をMiftonに誘ってみましょう！
-  = paginate datas
-  = page_entries_info datas
+  - elsif type == "bector"
+    = paginate datas
+    = page_entries_info datas
   - datas.each do |data|
     - user = User.find_by(id: data.user_id)
 
