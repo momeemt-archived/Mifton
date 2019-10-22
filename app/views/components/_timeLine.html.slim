@@ -10,7 +10,7 @@ section.common_timeLine
   - datas.each do |data|
     - user = User.find_by(id: data.user_id)
 
-    .common_timeLine_data
+    .common_timeLine_data.jscroll
       = link_to "","/bector/microposts/#{data.id}", class: "common_timeLine_data_link"
       .common_timeLine_data_icon
         =link_to "/bector/users/#{user.user_id}" do
