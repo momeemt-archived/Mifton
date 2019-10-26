@@ -62,7 +62,7 @@ class BectorController < ApplicationController
       end
     end
 
-    render :index
+    render "bector/logged-in/index"
   end
 
   def global
@@ -70,7 +70,7 @@ class BectorController < ApplicationController
     @microposts = Micropost.all
     @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
     @informations = current_user.informations
-    render :index
+    render "bector/logged-in/index"
   end
 
   def friends
@@ -83,7 +83,7 @@ class BectorController < ApplicationController
     end
     @microposts = @microposts.sort.reverse
     @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
-    render :index
+    render "bector/logged-in/index"
   end
 
   def media
@@ -91,7 +91,7 @@ class BectorController < ApplicationController
     @microposts = Micropost.where.not(images: nil)
     @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
     @informations = current_user.informations
-    render :index
+    render "bector/logged-in/index"
   end
 
   def tags
@@ -101,7 +101,7 @@ class BectorController < ApplicationController
       @microposts << Micropost.find_by(id: tag.micropost_id)
     end
     @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
-    render :index
+    render "bector/logged-in/index"
   end
 
   def create
@@ -116,7 +116,7 @@ class BectorController < ApplicationController
         end
         redirect_back(fallback_location: root_path)
       else
-        render :index
+        render "bector/logged-in/index"
       end
     end
   end
