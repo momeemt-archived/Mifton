@@ -10,9 +10,22 @@
       justify-content: center;
       width: 100%;
 
+
 			&_container {
 				width: 50%;
 			}
+
+      .components_registerForm {
+        opacity: 0.3;
+        transition: 0.5s;
+
+        &:hover {
+          opacity: 1.0;
+          transition: 0.5s;
+        }
+      }
+
+
     }
     &_about {
 			text-align: center;
