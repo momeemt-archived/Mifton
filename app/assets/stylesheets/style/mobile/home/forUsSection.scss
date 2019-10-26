@@ -1,6 +1,7 @@
-@media screen and (min-width:1024px) {
+@media screen and (max-width:425px) {
   .home .forUsSection {
     text-align: center;
+    padding: 0 20px 0;
     &-title {
       font-size: 30px;
     }
@@ -8,6 +9,6 @@
     p{
       margin-top: 5px;
     }
-    margin-bottom: 100px;
+    margin-bottom: 20px;
   }
 }
