@@ -4,6 +4,7 @@ class HomeController < ApplicationController
       @informations = Information.where(starting_point_user: current_user.id)
       render :top_logined
     else
+      @user = User.new
       render :top_not_logined
     end
   end

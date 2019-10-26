@@ -10,13 +10,14 @@ class BectorController < ApplicationController
       end
       @microposts = @microposts.sort.reverse
       @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
-      render :index
+      render "bector/logged-in/index"
 
     else
       @microposts = Micropost.all
       @users = User.all
+      @user = User.new
 
-      render :top
+      render "bector/logging-out/index"
     end
   end
 

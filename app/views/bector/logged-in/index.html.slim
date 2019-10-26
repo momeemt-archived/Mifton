@@ -1,0 +1,24 @@
+.lay
+  - if login?
+    / ユーザー情報
+    .lay_1p4.lay_sticky.lay_a.lay_100vh
+      = render "components/userInfo"
+    / タイムライン
+    .lay_1p2.lay_b
+      = render "components/release"
+      = render "components/timeLine", datas: @microposts, type: "bector"
+    / メニュー
+    .lay_1p4.lay_sticky.lay_c.lay_100vh
+      section.common_sidemenu
+			  = render "components/menulist", u: bector_index_url,   f:"home",            d: "ホーム"
+			  = render "components/menulist", u: "/bector/global",   f:"globe-americas",  d: "グローバルタイムライン"
+			  = render "components/menulist", u: "/bector/friends",  f:"user-friends",    d: "フレンドタイムライン"
+			  = render "components/menulist", u: bector_index_url,   f:"images",          d: "メディアタイムライン"
+			  = render "components/menulist", u: bector_index_url,   f:"envelope",        d: "ダイレクトメッセージ"
+			  = render "components/menulist", u: bector_index_url,   f:"list",            d: "ユーザーリスト"
+			  = render "components/menulist", u: bector_index_url,   f:"bookmark",        d: "ブックマーク"
+			  = render "components/menulist", u: bector_index_url,   f:"volume-mute",     d: "ミュートしたユーザー"
+			  = render "components/menulist", u: bector_index_url,   f:"ban",             d: "ブロックしたユーザー"
+			  = render "components/menulist", u: users_edit_url,     f:"cog",             d: "プロフィールを編集"
+			  = render "components/menulist", u: help_url,           f:"question-circle", d: "ヘルプセンター"
+			  = render "components/menulist", u: root_url,           f:"chevron-left",    d: "Miftonに戻る"

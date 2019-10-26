@@ -1,0 +1,27 @@
+@media screen and (max-width:425px) {
+
+  .bector_logoutIndex {
+    &_about {
+			text-align: center;
+			padding-top: 40px;
+      h1 {
+        font-size: 28px;
+      }
+
+			hr {
+				border: 0;
+				border-top: 2px black solid;
+				width: 100%;
+				margin: 20px auto 0;
+			}
+
+      &_loginSection {
+        margin-top: 20px;
+
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
