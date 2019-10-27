@@ -10,31 +10,28 @@
         p このページではその権限について説明します。
 
         h2 style="color:red;" Admin / 管理者
-        p Mifton全体の管理・運営を行うユーザーです。
-        p ADの中でも特に強い権限を持ち、全ての提供されたアプリケーションにおいて独自に判断を下せます。
-        p 管理者の強い信頼・Miftonへの理解があるユーザーのみがなることができます。
+        p Mifton全体を管理しているユーザーです。
         - @users.each do |user|
           - if user.authority.manage_pos == "admin"
-            p= user.user_id
+            = link_to user.user_id, "users/#{user.user_id}"
 
-        / h2 style="color:green;" Operator / オペレーター
-        / p ユーザー・オブジェクトの秘匿、管理への参加を行うユーザーです。
-        / p Miftonについて詳しく、発展に協力的なユーザーがなることができます。
-        / - @users.each do |user|
-        /   - if user.authority.manage_pos == "operator"
-        /     p= user.user_id
+        h2 style="color:green;" Operator / 運営者
+        p Miftonを運営しているユーザーです。
+        - @users.each do |user|
+          - if user.authority.manage_pos == "operator"
+            = link_to user.user_id, "users/#{user.user_id}"
 
         h2 style="color:deepskyblue;" TrustUser / トラストユーザー
         p 普段からMiftonを利用し、コミュニティ形成に良い影響を与えているユーザー。
         - @users.each do |user|
           - if user.authority.manage_pos == "trust_user"
-            p= user.user_id
+            = link_to user.user_id, "users/#{user.user_id}"
 
         h2 style="color:darkorange;" Developer / 開発者
         p Miftonの開発を行なっているユーザー。
         - @users.each do |user|
           - if user.authority.dev_pos == "developer"
-            p= user.user_id
+            = link_to user.user_id, "users/#{user.user_id}"
 
   .lay_1p4.lay_sticky
 
