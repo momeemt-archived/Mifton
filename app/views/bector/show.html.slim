@@ -26,17 +26,14 @@
             .common_timeLine_data_container_content
               p= simple_format(sanitize(markdown(@micropost.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
 
-              - if type == "bector"
-                - if @micropost.tags.present?
-                  - @micropost.tags.each do |tag|
-                    = link_to "##{tag.name} ", "/bector/tags/#{tag.name}"
+              - if @micropost.tags.present?
+                - @micropost.tags.each do |tag|
+                  = link_to "##{tag.name} ", "/bector/tags/#{tag.name}"
 
-            - if type == "bector"
-
-              - post_images = @micropost.images
-              - if post_images.attached?
-                - post_images.each do |image|
-                  = image_tag image, class: "common_timeLine_data_container_img"
+            - post_images = @micropost.images
+            - if post_images.attached?
+              - post_images.each do |image|
+                = image_tag image, class: "common_timeLine_data_container_img"
 
               .app_reactionContainer
 

@@ -1,8 +1,14 @@
 class CrafesController < ApplicationController
 
   def index
-    @contests = Contest.all.order(start_datetime: :asc)
-    @questions = Question.all.order(start_datetime: :asc)
+    if login?
+      @contests = Contest.all.order(start_datetime: :asc)
+      @questions = Question.all.order(start_datetime: :asc)
+      render "crafes/logging-in/index"
+    else
+      @user = User.new
+      render "crafes/logged-out/index"
+    end
   end
 
   def about
