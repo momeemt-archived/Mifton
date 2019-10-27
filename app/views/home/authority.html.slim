@@ -13,25 +13,25 @@
         p Mifton全体を管理しているユーザーです。
         - @users.each do |user|
           - if user.authority.manage_pos == "admin"
-            = link_to user.user_id, "users/#{user.user_id}"
+            p= link_to user.user_id, "users/#{user.user_id}"
 
         h2 style="color:green;" Operator / 運営者
         p Miftonを運営しているユーザーです。
         - @users.each do |user|
           - if user.authority.manage_pos == "operator"
-            = link_to user.user_id, "users/#{user.user_id}"
+            p= link_to user.user_id, "users/#{user.user_id}"
 
         h2 style="color:deepskyblue;" TrustUser / トラストユーザー
         p 普段からMiftonを利用し、コミュニティ形成に良い影響を与えているユーザー。
         - @users.each do |user|
           - if user.authority.manage_pos == "trust_user"
-            = link_to user.user_id, "users/#{user.user_id}"
+            p= link_to user.user_id, "users/#{user.user_id}"
 
         h2 style="color:darkorange;" Developer / 開発者
         p Miftonの開発を行なっているユーザー。
         - @users.each do |user|
           - if user.authority.dev_pos == "developer"
-            = link_to user.user_id, "users/#{user.user_id}"
+            p= link_to user.user_id, "users/#{user.user_id}"
 
   .lay_1p4.lay_sticky
 
