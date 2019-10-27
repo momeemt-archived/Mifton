@@ -101,53 +101,127 @@
 
   }
 
-  &_timeLine_container {
+  &_timeLine_top {
     margin-top: 10px;
+  }
+
+
+
+  &_timeLine_container {
     background-color: white;
-    border-radius: 5px;
-    padding: 5px 10px;
-    border: 1px solid gray;
+    padding: 8px 16px;
+    border-bottom: 1px solid gray;
 
     img {
       border-radius: 50%;
-      width: 40px;
+      width: 32px;
       margin-right: 8px;
+      border: 1px black solid;
     }
 
-    &_descript {
+    &_commentSection {
       display: flex;
-      align-items: center;
-
-      &-date {
-        font-size: 11px;
+      &_icon {
+        width: 12%;
+        img {
+          width: 60%;
+          object-fit: cover;
+          margin: auto;
+        }
       }
+      &_descript {
+        &_head {
+          display: flex;
+          align-items: center;
+
+          p {
+            margin-right: 12px;
+          }
+        }
+      }
+
+
     }
 
-    &_bectorPost {
-      border: 1px solid gray;
-      border-radius: 5px;
-      width: 85%;
-      margin: 10px 0 10px 10%;
+    &_followSection {
+      display: flex;
 
-      &_top {
+      &_mark {
+        width: 16%;
+        padding: 8px;
+        padding-right: 16px;
+        i {
+          font-size: 28px;
+          color: #0095d9;
+        }
+      }
+
+      &_descript {
+        img {
+          margin-right: 16px;
+        }
         display: flex;
         align-items: center;
-
-        &-data {
-          margin-left: 10px;
+        &-date {
           font-size: 11px;
         }
 
-        img {
-          padding: 3px 10px;
-        }
-
-
-      }
-
-      &_content {
-        padding: 3px 20px;
       }
     }
+
+    &_reactionSection {
+      display: flex;
+
+      &_reaction {
+        padding: 8px;
+        padding-right: 16px;
+        width:16%;
+
+        i {
+          font-size: 24px;
+        }
+
+        .fa-thumbs-up {
+          color: #0095d9;
+        }
+
+        .fa-heart {
+          color: #ec6d71;
+        }
+
+        .fa-sad-tear {
+          color: #83ccd2;
+        }
+
+        .fa-angry {
+          color: #d9333f;
+        }
+
+        .fa-surprise {
+          color: #ec6800;
+        }
+      }
+      &_descript {
+        &_head {
+          img {
+            margin-right: 16px;
+          }
+          display: flex;
+          align-items: center;
+          &-date {
+            font-size: 11px;
+          }
+        }
+        &_content {
+          padding: 4px 16px;
+          color: gray;
+        }
+
+      }
+
+
+    }
+
+
   }
 }

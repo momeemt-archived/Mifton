@@ -15,14 +15,25 @@ class ReactionsController < ApplicationController
     )
 
     unless post.user_id == current_user.id
-      @information = Information.new(
-        user_id: current_user.id,
-        from_any_service: "bector",
-        target_object: post.id,
-        starting_point_user: post.user_id,
-        content: "あなたの投稿にリアクションしました。"
+      user = User.find(post.user_id)
+      @notification = user.notifications.build(
+        kind: "reaction",
+        is_public: false,
+        target: post.id,
+        from_user: current_user.id,
+        from_service: "bector"
       )
-      @information.save
+      search_object = Notification.where(
+        kind: "reaction",
+        is_public: false,
+        target: post.id,
+        from_user: current_user.id,
+        from_service: "bector"
+      )
+      is_already_exist = search_object.present?
+      unless is_already_exist
+        @notification.save
+      end
     end
 
     @post_id = params[:post_id]
@@ -48,15 +59,22 @@ class ReactionsController < ApplicationController
     )
 
     unless post.user_id == current_user.id
-      @information = Information.find_by(
+      search_object = Reaction.where(
         user_id: current_user.id,
-        from_any_service: "bector",
-        target_object: post.id,
-        starting_point_user: post.user_id,
-        content: "あなたの投稿にリアクションしました。"
+        reactioned_id: params[:reactioned_id]
       )
-      if @information.present?
-        @information.destroy
+      is_exist = search_object.present?
+      unless is_exist
+        @notification = Notification.find_by(
+          kind: "reaction",
+          is_public: false,
+          target: post.id,
+          from_user: current_user.id,
+          from_service: "bector"
+        )
+        if @notification.present?
+          @notification.destroy
+        end
       end
     end
 

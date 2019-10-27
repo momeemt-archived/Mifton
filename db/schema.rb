@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_011118) do
+ActiveRecord::Schema.define(version: 2019_10_27_051204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,17 @@ ActiveRecord::Schema.define(version: 2019_08_12_011118) do
     t.datetime "updated_at", null: false
     t.string "image_name"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "kind"
+    t.bigint "user_id"
+    t.string "target"
+    t.boolean "is_public"
+    t.integer "from_user"
+    t.string "from_service"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "questions", force: :cascade do |t|

@@ -1,5 +1,5 @@
 section.common_timeLine
-  - if @informations.empty?
+  - if @notifications.empty?
     .common_timeLine_noneInformation
       .common_timeLine_noneInformation_box
         p.common_timeLine_noneInformation_box-title Miftonでの活動を始めましょう！
@@ -43,64 +43,61 @@ section.common_timeLine
           = "開発者のMiftonアカウント"
 
   - else
-
-      - @informations.each do |information|
-
-        - user = User.find_by(id: information.user_id)
-
+      .common_timeLine_top
+      - @notifications.each do |notification|
         .common_timeLine_container
+          - user = User.find(notification.from_user)
 
-          = link_to "","/informations/#{information.id}", class: "common_timeLine_container_link"
+          - if notification.kind == "reaction"
+            - post = Micropost.find(notification.target)
+            - reactions = Reaction.where(reactioned_id: post.id)
+            .common_timeLine_container_reactionSection
+              .common_timeLine_container_reactionSection_reaction
 
-          .common_timeLine_container_descript
-
-            =link_to "/users/#{user.user_id}" do
-              - if user.icon.attached?
-                = image_tag user.icon
-              - else
-                = image_tag "/user_images/default_icon.png"
-
-            p
-              = render "components/show_star_name", user: user
-              = "さんが #{information.content}"
-
-            p.common_timeLine_container_descript-date =date_display(information.created_at)
-
-          - f_service = information.from_any_service
-
-          - if f_service == "bector"
-
-            .common_timeLine_container_bectorPost
-              - target_user = User.find_by(id: information.starting_point_user)
-              - post = Micropost.find(information.target_object)
-
-              .common_timeLine_container_bectorPost_top
-                = link_to "/bector/users/#{target_user.user_id}" do
-                  - if target_user.icon.attached?
-                    = image_tag target_user.icon
+                - reactions.each do |re|
+                  - case re.reactioned_type
+                  - when "good" then
+                    i.fas.fa-thumbs-up
+                  - when "cry" then
+                    i.fas.fa-sad-tear
+                  - else
+                    i class="fas fa-#{re.reactioned_type}"
+              .common_timeLine_container_reactionSection_descript
+                .common_timeLine_container_reactionSection_descript_head
+                  =link_to "/users/#{user.user_id}" do
+                    - if user.icon.attached?
+                      = image_tag user.icon
+                    - else
+                      = image_tag "/user_images/default_icon.png"
+                  p= "#{user.name}さんがあなたの投稿にリアクションしました。"
+                  p.common_timeLine_container_reactionSection_descript_head-date= date_display(notification.created_at)
+                .common_timeLine_container_reactionSection_descript_content
+                  p= post.content
+          - elsif notification.kind == "follow"
+            .common_timeLine_container_followSection
+              .common_timeLine_container_followSection_mark
+                i.fas.fa-user-plus
+              .common_timeLine_container_followSection_descript
+                =link_to "/users/#{user.user_id}" do
+                  - if user.icon.attached?
+                    = image_tag user.icon
                   - else
                     = image_tag "/user_images/default_icon.png"
-                = render "components/show_star_name", user: target_user
-                p.common_timeLine_container_bectorPost_top-data= date_display(post.created_at)
-              .common_timeLine_container_bectorPost_content
-                p= simple_format(sanitize(markdown(post.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
-
-          - elsif f_service == "comment"
-
-            - comment = Comment.find_by(id: information.target_object)
-            .common_timeLine_container_bectorPost_content
-              p= simple_format(sanitize(markdown(comment.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
-
-
-          / .app_reactionContainer
-          /
-          /   div id="heart_reaction_#{information.id}"
-          /     = render "components/reaction",  type: "heart", faName: "heart", post: information, color: "pink", user: user
-          /   div id="good_reaction_#{information.id}"
-          /     = render "components/reaction",  type: "good", faName: "thumbs-up", post: information, color: "blue", user: user
-          /   div id="cry_reaction_#{information.id}"
-          /     = render "components/reaction",  type: "cry", faName: "sad-tear", post: information, color: "deepskyblue", user: user
-          /   div id="surprise_reaction_#{information.id}"
-          /     = render "components/reaction",  type: "surprise", faName: "surprise", post: information, color: "darkorange", user: user
-          /   div id="angry_reaction_#{information.id}"
-          /     = render "components/reaction",  type: "angry", faName: "angry", post: information, color: "red", user: user
+                p= "#{user.name}さんがあなたをフォローしました。"
+                p.common_timeLine_container_followSection_descript-date= date_display(notification.created_at)
+          - elsif notification.kind == "comment"
+            - comment = Comment.find(notification.target)
+            .common_timeLine_container_commentSection
+              .common_timeLine_container_commentSection_icon
+                =link_to "/users/#{user.user_id}" do
+                  - if user.icon.attached?
+                    = image_tag user.icon
+                  - else
+                    = image_tag "/user_images/default_icon.png"
+              .common_timeLine_container_commentSection_descript
+                .common_timeLine_container_commentSection_descript_head
+                  p= user.name
+                  p= "@#{user.user_id}"
+                  p.common_timeLine_container_reactionSection_descript_head-date= date_display(notification.created_at)
+                .common_timeLine_container_reactionSection_descript_content
+                  p= comment.content

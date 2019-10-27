@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
   has_many :reports
   has_many :informations, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_many :direct_messages, dependent: :destroy
 
   has_secure_password

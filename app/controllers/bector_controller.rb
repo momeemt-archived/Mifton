@@ -38,15 +38,16 @@ class BectorController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     @comment.save
 
-    unless Micropost.find(@comment.parent_id).user_id == current_user.id
-      @information = Information.new(
-        user_id: current_user.id,
-        from_any_service: "comment",
-        starting_point_user: Micropost.find(@comment.parent_id).user_id,
-        content: "あなたの投稿にコメントをしました。",
-        target_object: @comment.id
+    post = Micropost.find(@comment.parent_id)
+    unless post.user_id == current_user.id
+      @notification = User.find(post.user_id).notifications.build(
+        kind: "comment",
+        is_public: false,
+        target: @comment.id,
+        from_user: current_user.id,
+        from_service: "bector"
       )
-      @information.save
+      @notification.save
     end
     redirect_back(fallback_location: root_path)
   end
