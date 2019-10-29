@@ -3,12 +3,10 @@ hr
 = form_with scope: :questions, url: manage_questions_url , local: true do |f|
   table
     tbody
+      = f.hidden_field :writer, :value => current_user.user_id
       tr
         td タイトル
         td= f.text_field :title
-      tr
-        td 問題作成者
-        td= f.text_field :writer
       tr
         td スコア
         td= f.number_field :score

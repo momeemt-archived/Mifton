@@ -1,0 +1,25 @@
+.lay
+  - @user = current_user
+  / ユーザー情報
+  .lay_1p4.lay_sticky.lay_100vh
+    = render "components/userInfo"
+
+  .lay_1p2
+
+    h1= @question.title
+    hr
+    p= "配点: #{@question.score}点"
+    h2 問題
+    p= @question.content
+    h2 制約
+    p= @question.constraints
+    h2 提出
+
+  / メニュー
+  .lay_1p4.lay_sticky.lay_100vh
+    section.crafes_sideBar_searchForm
+      = form_with url: "/bector/search/", local: true do |f|
+        = f.text_field :user_id, placeholder: "コンテスト/問題検索"
+
+    section.crafes_sideBar_menuTab
+      = render "crafes/components/sidemenu"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_051204) do
+ActiveRecord::Schema.define(version: 2019_10_29_125252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,22 @@ ActiveRecord::Schema.define(version: 2019_10_27_051204) do
   create_table "contest_join_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "contest_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contest_records", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "contest_id"
+    t.integer "q1_score"
+    t.integer "q1_elapsed_time"
+    t.integer "q2_score"
+    t.integer "q2_elapsed_time"
+    t.integer "q3_score"
+    t.integer "q3_elapsed_time"
+    t.integer "q4_score"
+    t.integer "q4_elapsed_time"
+    t.integer "primary_rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

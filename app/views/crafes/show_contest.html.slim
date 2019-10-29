@@ -6,21 +6,48 @@
   / タイムライン
   .lay_1p2
 
+    - if flash[:success].present?
+      = flash[:success]
+    - elsif flash[:fall].present?
+      = flash[:fall]
+    - elsif flash[:leave].present?
+      = flash[:leave]
+
     section.crafes_showContest
     h1= @contest.name
     p= "開催時刻: #{@contest.start_datetime.strftime("%Y年%m月%d日%H時%M分より")}"
     p= "コンテスト時間: #{@contest.duration}分"
     p= "レーティング変化: ~#{@contest.rated_range}"
 
-    p 参加登録
-    p contest_join モデルに登録させて、登録者のみコンテスト時間後に問題をチェック可能
+    p 作問者
+    - @writers.each do |writer|
+      p= writer
 
-    h2 問題
-    table
-      tr
-        td= link_to "#{@questions.find(@contest.question1_id).title}", "/crafes/question/#{@contest.question1_id}"
-        td= "#{@questions.find(@contest.question1_id).score}点"
-        td= "#{@questions.find(@contest.question1_id).writer}"
+    - if @after_the_contest
+      h2 コンテストは終了しました
+
+    - if (@before_the_contest) || (@is_in_session && !@did_join_contest) #開催中で、コンテストに参加していない場合
+      - unless @did_join_contest
+        p 参加登録
+        = button_to "参加登録", method: :post, action: "join_contest"
+      - else
+        p 参加登録を取り消す
+        = button_to "参加を取り消す", method: :post, action: "leave_contest"
+    - else
+      h2 問題
+      table
+        tr
+          td= link_to "#{@question_1.title}", "/crafes/question/#{@question_1.id}"
+          td= "#{@question_1.score}点"
+        tr
+          td= link_to "#{@question_2.title}", "/crafes/question/#{@question_2.id}"
+          td= "#{@question_2.score}点"
+        tr
+          td= link_to "#{@question_3.title}", "/crafes/question/#{@question_3.id}"
+          td= "#{@question_3.score}点"
+        tr
+          td= link_to "#{@question_4.title}", "/crafes/question/#{@question_4.id}"
+          td= "#{@question_4.score}点"
 
   / メニュー
   .lay_1p4.lay_sticky.lay_100vh

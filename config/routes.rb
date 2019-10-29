@@ -80,8 +80,12 @@ Rails.application.routes.draw do
   get "/crafes/schedule"
   get "/crafes/finished"
   get "/crafes/contest/:id", to: "crafes#show_contest"
+  get "/crafes/contest/:id/standings", to: "crafes#standings"
+  post "/crafes/join/:id", to: "crafes#join_contest"
+  post "/crafes/leave/:id", to: "crafes#leave_contest"
   get "/crafes/questions"
   get "/crafes/question/:id", to: "crafes#show_question"
+
 
   resources :users do
     member do
