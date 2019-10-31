@@ -10,7 +10,10 @@ table
   - @contests.each do |contest|
     tr
       td= contest.id
-      td= link_to "#{contest.name} ##{contest.times}", "/manage_contests/#{contest.id}"
+      - if than_admin
+        td= link_to "#{contest.name} ##{contest.times}", "/manage_contests/#{contest.id}"
+      - else
+        td= "#{contest.name} ##{contest.times}"
       td= contest.start_datetime
       td= contest.contest_type
       td= contest.is_public
