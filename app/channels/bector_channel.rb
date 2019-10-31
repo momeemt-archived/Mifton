@@ -7,7 +7,16 @@ class BectorChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def message
-    BectorChannel.broadcast_to("micropost", "hello")
+  def micropost
+    @micropost = current_user.microposts.build(m_params)
+    if @micropost.save
+      tag_array = params[:micropost][:tags].split(/[[:blank:]]+/);
+      tag_array.each do |tag|
+        @tag = @micropost.tags.build
+        @tag.name = tag
+        @tag.save
+      end
+    end
   end
+
 end

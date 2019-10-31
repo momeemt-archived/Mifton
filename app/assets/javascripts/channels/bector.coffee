@@ -7,7 +7,7 @@ App.bector = App.cable.subscriptions.create "BectorChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    console.log data
+    # 新規ポストを表示
 
   micropost: ->
-    @perform "message"
+    @perform "micropost"
