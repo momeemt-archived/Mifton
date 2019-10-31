@@ -2,46 +2,53 @@ class ReactionsController < ApplicationController
 
   def create
 
-    #render params
-    @reaction = Reaction.new(
+    has_same_reaction = Reaction.where(
       user_id: current_user.id,
       reactioned_id: params[:reactioned_id],
       reactioned_type: params[:reactioned_type]
     )
 
-    @reaction.save
-    post = Micropost.find_by(
-      id: params[:reactioned_id]
-    )
+    if has_same_reaction
+      @reaction = Reaction.new(
+        user_id: current_user.id,
+        reactioned_id: params[:reactioned_id],
+        reactioned_type: params[:reactioned_type]
+      )
 
-    unless post.user_id == current_user.id
-      user = User.find(post.user_id)
-      @notification = user.notifications.build(
-        kind: "reaction",
-        is_public: false,
-        target: post.id,
-        from_user: current_user.id,
-        from_service: "bector"
+      @reaction.save
+      post = Micropost.find_by(
+        id: params[:reactioned_id]
       )
-      search_object = Notification.where(
-        kind: "reaction",
-        is_public: false,
-        target: post.id,
-        from_user: current_user.id,
-        from_service: "bector"
-      )
-      is_already_exist = search_object.present?
-      unless is_already_exist
-        @notification.save
+
+      unless post.user_id == current_user.id
+        user = User.find(post.user_id)
+        @notification = user.notifications.build(
+          kind: "reaction",
+          is_public: false,
+          target: post.id,
+          from_user: current_user.id,
+          from_service: "bector"
+        )
+        search_object = Notification.where(
+          kind: "reaction",
+          is_public: false,
+          target: post.id,
+          from_user: current_user.id,
+          from_service: "bector"
+        )
+        is_already_exist = search_object.present?
+        unless is_already_exist
+          @notification.save
+        end
       end
-    end
 
-    @post_id = params[:post_id]
-    @user = params[:user]
+      @post_id = params[:post_id]
+      @user = params[:user]
 
-    respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path) }
-      format.js
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: root_path) }
+        format.js
+      end
     end
 
   end
