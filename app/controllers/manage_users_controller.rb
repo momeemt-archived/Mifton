@@ -9,26 +9,6 @@ class ManageUsersController < ApplicationController
     @users = @q.result(distinct: true).page(params[:page]).per(50)
   end
 
-  # 管理画面 -> ユーザー作成
-  def new
-    @user = User.new
-  end
-
-  # 管理画面 -> ユーザー作成(Post)
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      a = @user.build_authority(authority_params)
-      a.save
-      t = @user.build_user_traffic
-      t.save
-      redirect_to manage_users_url, notice: "ユーザー「#{@user.name}を登録しました。」"
-    else
-      render :new
-    end
-  end
-
   # 管理画面 -> ユーザー詳細 & 編集
   def show
 
