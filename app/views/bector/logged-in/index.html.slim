@@ -1,12 +1,59 @@
-.lay
+.layout
   - if login?
     / ユーザー情報
-    .lay_1p4.lay_sticky.lay_a.lay_100vh
-      = render "components/userInfo"
-    / タイムライン
+    .layout_1p4.lay_sticky.lay_a.lay_100vh
+      .components_bectorFunctionBar
+        = render "render_files/components/userImages", user: @user
+
+        .components_bectorFunctionBar_buttons
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector" do
+              i.fas.fa-home
+              p ホーム
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/global" do
+              i.fas.fa-globe-americas
+              p グローバル
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/notifications" do
+              i.far.fa-bell
+              p 通知
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/direct_messages" do
+              i.far.fa-envelope
+              p メッセージ
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/custom_timelines" do
+              i.fas.fa-list
+              p リスト
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/bookmarks" do
+              i.far.fa-bookmark
+              p ブックマーク
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/more" do
+              i.fas.fa-ellipsis-h
+              p 他のご用事？
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/" do
+              i.fas.fa-chevron-left
+              p Miftonに戻る
+
+          .components_bectorFunctionBar_buttons_micropostButton
+            p 投稿する
+          .components_bectorFunctionBar_buttons_topicButton
+            p トピックを書く
+
     .lay_1p2.lay_b
       = render "components/release"
-      /= render "components/timeLine", datas: @microposts, type: "bector"
       section.common_timeLine
         .post_list.jscroll
           - @microposts.each do |post|
@@ -59,10 +106,30 @@
                         = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "投稿を削除しますか？\n削除した投稿は運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
                           i.far.fa-trash-alt
 
+            - @comments = Comment.where(parent_id: post.id, parent_model: "bector")
+            - @comments.each do |comment|
+              .common_timeLine_data
+                i.fas.fa-reply-all
+                - user = User.find_by(id: comment.user_id)
+                .common_timeLine_data_icon
+                  =link_to "/bector/users/#{user.user_id}" do
+                    - if user.icon.attached?
+                      = image_tag user.icon
+                    - else
+                      = image_tag "/user_images/default_icon.png"
+                .common_timeLine_data_container
+                  .common_timeLine_data_container_top
+                    p.common_timeLine_data_container_top_name
+                      = render "components/show_star_name", user: user
+                    p.common_timeLine_data_container_top_id = "@#{user.user_id}"
+                    p.common_timeLine_data_container_top_date = date_display(comment.created_at)
+
+                  .common_timeLine_data_container_content
+                    p= simple_format(sanitize(markdown(comment.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
+
           = paginate @microposts
 
 
-    / メニュー
     .lay_1p4.lay_sticky.lay_c.lay_100vh
       section.common_sidemenu
 			  = render "components/menulist", u: bector_index_url,   f:"home",            d: "ホーム"
