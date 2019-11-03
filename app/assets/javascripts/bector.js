@@ -4,11 +4,10 @@ $(window).on('scroll', function() {
     scrollHeight = $(document).height();
     scrollPosition = $(window).height() + $(window).scrollTop();
     if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
-          console.log("jscroll")
-          $('.jscroll').jscroll({
-            contentSelector: '.post_list',
-            nextSelector: 'a[rel=next]:last'
-          });
+      $('.jscroll').jscroll({
+        contentSelector: '.post_list',
+        nextSelector: 'a[rel=next]:last'
+      });
     }
 });
 
