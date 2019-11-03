@@ -50,7 +50,7 @@ section.common_timeLine
 
           - if notification.kind == "reaction"
             - post = Micropost.find(notification.target)
-            - reactions = Reaction.where(reactioned_id: post.id)
+            - reactions = Reaction.where(reactioned_id: post.id, user_id: user.id)
             .common_timeLine_container_reactionSection
               .common_timeLine_container_reactionSection_reaction
 
