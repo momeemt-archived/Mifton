@@ -2,6 +2,8 @@
   - if login?
     / ユーザー情報
     .components_modalOverlay
+    .components_mobileDropButton
+      img src="/mifton.001.png"
     .components_micropostModal
       .components_micropostModal_close
       i.fas.fa-times.components_micropostModal_closeButton
@@ -143,26 +145,26 @@
                         = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "投稿を削除しますか？\n削除した投稿は運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
                           i.far.fa-trash-alt
 
-            - @comments = Comment.where(parent_id: post.id, parent_model: "bector")
-            - @comments.each do |comment|
-              .common_timeLine_data
-                i.fas.fa-reply-all
-                - user = User.find_by(id: comment.user_id)
-                .common_timeLine_data_icon
-                  =link_to "/bector/users/#{user.user_id}" do
-                    - if user.icon.attached?
-                      = image_tag user.icon
-                    - else
-                      = image_tag "/user_images/default_icon.png"
-                .common_timeLine_data_container
-                  .common_timeLine_data_container_top
-                    p.common_timeLine_data_container_top_name
-                      = render "components/show_star_name", user: user
-                    p.common_timeLine_data_container_top_id = "@#{user.user_id}"
-                    p.common_timeLine_data_container_top_date = date_display(comment.created_at)
-
-                  .common_timeLine_data_container_content
-                    p= simple_format(sanitize(markdown(comment.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
+            / - @comments = Comment.where(parent_id: post.id, parent_model: "bector")
+            / - @comments.each do |comment|
+            /   .common_timeLine_data
+            /     i.fas.fa-reply-all
+            /     - user = User.find_by(id: comment.user_id)
+            /     .common_timeLine_data_icon
+            /       =link_to "/bector/users/#{user.user_id}" do
+            /         - if user.icon.attached?
+            /           = image_tag user.icon
+            /         - else
+            /           = image_tag "/user_images/default_icon.png"
+            /     .common_timeLine_data_container
+            /       .common_timeLine_data_container_top
+            /         p.common_timeLine_data_container_top_name
+            /           = render "components/show_star_name", user: user
+            /         p.common_timeLine_data_container_top_id = "@#{user.user_id}"
+            /         p.common_timeLine_data_container_top_date = date_display(comment.created_at)
+            /
+            /       .common_timeLine_data_container_content
+            /         p= simple_format(sanitize(markdown(comment.content), tags: %w(h1 h2 h3 h4 h5 strong em a p), attributes: %w(href)).html_safe)
 
           = paginate @microposts
 

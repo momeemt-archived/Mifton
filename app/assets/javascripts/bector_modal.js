@@ -9,6 +9,15 @@ $(function(){
     }
   );
 
+  $('.components_mobileDropButton').on('click',
+    function(){
+      $(this).blur();
+      $(".components_modalOverlay").fadeIn("slow");
+      $(".components_micropostModal").fadeIn("slow");
+      $(".components_mobileDropButton").fadeOut("slow");
+    }
+  );
+
   $('.components_bectorFunctionBar_buttons_topicButton').on('click',
     function(){
       $(this).blur();
@@ -22,6 +31,7 @@ $(function(){
       $(this).blur();
       $(".components_modalOverlay").fadeOut("slow");
       $(".components_micropostModal").fadeOut("slow");
+      $(".components_mobileDropButton").fadeIn("slow");
     }
   );
 
@@ -30,6 +40,7 @@ $(function(){
       $(this).blur();
       $(".components_modalOverlay").fadeOut("slow");
       $(".components_topicModal").fadeOut("slow");
+      $(".components_mobileDropButton").fadeIn("slow");
     }
   );
 
@@ -39,6 +50,7 @@ $(function(){
       $(".components_modalOverlay").fadeOut("slow");
       $(".components_micropostModal").fadeOut("slow");
       $(".components_topicModal").fadeOut("slow");
+      $(".components_mobileDropButton").fadeIn("slow");
     }
   );
 });
