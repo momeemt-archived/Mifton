@@ -12,6 +12,14 @@ Rails.application.routes.draw do
 
 
   # Bector
+
+  # Microposts >> /bector/
+  # Topics >> /bector/topics
+  # 混合 >> /bector/posts
+
+
+
+
   get "/bector/top", to: "bector#top"
   get "/bector/custom/:level", to: "bector#custom"
 
@@ -27,6 +35,7 @@ Rails.application.routes.draw do
   get "/bector/tags/:tag", to:"bector#tags"
   post "/bector/destroy", to:"bector#destroy"
   resources :bector, only: [:create, :destroy, :index]
+
   get "/bector/microposts/:id", to: "bector#show"
   post "/bector/microposts/:id", to: "bector#comment"
 

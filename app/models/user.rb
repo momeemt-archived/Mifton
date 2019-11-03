@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :contest_records, dependent: :destroy
   has_many :microposts, dependent: :destroy
+  has_many :topics, dependent: :destroy
   has_many :contest_join_users, dependent: :destroy
   has_many :reports
   has_many :informations, dependent: :destroy

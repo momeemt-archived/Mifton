@@ -10,6 +10,8 @@ class BectorController < ApplicationController
       end
       @microposts = @microposts.sort.reverse
       @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
+      @random_users = @users.where.not(id: current_user.id).sample(5)
+      @random_tags = Tag.all.sample(5)
       render "bector/logged-in/index"
 
     else
@@ -32,6 +34,8 @@ class BectorController < ApplicationController
       end
     end
   end
+
+
 
 
   def comment
@@ -70,7 +74,8 @@ class BectorController < ApplicationController
     @users = User.all
     @microposts = Micropost.all
     @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
-    @informations = current_user.informations
+    @random_users = @users.where.not(id: current_user.id).sample(5)
+    @random_tags = Tag.all.sample(5)
     render "bector/logged-in/index"
   end
 
@@ -84,6 +89,8 @@ class BectorController < ApplicationController
     end
     @microposts = @microposts.sort.reverse
     @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
+    @random_users = @users.where.not(id: current_user.id).sample(5)
+    @random_tags = Tag.all.sample(5)
     render "bector/logged-in/index"
   end
 
@@ -102,6 +109,8 @@ class BectorController < ApplicationController
       @microposts << Micropost.find_by(id: tag.micropost_id)
     end
     @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
+    @random_users = @users.where.not(id: current_user.id).sample(5)
+    @random_tags = Tag.all.sample(5)
     render "bector/logged-in/index"
   end
 
@@ -119,8 +128,17 @@ class BectorController < ApplicationController
       else
         render "bector/logged-in/index"
       end
+
+    elsif params[:topic]
+      @topic = current_user.topics.build(topic_params)
+      if @topic.save
+        redirect_back(fallback_location: root_path)
+      else
+        render "bector/logged-in/index"
+      end
     end
   end
+
 
   def search
     user_id = params[:user_id]
@@ -143,6 +161,14 @@ class BectorController < ApplicationController
    params.require(:micropost).permit(
      :content,
      images: []
+    )
+  end
+
+  def topic_params
+    params.require(:topic).permit(
+      :title,
+      :content,
+      images: []
     )
   end
 
