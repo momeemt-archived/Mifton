@@ -23,6 +23,17 @@ class BectorController < ApplicationController
     end
   end
 
+  def notifications
+    if login?
+      @notifications = current_user.notifications.where(from_service: "bector").page(params[:page]).per(20)
+      @user = current_user
+      @users = User.all
+      @random_users = @users.where.not(id: current_user.id).sample(5)
+      @random_tags = Tag.all.sample(5)
+      render "bector/logged-in/notifications"
+    end
+  end
+
   def user
     if login?
       @user = User.find_by(user_id: params[:user_id])

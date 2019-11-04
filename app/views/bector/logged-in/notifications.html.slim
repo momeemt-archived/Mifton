@@ -1,0 +1,145 @@
+.layout
+  - if login?
+    / ユーザー情報
+    .components_modalOverlay
+    .components_mobileDropButton
+      img src="/mifton.001.png"
+    .components_micropostModal
+      .components_micropostModal_close
+      i.fas.fa-times.components_micropostModal_closeButton
+      .components_micropostModal_icon
+        - if current_user.icon.attached?
+          = image_tag current_user.icon
+        - else
+          = image_tag "/user_images/default_icon.png"
+      .components_micropostModal_form
+        = form_with scope: :micropost, url: bector_index_url, multipart: true, local: true do |f|
+          = f.text_area :content, placeholder: "進捗や日常の体験を発信しよう"
+          = f.text_field :tags, placeholder: "タグ", value: ""
+          .preview
+          = f.label :images
+            i.far.fa-images
+          = f.file_field :images, multiple: true, accept: 'image/jpg,image/jpeg,image/png,image/gif'
+
+          = f.submit "ドロップ"
+    .components_topicModal
+      .components_topicModal_close
+      i.fas.fa-times.components_topicModal_closeButton
+      .components_topicModal_icon
+        - if current_user.icon.attached?
+          = image_tag current_user.icon
+        - else
+          = image_tag "/user_images/default_icon.png"
+      .components_topicModal_form
+        = form_with scope: :topic, url: bector_index_url, multipart: true, local: true do |f|
+          = f.text_field :title, placeholder: "タイトル"
+          = f.text_area :content, placeholder: "紹介文や日記をたくさん書き込もう"
+          .preview
+          = f.label :images
+            i.far.fa-images
+          = f.file_field :images, multiple: true, accept: 'image/jpg,image/jpeg,image/png,image/gif'
+
+          = f.submit "トピックを投稿"
+    .layout_1p4.lay_sticky.lay_a.lay_100vh
+      .components_bectorFunctionBar
+        = render "render_files/components/userImages", user: @user
+
+        .components_bectorFunctionBar_buttons
+
+          .components_bectorFunctionBar_buttons_micropostButton
+            p 投稿する
+
+          .components_bectorFunctionBar_buttons_topicButton
+            p トピックを書く
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector" do
+              i.fas.fa-home
+              p ホーム
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/global" do
+              i.fas.fa-globe-americas
+              p グローバル
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/notifications" do
+              i.far.fa-bell
+              p 通知
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/direct_messages" do
+              i.far.fa-envelope
+              p メッセージ
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/custom_timelines" do
+              i.fas.fa-list
+              p リスト
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/bookmarks" do
+              i.far.fa-bookmark
+              p ブックマーク
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/bector/more" do
+              i.fas.fa-ellipsis-h
+              p 他のご用事？
+
+          .components_bectorFunctionBar_buttons_button
+            = link_to "/" do
+              i.fas.fa-chevron-left
+              p Miftonに戻る
+
+    .layout_1p2.lay_b
+      section.common_timeLine
+        p 開発中の機能です！
+        .post_list.jscroll
+          - @notifications.each do |notification|
+            - user = @users.find(notification.from_user)
+            .common_timeLine_data
+              /= link_to "","/bector/microposts/#{post.id}", class: "common_timeLine_data_link"
+              .common_timeLine_data_icon
+                =link_to "/bector/users/#{user.user_id}" do
+                  - if user.icon.attached?
+                    = image_tag user.icon
+                  - else
+                    = image_tag "/user_images/default_icon.png"
+              .common_timeLine_data_container
+                .common_timeLine_data_container_top
+                  p.common_timeLine_data_container_top_name
+                    = render "components/show_star_name", user: user
+                  p.common_timeLine_data_container_top_id = "@#{user.user_id}"
+                  p.common_timeLine_data_container_top_date = date_display(notification.created_at)
+
+                .common_timeLine_data_container_content
+                  p 通知
+
+          = paginate @notifications
+
+
+    .layout_1p4.lay_sticky.lay_c.lay_100vh
+      .components_bectorInfo
+        /.components_bectorInfo_searchBox
+          p 検索
+        .components_bectorInfo_recommendUser
+          p.components_bectorInfo_recommendUser_title おすすめユーザー
+          - @random_users.each do |user|
+            hr
+            .components_bectorInfo_recommendUser_userBox
+              = link_to "/bector/users/#{user.user_id}"
+                - if user.icon.attached?
+                  = image_tag user.icon
+                - else
+                  = image_tag "/user_images/default_icon.png"
+              .components_bectorInfo_recommendUser_userBox_identity
+                a= user.name
+                p= "@" + user.user_id
+
+        .components_bectorInfo_recommendTag
+          p.components_bectorInfo_recommendTag_title トレンド
+          - @random_tags.each do |tag|
+            .components_bectorInfo_recommendTag_tag
+              =link_to "#" + tag.name, "/bector/tags/#{tag.name}"
+              p= Tag.where(name: tag.name).length.to_s + "件の投稿"
