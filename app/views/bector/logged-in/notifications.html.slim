@@ -94,7 +94,6 @@
 
     .layout_1p2.lay_b
       section.common_timeLine
-        p 開発中の機能です！
         .post_list.jscroll
           - @notifications.each do |notification|
             - user = @users.find(notification.from_user)
@@ -113,8 +112,54 @@
                   p.common_timeLine_data_container_top_id = "@#{user.user_id}"
                   p.common_timeLine_data_container_top_date = date_display(notification.created_at)
 
-                .common_timeLine_data_container_content
-                  p 通知
+                - if notification.kind == "reaction"
+                  - post = Micropost.find(notification.target)
+                  - reactions = Reaction.where(reactioned_id: post.id, user_id: user.id)
+                  .common_timeLine_container_reactionSection
+                    .common_timeLine_container_reactionSection_reaction
+
+                      - reactions.each do |re|
+                        - case re.reactioned_type
+                        - when "good" then
+                          i.fas.fa-thumbs-up
+                        - when "cry" then
+                          i.fas.fa-sad-tear
+                        - else
+                          i class="fas fa-#{re.reactioned_type}"
+                    .common_timeLine_container_reactionSection_descript
+                      .common_timeLine_container_reactionSection_descript_head
+                        p= "あなたの投稿にリアクションしました。"
+                        p.common_timeLine_container_reactionSection_descript_head-date= date_display(notification.created_at)
+                      .common_timeLine_container_reactionSection_descript_content
+                        p= post.content
+                - elsif notification.kind == "follow"
+                  .common_timeLine_container_followSection
+                    .common_timeLine_container_followSection_mark
+                      i.fas.fa-user-plus
+                    .common_timeLine_container_followSection_descript
+                      =link_to "/users/#{user.user_id}" do
+                        - if user.icon.attached?
+                          = image_tag user.icon
+                        - else
+                          = image_tag "/user_images/default_icon.png"
+                      p= "あなたをフォローしました。"
+                      p.common_timeLine_container_followSection_descript-date= date_display(notification.created_at)
+                - elsif notification.kind == "comment"
+                  - comment = Comment.find(notification.target)
+                  .common_timeLine_container_commentSection
+                    .common_timeLine_container_commentSection_icon
+                      =link_to "/users/#{user.user_id}" do
+                        - if user.icon.attached?
+                          = image_tag user.icon
+                        - else
+                          = image_tag "/user_images/default_icon.png"
+                    .common_timeLine_container_commentSection_descript
+                      .common_timeLine_container_commentSection_descript_head
+                        p= user.name
+                        p= "@#{user.user_id}"
+                        p.common_timeLine_container_reactionSection_descript_head-date= date_display(notification.created_at)
+                      .common_timeLine_container_reactionSection_descript_content
+                        p= comment.content
 
           = paginate @notifications
 
