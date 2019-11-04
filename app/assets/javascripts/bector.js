@@ -1,15 +1,26 @@
 //= require_tree .
 
 $(window).on('scroll', function() {
-    scrollHeight = $(document).height();
-    scrollPosition = $(window).height() + $(window).scrollTop();
-    if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
-      $('.jscroll').jscroll({
-        contentSelector: '.post_list',
-        nextSelector: 'a[rel=next]:last'
-      });
-    }
+  scrollHeight = $(document).height();
+  scrollPosition = $(window).height() + $(window).scrollTop();
+  if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
+    $('.jscroll').jscroll({
+      contentSelector: '.post_list',
+      nextSelector: 'a[rel=next]:last'
+    });
+  }
 });
+
+$(function(){
+  $('.common_timeLine_data').on('click',
+    function(e){
+      e.stopPropagation();
+      console.log("clicked");
+    }
+  );
+});
+
+
 
 // $(document).ready(function() {
 //   console.log("ready");

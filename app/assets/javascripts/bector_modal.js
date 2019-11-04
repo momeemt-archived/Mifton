@@ -1,6 +1,6 @@
 //= require_tree .
 
-$(function(){
+  $(function(){
   $('.components_bectorFunctionBar_buttons_micropostButton').on('click',
     function(){
       $(this).blur();
@@ -31,7 +31,10 @@ $(function(){
       $(this).blur();
       $(".components_modalOverlay").fadeOut("slow");
       $(".components_micropostModal").fadeOut("slow");
-      $(".components_mobileDropButton").fadeIn("slow");
+      let windowWidth = window.innerWidth;
+      if (windowWidth < 1024) {
+        $(".components_mobileDropButton").fadeIn("slow");
+      }
     }
   );
 
@@ -40,7 +43,10 @@ $(function(){
       $(this).blur();
       $(".components_modalOverlay").fadeOut("slow");
       $(".components_topicModal").fadeOut("slow");
-      $(".components_mobileDropButton").fadeIn("slow");
+      let windowWidth = window.innerWidth;
+      if (windowWidth < 1024) {
+        $(".components_mobileDropButton").fadeIn("slow");
+      }
     }
   );
 
@@ -50,7 +56,10 @@ $(function(){
       $(".components_modalOverlay").fadeOut("slow");
       $(".components_micropostModal").fadeOut("slow");
       $(".components_topicModal").fadeOut("slow");
-      $(".components_mobileDropButton").fadeIn("slow");
+      let windowWidth = window.innerWidth;
+      if (windowWidth < 1024) {
+        $(".components_mobileDropButton").fadeIn("slow");
+      }
     }
   );
 });
