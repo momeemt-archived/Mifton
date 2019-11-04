@@ -31,7 +31,7 @@
       $(this).blur();
       $(".components_modalOverlay").fadeOut("slow");
       $(".components_micropostModal").fadeOut("slow");
-      let windowWidth = window.innerWidth;
+      var windowWidth = window.innerWidth;
       if (windowWidth < 1024) {
         $(".components_mobileDropButton").fadeIn("slow");
       }
@@ -43,7 +43,7 @@
       $(this).blur();
       $(".components_modalOverlay").fadeOut("slow");
       $(".components_topicModal").fadeOut("slow");
-      let windowWidth = window.innerWidth;
+      var windowWidth = window.innerWidth;
       if (windowWidth < 1024) {
         $(".components_mobileDropButton").fadeIn("slow");
       }
@@ -56,7 +56,7 @@
       $(".components_modalOverlay").fadeOut("slow");
       $(".components_micropostModal").fadeOut("slow");
       $(".components_topicModal").fadeOut("slow");
-      let windowWidth = window.innerWidth;
+      var windowWidth = window.innerWidth;
       if (windowWidth < 1024) {
         $(".components_mobileDropButton").fadeIn("slow");
       }
