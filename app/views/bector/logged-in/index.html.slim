@@ -99,7 +99,7 @@
             - user = User.find_by(id: post.user_id)
 
             .common_timeLine_data
-              = link_to "","/bector/microposts/#{post.id}", class: "common_timeLine_data_link"
+              /= link_to "","/bector/microposts/#{post.id}", class: "common_timeLine_data_link"
               .common_timeLine_data_icon
                 =link_to "/bector/users/#{user.user_id}" do
                   - if user.icon.attached?
@@ -144,6 +144,8 @@
                         = f.hidden_field :post_id, :value => post.id
                         = button_tag type: "submit", class: "common_timeLine_data_container_report", data: { confirm: "投稿を削除しますか？\n削除した投稿は運営が30日間確認することができますが、ユーザーは元に戻すことはできません。"} do
                           i.far.fa-trash-alt
+
+
 
             / - @comments = Comment.where(parent_id: post.id, parent_model: "bector")
             / - @comments.each do |comment|
