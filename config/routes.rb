@@ -35,7 +35,9 @@ Rails.application.routes.draw do
   get "/bector/tags/:tag", to:"bector#tags"
   post "/bector/destroy", to:"bector#destroy"
   resources :bector, only: [:create, :destroy, :index]
+
   get "/bector/notifications"
+  get "/bector/direct_messages"
 
   get "/bector/microposts/:id", to: "bector#show"
   post "/bector/microposts/:id", to: "bector#comment"
