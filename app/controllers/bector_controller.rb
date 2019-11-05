@@ -1,6 +1,19 @@
 class BectorController < ApplicationController
   before_action :add_users_and_infos, only: [:global, :friends, :tags, :index, :show]
 
+  before_action :loggedIn?, only: [
+    :direct_messages,
+    :notifications,
+    :user,
+    :global,
+    :tags,
+    :show
+  ]
+
+  # できれば index, top の名前に分けてリダイレクトさせたい
+  # params の分岐にすると見通しが悪いので関数にできるだけ切り分ける
+  # @users あたりはまとめる　頑張ろうな
+
   def index
     if login?
       @microposts = Micropost.where(user_id: current_user.id)
@@ -23,26 +36,30 @@ class BectorController < ApplicationController
     end
   end
 
+  def direct_messages
+    @users = User.all
+    @user = current_user
+    @random_users = @users.where.not(id: current_user.id).sample(5)
+    @random_tags = Tag.all.sample(5)
+    render "bector/logged-in/direct_messages"
+  end
+
   def notifications
-    if login?
-      @notifications = current_user.notifications.where(from_service: "bector").page(params[:page]).per(20)
-      @user = current_user
-      @users = User.all
-      @random_users = @users.where.not(id: current_user.id).sample(5)
-      @random_tags = Tag.all.sample(5)
-      render "bector/logged-in/notifications"
-    end
+    @notifications = current_user.notifications.where(from_service: "bector").page(params[:page]).per(20)
+    @user = current_user
+    @users = User.all
+    @random_users = @users.where.not(id: current_user.id).sample(5)
+    @random_tags = Tag.all.sample(5)
+    render "bector/logged-in/notifications"
   end
 
   def user
-    if login?
-      @user = User.find_by(user_id: params[:user_id])
-      if @user.present?
-        @posts = Micropost.where(user_id: @user.id)
-        render :user_index
-      else
-        redirect_to "/bector"
-      end
+    @user = User.find_by(user_id: params[:user_id])
+    if @user.present?
+      @posts = Micropost.where(user_id: @user.id)
+      render :user_index
+    else
+      redirect_to "/bector"
     end
   end
 
@@ -202,7 +219,6 @@ class BectorController < ApplicationController
   def add_users_and_infos
     if !current_user.nil?
       @users = User.all
-      @informations = current_user.informations
 
       user_raw_data = User.find_by(user_id: params[:user_id])
       if user_raw_data.present?
@@ -210,6 +226,13 @@ class BectorController < ApplicationController
       else
         @user = current_user
       end
+    end
+  end
+
+  def loggedIn?
+    unless current_user
+      redirect_to bector_index_url
+      return
     end
   end
 
