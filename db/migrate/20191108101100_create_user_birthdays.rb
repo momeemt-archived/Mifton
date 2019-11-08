@@ -2,8 +2,8 @@ class CreateUserBirthdays < ActiveRecord::Migration[5.2]
   def change
     create_table :user_birthdays do |t|
       t.date :birthday
-      t.boolean :publish_years
-      t.boolean :publish_date
+      t.string :publish_years, default: "publish"
+      t.string :publish_date, default: "publish"
       t.timestamps
     end
   end

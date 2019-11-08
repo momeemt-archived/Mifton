@@ -202,8 +202,8 @@ ActiveRecord::Schema.define(version: 2019_11_08_101100) do
 
   create_table "user_birthdays", force: :cascade do |t|
     t.date "birthday"
-    t.boolean "publish_years"
-    t.boolean "publish_date"
+    t.string "publish_years", default: "publish"
+    t.string "publish_date", default: "publish"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

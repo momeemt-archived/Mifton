@@ -1,6 +1,5 @@
 .lay.manages
   - if login?
-    / ユーザー情報
     .lay_1p4.lay_sticky.lay_100vh
       = render "components/userInfo"
 
@@ -37,6 +36,8 @@
           tr
             td= f.label :birthday, "誕生日"
             td= f.date_select :birthday, default: current_user.user_traffic.birthday, start_year: Time.now.year - 60 , end_year: Time.now.year - 8
+          tr
+            td= f.label :publish_years, "見ることができる人"
           tr
             td= f.label :twitter_id, "TwitterID"
             td= f.text_field :twitter_id, value: current_user.user_traffic.twitter_id

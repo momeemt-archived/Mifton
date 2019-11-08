@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class BectorController < ApplicationController
   before_action :add_users_and_infos, only: [:global, :friends, :tags, :index, :show]
 
@@ -146,12 +148,25 @@ class BectorController < ApplicationController
     if params[:micropost]
       @micropost = current_user.microposts.build(micropost_params)
       if @micropost.save
-        tag_array = params[:micropost][:tags].split(/[[:blank:]]+/);
+        tag_array = params[:micropost][:tags].split(/[[:blank:]]+/)
         tag_array.each do |tag|
           @tag = @micropost.tags.build
           @tag.name = tag
           @tag.save
         end
+
+        content = @micropost.content
+        content_split_array = content.split(/[[:blank:]]+/)
+
+        content_split_array.each do |str|
+          if str.start_with?("@")
+            user = User.where(user_id: str.delete("@"))
+            if user.present?
+              puts "メンション"
+            end
+          end
+        end
+
         redirect_back(fallback_location: root_path)
       else
         render "bector/logged-in/index"
