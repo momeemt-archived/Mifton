@@ -73,10 +73,19 @@ section.common_userInfo#common_userInfo
           i.fas.fa-link
           = link_to @user.user_traffic.user_link, "https://#{@user.user_traffic.user_link}", :target => "_blank"
 
-      - if @user.user_traffic.birthday.present?
-        .common_userInfo_wrapper_trafficSection_bar
-          i.fas.fa-birthday-cake
-          p= @user.user_traffic.birthday.strftime("%Y/%m/%d")
+      - if @user.user_birthday.present?
+        - @show_birthday = ""
+
+        - if @user.user_birthday.publish_years == "publish"
+          - @show_birthday += @user.user_birthday.birthday.strftime("%Y")
+
+        - if @user.user_birthday.publish_date == "publish"
+          - @show_birthday += @user.user_birthday.birthday.strftime("%m/%d")
+
+        - if @show_birthday.present?
+          .common_userInfo_wrapper_trafficSection_bar
+            i.fas.fa-birthday-cake
+            p= @show_birthday
 
       .common_userInfo_wrapper_trafficSection_bar
         i.fas.fa-calendar-week

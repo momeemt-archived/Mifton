@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(version: 2019_11_08_101100) do
   end
 
   create_table "user_birthdays", force: :cascade do |t|
+    t.bigint "user_id"
     t.date "birthday"
     t.string "publish_years", default: "publish"
     t.string "publish_date", default: "publish"

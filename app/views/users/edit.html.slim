@@ -36,8 +36,21 @@
           tr
             td= f.label :birthday, "誕生日"
             td= f.date_select :birthday, default: current_user.user_traffic.birthday, start_year: Time.now.year - 60 , end_year: Time.now.year - 8
+
+          // , ["フォロワー", "only_follower"], ["フォローしているユーザー", "only_following"], ["相互フォローのユーザー", "only_friend"]
+
           tr
-            td= f.label :publish_years, "見ることができる人"
+            td= f.label :publish_years, "年齢を公開しますか？"
+            - if @user_birthday.present?
+              td= f.select :publish_years, [["公開", "publish"], ["非公開", "private"]], :selected => @user_birthday.publish_years
+            - else
+              td= f.select :publish_years, [["公開", "publish"], ["非公開", "private"]]
+          tr
+            td= f.label :publish_date, "月日を公開しますか？"
+            - if @user_birthday.present?
+              td= f.select :publish_date, [["公開", "publish"], ["非公開", "private"]], :selected => @user_birthday.publish_date
+            - else
+              td= f.select :publish_date, [["公開", "publish"], ["非公開", "private"]]
           tr
             td= f.label :twitter_id, "TwitterID"
             td= f.text_field :twitter_id, value: current_user.user_traffic.twitter_id

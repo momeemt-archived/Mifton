@@ -40,11 +40,22 @@ class UsersController < ApplicationController
       return
     end
     @user = current_user
+
+    if current_user.user_birthday.present?
+      @user_birthday = current_user.user_birthday
+    end
   end
 
   def update
     current_user.update!(user_params)
     current_user.user_traffic.update!(user_traffic_params)
+
+    if current_user.user_birthday.present?
+      current_user.user_birthday.update!(user_birthdays_params)
+    else
+      current_user.create_user_birthday(user_birthdays_params)
+    end
+
     redirect_to "/users/edit"
   end
 
@@ -62,11 +73,18 @@ class UsersController < ApplicationController
       :profile,
       :location,
       :user_link,
-      :birthday,
       :twitter_id,
       :lobi_id,
       :github_id,
       :discord_id
+    )
+  end
+
+  def user_birthdays_params
+    params.require(:user).permit(
+      :birthday,
+      :publish_years,
+      :publish_date
     )
   end
 
