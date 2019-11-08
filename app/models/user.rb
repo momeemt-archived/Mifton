@@ -12,7 +12,6 @@ class User < ApplicationRecord
   has_many :topics, dependent: :destroy
   has_many :contest_join_users, dependent: :destroy
   has_many :reports
-  has_many :informations, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :direct_messages, dependent: :destroy
 

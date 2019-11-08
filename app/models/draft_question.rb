@@ -1,0 +1,2 @@
+class DraftQuestion < ApplicationRecord
+end

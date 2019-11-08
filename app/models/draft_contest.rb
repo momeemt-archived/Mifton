@@ -1,0 +1,2 @@
+class DraftContest < ApplicationRecord
+end

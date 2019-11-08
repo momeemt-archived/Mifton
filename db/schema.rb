@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_08_101100) do
+ActiveRecord::Schema.define(version: 2019_11_08_132431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,11 @@ ActiveRecord::Schema.define(version: 2019_11_08_101100) do
     t.string "manage_pos", default: "general"
     t.string "dev_pos", default: "none"
     t.integer "donor_amount", default: 0
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -103,6 +108,17 @@ ActiveRecord::Schema.define(version: 2019_11_08_101100) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "draft_contests", force: :cascade do |t|
+    t.string "name"
+    t.integer "times"
+    t.datetime "start_datetime"
+    t.integer "rated_range"
+    t.integer "penalty"
+    t.string "contest_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "draft_microposts", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id"
@@ -110,14 +126,26 @@ ActiveRecord::Schema.define(version: 2019_11_08_101100) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "information", force: :cascade do |t|
+  create_table "draft_questions", force: :cascade do |t|
+    t.integer "contest_id"
+    t.string "title"
+    t.string "writer"
+    t.integer "score"
     t.text "content"
+    t.text "constraints"
+    t.text "input_example"
+    t.text "output_example"
+    t.text "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "draft_topics", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
     t.integer "user_id"
-    t.integer "starting_point_user"
-    t.string "from_any_service"
-    t.integer "target_object"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "microposts", force: :cascade do |t|
@@ -176,11 +204,21 @@ ActiveRecord::Schema.define(version: 2019_11_08_101100) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "replies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reports", force: :cascade do |t|
     t.integer "user_id"
     t.integer "reported_object_id"
     t.string "reported_object_type"
     t.integer "report_reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reposts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

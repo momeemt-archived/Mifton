@@ -128,7 +128,6 @@ class BectorController < ApplicationController
     @users = User.all
     @microposts = Micropost.where.not(images: nil)
     @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
-    @informations = current_user.informations
     render "bector/logged-in/index"
   end
 
