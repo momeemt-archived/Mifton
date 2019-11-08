@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_one_attached :header
 
   has_one :user_traffic, dependent: :destroy
+  has_one :user_birthdays, dependent: :destroy
   has_one :authority, dependent: :destroy
   has_many :rating, dependent: :destroy
   has_many :comments, dependent: :destroy
