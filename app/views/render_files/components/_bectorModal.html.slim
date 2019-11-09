@@ -11,6 +11,7 @@
       = image_tag "/user_images/default_icon.png"
   .components_micropostModal_form
     = form_with scope: :micropost, url: bector_index_url, multipart: true, remote: true do |f|
+      = f.hidden_field :custom_timeline, :value => @custom_timeline
       = f.text_area :content, placeholder: "進捗や日常の体験を発信しよう"
       = f.text_field :tags, placeholder: "タグ", value: ""
       .preview

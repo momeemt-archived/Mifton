@@ -10,7 +10,7 @@
           #common_timeline
             = render "/bector/timeline", microposts: @microposts
 
-          = paginate @microposts
+          = paginate @microposts, remote: true
 
 
     .layout_1p4.lay_sticky.lay_c.lay_100vh

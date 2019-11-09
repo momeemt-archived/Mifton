@@ -27,6 +27,7 @@ class BectorController < ApplicationController
       @microposts = Kaminari.paginate_array(@raw_microposts).page(params[:page]).per(20)
       @random_users = @users.where.not(id: current_user.id).sample(5)
       @random_tags = Tag.all.sample(5)
+      @custom_timeline = "index"
       render "bector/logged-in/index"
 
     else
@@ -103,6 +104,7 @@ class BectorController < ApplicationController
     @microposts = Kaminari.paginate_array(@raw_microposts).page(params[:page]).per(20)
     @random_users = @users.where.not(id: current_user.id).sample(5)
     @random_tags = Tag.all.sample(5)
+    @custom_timeline = "global"
     render "bector/logged-in/index"
   end
 
@@ -125,18 +127,6 @@ class BectorController < ApplicationController
     @users = User.all
     @microposts = Micropost.where.not(images: nil)
     @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
-    render "bector/logged-in/index"
-  end
-
-  def tags
-    @microposts = []
-    target_tags = Tag.where(name: params[:tag])
-    target_tags.each do |tag|
-      @microposts << Micropost.find_by(id: tag.micropost_id)
-    end
-    @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
-    @random_users = @users.where.not(id: current_user.id).sample(5)
-    @random_tags = Tag.all.sample(5)
     render "bector/logged-in/index"
   end
 
@@ -164,7 +154,20 @@ class BectorController < ApplicationController
           end
         end
 
-        @microposts = Micropost.all.sort.reverse
+
+        if params[:micropost][:custom_timeline] == "index"
+          @microposts = Micropost.where(user_id: current_user.id)
+          follow_users = current_user.following
+          follow_users.each do |user|
+            @microposts += Micropost.where(user_id: user.id)
+          end
+          @microposts = @microposts.sort.reverse
+        else
+          @microposts = Micropost.all.sort.reverse
+        end
+
+        @microposts = Kaminari.paginate_array(@microposts).page(params[:page])
+
         respond_to do |format|
           format.html { redirect_back(fallback_location: root_path) }
           format.js
