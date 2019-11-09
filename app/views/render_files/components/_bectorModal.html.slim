@@ -10,7 +10,7 @@
     - else
       = image_tag "/user_images/default_icon.png"
   .components_micropostModal_form
-    = form_with scope: :micropost, url: bector_index_url, multipart: true, local: true do |f|
+    = form_with scope: :micropost, url: bector_index_url, multipart: true, remote: true do |f|
       = f.text_area :content, placeholder: "進捗や日常の体験を発信しよう"
       = f.text_field :tags, placeholder: "タグ", value: ""
       .preview
@@ -28,7 +28,7 @@
     - else
       = image_tag "/user_images/default_icon.png"
   .components_topicModal_form
-    = form_with scope: :topic, url: bector_index_url, multipart: true, local: true do |f|
+    = form_with scope: :topic, url: bector_index_url, multipart: true, remote: true do |f|
       = f.text_field :title, placeholder: "タイトル"
       = f.text_area :content, placeholder: "紹介文や日記をたくさん書き込もう"
       .preview

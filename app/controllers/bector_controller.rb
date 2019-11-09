@@ -23,8 +23,8 @@ class BectorController < ApplicationController
       follow_users.each do |user|
         @microposts += Micropost.where(user_id: user.id)
       end
-      @microposts = @microposts.sort.reverse
-      @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
+      @raw_microposts = @microposts.sort.reverse
+      @microposts = Kaminari.paginate_array(@raw_microposts).page(params[:page]).per(20)
       @random_users = @users.where.not(id: current_user.id).sample(5)
       @random_tags = Tag.all.sample(5)
       render "bector/logged-in/index"
@@ -65,9 +65,6 @@ class BectorController < ApplicationController
     end
   end
 
-
-
-
   def comment
     @comment = current_user.comments.build(comment_params)
     @comment.save
@@ -102,8 +99,8 @@ class BectorController < ApplicationController
 
   def global
     @users = User.all
-    @microposts = Micropost.all
-    @microposts = Kaminari.paginate_array(@microposts).page(params[:page]).per(20)
+    @raw_microposts = Micropost.all
+    @microposts = Kaminari.paginate_array(@raw_microposts).page(params[:page]).per(20)
     @random_users = @users.where.not(id: current_user.id).sample(5)
     @random_tags = Tag.all.sample(5)
     render "bector/logged-in/index"
@@ -146,6 +143,7 @@ class BectorController < ApplicationController
   def create
     if params[:micropost]
       @micropost = current_user.microposts.build(micropost_params)
+      #@microposts = Kaminari.paginate_array(@raw_microposts).page(params[:page]).per(20)
       if @micropost.save
         tag_array = params[:micropost][:tags].split(/[[:blank:]]+/)
         tag_array.each do |tag|
@@ -166,7 +164,11 @@ class BectorController < ApplicationController
           end
         end
 
-        redirect_back(fallback_location: root_path)
+        @microposts = Micropost.all.sort.reverse
+        respond_to do |format|
+          format.html { redirect_back(fallback_location: root_path) }
+          format.js
+        end
       else
         render "bector/logged-in/index"
       end
