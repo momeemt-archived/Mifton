@@ -66,7 +66,7 @@ section.common_timeLine
                 .common_timeLine_container_reactionSection_descript_head
                   =link_to "/users/#{user.user_id}" do
                     - if user.icon.attached?
-                      = image_tag user.icon
+                      = image_tag user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed
                     - else
                       = image_tag "/user_images/default_icon.png"
                   p= "#{user.name}さんがあなたの投稿にリアクションしました。"
@@ -80,7 +80,7 @@ section.common_timeLine
               .common_timeLine_container_followSection_descript
                 =link_to "/users/#{user.user_id}" do
                   - if user.icon.attached?
-                    = image_tag user.icon
+                    = image_tag user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed
                   - else
                     = image_tag "/user_images/default_icon.png"
                 p= "#{user.name}さんがあなたをフォローしました。"
@@ -91,7 +91,7 @@ section.common_timeLine
               .common_timeLine_container_commentSection_icon
                 =link_to "/users/#{user.user_id}" do
                   - if user.icon.attached?
-                    = image_tag user.icon
+                    = image_tag user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed
                   - else
                     = image_tag "/user_images/default_icon.png"
               .common_timeLine_container_commentSection_descript

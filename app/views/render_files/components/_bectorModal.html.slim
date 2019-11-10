@@ -6,7 +6,7 @@
   i.fas.fa-times.components_micropostModal_closeButton
   .components_micropostModal_icon
     - if current_user.icon.attached?
-      = image_tag current_user.icon
+      = image_tag current_user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed
     - else
       = image_tag "/user_images/default_icon.png"
   .components_micropostModal_form
@@ -25,7 +25,7 @@
   i.fas.fa-times.components_topicModal_closeButton
   .components_topicModal_icon
     - if current_user.icon.attached?
-      = image_tag current_user.icon
+      = image_tag current_user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed
     - else
       = image_tag "/user_images/default_icon.png"
   .components_topicModal_form

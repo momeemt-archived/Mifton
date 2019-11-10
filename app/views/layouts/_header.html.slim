@@ -34,7 +34,7 @@
           =link_to "/users/edit" do
             .application_header_naviList_group-image
               - if current_user.icon.attached?
-                = image_tag current_user.icon
+                = image_tag current_user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed
               - else
                 = image_tag "/user_images/default_icon.png"
       - else

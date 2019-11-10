@@ -13,6 +13,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'slim-rails'
 gem 'html2slim'
 
+gem 'mini_magick', '~> 4.8'
+
 # use rails console
 gem 'rb-readline'
 

@@ -13,7 +13,7 @@
           .common_timeLine_data_icon
             =link_to "/bector/users/#{user.user_id}" do
               - if user.icon.attached?
-                = image_tag user.icon
+                = image_tag user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed
               - else
                 = image_tag "/user_images/default_icon.png"
           .common_timeLine_data_container
@@ -64,7 +64,7 @@
             .common_timeLine_data_icon
               =link_to "/bector/users/#{user.user_id}" do
                 - if user.icon.attached?
-                  = image_tag user.icon
+                  = image_tag user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed
                 - else
                   = image_tag "/user_images/default_icon.png"
 
@@ -82,7 +82,7 @@
       section.common_release.common_notMargin
         .common_release_container
           - if current_user.icon.attached?
-            = image_tag current_user.icon, class:"common_release_container_icon"
+            = image_tag current_user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed, class:"common_release_container_icon"
           - else
             = image_tag "/user_images/default_icon.png", class:"common_release_container_icon"
           = form_with scope: :comment, url: "/bector/microposts/#{@micropost.id}", multipart: true, local: true do |f|
