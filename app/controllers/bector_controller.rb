@@ -59,7 +59,10 @@ class BectorController < ApplicationController
   def user
     @user = User.find_by(user_id: params[:user_id])
     if @user.present?
-      @posts = Micropost.where(user_id: @user.id)
+      @users = User.all
+      @random_users = @users.where.not(id: current_user.id).sample(5)
+      @random_tags = Tag.all.sample(5)
+      @posts = Micropost.where(user_id: @user.id).page(params[:page]).per(20)
       render :user_index
     else
       redirect_to "/bector"
