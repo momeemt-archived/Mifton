@@ -13,5 +13,16 @@
           = paginate @microposts, remote: true
 
 
+      .mobile-functionbar
+        = link_to "/bector" do
+          i.fas.fa-home
+        = link_to "/bector/global" do
+          i.fas.fa-globe-americas
+        = link_to "/bector/notifications" do
+          i.far.fa-bell
+        = link_to "/bector/direct_messages" do
+          i.far.fa-envelope
+        = link_to "/" do
+          i.fas.fa-chevron-left
     .layout_1p4.lay_sticky.lay_c.lay_100vh
       = render "render_files/components/bectorInfo"

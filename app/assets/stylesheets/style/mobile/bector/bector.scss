@@ -2,6 +2,28 @@
   .bector {
     background-color: #eaf4fc;
 
+    .mobile-functionbar {
+      position: fixed;
+      background-color: white;
+      width: 100%;
+      bottom: 0;
+      z-index: 10;
+      height: 8vh;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 8%;
+
+      a {
+        width: 20%;
+
+        i {
+          font-size: 26px;
+          color: #365089;
+        }
+      }
+    }
+
     .application_header {
 
       background: #365089;

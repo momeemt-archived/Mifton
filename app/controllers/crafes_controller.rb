@@ -2,7 +2,7 @@ class CrafesController < ApplicationController
 
   def index
     if login?
-      @contests = Contest.all.order(start_datetime: :asc)
+      @contests = Contest.all.order(start_datetime: :desc)
       @questions = Question.all.order(start_datetime: :asc)
       render "crafes/logging-in/index"
     else
