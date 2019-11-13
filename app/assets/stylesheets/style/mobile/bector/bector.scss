@@ -7,15 +7,19 @@
       background-color: white;
       width: 100%;
       bottom: 0;
-      z-index: 10;
+      z-index: 5;
       height: 8vh;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-left: 8%;
 
       a {
+
         width: 20%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         i {
           font-size: 26px;

@@ -4,14 +4,13 @@ description: マイクロポスト投稿モーダルのscss
 */
 @media screen and (max-width:1023px) {
   .components_micropostModal {
-    width: 80%;
-    height: 60%;
+    width: calc(100% - 48px);
+    height: calc(100vh - 48px);
     position: fixed;
     z-index: 10000;
     background-color: white;
-    top:20%;
-    left: 5%;
-    border-radius: 20px;
+    top:0;
+    left: 0;
     padding: 24px;
 
     &_close {
@@ -40,6 +39,7 @@ description: マイクロポスト投稿モーダルのscss
         resize: none;
         outline: none;
         height: 60%;
+        margin-top: 12px;
       }
 
       input[type="text"] {
@@ -55,14 +55,16 @@ description: マイクロポスト投稿モーダルのscss
       }
 
       input[type="submit"] {
+        -webkit-appearance:none;
+        background: white;
         border: 2px solid #027ABB;
         border-radius: 20px;
         padding: 2px 48px;
         font-size: 16px;
         color: #027ABB;
         position: absolute;
-        right: 12px;
-        bottom: 78px;
+        top: -8vh;
+        right: 0vw;
       }
 
       i.far.fa-images {
