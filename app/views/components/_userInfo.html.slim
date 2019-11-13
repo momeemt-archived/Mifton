@@ -6,7 +6,7 @@ section.common_userInfo#common_userInfo
     = image_tag "/user_images/header/default_header.png", class: "common_userInfo_header"
 
   - if @user.icon.attached?
-    = image_tag @user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed, class:"common_userInfo_icon"
+    = image_tag @user.icon, class:"common_userInfo_icon"
   - else
     = image_tag "/user_images/default_icon.png", class:"common_userInfo_icon"
 

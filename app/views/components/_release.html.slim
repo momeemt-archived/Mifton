@@ -1,7 +1,7 @@
 section.common_release
   .common_release_container
     - if current_user.icon.attached?
-      = image_tag current_user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed, class:"common_release_container_icon"
+      = image_tag current_user.icon, class:"common_release_container_icon"
     - else
       = image_tag "/user_images/default_icon.png", class:"common_release_container_icon"
     = form_with scope: :micropost, url: bector_index_url, multipart: true, local: true do |f|

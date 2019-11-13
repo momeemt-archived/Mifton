@@ -7,7 +7,7 @@
     .common_timeLine_data_icon
       =link_to "/bector/users/#{user.user_id}" do
         - if user.icon.attached?
-          = image_tag user.icon.variant(combine_options:{resize:"640x640^",crop:"640x640+0+0",gravity: :center}).processed
+          = image_tag user.icon
         - else
           = image_tag "/user_images/default_icon.png"
     .common_timeLine_data_container
