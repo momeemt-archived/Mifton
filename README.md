@@ -1,4 +1,9 @@
 # Mifton
-Miftonは、Minecraftをプレイするユーザーのために開発された新しいコミュニティサービスです。  
+MiftonはMinecraftユーザーのためのコミュニティサービスです。  
 
-## Bector
+## 開発環境について
+### フロントエンド
+Vue.js / TypeScript
+
+### バックエンド
+Rails (Ruby)
