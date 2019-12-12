@@ -15,6 +15,9 @@ gem 'html2slim'
 
 gem 'mini_magick', '~> 4.8'
 
+# use webpacker
+gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
+
 # use rails console
 gem 'rb-readline'
 
