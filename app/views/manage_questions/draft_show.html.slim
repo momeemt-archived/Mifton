@@ -1,7 +1,7 @@
 .manageContest_draftShow
   h1= @question.title
 
-  = form_with scope: :question, url: "/manage_questions/publish/#{@question.id}", class: "manageContest_draftShow_form", local: true do |f|
+  = form_with scope: :question, url: "/manage_questions/draft/#{@question.id}", class: "manageContest_draftShow_form", local: true do |f|
     .manageContest_draftShow_form_group
       = f.label :title, "問題名"
       = f.text_field :title, :value => @question.title
@@ -34,3 +34,5 @@
       = f.select :contest_id, @contests_list, :value => @question.contest_id
     = f.submit "更新する"
     = f.submit "更新し、一覧に戻る", name: "back"
+
+  = button_to "問題を削除する", "/manage_questions/draft/#{@question.id}/destroy", method: :delete, data: {confirm: "本当に削除しますか？"}, class: "manageContest_draftShow_deleteButton"

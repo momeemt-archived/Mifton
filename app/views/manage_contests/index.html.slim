@@ -1,19 +1,46 @@
-h1 コンテスト一覧
+.managesContest_index
+  .managesContest_index_contestsTable
+    p.managesContest_index_contestsTable_head 公開中のコンテスト
 
-table
-  tr
-    th ID
-    th コンテスト名
-    th 開催時刻
-    th コンテストタイプ
-    th 公開中？
-  - @contests.each do |contest|
-    tr
-      td= contest.id
-      - if than_admin
-        td= link_to "#{contest.name} ##{contest.times}", "/manage_contests/#{contest.id}"
-      - else
-        td= "#{contest.name} ##{contest.times}"
-      td= contest.start_datetime
-      td= contest.contest_type
-      td= contest.is_public
+    - if @contests.present?
+      table
+        tr
+          th コンテスト名
+          th 開催時刻
+        - @contests.each do |c|
+          tr
+            - if c.times.present?
+              td= link_to "#{c.name} ##{c.times}", "/manage_contests/publish/#{c.id}"
+            - else
+              td= link_to c.name, "/manage_contests/draft/#{c.id}"
+
+            - if c.start_datetime.present?
+              td= c.start_datetime.strftime("%Y年%m月%d日%H時%M分")
+            - else
+              td 未設定
+
+    - else
+      p.managesContest_index_contestsTable_noneContest 公開中のコンテストはありません
+
+  .managesContest_index_draftContestsTable
+    p.managesContest_index_draftContestsTable_head 非公開のコンテスト
+
+    - if @draft_contests.present?
+      table
+        tr
+          th コンテスト名
+          th 開催時刻
+        - @draft_contests.each do |c|
+          tr
+            - if c.times.present?
+              td= link_to "#{c.name} ##{c.times}", "/manage_contests/draft/#{c.id}"
+            - else
+              td= link_to c.name, "/manage_contests/draft/#{c.id}"
+
+            - if c.start_datetime.present?
+              td= c.start_datetime.strftime("%Y年%m月%d日%H時%M分")
+            - else
+              td 未設定
+
+    - else
+      p.managesContest_index_contestsTable_noneContest 非公開中のコンテストはありません

@@ -1,59 +1,56 @@
-.lay
-  - @user = current_user
-  / ユーザー情報
-  .lay_1p4.lay_sticky.lay_100vh
-    = render "components/userInfo"
-  / タイムライン
-  .lay_1p2
+.layout
+  - if login?
+    - @user = current_user
+    .layout_1p4.lay_sticky.lay_a.lay_100vh
+      = render "render_files/components/crafesFunctionBar"
 
-    - if flash[:success].present?
-      = flash[:success]
-    - elsif flash[:fall].present?
-      = flash[:fall]
-    - elsif flash[:leave].present?
-      = flash[:leave]
+    .layout_1p2.lay_b
+      - if flash[:success]
+        .crafes_flash
+          = flash[:success]
+      - elsif flash[:fall]
+        .crafes_flash
+          = flash[:fall]
+      - elsif flash[:leave]
+        .crafes_flash
+          = flash[:leave]
 
-    section.crafes_showContest
-    h1= @contest.name
-    p= "開催時刻: #{@contest.start_datetime.strftime("%Y年%m月%d日%H時%M分より")}"
-    p= "コンテスト時間: #{@contest.duration}分"
-    p= "レーティング変化: ~#{@contest.rated_range}"
+      .crafes_showContest
+        h1= @contest.name
+        hr
+        p= "開催時刻: #{@contest.start_datetime.strftime("%Y年%m月%d日%H時%M分より")}"
+        p= "コンテスト時間: #{@contest.duration}分"
+        p= "レーティング変化: ~#{@contest.rated_range}"
 
-    p 作問者
-    - @writers.each do |writer|
-      p= writer
+        h2 作問者
+        - @writers.each do |writer|
+          p= writer
 
-    - if @after_the_contest
-      h2 コンテストは終了しました
+        - if @after_the_contest
+          h2 コンテストは終了しました
 
-    - if (@before_the_contest) || (@is_in_session && !@did_join_contest) #開催中で、コンテストに参加していない場合
-      - unless @did_join_contest
-        p 参加登録
-        = button_to "参加登録", method: :post, action: "join_contest"
-      - else
-        p 参加登録を取り消す
-        = button_to "参加を取り消す", method: :post, action: "leave_contest"
-    - else
-      h2 問題
-      table
-        tr
-          td= link_to "#{@question_1.title}", "/crafes/question/#{@question_1.id}"
-          td= "#{@question_1.score}点"
-        tr
-          td= link_to "#{@question_2.title}", "/crafes/question/#{@question_2.id}"
-          td= "#{@question_2.score}点"
-        tr
-          td= link_to "#{@question_3.title}", "/crafes/question/#{@question_3.id}"
-          td= "#{@question_3.score}点"
-        tr
-          td= link_to "#{@question_4.title}", "/crafes/question/#{@question_4.id}"
-          td= "#{@question_4.score}点"
+        - if (@before_the_contest) || (@is_in_session && !@did_join_contest) #開催中で、コンテストに参加していない場合
+          - unless @did_join_contest
+            h2 参加登録
+            = button_to "参加登録", method: :post, action: "join_contest"
+          - else
+            h2 参加登録を取り消す
+            = button_to "参加を取り消す", method: :post, action: "leave_contest"
+        - else
+          h2 問題
+          - alpha_arr = [*'A'..'Z']
+          - index = 0
+          table
+            tr
+              th
+              th 問題名
+              th スコア
+            - @questions.each do |q|
+              tr
+                td= alpha_arr[index]
+                td= link_to q.title, "/crafes/question/#{q.id}"
+                td= q.score
+                - index += 1
 
-  / メニュー
-  .lay_1p4.lay_sticky.lay_100vh
-    section.crafes_sideBar_searchForm
-      = form_with url: "/bector/search/", local: true do |f|
-        = f.text_field :user_id, placeholder: "コンテスト/問題検索"
-
-    section.crafes_sideBar_menuTab
-      = render "crafes/components/sidemenu"
+    .layout_1p4.lay_sticky.lay_c.lay_100vh
+      = render "render_files/components/bectorInfo"

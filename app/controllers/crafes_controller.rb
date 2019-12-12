@@ -1,9 +1,10 @@
 class CrafesController < ApplicationController
 
+  before_action :inDevTest
+
   def index
     if login?
       @contests = Contest.all.order(start_datetime: :desc)
-      @questions = Question.all.order(start_datetime: :asc)
       render "crafes/logging-in/index"
     else
       @user = User.new
@@ -11,28 +12,87 @@ class CrafesController < ApplicationController
     end
   end
 
+  def new_contest
+    @categories = Set.new
+    (Contest.all + DraftContest.all).each do |c|
+      @categories.add(c.contest_type)
+    end
+  end
+
+  def create_contest
+    @contest = DraftContest.new(contest_params)
+    if @contest.save
+      redirect_to "/crafes/draft_contests/#{@contest.id}"
+    else
+      flash[:error] = "コンテスト名は必ず入力してください。"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def new_question
+    contests = DraftContest.all
+    @contests_list = [["未選択", nil]]
+
+    contests.each do |c|
+      if c.times.present?
+        @contests_list << ["#{c.name} ##{c.times}", c.id]
+      else
+        @contests_list << [c.name, c.id]
+      end
+    end
+  end
+
+  def create_question
+    @question = DraftQuestion.new(question_params)
+    if @question.save
+      redirect_to "/crafes/draft_questions/#{@question.id}"
+    else
+      flash[:error] = "問題名は必ず入力してください。"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def draft_contest_show
+    @contest = DraftContest.find(params[:id])
+    @questions = DraftQuestion.where(
+      contest_id: @contest.id
+    )
+  end
+
+  def draft_question_show
+    @question = DraftQuestion.find(params[:id])
+  end
+
+  def notifications
+    @notifications = current_user.notifications.where(from_service: "crafes").page(params[:page]).per(20)
+  end
+
   def about
   end
 
   def schedule
+    @contests = Contest.where("start_datetime > ?", Time.now)
   end
 
   def finished
+    @contests = []
+
+    Contest.all.each do |c|
+      if c.start_datetime + c.duration * 60 < Time.now
+        @contests << c
+      end
+    end
   end
 
   def show_contest
     @contest = Contest.find(params[:id])
-    @questions = Question.all
-    @question_1 = Question.find(@contest.question1_id)
-    @question_2 = Question.find(@contest.question2_id)
-    @question_3 = Question.find(@contest.question3_id)
-    @question_4 = Question.find(@contest.question4_id)
-    @writers = Set.new([
-      @question_1.writer,
-      @question_2.writer,
-      @question_3.writer,
-      @question_4.writer
-    ])
+    @questions = Question.where(
+      contest_id: @contest.id
+    ).order(score: :asc)
+    @writers = Set.new
+    @questions.each do |q|
+      @writers.add(q.writer)
+    end
     join_data = ContestJoinUser.where(
       user_id: current_user.id,
       contest_id: params[:id]
@@ -92,6 +152,38 @@ class CrafesController < ApplicationController
 
   def set_contest
     @contest = Contest.find(params[:id])
+  end
+
+  def contest_params
+    params.require(:contest).permit(
+      :name,
+      :times,
+      :start_datetime,
+      :duration,
+      :rated_range,
+      :contest_type
+    )
+  end
+
+  def question_params
+    params.require(:question).permit(
+      :title,
+      :writer,
+      :score,
+      :content,
+      :constraints,
+      :input_example,
+      :output_example,
+      :answer,
+      :contest_id
+    )
+  end
+
+  def inDevTest
+    @users = User.all
+    current_user = current_user || User.find_by(user_id: "mifton")
+    @random_users = @users.where.not(id: current_user.id).sample(5)
+    @random_tags = Tag.all.sample(5)
   end
 
 end

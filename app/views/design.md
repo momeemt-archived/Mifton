@@ -1,7 +1,9 @@
-# Views (Slim/SCSS) 設計について
-renderする要素は `/views/render_files` に統一  
-その中でも比較的小さい要素は `/views/render_files/components` に、大きい要素は `/views/render_files/layouts` に統一する。  
+全てのページは `Layout` クラスに属する。  
+`Layout` クラスでは、ページのFlex構造・strictの有無などの指定、枠組みのサイズ指定など。  
 
-## CSS
+全てのコントローラーに属するviewは、controller_name クラスに属する。  
 
-コントローラー名_要素名-状態名
+
+top.slim ... 未ログインのトップページ  
+index.slim ... 既ログインのトップページ  
+about.slim ... 詳細  

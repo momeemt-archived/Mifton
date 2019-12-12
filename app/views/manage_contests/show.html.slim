@@ -1,58 +1,29 @@
 h1= @contest.name
 
-table
-  tbody
-    tr
-      td 名前
-      td= @contest.name
-    tr
-      td 開催回数
-      td= "#{@contest.times}回"
-    tr
-      td 開催時刻
-      td= @contest.start_datetime.strftime("%Y年%m月%d日 %H時%M分")
-    tr
-      td コンテスト時間
-      td= "#{@contest.duration}分"
-    tr
-      td Rated範囲
-      td= "0 ~ #{@contest.rated_range}"
-    tr
-      td ペナルティ
-      td= "#{@contest.penalty}分"
-    tr
-      td コンテストタイプ
-      td= @contest.contest_type
-    tr
-      td 公開
-      td= @contest.is_public ? "公開中" : "非公開"
-    tr
-      td 登録日時
-      td= @contest.created_at.strftime("%Y年%m月%d日 %H時%M分")
-    tr
-      td 最終更新日時
-      td= @contest.updated_at.strftime("%Y年%m月%d日 %H時%M分")
-    tr
-      td 問題１
-      - if Question.find_by(id:@contest.question1_id).present?
-        td= link_to Question.find_by(id:@contest.question1_id).title, "/manage_questions/#{@contest.question1_id}"
-      - else
-        td 未登録です
-    tr
-      td 問題２
-      - if Question.find_by(id:@contest.question2_id).present?
-        td= link_to Question.find_by(id:@contest.question2_id).title, "/manage_questions/#{@contest.question2_id}"
-      - else
-        td 未登録です
-    tr
-      td 問題３
-      - if Question.find_by(id:@contest.question3_id).present?
-        td= link_to Question.find_by(id:@contest.question3_id).title, "/manage_questions/#{@contest.question3_id}"
-      - else
-        td 未登録です
-    tr
-      td 問題４
-      - if Question.find_by(id:@contest.question4_id).present?
-        td= link_to Question.find_by(id:@contest.question4_id).title, "/manage_questions/#{@contest.question4_id}"
-      - else
-        td 未登録です
+= form_with scope: :contest, url: "/manage_contests/publish/#{@contest.id}",  local: true do |f|
+  .crafes_newContest_form_group
+    = f.label :name, "コンテスト名"
+    = f.text_field :name, :value => @contest.name
+  .crafes_newContest_form_group
+    = f.label :times, "コンテスト開催回数(省略可)"
+    = f.number_field :times, :value => @contest.times
+  .crafes_newContest_form_group
+    = f.label :start_datetime, "開始時刻"
+    = f.datetime_field :start_datetime, :value => @contest.start_datetime && @contest.start_datetime.strftime("%Y-%m-%dT%H:%M:%S")
+  .crafes_newContest_form_group
+    = f.label :duration, "大会時間(分)"
+    = f.number_field :duration, :value => @contest.duration
+  .crafes_newContest_form_group
+    = f.label :rated_range, "レート変動"
+    = f.number_field :rated_range, :value => @contest.rated_range
+  .crafes_newContest_form_group
+    = f.label :contest_type, "コンテストの種類"
+    = f.text_field :contest_type, list: "categories_list", :value => @contest.contest_type
+    datalist#categories_list
+      - @categories.each do |c|
+        option value="#{c}"
+  = f.submit "更新する"
+  = f.submit "更新し、一覧に戻る", name: "back"
+
+= button_to "コンテストを非公開する", manage_contests_destroy_url,
+  {params: { contest: { name: @contest.name, times: @contest.times, start_datetime: @contest.start_datetime, duration: @contest.duration, rated_range: @contest.rated_range, contest_type: @contest.contest_type } }}

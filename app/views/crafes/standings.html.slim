@@ -1,39 +1,35 @@
-.lay
-  - @user = current_user
-  / ユーザー情報
-  .lay_1p4.lay_sticky.lay_100vh
-    = render "components/userInfo"
+.layout
+  - if login?
+    - @user = current_user
+    .layout_1p4.lay_sticky.lay_a.lay_100vh
+      = render "render_files/components/crafesFunctionBar"
 
-  .lay_1p2
-    h1 順位表
+    .layout_1p2.lay_b
+      .crafes_showContest
+        h1 順位表
 
-    table
-      - i = 1
-      - @join_users.each do |juser|
-        - user = User.find(juser.user_id)
-        tr
-          th 順位
-          th ユーザー
-          th 得点
-          th A
-          th 解答時間
-          th B
-          th 解答時間
-          th C
-          th 解答時間
-          th D
-          th 解答時間
-        tr
-          td= i
-          td= user.name
-          td= 
-          td= @contest_records.find_by(user_id: user.id).q1_score
+        table
+          - i = 1
+          - @join_users.each do |juser|
+            - user = User.find(juser.user_id)
+            tr
+              th 順位
+              th ユーザー
+              th 得点
+              th A
+              th 解答時間
+              th B
+              th 解答時間
+              th C
+              th 解答時間
+              th D
+              th 解答時間
+            tr
+              td= i
+              td= user.name
+              td=
+              td= @contest_records.find_by(user_id: user.id).q1_score
 
-  / メニュー
-  .lay_1p4.lay_sticky.lay_100vh
-    section.crafes_sideBar_searchForm
-      = form_with url: "/bector/search/", local: true do |f|
-        = f.text_field :user_id, placeholder: "コンテスト/問題検索"
 
-    section.crafes_sideBar_menuTab
-      = render "crafes/components/sidemenu"
+    .layout_1p4.lay_sticky.lay_c.lay_100vh
+      = render "render_files/components/bectorInfo"

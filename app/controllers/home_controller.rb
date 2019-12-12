@@ -5,7 +5,7 @@ class HomeController < ApplicationController
       render :top_logined
     else
       @user = User.new
-      render :top_not_logined
+      render :top
     end
   end
 
