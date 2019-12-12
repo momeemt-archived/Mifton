@@ -3,7 +3,7 @@ name: crafesFunctionBar.scss
 description: ユーザーアイコン,ヘッダーのscss
 */
 @media screen and (min-width:1024px) {
-  .components_crafesFunctionBar {
+  .components_manageFunctionBar {
     border-right: 2px darkgray solid;
     background-color: white;
     height: 100vh;
@@ -26,19 +26,19 @@ description: ユーザーアイコン,ヘッダーのscss
           }
           i {
             width: 28px;
-            color: #2c4f54;
+            color: #EC6D51;
             font-size: 28px;
             margin-right: 24px;
           }
         }
       }
 
-      &_micropostButton {
+      &_makeNotificationButton {
         width: 60%;
         margin: auto;
         margin-top: 48px;
         color: white;
-        background-color: #5c9291;
+        background-color: #f08300;
         padding: 8px 16px;
         border-radius: 60px;
         text-align: center;
@@ -49,13 +49,13 @@ description: ユーザーアイコン,ヘッダーのscss
         }
       }
 
-      &_topicButton {
+      &_dropByMiftonButton {
         width: 60%;
         margin: auto;
         margin-top: 24px;
         margin-bottom: 48px;
         color: white;
-        background-color: #2c4f54;
+        background-color: #EC6D51;
         padding: 8px 16px;
         border-radius: 60px;
         text-align: center;

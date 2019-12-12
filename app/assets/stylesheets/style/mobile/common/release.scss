@@ -15,6 +15,7 @@
           width: 5%;
           margin-left: 5%;
           margin-right: 2%;
+          object-fit: cover;
         }
 
         form,p {
@@ -89,6 +90,7 @@
     &_release {
       &_container {
         &_icon {
+          object-fit: cover;
           display: none;
         }
         form,p {

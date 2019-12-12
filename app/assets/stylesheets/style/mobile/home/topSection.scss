@@ -6,9 +6,15 @@
       margin: 15px 0;
     }
 
+    &_registerForm {
+      display: none;
+    }
+    background-color: white;
+    background-size: 100vh;
+    background: url("http://urx.blue/TlC9") no-repeat;
+
     &_backGroundSection {
       padding: 0 20px 0;
-      margin-top: 30px;
       .title {
         width: 100%;
         line-height: 1.3;

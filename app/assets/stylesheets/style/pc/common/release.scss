@@ -35,6 +35,7 @@
         align-items: flex-start;
 
         &_icon {
+          object-fit: cover;
           border-radius: 50%;
           width: 5%;
           margin-left: 5%;

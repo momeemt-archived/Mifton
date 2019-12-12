@@ -78,6 +78,7 @@ description: トピック投稿モーダルのscss
       width: 12%;
       margin-right: 24px;
       img {
+        object-fit: cover;
         width: 100%;
         border-radius: 50%;
       }
