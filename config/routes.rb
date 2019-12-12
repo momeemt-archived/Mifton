@@ -68,10 +68,8 @@ Rails.application.routes.draw do
 
   resources :manage_informations
   resources :manage_reports
-  resources :manage_contests
-  post "/manage_contests/:id", to: "manage_contests#update"
 
-  resources :manage_questions
+
 
   post "/reactions/:reactioned_type/:reactioned_id/create", to: "reactions#create"
   delete "/reactions/:reactioned_type/:reactioned_id/destroy", to: "reactions#destroy"
@@ -86,18 +84,50 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   delete "/logout/:service", to: "sessions#destroy"
 
-  # Crafes!
-  get "/crafes", to: "crafes#index"
-  get "/crafes/about"
-  get "/crafes/schedule"
-  get "/crafes/finished"
-  get "/crafes/contest/:id", to: "crafes#show_contest"
-  get "/crafes/contest/:id/standings", to: "crafes#standings"
-  post "/crafes/join/:id", to: "crafes#join_contest"
-  post "/crafes/leave/:id", to: "crafes#leave_contest"
-  get "/crafes/questions"
-  get "/crafes/question/:id", to: "crafes#show_question"
+  # Crafes! Routes ここから
 
+  get     "/crafes",                              to: "crafes#index"                      # Topページ/コンテスト一覧
+  get     "/crafes/about",                        to: "crafes#about"                      # Crafes!について
+  get     "/crafes/schedule",                     to: "crafes#schedule"                   # 開催予定コンテスト
+  get     "/crafes/finished",                     to: "crafes#finished"                   # 終了したコンテスト
+  get     "/crafes/contests/new",                 to: "crafes#new_contest"                # 新規コンテスト作成
+  post    "/crafes/contests",                     to: "crafes#create_contest"             # 新規コンテスト作成
+  get     "/crafes/contests/guideline",           to: "crafes#contest_guideline"          # コンテスト作成のガイドライン
+  get     "/crafes/draft_contests/:id",           to: "crafes#draft_contest_show"         # 非公開コンテストの詳細
+  get     "/crafes/questions",                    to: "crafes#question_index"             # 公開問題一覧
+  get     "/crafes/questions/new",                to: "crafes#new_question"               # 新規問題作成
+  post    "/crafes/questions",                    to: "crafes#create_question"            # 新規問題作成
+  get     "/crafes/questions/guideline",          to: "crafes#question_guideline"         # 問題作成のガイドライン
+  get     "/crafes/question/:id",                 to: "crafes#show_question"              # 公開問題の詳細
+  get     "/crafes/draft_questions/:id",          to: "crafes#draft_question_show"        # 非公開問題の詳細
+  get     "/crafes/notifications",                to: "crafes#notifications"              # 通知
+  get     "/crafes/contest/:id",                  to: "crafes#show_contest"               # 公開コンテストの詳細
+  get     "/crafes/contest/:id/standings",        to: "crafes#standings"                  # 公開コンテストの順位表
+  post    "/crafes/join/:id",                     to: "crafes#join_contest"               # コンテスト参加登録
+  post    "/crafes/leave/:id",                    to: "crafes#leave_contest"              # コンテスト参加取り消し
+
+  get     "/manage_contests",                     to: "manage_contests#index"
+  post    "/manage_contests/create",              to: "manage_contests#create"
+  post    "/manage_contests/destroy",             to: "manage_contests#destroy"
+  get     "/manage_contests/draft"
+  get     "/manage_contests/draft/:id",           to: "manage_contests#draft_show"
+  post    "/manage_contests/draft/:id",           to: "manage_contests#draft_update"
+  delete  "/manage_contests/draft/:id/destroy",   to: "manage_contests#draft_destroy"
+  get     "/manage_contests/publish/:id",         to: "manage_contests#show"
+  post    "/manage_contests/publish/:id",         to: "manage_contests#update"
+
+  get     "/manage_questions",                    to: "manage_questions#index"
+  get     "/manage_questions/draft"
+  get     "/manage_questions/draft/:id",          to: "manage_questions#draft_show"
+  post    "/manage_questions/draft/:id",          to: "manage_questions#draft_update"
+  delete  "/manage_questions/draft/:id/destroy",  to: "manage_questions#draft_destroy"
+  get     "/manage_questions/publish/:id",        to: "manage_questions#show"
+  post    "/manage_questions/publish/:id",        to: "manage_questions#update"
+
+  resources :manage_questions
+
+
+  # Crafes! Routes ここまで
 
   resources :users do
     member do

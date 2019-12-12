@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_08_132431) do
+ActiveRecord::Schema.define(version: 2019_11_15_141452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,14 +70,6 @@ ActiveRecord::Schema.define(version: 2019_11_08_132431) do
   create_table "contest_records", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "contest_id"
-    t.integer "q1_score"
-    t.integer "q1_elapsed_time"
-    t.integer "q2_score"
-    t.integer "q2_elapsed_time"
-    t.integer "q3_score"
-    t.integer "q3_elapsed_time"
-    t.integer "q4_score"
-    t.integer "q4_elapsed_time"
     t.integer "primary_rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -91,11 +83,6 @@ ActiveRecord::Schema.define(version: 2019_11_08_132431) do
     t.integer "rated_range"
     t.integer "penalty"
     t.string "contest_type"
-    t.boolean "is_public"
-    t.integer "question1_id"
-    t.integer "question2_id"
-    t.integer "question3_id"
-    t.integer "question4_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -117,6 +104,7 @@ ActiveRecord::Schema.define(version: 2019_11_08_132431) do
     t.string "contest_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "duration"
   end
 
   create_table "draft_microposts", force: :cascade do |t|
@@ -179,6 +167,7 @@ ActiveRecord::Schema.define(version: 2019_11_08_132431) do
     t.text "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "contest_id"
   end
 
   create_table "ratings", force: :cascade do |t|
